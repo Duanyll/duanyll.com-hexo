@@ -6,13 +6,15 @@
     "build": "hexo generate",
     "clean": "hexo clean",
     "deploy": "hexo deploy",
-    "server": "hexo server"
+    "server": "hexo server",
+    "postinstall": "patch-package"
   },
   "hexo": {
     "version": "6.3.0"
   },
   "dependencies": {
     "hexo": "^6.3.0",
+    "hexo-filename-date": "^0.1.0",
     "hexo-filter-mathjax": "^0.9.0",
     "hexo-generator-archive": "^2.0.0",
     "hexo-generator-category": "^2.0.0",
@@ -23,6 +25,8 @@
     "hexo-renderer-pandoc": "^0.3.1",
     "hexo-renderer-stylus": "^2.1.0",
     "hexo-server": "^3.0.0",
-    "hexo-theme-landscape": "^0.0.3"
+    "hexo-theme-landscape": "^0.0.3",
+    "patch-package": "^6.5.1",
+    "postinstall-postinstall": "^2.1.0"
   }
 }

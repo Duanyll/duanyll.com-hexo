@@ -31,7 +31,7 @@ i18n_dir: :lang
 skip_render:
 
 # Writing
-new_post_name: :title.md # File name of new posts
+new_post_name: :year-:month:-date:-:title.md # File name of new posts
 default_layout: post
 titlecase: false # Transform title into titlecase
 external_link:
@@ -112,7 +112,18 @@ mathjax:
   append_css: true # add CSS to pages rendered by MathJax
   every_page: true # if true, every page will be rendered by MathJax regardless the `mathjax` setting in Front-matter
   packages: # extra packages to load
-  extension_options: {}
+  extension_options: {
+    macros: {
+      "R": "\\mathbb{R}",
+      "lrArr": "\\Leftrightarrow",
+      "exist": "\\exists",
+      "argmin": "\\operatorname*{argmin}",
+      "lArr": "\\Leftarrow",
+      "larr": "\\leftarrow",
+      "rArr": "\\Rightarrow",
+      "rarr": "\\rightarrow"
+    }
+  }
     # you can put your extension options here
     # see http://docs.mathjax.org/en/latest/options/input/tex.html#tex-extension-options for more detail
 
