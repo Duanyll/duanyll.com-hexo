@@ -1,0 +1,27 @@
+[
+   {
+      "name": "Standard-TLE-Library",
+      "url": "https://stl.duanyll.com",
+      "desc": "[C++] 常见算法的 C++11 实现片段，适用于算法竞赛"
+   },
+   {
+      "name": "DDZGame",
+      "url": "https://github.com/Duanyll/DDZGame",
+      "desc": "[WPF] 局域网联机斗地主"
+   },
+   {
+      "name": "QRTracker",
+      "url": "https://qrt.duanyll.com",
+      "desc": "[Xamarin Forms] 轻松通过扫描二维码来登记作业, 您的课堂管理助手!"
+   },
+   {
+      "name": "ProjectPixel",
+      "url": "https://github.com/Duanyll/ProjectPixel",
+      "desc": "[OpenGL] 入门级 OpenGL 3D 游戏 demo"
+   },
+   {
+      "name": "CVCollection",
+      "url": "https://github.com/Duanyll/CVCollection",
+      "desc": "[MAUI] 简易的 MAUI + ONNX 模型部署 demo"
+   }
+]
