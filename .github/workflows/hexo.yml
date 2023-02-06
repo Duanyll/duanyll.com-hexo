@@ -20,13 +20,6 @@ jobs:
         with:
           packages: pandoc
           version: 1.0
-      - name: Cache NPM dependencies
-        uses: actions/cache@v2
-        with:
-          path: node_modules
-          key: ${{ runner.OS }}-npm-cache
-          restore-keys: |
-            ${{ runner.OS }}-npm-cache
       - name: Run install
         uses: borales/actions-yarn@v4
         with:

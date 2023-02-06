@@ -136,3 +136,8 @@ pandoc:
 
 theme_config:
   colorscheme: light
+
+search:
+  path: search.xml
+  field: post
+  content: true
