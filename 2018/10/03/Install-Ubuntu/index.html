@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="最近研究 .net core，wsl用的一点也不爽(图形界面太卡了，还一堆Bug，字体也不好看)，遂决定安装Ubuntu双系统，基本上没有什么困难，下面是我的安装方法(没有多少截图，忘截了)，因为用UEFI，就用不着双硬盘了">
+<meta property="og:type" content="article">
+<meta property="og:title" content="单硬盘安装Ubuntu18.04与Win10">
+<meta property="og:url" content="https://n.duanyll.com/2018/10/03/Install-Ubuntu/index.html">
+<meta property="og:site_name" content="duanyll.com">
+<meta property="og:description" content="最近研究 .net core，wsl用的一点也不爽(图形界面太卡了，还一堆Bug，字体也不好看)，遂决定安装Ubuntu双系统，基本上没有什么困难，下面是我的安装方法(没有多少截图，忘截了)，因为用UEFI，就用不着双硬盘了">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-10-03T00:00:00.000Z">
+<meta property="article:modified_time" content="2023-02-06T08:34:17.112Z">
+<meta property="article:author" content="duanyll">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="教程">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>单硬盘安装Ubuntu18.04与Win10</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="duanyll.com" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a href="/categories/">分类</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/2018/10/03/GDB-Usage/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2018/10/02/New-URL/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://n.duanyll.com/2018/10/03/Install-Ubuntu/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://n.duanyll.com/2018/10/03/Install-Ubuntu/&text=单硬盘安装Ubuntu18.04与Win10"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://n.duanyll.com/2018/10/03/Install-Ubuntu/&title=单硬盘安装Ubuntu18.04与Win10"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://n.duanyll.com/2018/10/03/Install-Ubuntu/&is_video=false&description=单硬盘安装Ubuntu18.04与Win10"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=单硬盘安装Ubuntu18.04与Win10&body=Check out this article: https://n.duanyll.com/2018/10/03/Install-Ubuntu/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://n.duanyll.com/2018/10/03/Install-Ubuntu/&title=单硬盘安装Ubuntu18.04与Win10"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://n.duanyll.com/2018/10/03/Install-Ubuntu/&title=单硬盘安装Ubuntu18.04与Win10"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://n.duanyll.com/2018/10/03/Install-Ubuntu/&title=单硬盘安装Ubuntu18.04与Win10"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://n.duanyll.com/2018/10/03/Install-Ubuntu/&title=单硬盘安装Ubuntu18.04与Win10"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://n.duanyll.com/2018/10/03/Install-Ubuntu/&name=单硬盘安装Ubuntu18.04与Win10&description=&lt;p&gt;最近研究 .net core，wsl用的一点也不爽(图形界面太卡了，还一堆Bug，字体也不好看)，遂决定安装Ubuntu双系统，基本上没有什么困难，下面是我的安装方法(没有多少截图，忘截了)，因为用UEFI，就用不着双硬盘了&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://n.duanyll.com/2018/10/03/Install-Ubuntu/&t=单硬盘安装Ubuntu18.04与Win10"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        单硬盘安装Ubuntu18.04与Win10
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Duanyll</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2018-10-03T00:00:00.000Z" itemprop="datePublished">2018-10-03</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/OI/">OI</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/linux/" rel="tag">linux</a>, <a class="tag-link-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>最近研究 .net core，wsl用的一点也不爽(图形界面太卡了，还一堆Bug，字体也不好看)，遂决定安装Ubuntu双系统，基本上没有什么困难，下面是我的安装方法(没有多少截图，忘截了)，因为用UEFI，就用不着双硬盘了</p>
+<span id="more"></span>
+<ol type="1">
+<li>去<a target="_blank" rel="noopener" href="https://www.ubuntu.com/download/desktop">Ununtu官网</a>下载iso镜像，速度不错</li>
+<li>准备一个容量大于4G的移动硬盘（U盘也行），划分一个4G大小的<code>FAT32</code>分区或删掉原有文件，<strong>直接</strong>将ISO镜像里面的所有内容 <strong>复制粘贴</strong>到空分区里面，<strong>不用</strong> 特地创建引导。（因为用了UEFI）</li>
+<li>用磁盘管理或者别的什么软件在硬盘里划出60G空闲空间，<strong>不要</strong> 建立分区。</li>
+<li>如果托盘区里面有一个 <code>英特尔快速存储技术</code>，就要关掉它，请一定严格按照下列步骤操作，否则win10可能变砖
+<ol type="1">
+<li>关闭win10快速启动</li>
+<li>进入设置（immersive control panel）&gt; 更新与安全 &gt; 恢复 &gt; 立即重新启动 &gt; 疑难解答 &gt; 更多选项 &gt; 高级启动</li>
+<li>进入UEFI设置，找到<code>英特尔快速存储技术</code>并关闭他（我的电脑是在<code>SATA Options</code>里面从<code>Raid On</code>改成<code>AHCI</code>）</li>
+<li>退出UEFI设置，开机按F4进入安全模式，登陆进入桌面后重启电脑</li>
+</ol></li>
+<li>重启，进入<code>Boot Menu</code>，关闭<code>secure boot</code>，启动模式设为<code>UEFI Only</code>，如果此时<code>Boot Menu</code>里面没有你的U盘，那就放弃这篇教程吧</li>
+<li>选择你的U盘，弹出Grub的菜单，选<code>Try Ubuntu without installing</code></li>
+<li>如果U盘性能足够，很快就进入Ubuntu桌面环境了，双击打开桌面的<code>Install Ubuntu 18.04 LTS</code></li>
+<li>语言选中文，联不联网随意，下一步下一步下一步</li>
+<li>这一步很关键，别听其他教程把事情搞复杂，如果第一条提到了<code>windows boot manager</code>或者与其他系统共存什么的就选它没有错</li>
+<li>下一步下一步</li>
+<li>重启电脑，Ubuntu应该已经是启动项第一位了，开机你会看到一个Grub选单，里面有Windows有Ubuntu，自己选</li>
+<li>如果想默认启动Windows，就去UEFI里面把<code>windows boot manager</code>排前面</li>
+<li>你可以把Windows的快速启动打开了（别开<code>secure boot</code>和<code>英特尔快速存储技术</code>）</li>
+</ol>
+<p>Ubuntu中文输入法教程很多，自己看（系统自带的很垃圾，建议用搜狗）</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/categories/">分类</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://n.duanyll.com/2018/10/03/Install-Ubuntu/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://n.duanyll.com/2018/10/03/Install-Ubuntu/&text=单硬盘安装Ubuntu18.04与Win10"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://n.duanyll.com/2018/10/03/Install-Ubuntu/&title=单硬盘安装Ubuntu18.04与Win10"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://n.duanyll.com/2018/10/03/Install-Ubuntu/&is_video=false&description=单硬盘安装Ubuntu18.04与Win10"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=单硬盘安装Ubuntu18.04与Win10&body=Check out this article: https://n.duanyll.com/2018/10/03/Install-Ubuntu/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://n.duanyll.com/2018/10/03/Install-Ubuntu/&title=单硬盘安装Ubuntu18.04与Win10"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://n.duanyll.com/2018/10/03/Install-Ubuntu/&title=单硬盘安装Ubuntu18.04与Win10"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://n.duanyll.com/2018/10/03/Install-Ubuntu/&title=单硬盘安装Ubuntu18.04与Win10"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://n.duanyll.com/2018/10/03/Install-Ubuntu/&title=单硬盘安装Ubuntu18.04与Win10"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://n.duanyll.com/2018/10/03/Install-Ubuntu/&name=单硬盘安装Ubuntu18.04与Win10&description=&lt;p&gt;最近研究 .net core，wsl用的一点也不爽(图形界面太卡了，还一堆Bug，字体也不好看)，遂决定安装Ubuntu双系统，基本上没有什么困难，下面是我的安装方法(没有多少截图，忘截了)，因为用UEFI，就用不着双硬盘了&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://n.duanyll.com/2018/10/03/Install-Ubuntu/&t=单硬盘安装Ubuntu18.04与Win10"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023
+    duanyll
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a href="/categories/">分类</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
