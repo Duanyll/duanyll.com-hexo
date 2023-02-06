@@ -155,11 +155,11 @@ disqus:
 
 # Fill in your Utterances data to enable Utterances comments
 utterances:
-  enabled: false
-  repo: owner/githubrepo
+  enabled: true
+  repo: duanyll/duanyll.com-comment
   issue_term: pathname
   label: Comment
-  theme: github-dark
+  theme: github-light
 
 # Fill in your Google Analytics tracking ID to enable Google Analytics.
 google_analytics:

@@ -115,6 +115,7 @@ mathjax:
   extension_options: {
     macros: {
       "R": "\\mathbb{R}",
+      "N": "\\mathbb{N}",
       "lrArr": "\\Leftrightarrow",
       "exist": "\\exists",
       "argmin": "\\operatorname*{argmin}",
@@ -140,4 +141,4 @@ theme_config:
 search:
   path: search.xml
   field: post
-  content: true
+  content: false
