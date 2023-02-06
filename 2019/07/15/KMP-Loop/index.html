@@ -14,7 +14,7 @@
 <meta property="og:description" content="next数组 next数组的作用: 在失配时, 应该将模板串的指针指向哪个位置 next数组的意义: 前面长度为i的字串中, 前后缀相等的最大长度 求法一 12345678910111213141516memset(next, 0, sizeof next);int j &#x3D; 0, k &#x3D; -1;  &#x2F;&#x2F; j前缀，k后缀next[0] &#x3D; -1;while (j &lt; m - 1) {    i">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-07-15T00:00:00.000Z">
-<meta property="article:modified_time" content="2023-02-06T08:34:17.112Z">
+<meta property="article:modified_time" content="2023-02-06T16:03:14.213Z">
 <meta property="article:author" content="duanyll">
 <meta property="article:tag" content="OI">
 <meta property="article:tag" content="KMP">
@@ -289,6 +289,12 @@ mjx-container[display="true"] + br {
 </article>
 
 
+    <div class="blog-post-comments">
+        <div id="utterances_thread">
+            <noscript>加载评论需要在浏览器启用 JavaScript 脚本支持。</noscript>
+        </div>
+    </div>
+
 
         
           <div id="footer-post-container">
@@ -425,6 +431,26 @@ mjx-container[display="true"] + br {
 <!-- Disqus Comments -->
 
 <!-- utterances Comments -->
+
+    <script type="text/javascript">
+      var utterances_repo = 'duanyll/duanyll.com-comment';
+      var utterances_issue_term = 'pathname';
+      var utterances_label = 'Comment';
+      var utterances_theme = 'github-light';
+
+      (function(){
+          var script = document.createElement('script');
+
+          script.src = 'https://utteranc.es/client.js';
+          script.setAttribute('repo', utterances_repo);
+          script.setAttribute('issue-term', 'pathname');
+          script.setAttribute('label', utterances_label);
+          script.setAttribute('theme', utterances_theme);
+          script.setAttribute('crossorigin', 'anonymous');
+          script.async = true;
+          (document.getElementById('utterances_thread')).appendChild(script);
+      }());
+  </script>
 
 </body>
 </html>
