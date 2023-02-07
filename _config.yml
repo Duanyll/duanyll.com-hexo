@@ -122,7 +122,8 @@ mathjax:
       "lArr": "\\Leftarrow",
       "larr": "\\leftarrow",
       "rArr": "\\Rightarrow",
-      "rarr": "\\rightarrow"
+      "rarr": "\\rightarrow",
+      "sub": "\\subset",
     }
   }
     # you can put your extension options here
