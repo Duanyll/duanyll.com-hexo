@@ -9,12 +9,12 @@
     <meta name="description" content="UWP 存在一个网络隔离机制使得程序无法正常访问 localhost, 表现为 Onenote UWP 版在搭配某不可名状软件使用时界面显示同步失败, 但是网页版上看内容都在. 解决方法: 管理员终端运行 1.\CheckNetIsolation.exe loopbackexempt -a -p&#x3D;SID SID 可以去注册表里找. 1\HKEY_CURRENT_USER\Software\Clas">
 <meta property="og:type" content="article">
 <meta property="og:title" content="解决 Onenote UWP 版与某不可名状软件搭配使用的同步失败问题">
-<meta property="og:url" content="https://n.duanyll.com/2020/03/18/Solve-Onenote-Problems-With-SSR/index.html">
+<meta property="og:url" content="https://duanyll.com/2020/03/18/Solve-Onenote-Problems-With-SSR/index.html">
 <meta property="og:site_name" content="duanyll.com">
 <meta property="og:description" content="UWP 存在一个网络隔离机制使得程序无法正常访问 localhost, 表现为 Onenote UWP 版在搭配某不可名状软件使用时界面显示同步失败, 但是网页版上看内容都在. 解决方法: 管理员终端运行 1.\CheckNetIsolation.exe loopbackexempt -a -p&#x3D;SID SID 可以去注册表里找. 1\HKEY_CURRENT_USER\Software\Clas">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-03-18T00:00:00.000Z">
-<meta property="article:modified_time" content="2023-02-06T16:03:14.217Z">
+<meta property="article:modified_time" content="2023-02-07T15:55:29.075Z">
 <meta property="article:author" content="duanyll">
 <meta property="article:tag" content="废话">
 <meta name="twitter:card" content="summary">
@@ -46,8 +46,6 @@
     
     <!-- rss -->
     
-    
-      <link rel="alternate" href="/true" title="duanyll.com" type="application/atom+xml" />
     
 	<!-- mathjax -->
 	
@@ -163,7 +161,8 @@ mjx-container[display="true"] {
 mjx-container[display="true"] + br {
   display: none;
 }
-</style></head>
+</style><link rel="alternate" href="/atom.xml" title="duanyll.com" type="application/atom+xml">
+</head>
 
 <body class="max-width mx-auto px3 ltr">
     
@@ -207,17 +206,17 @@ mjx-container[display="true"] + br {
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://n.duanyll.com/2020/03/18/Solve-Onenote-Problems-With-SSR/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://n.duanyll.com/2020/03/18/Solve-Onenote-Problems-With-SSR/&text=解决 Onenote UWP 版与某不可名状软件搭配使用的同步失败问题"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://n.duanyll.com/2020/03/18/Solve-Onenote-Problems-With-SSR/&title=解决 Onenote UWP 版与某不可名状软件搭配使用的同步失败问题"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://n.duanyll.com/2020/03/18/Solve-Onenote-Problems-With-SSR/&is_video=false&description=解决 Onenote UWP 版与某不可名状软件搭配使用的同步失败问题"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=解决 Onenote UWP 版与某不可名状软件搭配使用的同步失败问题&body=Check out this article: https://n.duanyll.com/2020/03/18/Solve-Onenote-Problems-With-SSR/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://n.duanyll.com/2020/03/18/Solve-Onenote-Problems-With-SSR/&title=解决 Onenote UWP 版与某不可名状软件搭配使用的同步失败问题"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://n.duanyll.com/2020/03/18/Solve-Onenote-Problems-With-SSR/&title=解决 Onenote UWP 版与某不可名状软件搭配使用的同步失败问题"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://n.duanyll.com/2020/03/18/Solve-Onenote-Problems-With-SSR/&title=解决 Onenote UWP 版与某不可名状软件搭配使用的同步失败问题"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://n.duanyll.com/2020/03/18/Solve-Onenote-Problems-With-SSR/&title=解决 Onenote UWP 版与某不可名状软件搭配使用的同步失败问题"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://n.duanyll.com/2020/03/18/Solve-Onenote-Problems-With-SSR/&name=解决 Onenote UWP 版与某不可名状软件搭配使用的同步失败问题&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://n.duanyll.com/2020/03/18/Solve-Onenote-Problems-With-SSR/&t=解决 Onenote UWP 版与某不可名状软件搭配使用的同步失败问题"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://duanyll.com/2020/03/18/Solve-Onenote-Problems-With-SSR/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://duanyll.com/2020/03/18/Solve-Onenote-Problems-With-SSR/&text=解决 Onenote UWP 版与某不可名状软件搭配使用的同步失败问题"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://duanyll.com/2020/03/18/Solve-Onenote-Problems-With-SSR/&title=解决 Onenote UWP 版与某不可名状软件搭配使用的同步失败问题"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://duanyll.com/2020/03/18/Solve-Onenote-Problems-With-SSR/&is_video=false&description=解决 Onenote UWP 版与某不可名状软件搭配使用的同步失败问题"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=解决 Onenote UWP 版与某不可名状软件搭配使用的同步失败问题&body=Check out this article: https://duanyll.com/2020/03/18/Solve-Onenote-Problems-With-SSR/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://duanyll.com/2020/03/18/Solve-Onenote-Problems-With-SSR/&title=解决 Onenote UWP 版与某不可名状软件搭配使用的同步失败问题"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://duanyll.com/2020/03/18/Solve-Onenote-Problems-With-SSR/&title=解决 Onenote UWP 版与某不可名状软件搭配使用的同步失败问题"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://duanyll.com/2020/03/18/Solve-Onenote-Problems-With-SSR/&title=解决 Onenote UWP 版与某不可名状软件搭配使用的同步失败问题"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://duanyll.com/2020/03/18/Solve-Onenote-Problems-With-SSR/&title=解决 Onenote UWP 版与某不可名状软件搭配使用的同步失败问题"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://duanyll.com/2020/03/18/Solve-Onenote-Problems-With-SSR/&name=解决 Onenote UWP 版与某不可名状软件搭配使用的同步失败问题&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://duanyll.com/2020/03/18/Solve-Onenote-Problems-With-SSR/&t=解决 Onenote UWP 版与某不可名状软件搭配使用的同步失败问题"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -314,17 +313,17 @@ mjx-container[display="true"] + br {
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://n.duanyll.com/2020/03/18/Solve-Onenote-Problems-With-SSR/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://n.duanyll.com/2020/03/18/Solve-Onenote-Problems-With-SSR/&text=解决 Onenote UWP 版与某不可名状软件搭配使用的同步失败问题"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://n.duanyll.com/2020/03/18/Solve-Onenote-Problems-With-SSR/&title=解决 Onenote UWP 版与某不可名状软件搭配使用的同步失败问题"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://n.duanyll.com/2020/03/18/Solve-Onenote-Problems-With-SSR/&is_video=false&description=解决 Onenote UWP 版与某不可名状软件搭配使用的同步失败问题"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=解决 Onenote UWP 版与某不可名状软件搭配使用的同步失败问题&body=Check out this article: https://n.duanyll.com/2020/03/18/Solve-Onenote-Problems-With-SSR/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://n.duanyll.com/2020/03/18/Solve-Onenote-Problems-With-SSR/&title=解决 Onenote UWP 版与某不可名状软件搭配使用的同步失败问题"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://n.duanyll.com/2020/03/18/Solve-Onenote-Problems-With-SSR/&title=解决 Onenote UWP 版与某不可名状软件搭配使用的同步失败问题"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://n.duanyll.com/2020/03/18/Solve-Onenote-Problems-With-SSR/&title=解决 Onenote UWP 版与某不可名状软件搭配使用的同步失败问题"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://n.duanyll.com/2020/03/18/Solve-Onenote-Problems-With-SSR/&title=解决 Onenote UWP 版与某不可名状软件搭配使用的同步失败问题"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://n.duanyll.com/2020/03/18/Solve-Onenote-Problems-With-SSR/&name=解决 Onenote UWP 版与某不可名状软件搭配使用的同步失败问题&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://n.duanyll.com/2020/03/18/Solve-Onenote-Problems-With-SSR/&t=解决 Onenote UWP 版与某不可名状软件搭配使用的同步失败问题"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://duanyll.com/2020/03/18/Solve-Onenote-Problems-With-SSR/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://duanyll.com/2020/03/18/Solve-Onenote-Problems-With-SSR/&text=解决 Onenote UWP 版与某不可名状软件搭配使用的同步失败问题"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://duanyll.com/2020/03/18/Solve-Onenote-Problems-With-SSR/&title=解决 Onenote UWP 版与某不可名状软件搭配使用的同步失败问题"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://duanyll.com/2020/03/18/Solve-Onenote-Problems-With-SSR/&is_video=false&description=解决 Onenote UWP 版与某不可名状软件搭配使用的同步失败问题"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=解决 Onenote UWP 版与某不可名状软件搭配使用的同步失败问题&body=Check out this article: https://duanyll.com/2020/03/18/Solve-Onenote-Problems-With-SSR/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://duanyll.com/2020/03/18/Solve-Onenote-Problems-With-SSR/&title=解决 Onenote UWP 版与某不可名状软件搭配使用的同步失败问题"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://duanyll.com/2020/03/18/Solve-Onenote-Problems-With-SSR/&title=解决 Onenote UWP 版与某不可名状软件搭配使用的同步失败问题"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://duanyll.com/2020/03/18/Solve-Onenote-Problems-With-SSR/&title=解决 Onenote UWP 版与某不可名状软件搭配使用的同步失败问题"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://duanyll.com/2020/03/18/Solve-Onenote-Problems-With-SSR/&title=解决 Onenote UWP 版与某不可名状软件搭配使用的同步失败问题"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://duanyll.com/2020/03/18/Solve-Onenote-Problems-With-SSR/&name=解决 Onenote UWP 版与某不可名状软件搭配使用的同步失败问题&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://duanyll.com/2020/03/18/Solve-Onenote-Problems-With-SSR/&t=解决 Onenote UWP 版与某不可名状软件搭配使用的同步失败问题"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>

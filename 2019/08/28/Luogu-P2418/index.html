@@ -9,12 +9,12 @@
     <meta name="description" content="感到颓废怎么办？ 当然是写大模拟了。  你一看这道题的题面长度，就知道坑点一定很多。建议大家先自己按自己理解写完再看题解（Orz某一遍AC的大佬）。 有关于身份的判断：事实上只要有人主动打出杀，决斗和无懈可击，就可以直接确定他的身份了，所以我们不需要真的模拟每个人对别人的看法，只需要把每个人是否暴露身份这一状态存起来，由他自己在行动的时候维护就行。 坑点：  死人要从场上清掉，维护next指针。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="洛谷P2482 [SDOI2010]猪国杀">
-<meta property="og:url" content="https://n.duanyll.com/2019/08/28/Luogu-P2418/index.html">
+<meta property="og:url" content="https://duanyll.com/2019/08/28/Luogu-P2418/index.html">
 <meta property="og:site_name" content="duanyll.com">
 <meta property="og:description" content="感到颓废怎么办？ 当然是写大模拟了。  你一看这道题的题面长度，就知道坑点一定很多。建议大家先自己按自己理解写完再看题解（Orz某一遍AC的大佬）。 有关于身份的判断：事实上只要有人主动打出杀，决斗和无懈可击，就可以直接确定他的身份了，所以我们不需要真的模拟每个人对别人的看法，只需要把每个人是否暴露身份这一状态存起来，由他自己在行动的时候维护就行。 坑点：  死人要从场上清掉，维护next指针。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-08-28T00:00:00.000Z">
-<meta property="article:modified_time" content="2023-02-06T16:03:14.213Z">
+<meta property="article:modified_time" content="2023-02-07T15:55:29.071Z">
 <meta property="article:author" content="duanyll">
 <meta property="article:tag" content="OI">
 <meta property="article:tag" content="题解">
@@ -48,8 +48,6 @@
     
     <!-- rss -->
     
-    
-      <link rel="alternate" href="/true" title="duanyll.com" type="application/atom+xml" />
     
 	<!-- mathjax -->
 	
@@ -165,7 +163,8 @@ mjx-container[display="true"] {
 mjx-container[display="true"] + br {
   display: none;
 }
-</style></head>
+</style><link rel="alternate" href="/atom.xml" title="duanyll.com" type="application/atom+xml">
+</head>
 
 <body class="max-width mx-auto px3 ltr">
     
@@ -209,17 +208,17 @@ mjx-container[display="true"] + br {
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://n.duanyll.com/2019/08/28/Luogu-P2418/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://n.duanyll.com/2019/08/28/Luogu-P2418/&text=洛谷P2482 [SDOI2010]猪国杀"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://n.duanyll.com/2019/08/28/Luogu-P2418/&title=洛谷P2482 [SDOI2010]猪国杀"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://n.duanyll.com/2019/08/28/Luogu-P2418/&is_video=false&description=洛谷P2482 [SDOI2010]猪国杀"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=洛谷P2482 [SDOI2010]猪国杀&body=Check out this article: https://n.duanyll.com/2019/08/28/Luogu-P2418/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://n.duanyll.com/2019/08/28/Luogu-P2418/&title=洛谷P2482 [SDOI2010]猪国杀"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://n.duanyll.com/2019/08/28/Luogu-P2418/&title=洛谷P2482 [SDOI2010]猪国杀"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://n.duanyll.com/2019/08/28/Luogu-P2418/&title=洛谷P2482 [SDOI2010]猪国杀"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://n.duanyll.com/2019/08/28/Luogu-P2418/&title=洛谷P2482 [SDOI2010]猪国杀"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://n.duanyll.com/2019/08/28/Luogu-P2418/&name=洛谷P2482 [SDOI2010]猪国杀&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://n.duanyll.com/2019/08/28/Luogu-P2418/&t=洛谷P2482 [SDOI2010]猪国杀"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://duanyll.com/2019/08/28/Luogu-P2418/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://duanyll.com/2019/08/28/Luogu-P2418/&text=洛谷P2482 [SDOI2010]猪国杀"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://duanyll.com/2019/08/28/Luogu-P2418/&title=洛谷P2482 [SDOI2010]猪国杀"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://duanyll.com/2019/08/28/Luogu-P2418/&is_video=false&description=洛谷P2482 [SDOI2010]猪国杀"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=洛谷P2482 [SDOI2010]猪国杀&body=Check out this article: https://duanyll.com/2019/08/28/Luogu-P2418/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://duanyll.com/2019/08/28/Luogu-P2418/&title=洛谷P2482 [SDOI2010]猪国杀"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://duanyll.com/2019/08/28/Luogu-P2418/&title=洛谷P2482 [SDOI2010]猪国杀"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://duanyll.com/2019/08/28/Luogu-P2418/&title=洛谷P2482 [SDOI2010]猪国杀"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://duanyll.com/2019/08/28/Luogu-P2418/&title=洛谷P2482 [SDOI2010]猪国杀"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://duanyll.com/2019/08/28/Luogu-P2418/&name=洛谷P2482 [SDOI2010]猪国杀&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://duanyll.com/2019/08/28/Luogu-P2418/&t=洛谷P2482 [SDOI2010]猪国杀"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -333,17 +332,17 @@ mjx-container[display="true"] + br {
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://n.duanyll.com/2019/08/28/Luogu-P2418/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://n.duanyll.com/2019/08/28/Luogu-P2418/&text=洛谷P2482 [SDOI2010]猪国杀"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://n.duanyll.com/2019/08/28/Luogu-P2418/&title=洛谷P2482 [SDOI2010]猪国杀"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://n.duanyll.com/2019/08/28/Luogu-P2418/&is_video=false&description=洛谷P2482 [SDOI2010]猪国杀"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=洛谷P2482 [SDOI2010]猪国杀&body=Check out this article: https://n.duanyll.com/2019/08/28/Luogu-P2418/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://n.duanyll.com/2019/08/28/Luogu-P2418/&title=洛谷P2482 [SDOI2010]猪国杀"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://n.duanyll.com/2019/08/28/Luogu-P2418/&title=洛谷P2482 [SDOI2010]猪国杀"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://n.duanyll.com/2019/08/28/Luogu-P2418/&title=洛谷P2482 [SDOI2010]猪国杀"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://n.duanyll.com/2019/08/28/Luogu-P2418/&title=洛谷P2482 [SDOI2010]猪国杀"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://n.duanyll.com/2019/08/28/Luogu-P2418/&name=洛谷P2482 [SDOI2010]猪国杀&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://n.duanyll.com/2019/08/28/Luogu-P2418/&t=洛谷P2482 [SDOI2010]猪国杀"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://duanyll.com/2019/08/28/Luogu-P2418/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://duanyll.com/2019/08/28/Luogu-P2418/&text=洛谷P2482 [SDOI2010]猪国杀"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://duanyll.com/2019/08/28/Luogu-P2418/&title=洛谷P2482 [SDOI2010]猪国杀"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://duanyll.com/2019/08/28/Luogu-P2418/&is_video=false&description=洛谷P2482 [SDOI2010]猪国杀"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=洛谷P2482 [SDOI2010]猪国杀&body=Check out this article: https://duanyll.com/2019/08/28/Luogu-P2418/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://duanyll.com/2019/08/28/Luogu-P2418/&title=洛谷P2482 [SDOI2010]猪国杀"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://duanyll.com/2019/08/28/Luogu-P2418/&title=洛谷P2482 [SDOI2010]猪国杀"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://duanyll.com/2019/08/28/Luogu-P2418/&title=洛谷P2482 [SDOI2010]猪国杀"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://duanyll.com/2019/08/28/Luogu-P2418/&title=洛谷P2482 [SDOI2010]猪国杀"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://duanyll.com/2019/08/28/Luogu-P2418/&name=洛谷P2482 [SDOI2010]猪国杀&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://duanyll.com/2019/08/28/Luogu-P2418/&t=洛谷P2482 [SDOI2010]猪国杀"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>

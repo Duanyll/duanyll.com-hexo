@@ -9,12 +9,12 @@
     <meta name="description" content="题意 将一个长度为  的序列分为  段, 使得总价值最大, 一段区间的价值为区间内不同数字的个数.  分析  的区间DP以及各种瞎搞显然(然而考试时还是写爆了). 定义  表示前 i 个数分成 j 段的总价值, col表示一段区间内不同颜色数量, 容易得到  的 DP 方程:  只要在转移的时候搞掉一个  就可以过了. 分别考虑每一个点的贡献, 设 pre[i] 是这个位置上的点上次出现的位置,">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Codeforces 833B The bakery">
-<meta property="og:url" content="https://n.duanyll.com/2019/10/31/Codeforces-833B/index.html">
+<meta property="og:url" content="https://duanyll.com/2019/10/31/Codeforces-833B/index.html">
 <meta property="og:site_name" content="duanyll.com">
 <meta property="og:description" content="题意 将一个长度为  的序列分为  段, 使得总价值最大, 一段区间的价值为区间内不同数字的个数.  分析  的区间DP以及各种瞎搞显然(然而考试时还是写爆了). 定义  表示前 i 个数分成 j 段的总价值, col表示一段区间内不同颜色数量, 容易得到  的 DP 方程:  只要在转移的时候搞掉一个  就可以过了. 分别考虑每一个点的贡献, 设 pre[i] 是这个位置上的点上次出现的位置,">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-10-31T00:00:00.000Z">
-<meta property="article:modified_time" content="2023-02-06T16:03:14.213Z">
+<meta property="article:modified_time" content="2023-02-07T15:55:29.071Z">
 <meta property="article:author" content="duanyll">
 <meta property="article:tag" content="题解">
 <meta property="article:tag" content="线段树">
@@ -47,8 +47,6 @@
     
     <!-- rss -->
     
-    
-      <link rel="alternate" href="/true" title="duanyll.com" type="application/atom+xml" />
     
 	<!-- mathjax -->
 	
@@ -164,7 +162,8 @@ mjx-container[display="true"] {
 mjx-container[display="true"] + br {
   display: none;
 }
-</style></head>
+</style><link rel="alternate" href="/atom.xml" title="duanyll.com" type="application/atom+xml">
+</head>
 
 <body class="max-width mx-auto px3 ltr">
     
@@ -208,17 +207,17 @@ mjx-container[display="true"] + br {
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://n.duanyll.com/2019/10/31/Codeforces-833B/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://n.duanyll.com/2019/10/31/Codeforces-833B/&text=Codeforces 833B The bakery"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://n.duanyll.com/2019/10/31/Codeforces-833B/&title=Codeforces 833B The bakery"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://n.duanyll.com/2019/10/31/Codeforces-833B/&is_video=false&description=Codeforces 833B The bakery"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Codeforces 833B The bakery&body=Check out this article: https://n.duanyll.com/2019/10/31/Codeforces-833B/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://n.duanyll.com/2019/10/31/Codeforces-833B/&title=Codeforces 833B The bakery"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://n.duanyll.com/2019/10/31/Codeforces-833B/&title=Codeforces 833B The bakery"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://n.duanyll.com/2019/10/31/Codeforces-833B/&title=Codeforces 833B The bakery"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://n.duanyll.com/2019/10/31/Codeforces-833B/&title=Codeforces 833B The bakery"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://n.duanyll.com/2019/10/31/Codeforces-833B/&name=Codeforces 833B The bakery&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://n.duanyll.com/2019/10/31/Codeforces-833B/&t=Codeforces 833B The bakery"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://duanyll.com/2019/10/31/Codeforces-833B/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://duanyll.com/2019/10/31/Codeforces-833B/&text=Codeforces 833B The bakery"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://duanyll.com/2019/10/31/Codeforces-833B/&title=Codeforces 833B The bakery"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://duanyll.com/2019/10/31/Codeforces-833B/&is_video=false&description=Codeforces 833B The bakery"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Codeforces 833B The bakery&body=Check out this article: https://duanyll.com/2019/10/31/Codeforces-833B/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://duanyll.com/2019/10/31/Codeforces-833B/&title=Codeforces 833B The bakery"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://duanyll.com/2019/10/31/Codeforces-833B/&title=Codeforces 833B The bakery"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://duanyll.com/2019/10/31/Codeforces-833B/&title=Codeforces 833B The bakery"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://duanyll.com/2019/10/31/Codeforces-833B/&title=Codeforces 833B The bakery"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://duanyll.com/2019/10/31/Codeforces-833B/&name=Codeforces 833B The bakery&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://duanyll.com/2019/10/31/Codeforces-833B/&t=Codeforces 833B The bakery"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -320,17 +319,17 @@ mjx-container[display="true"] + br {
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://n.duanyll.com/2019/10/31/Codeforces-833B/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://n.duanyll.com/2019/10/31/Codeforces-833B/&text=Codeforces 833B The bakery"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://n.duanyll.com/2019/10/31/Codeforces-833B/&title=Codeforces 833B The bakery"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://n.duanyll.com/2019/10/31/Codeforces-833B/&is_video=false&description=Codeforces 833B The bakery"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Codeforces 833B The bakery&body=Check out this article: https://n.duanyll.com/2019/10/31/Codeforces-833B/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://n.duanyll.com/2019/10/31/Codeforces-833B/&title=Codeforces 833B The bakery"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://n.duanyll.com/2019/10/31/Codeforces-833B/&title=Codeforces 833B The bakery"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://n.duanyll.com/2019/10/31/Codeforces-833B/&title=Codeforces 833B The bakery"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://n.duanyll.com/2019/10/31/Codeforces-833B/&title=Codeforces 833B The bakery"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://n.duanyll.com/2019/10/31/Codeforces-833B/&name=Codeforces 833B The bakery&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://n.duanyll.com/2019/10/31/Codeforces-833B/&t=Codeforces 833B The bakery"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://duanyll.com/2019/10/31/Codeforces-833B/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://duanyll.com/2019/10/31/Codeforces-833B/&text=Codeforces 833B The bakery"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://duanyll.com/2019/10/31/Codeforces-833B/&title=Codeforces 833B The bakery"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://duanyll.com/2019/10/31/Codeforces-833B/&is_video=false&description=Codeforces 833B The bakery"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Codeforces 833B The bakery&body=Check out this article: https://duanyll.com/2019/10/31/Codeforces-833B/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://duanyll.com/2019/10/31/Codeforces-833B/&title=Codeforces 833B The bakery"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://duanyll.com/2019/10/31/Codeforces-833B/&title=Codeforces 833B The bakery"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://duanyll.com/2019/10/31/Codeforces-833B/&title=Codeforces 833B The bakery"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://duanyll.com/2019/10/31/Codeforces-833B/&title=Codeforces 833B The bakery"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://duanyll.com/2019/10/31/Codeforces-833B/&name=Codeforces 833B The bakery&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://duanyll.com/2019/10/31/Codeforces-833B/&t=Codeforces 833B The bakery"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>

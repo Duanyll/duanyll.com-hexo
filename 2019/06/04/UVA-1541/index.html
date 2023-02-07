@@ -9,12 +9,12 @@
     <meta name="description" content="题意 给定一个线性棋盘，每回合抛一次硬币，正面向前走一个，反面向前走两个。走到的格子上面可能有三种操作或者没有操作：  向前走格 向后走格 跳过下一回合（回合数++）  抛完硬币后就执行一次目标格的操作，只执行一次。 问在回合内走到终点或者终点之后的概率（输出格式见原题）。 分析 记忆化搜索，表示第步走到第格的概率。分类讨论抛硬币正面和反面的情况。 走一个的情况： 格是停一回合格不是停一回合 走两">
 <meta property="og:type" content="article">
 <meta property="og:title" content="UVA1541 To Bet or Not To Bet">
-<meta property="og:url" content="https://n.duanyll.com/2019/06/04/UVA-1541/index.html">
+<meta property="og:url" content="https://duanyll.com/2019/06/04/UVA-1541/index.html">
 <meta property="og:site_name" content="duanyll.com">
 <meta property="og:description" content="题意 给定一个线性棋盘，每回合抛一次硬币，正面向前走一个，反面向前走两个。走到的格子上面可能有三种操作或者没有操作：  向前走格 向后走格 跳过下一回合（回合数++）  抛完硬币后就执行一次目标格的操作，只执行一次。 问在回合内走到终点或者终点之后的概率（输出格式见原题）。 分析 记忆化搜索，表示第步走到第格的概率。分类讨论抛硬币正面和反面的情况。 走一个的情况： 格是停一回合格不是停一回合 走两">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-06-04T00:00:00.000Z">
-<meta property="article:modified_time" content="2023-02-06T16:03:14.213Z">
+<meta property="article:modified_time" content="2023-02-07T15:55:29.071Z">
 <meta property="article:author" content="duanyll">
 <meta property="article:tag" content="OI">
 <meta property="article:tag" content="题解">
@@ -48,8 +48,6 @@
     
     <!-- rss -->
     
-    
-      <link rel="alternate" href="/true" title="duanyll.com" type="application/atom+xml" />
     
 	<!-- mathjax -->
 	
@@ -165,7 +163,8 @@ mjx-container[display="true"] {
 mjx-container[display="true"] + br {
   display: none;
 }
-</style></head>
+</style><link rel="alternate" href="/atom.xml" title="duanyll.com" type="application/atom+xml">
+</head>
 
 <body class="max-width mx-auto px3 ltr">
     
@@ -209,17 +208,17 @@ mjx-container[display="true"] + br {
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://n.duanyll.com/2019/06/04/UVA-1541/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://n.duanyll.com/2019/06/04/UVA-1541/&text=UVA1541 To Bet or Not To Bet"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://n.duanyll.com/2019/06/04/UVA-1541/&title=UVA1541 To Bet or Not To Bet"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://n.duanyll.com/2019/06/04/UVA-1541/&is_video=false&description=UVA1541 To Bet or Not To Bet"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=UVA1541 To Bet or Not To Bet&body=Check out this article: https://n.duanyll.com/2019/06/04/UVA-1541/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://n.duanyll.com/2019/06/04/UVA-1541/&title=UVA1541 To Bet or Not To Bet"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://n.duanyll.com/2019/06/04/UVA-1541/&title=UVA1541 To Bet or Not To Bet"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://n.duanyll.com/2019/06/04/UVA-1541/&title=UVA1541 To Bet or Not To Bet"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://n.duanyll.com/2019/06/04/UVA-1541/&title=UVA1541 To Bet or Not To Bet"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://n.duanyll.com/2019/06/04/UVA-1541/&name=UVA1541 To Bet or Not To Bet&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://n.duanyll.com/2019/06/04/UVA-1541/&t=UVA1541 To Bet or Not To Bet"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://duanyll.com/2019/06/04/UVA-1541/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://duanyll.com/2019/06/04/UVA-1541/&text=UVA1541 To Bet or Not To Bet"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://duanyll.com/2019/06/04/UVA-1541/&title=UVA1541 To Bet or Not To Bet"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://duanyll.com/2019/06/04/UVA-1541/&is_video=false&description=UVA1541 To Bet or Not To Bet"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=UVA1541 To Bet or Not To Bet&body=Check out this article: https://duanyll.com/2019/06/04/UVA-1541/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://duanyll.com/2019/06/04/UVA-1541/&title=UVA1541 To Bet or Not To Bet"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://duanyll.com/2019/06/04/UVA-1541/&title=UVA1541 To Bet or Not To Bet"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://duanyll.com/2019/06/04/UVA-1541/&title=UVA1541 To Bet or Not To Bet"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://duanyll.com/2019/06/04/UVA-1541/&title=UVA1541 To Bet or Not To Bet"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://duanyll.com/2019/06/04/UVA-1541/&name=UVA1541 To Bet or Not To Bet&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://duanyll.com/2019/06/04/UVA-1541/&t=UVA1541 To Bet or Not To Bet"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -330,17 +329,17 @@ mjx-container[display="true"] + br {
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://n.duanyll.com/2019/06/04/UVA-1541/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://n.duanyll.com/2019/06/04/UVA-1541/&text=UVA1541 To Bet or Not To Bet"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://n.duanyll.com/2019/06/04/UVA-1541/&title=UVA1541 To Bet or Not To Bet"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://n.duanyll.com/2019/06/04/UVA-1541/&is_video=false&description=UVA1541 To Bet or Not To Bet"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=UVA1541 To Bet or Not To Bet&body=Check out this article: https://n.duanyll.com/2019/06/04/UVA-1541/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://n.duanyll.com/2019/06/04/UVA-1541/&title=UVA1541 To Bet or Not To Bet"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://n.duanyll.com/2019/06/04/UVA-1541/&title=UVA1541 To Bet or Not To Bet"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://n.duanyll.com/2019/06/04/UVA-1541/&title=UVA1541 To Bet or Not To Bet"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://n.duanyll.com/2019/06/04/UVA-1541/&title=UVA1541 To Bet or Not To Bet"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://n.duanyll.com/2019/06/04/UVA-1541/&name=UVA1541 To Bet or Not To Bet&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://n.duanyll.com/2019/06/04/UVA-1541/&t=UVA1541 To Bet or Not To Bet"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://duanyll.com/2019/06/04/UVA-1541/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://duanyll.com/2019/06/04/UVA-1541/&text=UVA1541 To Bet or Not To Bet"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://duanyll.com/2019/06/04/UVA-1541/&title=UVA1541 To Bet or Not To Bet"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://duanyll.com/2019/06/04/UVA-1541/&is_video=false&description=UVA1541 To Bet or Not To Bet"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=UVA1541 To Bet or Not To Bet&body=Check out this article: https://duanyll.com/2019/06/04/UVA-1541/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://duanyll.com/2019/06/04/UVA-1541/&title=UVA1541 To Bet or Not To Bet"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://duanyll.com/2019/06/04/UVA-1541/&title=UVA1541 To Bet or Not To Bet"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://duanyll.com/2019/06/04/UVA-1541/&title=UVA1541 To Bet or Not To Bet"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://duanyll.com/2019/06/04/UVA-1541/&title=UVA1541 To Bet or Not To Bet"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://duanyll.com/2019/06/04/UVA-1541/&name=UVA1541 To Bet or Not To Bet&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://duanyll.com/2019/06/04/UVA-1541/&t=UVA1541 To Bet or Not To Bet"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
