@@ -6,7 +6,7 @@
   <link href="https://duanyll.com/atom.xml" rel="self"/>
   
   <link href="https://duanyll.com/"/>
-  <updated>2023-02-07T15:55:29.067Z</updated>
+  <updated>2023-02-08T14:40:52.438Z</updated>
   <id>https://duanyll.com/</id>
   
   <author>
@@ -17,11 +17,36 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>数分速通 - 函数极限</title>
+    <link href="https://duanyll.com/2023/02/08/Calculus-2/"/>
+    <id>https://duanyll.com/2023/02/08/Calculus-2/</id>
+    <published>2023-02-08T00:00:00.000Z</published>
+    <updated>2023-02-08T14:40:52.438Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;heine-定理&quot;&gt;Heine 定理&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;定理&lt;/strong&gt; &lt;span class=&quot;math inline&quot;&gt;&lt;mjx-container class=&quot;MathJax&quot; jax=&quot;SVG&quot;&gt;&lt;svg style=&quot;vertic</summary>
+      
+    
+    
+    
+    <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
+    
+    
+    <category term="数学分析" scheme="https://duanyll.com/tags/%E6%95%B0%E5%AD%A6%E5%88%86%E6%9E%90/"/>
+    
+    <category term="微积分" scheme="https://duanyll.com/tags/%E5%BE%AE%E7%A7%AF%E5%88%86/"/>
+    
+  </entry>
+  
+  <entry>
     <title>数分速通 - 数列极限</title>
     <link href="https://duanyll.com/2023/02/07/Calculus-1/"/>
     <id>https://duanyll.com/2023/02/07/Calculus-1/</id>
     <published>2023-02-07T00:00:00.000Z</published>
-    <updated>2023-02-07T15:55:29.067Z</updated>
+    <updated>2023-02-08T14:40:52.438Z</updated>
     
     
       
@@ -47,7 +72,7 @@
     <link href="https://duanyll.com/2022/12/07/Optim-7/"/>
     <id>https://duanyll.com/2022/12/07/Optim-7/</id>
     <published>2022-12-07T00:00:00.000Z</published>
-    <updated>2023-02-07T15:55:29.067Z</updated>
+    <updated>2023-02-08T14:40:52.438Z</updated>
     
     
       
@@ -69,7 +94,7 @@
     <link href="https://duanyll.com/2022/12/06/Optim-3/"/>
     <id>https://duanyll.com/2022/12/06/Optim-3/</id>
     <published>2022-12-06T00:00:00.000Z</published>
-    <updated>2023-02-07T15:55:29.067Z</updated>
+    <updated>2023-02-08T14:40:52.438Z</updated>
     
     
       
@@ -87,34 +112,11 @@
   </entry>
   
   <entry>
-    <title>最优化算法速通 - 无约束优化</title>
-    <link href="https://duanyll.com/2022/12/06/Optim-4/"/>
-    <id>https://duanyll.com/2022/12/06/Optim-4/</id>
-    <published>2022-12-06T00:00:00.000Z</published>
-    <updated>2023-02-07T15:55:29.067Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;二次型函数&lt;/p&gt;
-&lt;p&gt;&lt;span class=&quot;math display&quot;&gt;&lt;mjx-container class=&quot;MathJax&quot; jax=&quot;SVG&quot; display=&quot;true&quot; width=&quot;full&quot; style=&quot;min-width: 34.864ex;&quot;</summary>
-      
-    
-    
-    
-    <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
-    
-    
-    <category term="最优化" scheme="https://duanyll.com/tags/%E6%9C%80%E4%BC%98%E5%8C%96/"/>
-    
-  </entry>
-  
-  <entry>
     <title>最优化算法速通 - 线性规划</title>
     <link href="https://duanyll.com/2022/12/06/Optim-5/"/>
     <id>https://duanyll.com/2022/12/06/Optim-5/</id>
     <published>2022-12-06T00:00:00.000Z</published>
-    <updated>2023-02-07T15:55:29.067Z</updated>
+    <updated>2023-02-08T14:40:52.438Z</updated>
     
     
       
@@ -133,11 +135,34 @@
   </entry>
   
   <entry>
+    <title>最优化算法速通 - 无约束优化</title>
+    <link href="https://duanyll.com/2022/12/06/Optim-4/"/>
+    <id>https://duanyll.com/2022/12/06/Optim-4/</id>
+    <published>2022-12-06T00:00:00.000Z</published>
+    <updated>2023-02-08T14:40:52.438Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;二次型函数&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;math display&quot;&gt;&lt;mjx-container class=&quot;MathJax&quot; jax=&quot;SVG&quot; display=&quot;true&quot; width=&quot;full&quot; style=&quot;min-width: 34.864ex;&quot;</summary>
+      
+    
+    
+    
+    <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
+    
+    
+    <category term="最优化" scheme="https://duanyll.com/tags/%E6%9C%80%E4%BC%98%E5%8C%96/"/>
+    
+  </entry>
+  
+  <entry>
     <title>最优化算法速通 - 预备知识</title>
     <link href="https://duanyll.com/2022/12/03/Optim-1/"/>
     <id>https://duanyll.com/2022/12/03/Optim-1/</id>
     <published>2022-12-03T00:00:00.000Z</published>
-    <updated>2023-02-07T15:55:29.067Z</updated>
+    <updated>2023-02-08T14:40:52.438Z</updated>
     
     
       
@@ -164,7 +189,7 @@
     <link href="https://duanyll.com/2022/12/03/Optim-2/"/>
     <id>https://duanyll.com/2022/12/03/Optim-2/</id>
     <published>2022-12-03T00:00:00.000Z</published>
-    <updated>2023-02-07T15:55:29.067Z</updated>
+    <updated>2023-02-08T14:40:52.438Z</updated>
     
     
       
@@ -188,7 +213,7 @@
     <link href="https://duanyll.com/2022/06/15/WaterClass-2/"/>
     <id>https://duanyll.com/2022/06/15/WaterClass-2/</id>
     <published>2022-06-15T00:00:00.000Z</published>
-    <updated>2023-02-07T15:55:29.067Z</updated>
+    <updated>2023-02-08T14:40:52.438Z</updated>
     
     
       
@@ -211,7 +236,7 @@
     <link href="https://duanyll.com/2022/06/01/WaterClass-1/"/>
     <id>https://duanyll.com/2022/06/01/WaterClass-1/</id>
     <published>2022-06-01T00:00:00.000Z</published>
-    <updated>2023-02-07T15:55:29.067Z</updated>
+    <updated>2023-02-08T14:40:52.438Z</updated>
     
     
       
@@ -233,7 +258,7 @@
     <link href="https://duanyll.com/2022/05/21/UESTC-ICPC-Training-DP/"/>
     <id>https://duanyll.com/2022/05/21/UESTC-ICPC-Training-DP/</id>
     <published>2022-05-21T00:00:00.000Z</published>
-    <updated>2023-02-07T15:55:29.071Z</updated>
+    <updated>2023-02-08T14:40:52.442Z</updated>
     
     
       
@@ -260,7 +285,7 @@
     <link href="https://duanyll.com/2022/05/21/UESTC-ICPC-Training-Data-Structure/"/>
     <id>https://duanyll.com/2022/05/21/UESTC-ICPC-Training-Data-Structure/</id>
     <published>2022-05-21T00:00:00.000Z</published>
-    <updated>2023-02-07T15:55:29.071Z</updated>
+    <updated>2023-02-08T14:40:52.442Z</updated>
     
     
       
@@ -287,7 +312,7 @@
     <link href="https://duanyll.com/2022/04/30/UESTC-ICPC-Training-Graph/"/>
     <id>https://duanyll.com/2022/04/30/UESTC-ICPC-Training-Graph/</id>
     <published>2022-04-30T00:00:00.000Z</published>
-    <updated>2023-02-07T15:55:29.071Z</updated>
+    <updated>2023-02-08T14:40:52.442Z</updated>
     
     
       
@@ -316,7 +341,7 @@
     <link href="https://duanyll.com/2022/04/22/Luogu-P4208/"/>
     <id>https://duanyll.com/2022/04/22/Luogu-P4208/</id>
     <published>2022-04-22T00:00:00.000Z</published>
-    <updated>2023-02-07T15:55:29.071Z</updated>
+    <updated>2023-02-08T14:40:52.442Z</updated>
     
     
       
@@ -343,7 +368,7 @@
     <link href="https://duanyll.com/2022/04/19/Luogu-P4716/"/>
     <id>https://duanyll.com/2022/04/19/Luogu-P4716/</id>
     <published>2022-04-19T00:00:00.000Z</published>
-    <updated>2023-02-07T15:55:29.071Z</updated>
+    <updated>2023-02-08T14:40:52.442Z</updated>
     
     
       
@@ -372,7 +397,7 @@
     <link href="https://duanyll.com/2022/04/13/POJ-2914/"/>
     <id>https://duanyll.com/2022/04/13/POJ-2914/</id>
     <published>2022-04-13T00:00:00.000Z</published>
-    <updated>2023-02-07T15:55:29.071Z</updated>
+    <updated>2023-02-08T14:40:52.442Z</updated>
     
     
       
@@ -399,7 +424,7 @@
     <link href="https://duanyll.com/2022/02/18/WaterClass-3/"/>
     <id>https://duanyll.com/2022/02/18/WaterClass-3/</id>
     <published>2022-02-18T00:00:00.000Z</published>
-    <updated>2023-02-07T15:55:29.067Z</updated>
+    <updated>2023-02-08T14:40:52.438Z</updated>
     
     
       
@@ -421,7 +446,7 @@
     <link href="https://duanyll.com/2021/11/20/UESTC-Contest-1/"/>
     <id>https://duanyll.com/2021/11/20/UESTC-Contest-1/</id>
     <published>2021-11-20T00:00:00.000Z</published>
-    <updated>2023-02-07T15:55:29.071Z</updated>
+    <updated>2023-02-08T14:40:52.442Z</updated>
     
     
       
@@ -447,7 +472,7 @@
     <link href="https://duanyll.com/2021/09/26/Computer-Lab-Culture/"/>
     <id>https://duanyll.com/2021/09/26/Computer-Lab-Culture/</id>
     <published>2021-09-26T00:00:00.000Z</published>
-    <updated>2023-02-07T15:55:29.067Z</updated>
+    <updated>2023-02-08T14:40:52.438Z</updated>
     
     
       
@@ -469,7 +494,7 @@
     <link href="https://duanyll.com/2021/04/05/Poetry/"/>
     <id>https://duanyll.com/2021/04/05/Poetry/</id>
     <published>2021-04-05T00:00:00.000Z</published>
-    <updated>2023-02-07T15:55:29.067Z</updated>
+    <updated>2023-02-08T14:40:52.438Z</updated>
     
     
       
@@ -483,35 +508,6 @@
     
     
     <category term="文化课" scheme="https://duanyll.com/tags/%E6%96%87%E5%8C%96%E8%AF%BE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>生物选修一摘要</title>
-    <link href="https://duanyll.com/2021/03/29/Biology-4/"/>
-    <id>https://duanyll.com/2021/03/29/Biology-4/</id>
-    <published>2021-03-29T00:00:00.000Z</published>
-    <updated>2023-02-07T15:55:29.067Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;传统发酵技术的运用&quot;&gt;传统发酵技术的运用&lt;/h2&gt;
-&lt;h3 id=&quot;果酒和果醋的制作&quot;&gt;果酒和果醋的制作&lt;/h3&gt;
-&lt;ol type=&quot;1&quot;&gt;
-&lt;li&gt;酵母菌繁殖温度: 20℃&lt;/li&gt;
-&lt;li&gt;酒精发酵温度: 18~25℃&lt;/li&gt;
-&lt;li&gt;无需严格灭菌原因: </summary>
-      
-    
-    
-    
-    <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
-    
-    
-    <category term="文化课" scheme="https://duanyll.com/tags/%E6%96%87%E5%8C%96%E8%AF%BE/"/>
-    
-    <category term="生物" scheme="https://duanyll.com/tags/%E7%94%9F%E7%89%A9/"/>
     
   </entry>
   
