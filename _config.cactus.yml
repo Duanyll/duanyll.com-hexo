@@ -104,13 +104,13 @@ logo:
 favicon:
   desktop:
     url: /images/favicon.ico
-    gravatar: false
+    gravatar: true
   android:
     url: /images/favicon-192x192.png
-    gravatar: false
+    gravatar: true
   apple:
     url: /images/apple-touch-icon.png
-    gravatar: false
+    gravatar: true
 
 # The color scheme that should be used to highlight codeblocks.
 # See source/css/_highlight for a list of all available color schemes.
@@ -122,7 +122,7 @@ favicon:
 colorscheme: light
 
 # Maximal width of the page in rem units.
-page_width: 48
+page_width: 56
 
 
 ##############################################################################

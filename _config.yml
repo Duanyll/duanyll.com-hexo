@@ -124,6 +124,9 @@ mathjax:
       "rArr": "\\Rightarrow",
       "rarr": "\\rightarrow",
       "sub": "\\subset",
+      "d": "\\mathrm{d}",
+      "p": "\\partial",
+      "underbar": ["\\underline{#1}", 1]
     }
   }
     # you can put your extension options here

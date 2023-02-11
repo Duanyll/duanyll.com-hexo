@@ -62,9 +62,7 @@ $$
 \end{aligned}
 $$
 
-下凸函数在任意闭区间 $[a,b]$ 上 Lipschitz 连续.
-
-![20230208175334](https://cdn.duanyll.com/img/20230208175334.png)
+![下凸函数在任意闭区间上 Lipschitz 连续.](https://cdn.duanyll.com/img/20230208175334.png)
 
 证明函数在区间上不一致连续, 利用否定
 
