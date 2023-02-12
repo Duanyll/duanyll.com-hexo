@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>数分速通 - 级数</title>
+      <link href="/2023/02/12/Calculus-5/"/>
+      <url>/2023/02/12/Calculus-5/</url>
+      
+      
+      <categories>
+          
+          <category> 课程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数学分析 </tag>
+            
+            <tag> 微积分 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>关于迁移到 Hexo 的技术说明</title>
       <link href="/2023/02/10/Migrate-To-Hexo/"/>
       <url>/2023/02/10/Migrate-To-Hexo/</url>
@@ -13,6 +38,31 @@
         <tags>
             
             <tag> 公告 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>数分速通 - 定积分</title>
+      <link href="/2023/02/10/Calculus-4/"/>
+      <url>/2023/02/10/Calculus-4/</url>
+      
+      
+      <categories>
+          
+          <category> 课程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数学分析 </tag>
+            
+            <tag> 微积分 </tag>
             
         </tags>
       
