@@ -126,7 +126,8 @@ mathjax:
       "sub": "\\subset",
       "d": "\\mathrm{d}",
       "p": "\\partial",
-      "underbar": ["\\underline{#1}", 1]
+      "underbar": ["\\underline{#1}", 1],
+      "un": ["\\,\\mathrm{#1}", 1]
     }
   }
     # you can put your extension options here

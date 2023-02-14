@@ -1,2 +1,9 @@
 {
+  "markdown.extension.katex.macros": {
+    "\\d": "\\mathrm{d}",
+    "\\p": "\\partial",
+    "\\label": "\\boxed{\\textrm{#1}}",
+    "\\ref": "\\textrm{#1}",
+    "\\un": "\\,\\mathrm{#1}"
+  }
 }
