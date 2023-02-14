@@ -6,7 +6,7 @@
   <link href="https://duanyll.com/atom.xml" rel="self"/>
   
   <link href="https://duanyll.com/"/>
-  <updated>2023-02-12T15:32:23.246Z</updated>
+  <updated>2023-02-14T13:34:33.359Z</updated>
   <id>https://duanyll.com/</id>
   
   <author>
@@ -17,11 +17,57 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Physics Speedrun - Magnetic Field</title>
+    <link href="https://duanyll.com/2023/02/14/Physics-2/"/>
+    <id>https://duanyll.com/2023/02/14/Physics-2/</id>
+    <published>2023-02-14T00:00:00.000Z</published>
+    <updated>2023-02-14T13:34:33.359Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;figure&gt;
+&lt;img src=&quot;https://cdn.duanyll.com/img/20230214174320.png&quot; alt=&quot;&quot;&gt;&lt;figcaption&gt;Magnetic Field&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;Magnetism is </summary>
+      
+    
+    
+    
+    <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Physics Speedrun - Electric Field</title>
+    <link href="https://duanyll.com/2023/02/13/Physics-1/"/>
+    <id>https://duanyll.com/2023/02/13/Physics-1/</id>
+    <published>2023-02-13T00:00:00.000Z</published>
+    <updated>2023-02-14T13:34:33.359Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;electric-charge&quot;&gt;Electric Charge&lt;/h2&gt;
+&lt;ol type=&quot;1&quot;&gt;
+&lt;li&gt;Two types: positive, negative&lt;/li&gt;
+&lt;li&gt;Quantized: &lt;span class=&quot;math inline&quot;&gt;</summary>
+      
+    
+    
+    
+    <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>数分速通 - 级数</title>
     <link href="https://duanyll.com/2023/02/12/Calculus-5/"/>
     <id>https://duanyll.com/2023/02/12/Calculus-5/</id>
     <published>2023-02-12T00:00:00.000Z</published>
-    <updated>2023-02-12T15:32:23.246Z</updated>
+    <updated>2023-02-14T13:34:33.359Z</updated>
     
     
       
@@ -46,7 +92,7 @@
     <link href="https://duanyll.com/2023/02/10/Migrate-To-Hexo/"/>
     <id>https://duanyll.com/2023/02/10/Migrate-To-Hexo/</id>
     <published>2023-02-10T00:00:00.000Z</published>
-    <updated>2023-02-12T15:32:23.246Z</updated>
+    <updated>2023-02-14T13:34:33.355Z</updated>
     
     
       
@@ -67,7 +113,7 @@
     <link href="https://duanyll.com/2023/02/10/Calculus-4/"/>
     <id>https://duanyll.com/2023/02/10/Calculus-4/</id>
     <published>2023-02-10T00:00:00.000Z</published>
-    <updated>2023-02-12T15:32:23.246Z</updated>
+    <updated>2023-02-14T13:34:33.359Z</updated>
     
     
       
@@ -92,7 +138,7 @@
     <link href="https://duanyll.com/2023/02/09/Calculus-3/"/>
     <id>https://duanyll.com/2023/02/09/Calculus-3/</id>
     <published>2023-02-09T00:00:00.000Z</published>
-    <updated>2023-02-12T15:32:23.246Z</updated>
+    <updated>2023-02-14T13:34:33.359Z</updated>
     
     
       
@@ -117,7 +163,7 @@
     <link href="https://duanyll.com/2023/02/08/Calculus-2/"/>
     <id>https://duanyll.com/2023/02/08/Calculus-2/</id>
     <published>2023-02-08T00:00:00.000Z</published>
-    <updated>2023-02-12T15:32:23.246Z</updated>
+    <updated>2023-02-14T13:34:33.359Z</updated>
     
     
       
@@ -142,7 +188,7 @@
     <link href="https://duanyll.com/2023/02/07/Calculus-1/"/>
     <id>https://duanyll.com/2023/02/07/Calculus-1/</id>
     <published>2023-02-07T00:00:00.000Z</published>
-    <updated>2023-02-12T15:32:23.246Z</updated>
+    <updated>2023-02-14T13:34:33.359Z</updated>
     
     
       
@@ -168,7 +214,7 @@
     <link href="https://duanyll.com/2022/12/07/Optim-7/"/>
     <id>https://duanyll.com/2022/12/07/Optim-7/</id>
     <published>2022-12-07T00:00:00.000Z</published>
-    <updated>2023-02-12T15:32:23.246Z</updated>
+    <updated>2023-02-14T13:34:33.355Z</updated>
     
     
       
@@ -190,7 +236,7 @@
     <link href="https://duanyll.com/2022/12/06/Optim-3/"/>
     <id>https://duanyll.com/2022/12/06/Optim-3/</id>
     <published>2022-12-06T00:00:00.000Z</published>
-    <updated>2023-02-12T15:32:23.246Z</updated>
+    <updated>2023-02-14T13:34:33.355Z</updated>
     
     
       
@@ -212,7 +258,7 @@
     <link href="https://duanyll.com/2022/12/06/Optim-4/"/>
     <id>https://duanyll.com/2022/12/06/Optim-4/</id>
     <published>2022-12-06T00:00:00.000Z</published>
-    <updated>2023-02-12T15:32:23.246Z</updated>
+    <updated>2023-02-14T13:34:33.355Z</updated>
     
     
       
@@ -235,7 +281,7 @@
     <link href="https://duanyll.com/2022/12/06/Optim-5/"/>
     <id>https://duanyll.com/2022/12/06/Optim-5/</id>
     <published>2022-12-06T00:00:00.000Z</published>
-    <updated>2023-02-12T15:32:23.246Z</updated>
+    <updated>2023-02-14T13:34:33.355Z</updated>
     
     
       
@@ -258,7 +304,7 @@
     <link href="https://duanyll.com/2022/12/03/Optim-1/"/>
     <id>https://duanyll.com/2022/12/03/Optim-1/</id>
     <published>2022-12-03T00:00:00.000Z</published>
-    <updated>2023-02-12T15:32:23.246Z</updated>
+    <updated>2023-02-14T13:34:33.355Z</updated>
     
     
       
@@ -285,7 +331,7 @@
     <link href="https://duanyll.com/2022/12/03/Optim-2/"/>
     <id>https://duanyll.com/2022/12/03/Optim-2/</id>
     <published>2022-12-03T00:00:00.000Z</published>
-    <updated>2023-02-12T15:32:23.246Z</updated>
+    <updated>2023-02-14T13:34:33.355Z</updated>
     
     
       
@@ -309,7 +355,7 @@
     <link href="https://duanyll.com/2022/06/15/WaterClass-2/"/>
     <id>https://duanyll.com/2022/06/15/WaterClass-2/</id>
     <published>2022-06-15T00:00:00.000Z</published>
-    <updated>2023-02-12T15:32:23.250Z</updated>
+    <updated>2023-02-14T13:34:33.359Z</updated>
     
     
       
@@ -332,7 +378,7 @@
     <link href="https://duanyll.com/2022/06/01/WaterClass-1/"/>
     <id>https://duanyll.com/2022/06/01/WaterClass-1/</id>
     <published>2022-06-01T00:00:00.000Z</published>
-    <updated>2023-02-12T15:32:23.250Z</updated>
+    <updated>2023-02-14T13:34:33.359Z</updated>
     
     
       
@@ -354,7 +400,7 @@
     <link href="https://duanyll.com/2022/05/21/UESTC-ICPC-Training-DP/"/>
     <id>https://duanyll.com/2022/05/21/UESTC-ICPC-Training-DP/</id>
     <published>2022-05-21T00:00:00.000Z</published>
-    <updated>2023-02-12T15:32:23.250Z</updated>
+    <updated>2023-02-14T13:34:33.363Z</updated>
     
     
       
@@ -381,7 +427,7 @@
     <link href="https://duanyll.com/2022/05/21/UESTC-ICPC-Training-Data-Structure/"/>
     <id>https://duanyll.com/2022/05/21/UESTC-ICPC-Training-Data-Structure/</id>
     <published>2022-05-21T00:00:00.000Z</published>
-    <updated>2023-02-12T15:32:23.254Z</updated>
+    <updated>2023-02-14T13:34:33.363Z</updated>
     
     
       
@@ -408,7 +454,7 @@
     <link href="https://duanyll.com/2022/04/30/UESTC-ICPC-Training-Graph/"/>
     <id>https://duanyll.com/2022/04/30/UESTC-ICPC-Training-Graph/</id>
     <published>2022-04-30T00:00:00.000Z</published>
-    <updated>2023-02-12T15:32:23.250Z</updated>
+    <updated>2023-02-14T13:34:33.363Z</updated>
     
     
       
@@ -437,69 +483,13 @@
     <link href="https://duanyll.com/2022/04/22/Luogu-P4208/"/>
     <id>https://duanyll.com/2022/04/22/Luogu-P4208/</id>
     <published>2022-04-22T00:00:00.000Z</published>
-    <updated>2023-02-12T15:32:23.250Z</updated>
+    <updated>2023-02-14T13:34:33.363Z</updated>
     
     
       
       
     <summary type="html">&lt;h2 id=&quot;题意&quot;&gt;题意&lt;/h2&gt;
 &lt;p&gt;求 &lt;span class=&quot;math inline&quot;&gt;&lt;mjx-container class=&quot;MathJax&quot; jax=&quot;SVG&quot;&gt;&lt;svg style=&quot;vertical-align: -0.312ex;&quot; xmlns=&quot;ht</summary>
-      
-    
-    
-    
-    <category term="OI" scheme="https://duanyll.com/categories/OI/"/>
-    
-    
-    <category term="OI" scheme="https://duanyll.com/tags/OI/"/>
-    
-    <category term="题解" scheme="https://duanyll.com/tags/%E9%A2%98%E8%A7%A3/"/>
-    
-    <category term="图论" scheme="https://duanyll.com/tags/%E5%9B%BE%E8%AE%BA/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>洛谷 P4716 Lutece 2733 POJ3164 最小树形图模板</title>
-    <link href="https://duanyll.com/2022/04/19/Luogu-P4716/"/>
-    <id>https://duanyll.com/2022/04/19/Luogu-P4716/</id>
-    <published>2022-04-19T00:00:00.000Z</published>
-    <updated>2023-02-12T15:32:23.250Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;题意&quot;&gt;题意&lt;/h2&gt;
-&lt;p&gt;最小树形图是有向图上，从给定的根节点出发到达所有节点的一颗生成树。&lt;/p&gt;
-&lt;h2 id=&quot;分析&quot;&gt;分析&lt;/h2&gt;
-&lt;p&gt;求解最小树形图的一种算法是&lt;span class=&quot;math inline&quot;&gt;&lt;mjx-container cl</summary>
-      
-    
-    
-    
-    <category term="OI" scheme="https://duanyll.com/categories/OI/"/>
-    
-    
-    <category term="OI" scheme="https://duanyll.com/tags/OI/"/>
-    
-    <category term="题解" scheme="https://duanyll.com/tags/%E9%A2%98%E8%A7%A3/"/>
-    
-    <category term="图论" scheme="https://duanyll.com/tags/%E5%9B%BE%E8%AE%BA/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>POJ2914 Lutece 2710 Minimum Cut</title>
-    <link href="https://duanyll.com/2022/04/13/POJ-2914/"/>
-    <id>https://duanyll.com/2022/04/13/POJ-2914/</id>
-    <published>2022-04-13T00:00:00.000Z</published>
-    <updated>2023-02-12T15:32:23.250Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;题意&quot;&gt;题意&lt;/h2&gt;
-&lt;p&gt;&lt;span class=&quot;math inline&quot;&gt;&lt;mjx-container class=&quot;MathJax&quot; jax=&quot;SVG&quot;&gt;&lt;svg style=&quot;vertical-align: -0.312ex;&quot; xmlns=&quot;http</summary>
       
     
     

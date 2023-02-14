@@ -88,23 +88,22 @@ var searchFunc = function(path, searchId, contentId) {
           var indexTitle = -1;
           var indexContent = -1;
           var firstOccur = -1;
-          // only match artiles with not empty contents
-          if (dataContent !== "") {
-            keywords.forEach(function(keyword) {
-              indexTitle = dataTitleLowerCase.indexOf(keyword);
-              indexContent = dataContentLowerCase.indexOf(keyword);
-
-              if( indexTitle >= 0 || indexContent >= 0 ){
-                matches += 1;
-                if (indexContent < 0) {
-                  indexContent = 0;
-                }
-                if (firstOccur < 0) {
-                  firstOccur = indexContent;
-                }
+          
+          keywords.forEach(function(keyword) {
+            indexTitle = dataTitleLowerCase.indexOf(keyword);
+            indexContent = dataContentLowerCase.indexOf(keyword);
+            
+            if( indexTitle >= 0 || indexContent >= 0 ){
+              matches += 1;
+              if (indexContent < 0) {
+                indexContent = 0;
               }
-            });
-          }
+              if (firstOccur < 0) {
+                firstOccur = indexContent;
+              }
+            }
+          });
+            
           // show search results
           if (matches > 0) {
             var searchResult = {};

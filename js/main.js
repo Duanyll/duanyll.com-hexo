@@ -110,4 +110,15 @@ $(document).ready(function() {
       });
     }
   }
+
+  /**
+   * Smooth scrolling when clicking an anchor link
+   */
+  $(document).on('click', 'a[href^="#"]', function (event) {
+    event.preventDefault();
+
+    $('html, body').animate({
+      scrollTop: $(decodeURI($.attr(this, 'href'))).offset().top
+    }, 500);
+  });
 });
