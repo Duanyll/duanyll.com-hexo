@@ -4,6 +4,23 @@
   
     
     <entry>
+      <title>Physics Speedrun - Electromagnetic Induction</title>
+      <link href="/2023/02/15/Physics-3/"/>
+      <url>/2023/02/15/Physics-3/</url>
+      
+      
+      <categories>
+          
+          <category> 课程 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Physics Speedrun - Magnetic Field</title>
       <link href="/2023/02/14/Physics-2/"/>
       <url>/2023/02/14/Physics-2/</url>
@@ -63,23 +80,6 @@
     
     
     <entry>
-      <title>关于迁移到 Hexo 的技术说明</title>
-      <link href="/2023/02/10/Migrate-To-Hexo/"/>
-      <url>/2023/02/10/Migrate-To-Hexo/</url>
-      
-      
-      
-        <tags>
-            
-            <tag> 公告 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>数分速通 - 定积分</title>
       <link href="/2023/02/10/Calculus-4/"/>
       <url>/2023/02/10/Calculus-4/</url>
@@ -97,6 +97,29 @@
             <tag> 数学分析 </tag>
             
             <tag> 微积分 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>关于迁移到 Hexo 的技术说明</title>
+      <link href="/2023/02/10/Migrate-To-Hexo/"/>
+      <url>/2023/02/10/Migrate-To-Hexo/</url>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 公告 </tag>
             
         </tags>
       
