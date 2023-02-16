@@ -14,7 +14,7 @@
 <meta property="og:description" content="我打赌这道题如果n&#x3D;1e5，绝对八成的人都会打树剖  然而n高达1e18，所以建图是不可能的了。注意观察q只有1000，就是说只会涉及最多2000个点，因此就可以离散化+LCA瞎搞。然而这是一颗满二叉树，所以不用建图，直接开一个map&lt;int64,int64&gt;表示每个节点到父亲的距离，按照LCA的求法边跳边更新答案就是了。 2000个点，最多处理2000*64次边，爆不了。 1234">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-03-15T00:00:00.000Z">
-<meta property="article:modified_time" content="2023-02-15T11:23:52.939Z">
+<meta property="article:modified_time" content="2023-02-16T04:04:05.027Z">
 <meta property="article:author" content="duanyll">
 <meta property="article:tag" content="OI">
 <meta property="article:tag" content="题解">
