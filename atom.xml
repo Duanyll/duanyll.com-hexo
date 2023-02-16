@@ -6,7 +6,7 @@
   <link href="https://duanyll.com/atom.xml" rel="self"/>
   
   <link href="https://duanyll.com/"/>
-  <updated>2023-02-16T04:04:05.027Z</updated>
+  <updated>2023-02-16T08:41:30.100Z</updated>
   <id>https://duanyll.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://duanyll.com/2023/02/16/ClaMacha-1/"/>
     <id>https://duanyll.com/2023/02/16/ClaMacha-1/</id>
     <published>2023-02-16T00:00:00.000Z</published>
-    <updated>2023-02-16T04:04:05.027Z</updated>
+    <updated>2023-02-16T08:41:30.100Z</updated>
     
     
       
@@ -43,7 +43,7 @@
     <link href="https://duanyll.com/2023/02/16/ClaMacha-2/"/>
     <id>https://duanyll.com/2023/02/16/ClaMacha-2/</id>
     <published>2023-02-16T00:00:00.000Z</published>
-    <updated>2023-02-16T04:04:05.027Z</updated>
+    <updated>2023-02-16T08:41:30.100Z</updated>
     
     
       
@@ -72,7 +72,7 @@
     <link href="https://duanyll.com/2023/02/16/ClaMacha-3/"/>
     <id>https://duanyll.com/2023/02/16/ClaMacha-3/</id>
     <published>2023-02-16T00:00:00.000Z</published>
-    <updated>2023-02-16T04:04:05.027Z</updated>
+    <updated>2023-02-16T08:41:30.100Z</updated>
     
     
       
@@ -96,11 +96,32 @@
   </entry>
   
   <entry>
+    <title>Physics Speedrun - Quantum Theory</title>
+    <link href="https://duanyll.com/2023/02/16/Physics-4/"/>
+    <id>https://duanyll.com/2023/02/16/Physics-4/</id>
+    <published>2023-02-16T00:00:00.000Z</published>
+    <updated>2023-02-16T08:41:30.100Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;photon-theory-of-light&quot;&gt;Photon Theory of Light&lt;/h2&gt;
+&lt;p&gt;The light ought to be emitted, transported, and absorbed as tiny particles, o</summary>
+      
+    
+    
+    
+    <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>Physics Speedrun - Electromagnetic Induction</title>
     <link href="https://duanyll.com/2023/02/15/Physics-3/"/>
     <id>https://duanyll.com/2023/02/15/Physics-3/</id>
     <published>2023-02-15T00:00:00.000Z</published>
-    <updated>2023-02-16T04:04:05.027Z</updated>
+    <updated>2023-02-16T08:41:30.100Z</updated>
     
     
       
@@ -122,7 +143,7 @@
     <link href="https://duanyll.com/2023/02/14/Physics-2/"/>
     <id>https://duanyll.com/2023/02/14/Physics-2/</id>
     <published>2023-02-14T00:00:00.000Z</published>
-    <updated>2023-02-16T04:04:05.023Z</updated>
+    <updated>2023-02-16T08:41:30.100Z</updated>
     
     
       
@@ -145,7 +166,7 @@
     <link href="https://duanyll.com/2023/02/13/Physics-1/"/>
     <id>https://duanyll.com/2023/02/13/Physics-1/</id>
     <published>2023-02-13T00:00:00.000Z</published>
-    <updated>2023-02-16T04:04:05.023Z</updated>
+    <updated>2023-02-16T08:41:30.100Z</updated>
     
     
       
@@ -168,7 +189,7 @@
     <link href="https://duanyll.com/2023/02/12/Calculus-5/"/>
     <id>https://duanyll.com/2023/02/12/Calculus-5/</id>
     <published>2023-02-12T00:00:00.000Z</published>
-    <updated>2023-02-16T04:04:05.023Z</updated>
+    <updated>2023-02-16T08:41:30.100Z</updated>
     
     
       
@@ -193,7 +214,7 @@
     <link href="https://duanyll.com/2023/02/10/Calculus-4/"/>
     <id>https://duanyll.com/2023/02/10/Calculus-4/</id>
     <published>2023-02-10T00:00:00.000Z</published>
-    <updated>2023-02-16T04:04:05.023Z</updated>
+    <updated>2023-02-16T08:41:30.100Z</updated>
     
     
       
@@ -218,7 +239,7 @@
     <link href="https://duanyll.com/2023/02/10/Migrate-To-Hexo/"/>
     <id>https://duanyll.com/2023/02/10/Migrate-To-Hexo/</id>
     <published>2023-02-10T00:00:00.000Z</published>
-    <updated>2023-02-16T04:04:05.031Z</updated>
+    <updated>2023-02-16T08:41:30.108Z</updated>
     
     
       
@@ -241,7 +262,7 @@
     <link href="https://duanyll.com/2023/02/09/Calculus-3/"/>
     <id>https://duanyll.com/2023/02/09/Calculus-3/</id>
     <published>2023-02-09T00:00:00.000Z</published>
-    <updated>2023-02-16T04:04:05.027Z</updated>
+    <updated>2023-02-16T08:41:30.100Z</updated>
     
     
       
@@ -266,7 +287,7 @@
     <link href="https://duanyll.com/2023/02/08/Calculus-2/"/>
     <id>https://duanyll.com/2023/02/08/Calculus-2/</id>
     <published>2023-02-08T00:00:00.000Z</published>
-    <updated>2023-02-16T04:04:05.027Z</updated>
+    <updated>2023-02-16T08:41:30.100Z</updated>
     
     
       
@@ -291,7 +312,7 @@
     <link href="https://duanyll.com/2023/02/07/Calculus-1/"/>
     <id>https://duanyll.com/2023/02/07/Calculus-1/</id>
     <published>2023-02-07T00:00:00.000Z</published>
-    <updated>2023-02-16T04:04:05.027Z</updated>
+    <updated>2023-02-16T08:41:30.100Z</updated>
     
     
       
@@ -317,7 +338,7 @@
     <link href="https://duanyll.com/2022/12/07/Optim-7/"/>
     <id>https://duanyll.com/2022/12/07/Optim-7/</id>
     <published>2022-12-07T00:00:00.000Z</published>
-    <updated>2023-02-16T04:04:05.023Z</updated>
+    <updated>2023-02-16T08:41:30.100Z</updated>
     
     
       
@@ -339,7 +360,7 @@
     <link href="https://duanyll.com/2022/12/06/Optim-3/"/>
     <id>https://duanyll.com/2022/12/06/Optim-3/</id>
     <published>2022-12-06T00:00:00.000Z</published>
-    <updated>2023-02-16T04:04:05.023Z</updated>
+    <updated>2023-02-16T08:41:30.100Z</updated>
     
     
       
@@ -361,7 +382,7 @@
     <link href="https://duanyll.com/2022/12/06/Optim-4/"/>
     <id>https://duanyll.com/2022/12/06/Optim-4/</id>
     <published>2022-12-06T00:00:00.000Z</published>
-    <updated>2023-02-16T04:04:05.023Z</updated>
+    <updated>2023-02-16T08:41:30.100Z</updated>
     
     
       
@@ -384,7 +405,7 @@
     <link href="https://duanyll.com/2022/12/06/Optim-5/"/>
     <id>https://duanyll.com/2022/12/06/Optim-5/</id>
     <published>2022-12-06T00:00:00.000Z</published>
-    <updated>2023-02-16T04:04:05.023Z</updated>
+    <updated>2023-02-16T08:41:30.100Z</updated>
     
     
       
@@ -407,7 +428,7 @@
     <link href="https://duanyll.com/2022/12/03/Optim-1/"/>
     <id>https://duanyll.com/2022/12/03/Optim-1/</id>
     <published>2022-12-03T00:00:00.000Z</published>
-    <updated>2023-02-16T04:04:05.023Z</updated>
+    <updated>2023-02-16T08:41:30.100Z</updated>
     
     
       
@@ -434,7 +455,7 @@
     <link href="https://duanyll.com/2022/12/03/Optim-2/"/>
     <id>https://duanyll.com/2022/12/03/Optim-2/</id>
     <published>2022-12-03T00:00:00.000Z</published>
-    <updated>2023-02-16T04:04:05.023Z</updated>
+    <updated>2023-02-16T08:41:30.100Z</updated>
     
     
       
@@ -458,35 +479,13 @@
     <link href="https://duanyll.com/2022/06/15/WaterClass-2/"/>
     <id>https://duanyll.com/2022/06/15/WaterClass-2/</id>
     <published>2022-06-15T00:00:00.000Z</published>
-    <updated>2023-02-16T04:04:05.027Z</updated>
+    <updated>2023-02-16T08:41:30.104Z</updated>
     
     
       
       
     <summary type="html">&lt;h2 id=&quot;摘要&quot;&gt;摘要&lt;/h2&gt;
 &lt;p&gt;亚当·斯密是18世纪著名的苏格兰哲学家和经济学家，著有《国富论》等经济学巨著和《道德情操论》等道德哲学作品。在对亚当·斯密的伦理思想体系的研究中，时常认为亚当·斯密的经济学理论鼓励人无限的追求自利，而道德哲学理论却强调人应当通过“合宜</summary>
-      
-    
-    
-    
-    <category term="文字" scheme="https://duanyll.com/categories/%E6%96%87%E5%AD%97/"/>
-    
-    
-    <category term="通识教育" scheme="https://duanyll.com/tags/%E9%80%9A%E8%AF%86%E6%95%99%E8%82%B2/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>历史的混沌样貌——粗读《近代中国社会的新陈代谢》后杂谈</title>
-    <link href="https://duanyll.com/2022/06/01/WaterClass-1/"/>
-    <id>https://duanyll.com/2022/06/01/WaterClass-1/</id>
-    <published>2022-06-01T00:00:00.000Z</published>
-    <updated>2023-02-16T04:04:05.027Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;我 的历史观是怎么样的？我不知道。此前提交的课堂作业里，我写了一段尤其中二的“混沌”论述，归纳起来，就是说，我不能回答英雄人物的成功是来源于努力还是机遇这个问题，但至少我认为将结论全部归结于其中一者是不恰当的。于是面对历史方面的许多辩题我都保持沉默，因为我并不敢信服地持有鲜</summary>
       
     
     
