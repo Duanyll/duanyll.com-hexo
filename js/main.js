@@ -118,7 +118,7 @@ $(document).ready(function() {
     event.preventDefault();
 
     $('html, body').animate({
-      scrollTop: $(decodeURI($.attr(this, 'href'))).offset().top
+      scrollTop: $(decodeURIComponent($.attr(this, 'href')).replace(':', '\\3A ')).offset().top - 50
     }, 500);
   });
 });
