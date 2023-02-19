@@ -5,5 +5,8 @@
     "\\label": "\\boxed{\\textrm{#1}}",
     "\\ref": "\\textrm{#1}",
     "\\un": "\\,\\mathrm{#1}"
-  }
+  },
+  "markdown.styles": [
+    ".vscode/cobalt.css"
+  ]
 }

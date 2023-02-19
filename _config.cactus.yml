@@ -197,3 +197,9 @@ cdn:
   font_awesome: https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css
   justified_gallery_css: https://cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.8.1/css/justifiedGallery.min.css
   justified_gallery_js: https://cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js
+
+license:
+  enable: true
+  url: http://creativecommons.org/licenses/by-sa/4.0/
+  logo_url: https://i.creativecommons.org/l/by-sa/4.0/88x31.png
+  name: Creative Commons Attribution-ShareAlike 4.0 International License
