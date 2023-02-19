@@ -14,7 +14,7 @@
 <meta property="og:description" content="不多说,上代码">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2018-10-19T00:00:00.000Z">
-<meta property="article:modified_time" content="2023-02-18T14:17:01.317Z">
+<meta property="article:modified_time" content="2023-02-19T09:33:28.850Z">
 <meta property="article:author" content="duanyll">
 <meta property="article:tag" content="OI">
 <meta property="article:tag" content="linux">
@@ -285,6 +285,25 @@ mjx-container[display="true"] + br {
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">{</span></span><br><span class="line">	<span class="attr">"Duipai"</span><span class="punctuation">:</span><span class="punctuation">{</span></span><br><span class="line">		<span class="attr">"prefix"</span><span class="punctuation">:</span> <span class="string">"duipai"</span><span class="punctuation">,</span></span><br><span class="line">		<span class="attr">"body"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">			<span class="string">"g++ $1.cpp -o $1.out"</span><span class="punctuation">,</span></span><br><span class="line">			<span class="string">"g++ $1_std.cpp -o $1_std.out"</span><span class="punctuation">,</span></span><br><span class="line">			<span class="string">"g++ $1_dm.cpp -o $1_dm.out"</span><span class="punctuation">,</span></span><br><span class="line">			<span class="string">"while true; do"</span><span class="punctuation">,</span></span><br><span class="line">			<span class="string">"\t./$1_dm.out &gt; $1.in"</span><span class="punctuation">,</span></span><br><span class="line">			<span class="string">"\t./$1_std.out &lt; $1.in &gt; $1_std.ans"</span><span class="punctuation">,</span></span><br><span class="line">			<span class="string">"\t./$1.out &lt; $1.in &gt; $1.ans"</span><span class="punctuation">,</span></span><br><span class="line">			<span class="string">"\tif diff $1.ans $1_std.ans; then"</span><span class="punctuation">,</span></span><br><span class="line">			<span class="string">"\t\tprintf \"AC\\n\""</span><span class="punctuation">,</span></span><br><span class="line">			<span class="string">"\telse"</span><span class="punctuation">,</span></span><br><span class="line">			<span class="string">"\t\tprintf \"WA\\n\""</span><span class="punctuation">,</span></span><br><span class="line">			<span class="string">"\t\texit 0"</span><span class="punctuation">,</span></span><br><span class="line">			<span class="string">"\tfi"</span><span class="punctuation">,</span></span><br><span class="line">			<span class="string">"done"</span></span><br><span class="line">		<span class="punctuation">]</span></span><br><span class="line">	<span class="punctuation">}</span></span><br><span class="line"><span class="punctuation">}</span></span><br></pre></td></tr></table></figure>
 
   </div>
+  
+    <div class="post-license">
+        <div class="post-license-container">
+            <a class="post-license-logo" target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-sa/4.0/">
+                <img src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" alt="Creative Commons Attribution-ShareAlike 4.0 International License"/>
+            </a>
+            <div>
+                <p>
+                    This work is licensed under a
+                        <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+                </p>
+            </div>
+        </div>
+        <p>
+            Permalink: 
+                <a href="/2018/10/19/VSCode-Duipai/">https://duanyll.com/2018/10/19/VSCode-Duipai/</a>
+        </p>
+    </div>
+
 </article>
 
 

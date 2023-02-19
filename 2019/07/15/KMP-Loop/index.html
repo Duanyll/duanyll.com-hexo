@@ -14,7 +14,7 @@
 <meta property="og:description" content="next数组 next数组的作用: 在失配时, 应该将模板串的指针指向哪个位置 next数组的意义: 前面长度为i的字串中, 前后缀相等的最大长度 求法一 12345678910111213141516memset(next, 0, sizeof next);int j &#x3D; 0, k &#x3D; -1;  &#x2F;&#x2F; j前缀，k后缀next[0] &#x3D; -1;while (j &lt; m - 1) {    i">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-07-15T00:00:00.000Z">
-<meta property="article:modified_time" content="2023-02-18T14:17:01.321Z">
+<meta property="article:modified_time" content="2023-02-19T09:33:28.850Z">
 <meta property="article:author" content="duanyll">
 <meta property="article:tag" content="OI">
 <meta property="article:tag" content="KMP">
@@ -291,6 +291,25 @@ mjx-container[display="true"] + br {
 <p>若<code>T</code>不是一个完美的循环串, 其最后一个循环节缺失了一部分, 以上写法依然可以得到正确的循环节长度, <code>T</code>再补上<code>l - n % l</code>的长度就是循环串了</p>
 
   </div>
+  
+    <div class="post-license">
+        <div class="post-license-container">
+            <a class="post-license-logo" target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-sa/4.0/">
+                <img src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" alt="Creative Commons Attribution-ShareAlike 4.0 International License"/>
+            </a>
+            <div>
+                <p>
+                    This work is licensed under a
+                        <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+                </p>
+            </div>
+        </div>
+        <p>
+            Permalink: 
+                <a href="/2019/07/15/KMP-Loop/">https://duanyll.com/2019/07/15/KMP-Loop/</a>
+        </p>
+    </div>
+
 </article>
 
 

@@ -14,7 +14,7 @@
 <meta property="og:description" content="A 首先考虑经典的  LCS 做法:   指考虑了  的前  个字符和  的前  个字符的答案. 本题中公式涉及到  长度的项, 只需要转移的时候相应地加上在  或者  方向上拓展的长度即可. 注意到  是负数, 因此进行拓展并不一定是最优解, 所以这个时候也要进行不拓展的转移. 于是得到求完整答案的转移方式:  在考虑如何只求子串的答案. 子串的终点容易处理, 直接最后取所有  的最大值即可,">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-21T00:00:00.000Z">
-<meta property="article:modified_time" content="2023-02-18T14:17:01.321Z">
+<meta property="article:modified_time" content="2023-02-19T09:33:28.854Z">
 <meta property="article:author" content="duanyll">
 <meta property="article:tag" content="OI">
 <meta property="article:tag" content="题解">
@@ -337,6 +337,25 @@ mjx-container[display="true"] + br {
 <p>零一背包模板。只需要注意到滚动数组时更新顺序很重要，从上到下枚举重量时，不会从该物品已经选取过的状态转移，所以物品只选取一次，成为零一背包；而从小到大枚举时，会从该物品已经处理过的状态转移，所以物品会选取多次，成为多重背包。</p>
 
   </div>
+  
+    <div class="post-license">
+        <div class="post-license-container">
+            <a class="post-license-logo" target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-sa/4.0/">
+                <img src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" alt="Creative Commons Attribution-ShareAlike 4.0 International License"/>
+            </a>
+            <div>
+                <p>
+                    This work is licensed under a
+                        <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+                </p>
+            </div>
+        </div>
+        <p>
+            Permalink: 
+                <a href="/2022/05/21/UESTC-ICPC-Training-DP/">https://duanyll.com/2022/05/21/UESTC-ICPC-Training-DP/</a>
+        </p>
+    </div>
+
 </article>
 
 

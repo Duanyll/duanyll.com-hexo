@@ -1506,6 +1506,24 @@ article .content .caption {
 #categories .category-list .category-list-item .category-list-count:after {
   content: ")";
 }
+.post-license {
+  display: block;
+  background-color: #dedcd9;
+  border-radius: 5pt;
+  padding: 1rem;
+}
+.post-license-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+}
+.post-license-logo {
+  display: block;
+  margin-bottom: 0;
+}
 .highlight {
   color: #333;
   background: #f8f8f8;

@@ -14,7 +14,7 @@
 <meta property="og:description" content="我打赌这道题如果n&#x3D;1e5，绝对八成的人都会打树剖  然而n高达1e18，所以建图是不可能的了。注意观察q只有1000，就是说只会涉及最多2000个点，因此就可以离散化+LCA瞎搞。然而这是一颗满二叉树，所以不用建图，直接开一个map&lt;int64,int64&gt;表示每个节点到父亲的距离，按照LCA的求法边跳边更新答案就是了。 2000个点，最多处理2000*64次边，爆不了。 1234">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-03-15T00:00:00.000Z">
-<meta property="article:modified_time" content="2023-02-18T14:17:01.317Z">
+<meta property="article:modified_time" content="2023-02-19T09:33:28.850Z">
 <meta property="article:author" content="duanyll">
 <meta property="article:tag" content="OI">
 <meta property="article:tag" content="题解">
@@ -286,6 +286,25 @@ mjx-container[display="true"] + br {
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> int64;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MAXN = <span class="number">500010</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> INF = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line"></span><br><span class="line">map&lt;int64,int64&gt; dis;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>{</span><br><span class="line">	<span class="type">int</span> q;</span><br><span class="line">	cin &gt;&gt; q;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i&lt;=q;i++){</span><br><span class="line">		int64 opr,a,b;</span><br><span class="line">		cin &gt;&gt; opr &gt;&gt; a &gt;&gt; b;</span><br><span class="line">		<span class="keyword">if</span>(opr == <span class="number">1</span>){</span><br><span class="line">			int64 w;</span><br><span class="line">			cin &gt;&gt; w;</span><br><span class="line">			<span class="keyword">while</span>(a != b){</span><br><span class="line">				<span class="keyword">if</span>(a &lt; b){</span><br><span class="line">					<span class="built_in">swap</span>(a,b);</span><br><span class="line">				}</span><br><span class="line">				dis[a] += w;</span><br><span class="line">				a &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">			}</span><br><span class="line">		}<span class="keyword">else</span>{</span><br><span class="line">			int64 ans = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">while</span>(a != b){</span><br><span class="line">				<span class="keyword">if</span>(a &lt; b){</span><br><span class="line">					<span class="built_in">swap</span>(a,b);</span><br><span class="line">				}</span><br><span class="line">				ans += dis[a];</span><br><span class="line">				a &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">			}</span><br><span class="line">			cout &lt;&lt; ans &lt;&lt; endl;</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">} </span><br></pre></td></tr></table></figure>
 
   </div>
+  
+    <div class="post-license">
+        <div class="post-license-container">
+            <a class="post-license-logo" target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-sa/4.0/">
+                <img src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" alt="Creative Commons Attribution-ShareAlike 4.0 International License"/>
+            </a>
+            <div>
+                <p>
+                    This work is licensed under a
+                        <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+                </p>
+            </div>
+        </div>
+        <p>
+            Permalink: 
+                <a href="/2019/03/15/Codeforces-696A/">https://duanyll.com/2019/03/15/Codeforces-696A/</a>
+        </p>
+    </div>
+
 </article>
 
 

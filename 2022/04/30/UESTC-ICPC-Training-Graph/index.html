@@ -14,7 +14,7 @@
 <meta property="og:description" content="A POJ2914 Lutece 2710 Minimum Cut C 容易证明只有行号列号之和奇偶性相同的情况下才能到达重点. 并且这种情况下, 能走通的对角线方向都是与奇偶性相关的. 因此直接按照初始方向与能走通的方向是否相同确定权值建图即可. E 在题目要求简单路径的情况下, 容易发现如果起点和查询点都在同一个点双联通分量下, 则一定可以构造出一条路径经过点双联通分量中的最小点. 所以利用">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-04-30T00:00:00.000Z">
-<meta property="article:modified_time" content="2023-02-18T14:17:01.321Z">
+<meta property="article:modified_time" content="2023-02-19T09:33:28.850Z">
 <meta property="article:author" content="duanyll">
 <meta property="article:tag" content="OI">
 <meta property="article:tag" content="题解">
@@ -307,6 +307,25 @@ mjx-container[display="true"] + br {
 <p>其实可以不管二分图, 直接用网络流来考虑. 假设初始情况是每个点都是一条独立的链, 则问题相当于是问能进行多少次链的合并操作, 沿着 DAG 上的边将链合并起来, 则最小链数就是节点数减合并次数. 于是把每个点拆成入点和出点, 源和入点, 出点和汇连容量为一的边 (每个点的入度和出度最多用一次), 然后 DAG 上的边就把起点的入点和终点的出点连起来即可, 然后求最大流, Dinic 足矣.</p>
 
   </div>
+  
+    <div class="post-license">
+        <div class="post-license-container">
+            <a class="post-license-logo" target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-sa/4.0/">
+                <img src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" alt="Creative Commons Attribution-ShareAlike 4.0 International License"/>
+            </a>
+            <div>
+                <p>
+                    This work is licensed under a
+                        <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+                </p>
+            </div>
+        </div>
+        <p>
+            Permalink: 
+                <a href="/2022/04/30/UESTC-ICPC-Training-Graph/">https://duanyll.com/2022/04/30/UESTC-ICPC-Training-Graph/</a>
+        </p>
+    </div>
+
 </article>
 
 
