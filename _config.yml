@@ -140,9 +140,6 @@ pandoc:
   meta:
   mathEngine:
 
-theme_config:
-  colorscheme: light
-
 search:
   path: search.xml
   field: post
