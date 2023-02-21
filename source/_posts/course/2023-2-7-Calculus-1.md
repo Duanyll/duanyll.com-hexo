@@ -226,7 +226,6 @@ $$
     \epsilon_2&=\frac{1}{2},\exist n_2>n_1,&a_{n_2}\in(\xi_2-\epsilon_2,\xi_2+\epsilon_2)\\
     \epsilon_3&=\frac{1}{3},\exist n_3>n_2,&a_{n_3}\in(\xi_3-\epsilon_3,\xi_3+\epsilon_3)\\
 \end{aligned}
-
 $$
 
 可构造子列 $\{a_{n_k}\}$.
@@ -270,8 +269,10 @@ $$
 上下极限的和
 
 $$
-\varlimsup_{n\to\infty}(a_n+b_n)\leq\varlimsup_{n\to\infty}a_n+\varlimsup_{n\to\infty}b_n\\
-\varliminf_{n\to\infty}(a_n+b_n)\geq\varliminf_{n\to\infty}a_n+\varliminf_{n\to\infty}b_n\\
+\begin{aligned}
+    \varlimsup_{n\to\infty}(a_n+b_n)\leq\varlimsup_{n\to\infty}a_n+\varlimsup_{n\to\infty}b_n\\
+    \varliminf_{n\to\infty}(a_n+b_n)\geq\varliminf_{n\to\infty}a_n+\varliminf_{n\to\infty}b_n\\
+\end{aligned}
 $$
 
 其中一数列极限存在则取等 (不定式除外).
@@ -279,8 +280,10 @@ $$
 非负数列的上下极限的积
 
 $$
-\varlimsup_{n\to\infty}(a_nb_n)\leq\varlimsup_{n\to\infty}a_n\cdot\varlimsup_{n\to\infty}b_n\\
-\varliminf_{n\to\infty}(a_nb_n)\geq\varliminf_{n\to\infty}a_n\cdot\varliminf_{n\to\infty}b_n\\
+\begin{aligned}
+    \varlimsup_{n\to\infty}(a_nb_n)\leq\varlimsup_{n\to\infty}a_n\cdot\varlimsup_{n\to\infty}b_n\\
+    \varliminf_{n\to\infty}(a_nb_n)\geq\varliminf_{n\to\infty}a_n\cdot\varliminf_{n\to\infty}b_n\\
+\end{aligned}
 $$
 
 其中一数列极限存在则取等 (不定式除外).
@@ -288,11 +291,30 @@ $$
 > 拆开上下极限, 范围变大; 合并上下极限, 范围变小. 证明可用
 
 $$
-\varlimsup_{n\to\infty}a_n=H\implies\forall\epsilon>0,\exist N,\forall n>N,a_n<H+\epsilon\\
-\varliminf_{n\to\infty}a_n=H\implies\forall\epsilon>0,\exist N,\forall n>N,a_n>H-\epsilon\\
+\begin{aligned}
+    \varlimsup_{n\to\infty}a_n=H\implies\forall\epsilon>0,\exist N,\forall n>N,a_n<H+\epsilon\\
+    \varliminf_{n\to\infty}a_n=H\implies\forall\epsilon>0,\exist N,\forall n>N,a_n>H-\epsilon\\
+\end{aligned}
+\label{limsupaltdef}
 $$
 
 > 利用上下极限证明 ~~(伪证)~~ 极限存在: 肯定上下极限分别存在, 然后用上面的运算得到结果的上下极限大小关系, 发现刚好限制到相等.
+
+::: info
+
+利用上下极限的例题
+
+- 通过最大, 最小极限点的定义求上下极限
+- 利用 $(\ref{limsupaltdef})$ 展开上下极限, 比较大小关系
+- 证明递推数列上下极限存在
+  1. 证明有界
+  2. 递推式两端分别取上下极限, 并应用上下极限的运算
+  3. 得到关于 $\bar{a}, \underline{a}$ 的方程组, 解方程组得到 $\bar{a}=\underline{a}$
+- 用调几算平处理连加连乘 ($n$ 在指数上)
+- 通过放缩证明时, 若不能先说明 $\lim$ 的存在性, 可以在处理上界时写 $\varlimsup$, 处理下界写 $\varliminf$
+- 类似 $a_{m+n}=a_m+a_n$ 的式子, 通过 $n=km+l$ 处理下标到有限范围 $l$ 内
+ 
+:::
 
 ## 压缩映射原理
 
@@ -353,3 +375,17 @@ $$
 > 在迭代公式中找到压缩映射, 证明极限存在, 不动点存在
 
 对于闭集上的多元向量值压缩映射, 仍然可说明不动点存在且唯一.
+
+::: info
+
+压缩映射例题
+
+- 对于递推数列, 说明迭代函数符合压缩映射的条件, 说明数列收敛
+  - 可以枚举数列的前几项来确定压缩映射成立的区间
+- 也可证明数列极限的压缩性
+  $$
+  |a_{n+1}-a_n|\leq\alpha|a_n-a_{n-1}|
+  $$
+  通过 Cauchy 收敛说明极限存在, 再作差说明唯一性
+
+:::

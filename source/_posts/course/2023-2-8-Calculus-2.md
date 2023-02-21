@@ -67,7 +67,7 @@ $$
 证明函数在区间上不一致连续, 利用否定
 
 $$
-\exist\epsilon>0,\forall\delta,\exist x'_\delta,x''_\delta, |x'_\delta-x''_\delta|<\delta,|f(x'_\delta)-f(x''_\delta)|{\color{red}{\geq}}\epsilon
+\exist\epsilon>0,\forall\delta,\exist x'_\delta,x''_\delta, |x'_\delta-x''_\delta|<\delta,|f(x'_\delta)-f(x''_\delta)|{\color{red}{\geq}}\epsilon\label{negdef}
 $$
 
 取一个 $\epsilon_0$, 构造与 $\delta$ 有关的 $x',x''$, 代入 $|f(x'_\delta)-f(x''_\delta)|$ 并展开, 使其能大于 $\epsilon_0$
@@ -78,7 +78,19 @@ $$
 \lim_{n\to\infty}(f(x'_n)-f(x''_n))=0
 $$
 
-> 作用当然是用来证不一致连续
+> 自变量无限接近时, 函数值也要能无限接近. 作用当然是用来证不一致连续
+
+::: info
+
+一致连续例题
+
+- 通过定义的直接否定 $(\ref{negdef})$ 证明不一致连续. 
+- 通过构造函数值极限不同的点列来证明不一致连续, 常见于涉及三角函数证明
+- 证明是一致连续, 可通过放缩找到 Lipschitz 连续的系数 $M$
+- 在 $[0,+\infty)$ 一致连续 $\implies\exist A,B,|f(x)|\leq Ax+B$ 
+- 利用极限相关证明的常见技巧, $|a-b|\leq|a-c|+|c-b|\leq2\epsilon$
+
+:::
 
 ## 闭区间上连续函数的性质
 
