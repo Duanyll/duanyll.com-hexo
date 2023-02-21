@@ -1550,13 +1550,7 @@ article .content .caption {
 #categories .category-list .category-list-item .category-list-count:after {
   content: ")";
 }
-.post-license {
-  display: block;
-  background-color: var(--color-background-code);
-  border-radius: 5pt;
-  padding: 1rem;
-}
-.post-license-container {
+.license-container {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -1564,9 +1558,15 @@ article .content .caption {
   align-items: center;
   gap: 1rem;
 }
-.post-license-logo {
+.license-logo {
   display: block;
   margin-bottom: 0;
+}
+article .info {
+  display: block;
+  background-color: var(--color-background-code);
+  border-radius: 5pt;
+  padding: 1rem;
 }
 .highlight {
   background: #474949;
