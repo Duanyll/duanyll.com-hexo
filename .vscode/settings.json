@@ -4,7 +4,12 @@
     "\\p": "\\partial",
     "\\label": "\\boxed{\\textrm{#1}}",
     "\\ref": "\\textrm{#1}",
-    "\\un": "\\,\\mathrm{#1}"
+    "\\un": "\\,\\mathrm{#1}",
+    "\\re": "\\operatorname{Re}",
+    "\\im": "\\operatorname{Im}",
+    "\\conj": "\\overline{#1}",
+    "\\Arg": "\\operatorname{Arg}",
+    "\\Ln": "\\operatorname{Ln}"
   },
   "markdown.styles": [
     ".vscode/cobalt.css"

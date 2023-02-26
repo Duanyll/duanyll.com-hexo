@@ -117,8 +117,10 @@ mathjax:
       "R": "\\mathbb{R}",
       "N": "\\mathbb{N}",
       "lrArr": "\\Leftrightarrow",
+      "lrarr": "\\leftrightarrow",
       "exist": "\\exists",
-      "argmin": "\\operatorname*{argmin}",
+      "argmin": "\\operatorname*{arg\\,min}",
+      "argmax": "\\operatorname*{arg\\,max}",
       "lArr": "\\Leftarrow",
       "larr": "\\leftarrow",
       "rArr": "\\Rightarrow",
@@ -127,7 +129,13 @@ mathjax:
       "d": "\\mathrm{d}",
       "p": "\\partial",
       "underbar": ["\\underline{#1}", 1],
-      "un": ["\\,\\mathrm{#1}", 1]
+      "un": ["\\,\\mathrm{#1}", 1],
+      "re": "\\operatorname{Re}",
+      "im": "\\operatorname{Im}",
+      "conj": ["\\overline{#1}", 1],
+      "Arg": "\\operatorname{Arg}",
+      "plusmn": "\\pm",
+      "Ln": "\\operatorname{Ln}"
     }
   }
     # you can put your extension options here
