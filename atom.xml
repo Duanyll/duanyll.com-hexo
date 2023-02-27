@@ -6,7 +6,7 @@
   <link href="https://duanyll.com/atom.xml" rel="self"/>
   
   <link href="https://duanyll.com/"/>
-  <updated>2023-02-26T15:32:01.693Z</updated>
+  <updated>2023-02-27T11:34:46.481Z</updated>
   <id>https://duanyll.com/</id>
   
   <author>
@@ -17,11 +17,33 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>复变函数速通 - 积分</title>
+    <link href="https://duanyll.com/2023/02/27/Complex-2/"/>
+    <id>https://duanyll.com/2023/02/27/Complex-2/</id>
+    <published>2023-02-27T00:00:00.000Z</published>
+    <updated>2023-02-27T11:34:46.481Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;简单闭曲线的方向: 正向对应内部在左侧 (外边界逆时针, 内边界顺时针). 复定积分的定义类似实数域上的 Riemann 定积分, 只是不在区间上, 而是在光滑的有向曲线上划分分点.&lt;/p&gt;
+&lt;figure&gt;
+&lt;img src=&quot;https://cdn.duanyll.co</summary>
+      
+    
+    
+    
+    <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>复变函数速通 - 解析函数</title>
     <link href="https://duanyll.com/2023/02/25/Complex-1/"/>
     <id>https://duanyll.com/2023/02/25/Complex-1/</id>
     <published>2023-02-25T00:00:00.000Z</published>
-    <updated>2023-02-26T15:32:01.693Z</updated>
+    <updated>2023-02-27T11:34:46.481Z</updated>
     
     
       
@@ -42,7 +64,7 @@
     <link href="https://duanyll.com/2023/02/21/DiscreteMath/"/>
     <id>https://duanyll.com/2023/02/21/DiscreteMath/</id>
     <published>2023-02-21T00:00:00.000Z</published>
-    <updated>2023-02-26T15:32:01.693Z</updated>
+    <updated>2023-02-27T11:34:46.481Z</updated>
     
     
       
@@ -71,7 +93,7 @@
     <link href="https://duanyll.com/2023/02/17/ClaMacha-5/"/>
     <id>https://duanyll.com/2023/02/17/ClaMacha-5/</id>
     <published>2023-02-17T00:00:00.000Z</published>
-    <updated>2023-02-26T15:32:01.693Z</updated>
+    <updated>2023-02-27T11:34:46.481Z</updated>
     
     
       
@@ -96,7 +118,7 @@
     <link href="https://duanyll.com/2023/02/16/ClaMacha-1/"/>
     <id>https://duanyll.com/2023/02/16/ClaMacha-1/</id>
     <published>2023-02-16T00:00:00.000Z</published>
-    <updated>2023-02-26T15:32:01.693Z</updated>
+    <updated>2023-02-27T11:34:46.481Z</updated>
     
     
       
@@ -118,7 +140,7 @@
     <link href="https://duanyll.com/2023/02/16/ClaMacha-2/"/>
     <id>https://duanyll.com/2023/02/16/ClaMacha-2/</id>
     <published>2023-02-16T00:00:00.000Z</published>
-    <updated>2023-02-26T15:32:01.693Z</updated>
+    <updated>2023-02-27T11:34:46.481Z</updated>
     
     
       
@@ -147,7 +169,7 @@
     <link href="https://duanyll.com/2023/02/16/ClaMacha-3/"/>
     <id>https://duanyll.com/2023/02/16/ClaMacha-3/</id>
     <published>2023-02-16T00:00:00.000Z</published>
-    <updated>2023-02-26T15:32:01.693Z</updated>
+    <updated>2023-02-27T11:34:46.481Z</updated>
     
     
       
@@ -174,7 +196,7 @@
     <link href="https://duanyll.com/2023/02/16/Physics-4/"/>
     <id>https://duanyll.com/2023/02/16/Physics-4/</id>
     <published>2023-02-16T00:00:00.000Z</published>
-    <updated>2023-02-26T15:32:01.693Z</updated>
+    <updated>2023-02-27T11:34:46.481Z</updated>
     
     
       
@@ -195,7 +217,7 @@
     <link href="https://duanyll.com/2023/02/15/Physics-3/"/>
     <id>https://duanyll.com/2023/02/15/Physics-3/</id>
     <published>2023-02-15T00:00:00.000Z</published>
-    <updated>2023-02-26T15:32:01.693Z</updated>
+    <updated>2023-02-27T11:34:46.481Z</updated>
     
     
       
@@ -217,7 +239,7 @@
     <link href="https://duanyll.com/2023/02/14/Physics-2/"/>
     <id>https://duanyll.com/2023/02/14/Physics-2/</id>
     <published>2023-02-14T00:00:00.000Z</published>
-    <updated>2023-02-26T15:32:01.693Z</updated>
+    <updated>2023-02-27T11:34:46.481Z</updated>
     
     
       
@@ -240,7 +262,7 @@
     <link href="https://duanyll.com/2023/02/13/Physics-1/"/>
     <id>https://duanyll.com/2023/02/13/Physics-1/</id>
     <published>2023-02-13T00:00:00.000Z</published>
-    <updated>2023-02-26T15:32:01.693Z</updated>
+    <updated>2023-02-27T11:34:46.481Z</updated>
     
     
       
@@ -263,7 +285,7 @@
     <link href="https://duanyll.com/2023/02/12/Calculus-5/"/>
     <id>https://duanyll.com/2023/02/12/Calculus-5/</id>
     <published>2023-02-12T00:00:00.000Z</published>
-    <updated>2023-02-26T15:32:01.693Z</updated>
+    <updated>2023-02-27T11:34:46.481Z</updated>
     
     
       
@@ -288,7 +310,7 @@
     <link href="https://duanyll.com/2023/02/10/Calculus-4/"/>
     <id>https://duanyll.com/2023/02/10/Calculus-4/</id>
     <published>2023-02-10T00:00:00.000Z</published>
-    <updated>2023-02-26T15:32:01.693Z</updated>
+    <updated>2023-02-27T11:34:46.481Z</updated>
     
     
       
@@ -313,7 +335,7 @@
     <link href="https://duanyll.com/2023/02/10/Migrate-To-Hexo/"/>
     <id>https://duanyll.com/2023/02/10/Migrate-To-Hexo/</id>
     <published>2023-02-10T00:00:00.000Z</published>
-    <updated>2023-02-26T15:32:01.701Z</updated>
+    <updated>2023-02-27T11:34:46.485Z</updated>
     
     
       
@@ -336,7 +358,7 @@
     <link href="https://duanyll.com/2023/02/09/Calculus-3/"/>
     <id>https://duanyll.com/2023/02/09/Calculus-3/</id>
     <published>2023-02-09T00:00:00.000Z</published>
-    <updated>2023-02-26T15:32:01.693Z</updated>
+    <updated>2023-02-27T11:34:46.481Z</updated>
     
     
       
@@ -361,7 +383,7 @@
     <link href="https://duanyll.com/2023/02/08/Calculus-2/"/>
     <id>https://duanyll.com/2023/02/08/Calculus-2/</id>
     <published>2023-02-08T00:00:00.000Z</published>
-    <updated>2023-02-26T15:32:01.693Z</updated>
+    <updated>2023-02-27T11:34:46.481Z</updated>
     
     
       
@@ -386,7 +408,7 @@
     <link href="https://duanyll.com/2023/02/07/Calculus-1/"/>
     <id>https://duanyll.com/2023/02/07/Calculus-1/</id>
     <published>2023-02-07T00:00:00.000Z</published>
-    <updated>2023-02-26T15:32:01.693Z</updated>
+    <updated>2023-02-27T11:34:46.481Z</updated>
     
     
       
@@ -412,7 +434,7 @@
     <link href="https://duanyll.com/2022/12/07/Optim-7/"/>
     <id>https://duanyll.com/2022/12/07/Optim-7/</id>
     <published>2022-12-07T00:00:00.000Z</published>
-    <updated>2023-02-26T15:32:01.693Z</updated>
+    <updated>2023-02-27T11:34:46.481Z</updated>
     
     
       
@@ -434,7 +456,7 @@
     <link href="https://duanyll.com/2022/12/06/Optim-3/"/>
     <id>https://duanyll.com/2022/12/06/Optim-3/</id>
     <published>2022-12-06T00:00:00.000Z</published>
-    <updated>2023-02-26T15:32:01.693Z</updated>
+    <updated>2023-02-27T11:34:46.481Z</updated>
     
     
       
@@ -456,36 +478,13 @@
     <link href="https://duanyll.com/2022/12/06/Optim-4/"/>
     <id>https://duanyll.com/2022/12/06/Optim-4/</id>
     <published>2022-12-06T00:00:00.000Z</published>
-    <updated>2023-02-26T15:32:01.693Z</updated>
+    <updated>2023-02-27T11:34:46.481Z</updated>
     
     
       
       
     <summary type="html">&lt;p&gt;二次型函数&lt;/p&gt;
 &lt;p&gt;&lt;span class=&quot;math display&quot;&gt;&lt;mjx-container class=&quot;MathJax&quot; jax=&quot;SVG&quot; display=&quot;true&quot; width=&quot;full&quot; style=&quot;min-width: 34.864ex;&quot;</summary>
-      
-    
-    
-    
-    <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
-    
-    
-    <category term="最优化" scheme="https://duanyll.com/tags/%E6%9C%80%E4%BC%98%E5%8C%96/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>最优化算法速通 - 线性规划</title>
-    <link href="https://duanyll.com/2022/12/06/Optim-5/"/>
-    <id>https://duanyll.com/2022/12/06/Optim-5/</id>
-    <published>2022-12-06T00:00:00.000Z</published>
-    <updated>2023-02-26T15:32:01.693Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;标准型&quot;&gt;标准型&lt;/h2&gt;
-&lt;p&gt;&lt;span class=&quot;math display&quot;&gt;&lt;mjx-container class=&quot;MathJax&quot; jax=&quot;SVG&quot; display=&quot;true&quot; width=&quot;full&quot; style=&quot;min-width: 2</summary>
       
     
     
