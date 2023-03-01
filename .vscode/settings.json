@@ -9,7 +9,8 @@
     "\\im": "\\operatorname{Im}",
     "\\conj": "\\overline{#1}",
     "\\Arg": "\\operatorname{Arg}",
-    "\\Ln": "\\operatorname{Ln}"
+    "\\Ln": "\\operatorname{Ln}",
+    "\\Res": "\\operatorname*{Res}"
   },
   "markdown.styles": [
     ".vscode/cobalt.css"

@@ -135,7 +135,8 @@ mathjax:
       "conj": ["\\overline{#1}", 1],
       "Arg": "\\operatorname{Arg}",
       "plusmn": "\\pm",
-      "Ln": "\\operatorname{Ln}"
+      "Ln": "\\operatorname{Ln}",
+      "Res": "\\operatorname*{Res}"
     }
   }
     # you can put your extension options here
