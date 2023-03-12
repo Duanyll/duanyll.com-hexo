@@ -14,7 +14,7 @@
 <meta property="og:description" content="我打赌这道题如果n&#x3D;1e5，绝对八成的人都会打树剖  然而n高达1e18，所以建图是不可能的了。注意观察q只有1000，就是说只会涉及最多2000个点，因此就可以离散化+LCA瞎搞。然而这是一颗满二叉树，所以不用建图，直接开一个map&lt;int64,int64&gt;表示每个节点到父亲的距离，按照LCA的求法边跳边更新答案就是了。 2000个点，最多处理2000*64次边，爆不了。 1234">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-03-15T00:00:00.000Z">
-<meta property="article:modified_time" content="2023-03-12T08:23:55.753Z">
+<meta property="article:modified_time" content="2023-03-12T09:04:17.246Z">
 <meta property="article:author" content="duanyll">
 <meta property="article:tag" content="OI">
 <meta property="article:tag" content="题解">
@@ -205,11 +205,13 @@ mjx-container[display="true"] + br {
         
         <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" aria-label="分享文章" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+        <li><a class="icon" aria-label="切换深色模式" href="#"><i class="fas fa-moon" aria-hidden="true" onmouseover="$('#i-mode').toggle();" onmouseout="$('#i-mode').toggle();" onclick="$('body').toggleClass('dark-mode');return false;"></i></a></li>
       </ul>
       <span id="i-prev" class="info" style="display:none;">上一篇</span>
       <span id="i-next" class="info" style="display:none;">下一篇</span>
       <span id="i-top" class="info" style="display:none;">返回顶部</span>
       <span id="i-share" class="info" style="display:none;">分享文章</span>
+      <span id="i-mode" class="info" style="display:none;">切换深色模式</span>
     </span>
     <br/>
     <div id="share" style="display: none">

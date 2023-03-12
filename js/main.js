@@ -121,4 +121,17 @@ $(document).ready(function() {
       scrollTop: $(decodeURIComponent($.attr(this, 'href')).replace(':', '\\3A ')).offset().top - 50
     }, 500);
   });
+
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    $("body").addClass('dark-mode');
+  }
+
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+    const newColorScheme = event.matches ? "dark" : "light";
+    if (newColorScheme === "dark") {
+      $("body").removeClass('dark-mode');
+    } else {
+      $("body").addClass('dark-mode');
+    }
+  });
 });

@@ -14,7 +14,7 @@
 <meta property="og:description" content="启动 电子科大考场 在桌面上或开始菜单里有一个叫做 VMWare Workstation 或者 VMWare Player 的软件, 双击运行后, 默认应该已经打开了 NOI Linux 虚拟机的操作界面 (如果没有请咨询考场工作人员). 点击菜单栏上的绿色播放按钮就可以运行虚拟机了. 你可以全屏或者窗口化运行虚拟机. CDFLS 镜像列表里面有一个 NOI Linux 选项, 选他就是了. 注意">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-11-11T00:00:00.000Z">
-<meta property="article:modified_time" content="2023-03-12T08:23:55.753Z">
+<meta property="article:modified_time" content="2023-03-12T09:04:17.246Z">
 <meta property="article:author" content="duanyll">
 <meta property="article:tag" content="OI">
 <meta property="article:tag" content="Linux">
@@ -204,11 +204,13 @@ mjx-container[display="true"] + br {
         
         <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" aria-label="分享文章" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+        <li><a class="icon" aria-label="切换深色模式" href="#"><i class="fas fa-moon" aria-hidden="true" onmouseover="$('#i-mode').toggle();" onmouseout="$('#i-mode').toggle();" onclick="$('body').toggleClass('dark-mode');return false;"></i></a></li>
       </ul>
       <span id="i-prev" class="info" style="display:none;">上一篇</span>
       <span id="i-next" class="info" style="display:none;">下一篇</span>
       <span id="i-top" class="info" style="display:none;">返回顶部</span>
       <span id="i-share" class="info" style="display:none;">分享文章</span>
+      <span id="i-mode" class="info" style="display:none;">切换深色模式</span>
     </span>
     <br/>
     <div id="share" style="display: none">
