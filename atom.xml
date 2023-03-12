@@ -6,7 +6,7 @@
   <link href="https://duanyll.com/atom.xml" rel="self"/>
   
   <link href="https://duanyll.com/"/>
-  <updated>2023-03-01T15:16:08.776Z</updated>
+  <updated>2023-03-12T08:23:55.749Z</updated>
   <id>https://duanyll.com/</id>
   
   <author>
@@ -17,11 +17,39 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>数值分析作业 - 浮点运算和误差</title>
+    <link href="https://duanyll.com/2023/03/11/Numeric-1/"/>
+    <id>https://duanyll.com/2023/03/11/Numeric-1/</id>
+    <published>2023-03-11T00:00:00.000Z</published>
+    <updated>2023-03-12T08:23:55.749Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;problem-1&quot;&gt;Problem 1&lt;/h2&gt;
+&lt;div class=&quot;info&quot;&gt;
+&lt;p&gt;分析单精度计算 &lt;code&gt;fl(9.4)−fl(9)−fl(0.4)&lt;/code&gt; 的结果，并进行计算机实践。&lt;/p&gt;
+&lt;/div&gt;
+&lt;table&gt;
+&lt;thead&gt;
+</summary>
+      
+    
+    
+    
+    <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
+    
+    
+    <category term="数值分析" scheme="https://duanyll.com/tags/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
     <title>复变函数速通 - 积分</title>
     <link href="https://duanyll.com/2023/02/27/Complex-2/"/>
     <id>https://duanyll.com/2023/02/27/Complex-2/</id>
     <published>2023-02-27T00:00:00.000Z</published>
-    <updated>2023-03-01T15:16:08.776Z</updated>
+    <updated>2023-03-12T08:23:55.749Z</updated>
     
     
       
@@ -36,6 +64,8 @@
     <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
     
     
+    <category term="复变函数" scheme="https://duanyll.com/tags/%E5%A4%8D%E5%8F%98%E5%87%BD%E6%95%B0/"/>
+    
   </entry>
   
   <entry>
@@ -43,7 +73,7 @@
     <link href="https://duanyll.com/2023/02/27/Complex-3/"/>
     <id>https://duanyll.com/2023/02/27/Complex-3/</id>
     <published>2023-02-27T00:00:00.000Z</published>
-    <updated>2023-03-01T15:16:08.776Z</updated>
+    <updated>2023-03-12T08:23:55.749Z</updated>
     
     
       
@@ -57,6 +87,8 @@
     <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
     
     
+    <category term="复变函数" scheme="https://duanyll.com/tags/%E5%A4%8D%E5%8F%98%E5%87%BD%E6%95%B0/"/>
+    
   </entry>
   
   <entry>
@@ -64,7 +96,7 @@
     <link href="https://duanyll.com/2023/02/25/Complex-1/"/>
     <id>https://duanyll.com/2023/02/25/Complex-1/</id>
     <published>2023-02-25T00:00:00.000Z</published>
-    <updated>2023-03-01T15:16:08.776Z</updated>
+    <updated>2023-03-12T08:23:55.749Z</updated>
     
     
       
@@ -78,6 +110,8 @@
     <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
     
     
+    <category term="复变函数" scheme="https://duanyll.com/tags/%E5%A4%8D%E5%8F%98%E5%87%BD%E6%95%B0/"/>
+    
   </entry>
   
   <entry>
@@ -85,7 +119,7 @@
     <link href="https://duanyll.com/2023/02/21/DiscreteMath/"/>
     <id>https://duanyll.com/2023/02/21/DiscreteMath/</id>
     <published>2023-02-21T00:00:00.000Z</published>
-    <updated>2023-03-01T15:16:08.776Z</updated>
+    <updated>2023-03-12T08:23:55.749Z</updated>
     
     
       
@@ -107,6 +141,8 @@
     <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
     
     
+    <category term="离散数学" scheme="https://duanyll.com/tags/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/"/>
+    
   </entry>
   
   <entry>
@@ -114,7 +150,7 @@
     <link href="https://duanyll.com/2023/02/17/ClaMacha-5/"/>
     <id>https://duanyll.com/2023/02/17/ClaMacha-5/</id>
     <published>2023-02-17T00:00:00.000Z</published>
-    <updated>2023-03-01T15:16:08.776Z</updated>
+    <updated>2023-03-12T08:23:55.749Z</updated>
     
     
       
@@ -132,6 +168,8 @@
     <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
     
     
+    <category term="理论力学" scheme="https://duanyll.com/tags/%E7%90%86%E8%AE%BA%E5%8A%9B%E5%AD%A6/"/>
+    
   </entry>
   
   <entry>
@@ -139,7 +177,7 @@
     <link href="https://duanyll.com/2023/02/16/ClaMacha-1/"/>
     <id>https://duanyll.com/2023/02/16/ClaMacha-1/</id>
     <published>2023-02-16T00:00:00.000Z</published>
-    <updated>2023-03-01T15:16:08.772Z</updated>
+    <updated>2023-03-12T08:23:55.749Z</updated>
     
     
       
@@ -154,6 +192,8 @@
     <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
     
     
+    <category term="理论力学" scheme="https://duanyll.com/tags/%E7%90%86%E8%AE%BA%E5%8A%9B%E5%AD%A6/"/>
+    
   </entry>
   
   <entry>
@@ -161,7 +201,7 @@
     <link href="https://duanyll.com/2023/02/16/ClaMacha-2/"/>
     <id>https://duanyll.com/2023/02/16/ClaMacha-2/</id>
     <published>2023-02-16T00:00:00.000Z</published>
-    <updated>2023-03-01T15:16:08.772Z</updated>
+    <updated>2023-03-12T08:23:55.749Z</updated>
     
     
       
@@ -183,6 +223,8 @@
     <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
     
     
+    <category term="理论力学" scheme="https://duanyll.com/tags/%E7%90%86%E8%AE%BA%E5%8A%9B%E5%AD%A6/"/>
+    
   </entry>
   
   <entry>
@@ -190,7 +232,7 @@
     <link href="https://duanyll.com/2023/02/16/ClaMacha-3/"/>
     <id>https://duanyll.com/2023/02/16/ClaMacha-3/</id>
     <published>2023-02-16T00:00:00.000Z</published>
-    <updated>2023-03-01T15:16:08.776Z</updated>
+    <updated>2023-03-12T08:23:55.749Z</updated>
     
     
       
@@ -210,6 +252,8 @@
     <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
     
     
+    <category term="理论力学" scheme="https://duanyll.com/tags/%E7%90%86%E8%AE%BA%E5%8A%9B%E5%AD%A6/"/>
+    
   </entry>
   
   <entry>
@@ -217,7 +261,7 @@
     <link href="https://duanyll.com/2023/02/16/Physics-4/"/>
     <id>https://duanyll.com/2023/02/16/Physics-4/</id>
     <published>2023-02-16T00:00:00.000Z</published>
-    <updated>2023-03-01T15:16:08.776Z</updated>
+    <updated>2023-03-12T08:23:55.749Z</updated>
     
     
       
@@ -231,6 +275,8 @@
     <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
     
     
+    <category term="Physics" scheme="https://duanyll.com/tags/Physics/"/>
+    
   </entry>
   
   <entry>
@@ -238,7 +284,7 @@
     <link href="https://duanyll.com/2023/02/15/Physics-3/"/>
     <id>https://duanyll.com/2023/02/15/Physics-3/</id>
     <published>2023-02-15T00:00:00.000Z</published>
-    <updated>2023-03-01T15:16:08.772Z</updated>
+    <updated>2023-03-12T08:23:55.749Z</updated>
     
     
       
@@ -253,6 +299,8 @@
     <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
     
     
+    <category term="Physics" scheme="https://duanyll.com/tags/Physics/"/>
+    
   </entry>
   
   <entry>
@@ -260,7 +308,7 @@
     <link href="https://duanyll.com/2023/02/14/Physics-2/"/>
     <id>https://duanyll.com/2023/02/14/Physics-2/</id>
     <published>2023-02-14T00:00:00.000Z</published>
-    <updated>2023-03-01T15:16:08.772Z</updated>
+    <updated>2023-03-12T08:23:55.749Z</updated>
     
     
       
@@ -276,6 +324,8 @@
     <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
     
     
+    <category term="Physics" scheme="https://duanyll.com/tags/Physics/"/>
+    
   </entry>
   
   <entry>
@@ -283,7 +333,7 @@
     <link href="https://duanyll.com/2023/02/13/Physics-1/"/>
     <id>https://duanyll.com/2023/02/13/Physics-1/</id>
     <published>2023-02-13T00:00:00.000Z</published>
-    <updated>2023-03-01T15:16:08.772Z</updated>
+    <updated>2023-03-12T08:23:55.749Z</updated>
     
     
       
@@ -299,6 +349,8 @@
     <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
     
     
+    <category term="Physics" scheme="https://duanyll.com/tags/Physics/"/>
+    
   </entry>
   
   <entry>
@@ -306,7 +358,7 @@
     <link href="https://duanyll.com/2023/02/12/Calculus-5/"/>
     <id>https://duanyll.com/2023/02/12/Calculus-5/</id>
     <published>2023-02-12T00:00:00.000Z</published>
-    <updated>2023-03-01T15:16:08.772Z</updated>
+    <updated>2023-03-12T08:23:55.749Z</updated>
     
     
       
@@ -331,7 +383,7 @@
     <link href="https://duanyll.com/2023/02/10/Calculus-4/"/>
     <id>https://duanyll.com/2023/02/10/Calculus-4/</id>
     <published>2023-02-10T00:00:00.000Z</published>
-    <updated>2023-03-01T15:16:08.772Z</updated>
+    <updated>2023-03-12T08:23:55.749Z</updated>
     
     
       
@@ -356,7 +408,7 @@
     <link href="https://duanyll.com/2023/02/10/Migrate-To-Hexo/"/>
     <id>https://duanyll.com/2023/02/10/Migrate-To-Hexo/</id>
     <published>2023-02-10T00:00:00.000Z</published>
-    <updated>2023-03-01T15:16:08.780Z</updated>
+    <updated>2023-03-12T08:23:55.753Z</updated>
     
     
       
@@ -379,7 +431,7 @@
     <link href="https://duanyll.com/2023/02/09/Calculus-3/"/>
     <id>https://duanyll.com/2023/02/09/Calculus-3/</id>
     <published>2023-02-09T00:00:00.000Z</published>
-    <updated>2023-03-01T15:16:08.776Z</updated>
+    <updated>2023-03-12T08:23:55.749Z</updated>
     
     
       
@@ -404,7 +456,7 @@
     <link href="https://duanyll.com/2023/02/08/Calculus-2/"/>
     <id>https://duanyll.com/2023/02/08/Calculus-2/</id>
     <published>2023-02-08T00:00:00.000Z</published>
-    <updated>2023-03-01T15:16:08.776Z</updated>
+    <updated>2023-03-12T08:23:55.749Z</updated>
     
     
       
@@ -429,7 +481,7 @@
     <link href="https://duanyll.com/2023/02/07/Calculus-1/"/>
     <id>https://duanyll.com/2023/02/07/Calculus-1/</id>
     <published>2023-02-07T00:00:00.000Z</published>
-    <updated>2023-03-01T15:16:08.776Z</updated>
+    <updated>2023-03-12T08:23:55.749Z</updated>
     
     
       
@@ -455,34 +507,12 @@
     <link href="https://duanyll.com/2022/12/07/Optim-7/"/>
     <id>https://duanyll.com/2022/12/07/Optim-7/</id>
     <published>2022-12-07T00:00:00.000Z</published>
-    <updated>2023-03-01T15:16:08.772Z</updated>
+    <updated>2023-03-12T08:23:55.749Z</updated>
     
     
       
       
     <summary type="html">&lt;p&gt;&lt;span class=&quot;math display&quot;&gt;&lt;mjx-container class=&quot;MathJax&quot; jax=&quot;SVG&quot; display=&quot;true&quot; width=&quot;full&quot; style=&quot;min-width: 46.582ex;&quot;&gt;&lt;svg style=&quot;</summary>
-      
-    
-    
-    
-    <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
-    
-    
-    <category term="最优化" scheme="https://duanyll.com/tags/%E6%9C%80%E4%BC%98%E5%8C%96/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>最优化算法速通 - 线搜索</title>
-    <link href="https://duanyll.com/2022/12/06/Optim-3/"/>
-    <id>https://duanyll.com/2022/12/06/Optim-3/</id>
-    <published>2022-12-06T00:00:00.000Z</published>
-    <updated>2023-03-01T15:16:08.772Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;在区间 &lt;span class=&quot;math inline&quot;&gt;&lt;mjx-container class=&quot;MathJax&quot; jax=&quot;SVG&quot;&gt;&lt;svg style=&quot;vertical-align: -0.566ex;&quot; xmlns=&quot;http://www.w3.org/20</summary>
       
     
     

@@ -4,6 +4,29 @@
   
     
     <entry>
+      <title>数值分析作业 - 浮点运算和误差</title>
+      <link href="/2023/03/11/Numeric-1/"/>
+      <url>/2023/03/11/Numeric-1/</url>
+      
+      
+      <categories>
+          
+          <category> 课程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数值分析 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>复变函数速通 - 积分</title>
       <link href="/2023/02/27/Complex-2/"/>
       <url>/2023/02/27/Complex-2/</url>
@@ -15,6 +38,12 @@
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> 复变函数 </tag>
+            
+        </tags>
       
     </entry>
     
@@ -33,6 +62,12 @@
       </categories>
       
       
+        <tags>
+            
+            <tag> 复变函数 </tag>
+            
+        </tags>
+      
     </entry>
     
     
@@ -49,6 +84,12 @@
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> 复变函数 </tag>
+            
+        </tags>
       
     </entry>
     
@@ -67,6 +108,12 @@
       </categories>
       
       
+        <tags>
+            
+            <tag> 离散数学 </tag>
+            
+        </tags>
+      
     </entry>
     
     
@@ -83,6 +130,12 @@
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> 理论力学 </tag>
+            
+        </tags>
       
     </entry>
     
@@ -101,6 +154,12 @@
       </categories>
       
       
+        <tags>
+            
+            <tag> 理论力学 </tag>
+            
+        </tags>
+      
     </entry>
     
     
@@ -117,6 +176,12 @@
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> 理论力学 </tag>
+            
+        </tags>
       
     </entry>
     
@@ -135,6 +200,12 @@
       </categories>
       
       
+        <tags>
+            
+            <tag> 理论力学 </tag>
+            
+        </tags>
+      
     </entry>
     
     
@@ -151,6 +222,12 @@
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> Physics </tag>
+            
+        </tags>
       
     </entry>
     
@@ -169,6 +246,12 @@
       </categories>
       
       
+        <tags>
+            
+            <tag> Physics </tag>
+            
+        </tags>
+      
     </entry>
     
     
@@ -186,6 +269,12 @@
       </categories>
       
       
+        <tags>
+            
+            <tag> Physics </tag>
+            
+        </tags>
+      
     </entry>
     
     
@@ -202,6 +291,12 @@
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> Physics </tag>
+            
+        </tags>
       
     </entry>
     
@@ -402,9 +497,9 @@
     
     
     <entry>
-      <title>最优化算法速通 - 无约束优化</title>
-      <link href="/2022/12/06/Optim-4/"/>
-      <url>/2022/12/06/Optim-4/</url>
+      <title>最优化算法速通 - 线性规划</title>
+      <link href="/2022/12/06/Optim-5/"/>
+      <url>/2022/12/06/Optim-5/</url>
       
       
       <categories>
@@ -425,9 +520,9 @@
     
     
     <entry>
-      <title>最优化算法速通 - 线性规划</title>
-      <link href="/2022/12/06/Optim-5/"/>
-      <url>/2022/12/06/Optim-5/</url>
+      <title>最优化算法速通 - 无约束优化</title>
+      <link href="/2022/12/06/Optim-4/"/>
+      <url>/2022/12/06/Optim-4/</url>
       
       
       <categories>
@@ -1483,29 +1578,6 @@
     
     
     <entry>
-      <title>CSP 初赛数据结构与算法复习</title>
-      <link href="/2019/10/17/CSP-Data-Structure-And-Algorithm/"/>
-      <url>/2019/10/17/CSP-Data-Structure-And-Algorithm/</url>
-      
-      
-      <categories>
-          
-          <category> OI </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 数据结构 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>CSP 初赛数学复习</title>
       <link href="/2019/10/17/CSP-Review-Math/"/>
       <url>/2019/10/17/CSP-Review-Math/</url>
@@ -1521,6 +1593,29 @@
         <tags>
             
             <tag> 数学 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>CSP 初赛数据结构与算法复习</title>
+      <link href="/2019/10/17/CSP-Data-Structure-And-Algorithm/"/>
+      <url>/2019/10/17/CSP-Data-Structure-And-Algorithm/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数据结构 </tag>
             
         </tags>
       
@@ -2313,9 +2408,9 @@
     
     
     <entry>
-      <title>洛谷P2607 [ZJOI2008]骑士</title>
-      <link href="/2019/04/13/Luogu-P2607/"/>
-      <url>/2019/04/13/Luogu-P2607/</url>
+      <title>洛谷P3195 [HNOI2008]玩具装箱TOY</title>
+      <link href="/2019/04/13/Luogu-P3195/"/>
+      <url>/2019/04/13/Luogu-P3195/</url>
       
       
       <categories>
@@ -2340,9 +2435,9 @@
     
     
     <entry>
-      <title>洛谷P3195 [HNOI2008]玩具装箱TOY</title>
-      <link href="/2019/04/13/Luogu-P3195/"/>
-      <url>/2019/04/13/Luogu-P3195/</url>
+      <title>洛谷P2607 [ZJOI2008]骑士</title>
+      <link href="/2019/04/13/Luogu-P2607/"/>
+      <url>/2019/04/13/Luogu-P2607/</url>
       
       
       <categories>
@@ -3461,9 +3556,9 @@
             
             <tag> 项目 </tag>
             
-            <tag> PlaneGame </tag>
-            
             <tag> 施工现场 </tag>
+            
+            <tag> PlaneGame </tag>
             
         </tags>
       
