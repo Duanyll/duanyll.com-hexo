@@ -137,7 +137,7 @@ mathjax:
       "plusmn": "\\pm",
       "Ln": "\\operatorname{Ln}",
       "Res": "\\operatorname*{Res}",
-      "Coval": "\\operatorname{Cov}",
+      "Cov": "\\operatorname{Cov}",
     }
   }
     # you can put your extension options here
