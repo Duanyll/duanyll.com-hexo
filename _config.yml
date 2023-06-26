@@ -3,8 +3,8 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: duanyll.com
-subtitle: ''
+title: duanyll
+subtitle: live long and prosper | QWQ
 avatar: https://cdn.duanyll.com/android-chrome-192x192.png
 favicon: https://cdn.duanyll.com/favicon.ico
 description: "Hi, I'm duanyll. Nice to meet you."
@@ -99,7 +99,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: cactus
+theme: stellar
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment

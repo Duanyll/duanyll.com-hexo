@@ -5,6 +5,8 @@ author: duanyll
 source: https://www.luogu.org/problemnew/show/CF932D
 ---
 
+{% link https://www.luogu.org/problemnew/show/CF932D desc:true %}
+
 ## 题意
 
 一棵树开始只有一个1号点，权值为0，两种操作：

@@ -5,6 +5,8 @@ author: duanyll
 source: https://www.luogu.org/problemnew/show/CF95B
 ---
 
+{% link https://www.luogu.org/problemnew/show/CF95B desc:true %}
+
 其实代码用不着这么多goto，不过写着方便~
 
 详细分析有时间再写吧

@@ -1,6 +1,9 @@
 ---
 title: About
 date: 2023-02-05 16:32:37
+menu-id: about
+sidebar: 
+  - ghuser
 ---
 
 <h1 align="center">Hi 👋, I'm duanyll</h1>

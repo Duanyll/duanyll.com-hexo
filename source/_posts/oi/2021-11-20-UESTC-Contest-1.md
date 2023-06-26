@@ -5,6 +5,8 @@ tags: [OI, 比赛]
 source: https://acm.uestc.edu.cn/contest/151/summary
 ---
 
+{% link https://acm.uestc.edu.cn/contest/151/summary desc:true %}
+
 ## A. 双十一
 
 每种货物从最便宜的商店买即可。注意不要把 n 和 m 看反了。

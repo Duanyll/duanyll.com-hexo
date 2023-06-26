@@ -5,6 +5,8 @@ author: duanyll
 source: https://www.luogu.org/problemnew/show/CF832D
 ---
 
+{% link https://www.luogu.org/problemnew/show/CF832D desc:true %}
+
 简单LCA求距离，令a为汇合点，那么答案就是`(dis(a,b) + dis(a,c) - dis(b,c)) / 2 + 1`，dis用lca求出，枚举a就好。
 
 当然也可以一一讨论abc的位置关系，不过容易出错。

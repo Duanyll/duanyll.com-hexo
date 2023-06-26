@@ -5,6 +5,8 @@ tags: [OI, 题解, 思维题]
 source: https://www.luogu.org/problemnew/show/CF625E
 ---
 
+{% link https://www.luogu.org/problemnew/show/CF625E desc:true %}
+
 ## 题意
 
 有$n$只青蛙在一个长度为$m$的环上打架；每只青蛙有一个初始位置$p_i$，和一个跳跃数值$a_i$。从$1$号青蛙开始按序号循环行动，每次若第$i$只青蛙行动，则它会向前跳$a_i$个格子，撞飞它遇见的所有青蛙，包括终点格子上的，之后它的$a_i$减少等同于撞飞的青蛙只数，若$a_i<0$，它不会移动。求最后剩下的所有青蛙的编号。

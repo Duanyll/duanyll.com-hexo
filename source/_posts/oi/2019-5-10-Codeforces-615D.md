@@ -5,6 +5,8 @@ author: duanyll
 source: https://www.luogu.org/problemnew/show/CF615D
 ---
 
+{% link https://www.luogu.org/problemnew/show/CF615D desc:true %}
+
 > 垃圾JSON！！！有空去把`/posts.json`改成`/posts.xml`，JSON的转义符太恶心了。以上是吐槽。
 
 ## 题意

@@ -5,6 +5,8 @@ author: duanyll
 source: http://codeforces.com/problemset/problem/360/E
 ---
 
+{% link http://codeforces.com/problemset/problem/360/E desc:true %}
+
 ## 题意
 
 $n$个点, $m+k$条边的有向图, 其中给定$k$条边可以在给定$[l_i, r_i]$范围内任意修改边权, 判断并输出是否存在一种方案使$s_1\rightarrow f$的最短路比$s_2\rightarrow f$短.

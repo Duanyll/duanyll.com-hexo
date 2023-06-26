@@ -5,6 +5,8 @@ tags: ["OI", "题解", "动态规划"]
 source: http://acm-uestc-edu-cn-s.vpn.uestc.edu.cn:8118/contest/172/summary
 ---
 
+{% link http://acm-uestc-edu-cn-s.vpn.uestc.edu.cn:8118/contest/172/summary desc:true %}
+
 ## A
 
 首先考虑经典的 $O(mn)$ LCS 做法:

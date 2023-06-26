@@ -5,6 +5,8 @@ source: http://codeforces.com/problemset/problem/575/G
 author: duanyll
 ---
 
+{% link http://codeforces.com/problemset/problem/575/G desc:true %}
+
 > 9月30日的 Codeforces Div.2 的题解大概就鸽了吧
 
 ## 题意

@@ -5,6 +5,8 @@ source: http://codeforces.com/problemset/problem/273/D
 author: duanyll
 ---
 
+{% link http://codeforces.com/problemset/problem/273/D desc:true %}
+
 ## 题意
 
 在$n\times m, (n, m \leq 150)$的方格纸上选择一个四连块, 要求对于四连块中的任意两点之间的最小移动距离等于他们之间的曼哈顿距离. 问有多少种选法.

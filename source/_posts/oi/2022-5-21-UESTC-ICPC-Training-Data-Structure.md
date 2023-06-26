@@ -5,6 +5,8 @@ tags: ["OI", "题解", "数据结构"]
 source: http://acm-uestc-edu-cn-s.vpn.uestc.edu.cn:8118/contest/171/summary
 ---
 
+{% link http://acm-uestc-edu-cn-s.vpn.uestc.edu.cn:8118/contest/171/summary desc:true %}
+
 ## A
 
 首先对于每个物品，连续整除 d，匹配到能打开的最小钥匙。在钥匙编号从大到小排序后，可以 $O(n\log_d a)$ 完成这一过程。容易理解，要使不同的钥匙使用量最小，只需要贪心地使用能打开的最小钥匙。

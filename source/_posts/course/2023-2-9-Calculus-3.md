@@ -88,11 +88,11 @@ $$
 R_{n}={\frac{1}{n!}}\int_{0}^{1}(1-t)^{n}\left((x-x_{0}){\frac{\partial}{\partial x}}+(y-y_{0}){\frac{\partial}{\partial y}}\right)^{n+1}f(x_{0}+t(x-x_{0}),\,y_{0}+t(y-y_{0}))\mathrm{d}t
 $$
 
-::: info
+{% folding open:true 说明 %}
 
 多元 Taylor 公式求高阶偏导数: 用一元的 Taylor 公式整体代换然后展开, 对应系数得到高阶偏导数. 注意保证展开阶数足够.
 
-:::
+{% endfolding %}
 
 ## 隐函数求导
 

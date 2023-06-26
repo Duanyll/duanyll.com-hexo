@@ -5,6 +5,8 @@ author: duanyll
 source: https://www.luogu.org/problemnew/show/CF696A
 ---
 
+{% link https://www.luogu.org/problemnew/show/CF696A desc:true %}
+
 > 我打赌这道题如果`n=1e5`，绝对八成的人都会打树剖
 
 然而n高达1e18，所以建图是不可能的了。注意观察q只有1000，就是说只会涉及最多2000个点，因此就可以离散化+LCA瞎搞。然而这是一颗满二叉树，所以不用建图，直接开一个`map<int64,int64>`表示每个节点到父亲的距离，按照LCA的求法边跳边更新答案就是了。

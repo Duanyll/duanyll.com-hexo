@@ -5,6 +5,8 @@ tags: [OI, 题解, 思维题, 分类讨论]
 source: https://www.luogu.org/problemnew/show/CF852A
 ---
 
+{% link https://www.luogu.org/problemnew/show/CF852A desc:true %}
+
 > 好久都没写过题解了...
 
 ## 题意

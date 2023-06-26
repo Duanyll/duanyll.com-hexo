@@ -5,6 +5,8 @@ tags: [OI, 题解, 数论]
 source: https://www.luogu.org/problemnew/show/CF870F
 ---
 
+{% link https://www.luogu.org/problemnew/show/CF870F desc:true %}
+
 ## 题意
 
 照搬洛谷翻译

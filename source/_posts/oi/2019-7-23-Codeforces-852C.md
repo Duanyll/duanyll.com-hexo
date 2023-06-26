@@ -5,6 +5,8 @@ tags: [OI, 题解, 思维题]
 source: https://www.luogu.org/problemnew/show/CF852C
 ---
 
+{% link https://www.luogu.org/problemnew/show/CF852C desc:true %}
+
 ## 题意
 
 有一个正$2n$边形，在每条边上有$n$等分点. 现在已经选定了$n$个点, $n$个点分别位于第$2k+1$条边上, 且这$n$个点的序号构成了一个排列; 你需要再选出$n$个点位于第$2k$条边上, 并且这$n$个点的序号也构成一个排列, 使得这些点构成的多边形面积最大. 输出选择方案.

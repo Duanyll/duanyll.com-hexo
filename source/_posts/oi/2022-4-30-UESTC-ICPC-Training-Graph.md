@@ -5,6 +5,8 @@ tags: ["OI", "题解", "图论"]
 source: http://acm-uestc-edu-cn-s.vpn.uestc.edu.cn:8118/contest/170/summary
 ---
 
+{% link http://acm-uestc-edu-cn-s.vpn.uestc.edu.cn:8118/contest/170/summary desc:true %}
+
 ## A
 
 [POJ2914 Lutece 2710 Minimum Cut](/2022/04/13/POJ-2914.html)

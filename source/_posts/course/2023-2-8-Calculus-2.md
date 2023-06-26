@@ -80,7 +80,7 @@ $$
 
 > 自变量无限接近时, 函数值也要能无限接近. 作用当然是用来证不一致连续
 
-::: info
+{% folding open:true 说明 %}
 
 一致连续例题
 
@@ -90,7 +90,7 @@ $$
 - 在 $[0,+\infty)$ 一致连续 $\implies\exist A,B,|f(x)|\leq Ax+B$ 
 - 利用极限相关证明的常见技巧, $|a-b|\leq|a-c|+|c-b|\leq2\epsilon$
 
-:::
+{% endfolding %}
 
 ## 闭区间上连续函数的性质
 

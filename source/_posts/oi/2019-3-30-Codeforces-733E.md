@@ -5,6 +5,8 @@ author: duanyll
 source: https://www.luogu.org/problemnew/show/CF733E
 ---
 
+{% link https://www.luogu.org/problemnew/show/CF733E desc:true %}
+
 ## 题意
 
 一个人站在楼梯上，楼梯编号1到n，每一层楼梯上面都有着标识，'U'代表这个人上楼，'D'代表这个人下楼，每当这个人离开这一层楼梯，这层楼梯的标识改变，U变成D，D变成U。

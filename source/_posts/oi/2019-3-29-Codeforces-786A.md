@@ -5,6 +5,8 @@ tags: [OI,题解,博弈论]
 source: https://www.luogu.org/problemnew/show/CF786A
 ---
 
+{% link https://www.luogu.org/problemnew/show/CF786A desc:true %}
+
 > 切着切着搜索水题就做到它了。鉴于我还没有正式的学过博弈论，就写篇题解纪念一下吧。
 
 ## 题意
