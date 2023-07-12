@@ -6,6 +6,8 @@ tags:
 
 前几天把本站从 Jekyll 迁移到了 Hexo, 原先的网站部署在 [archive-2023.duanyll.com](https://archive-2023.duanyll.com) 下面说明迁移过程的一些技术问题以供参考.
 
+<!-- more -->
+
 ## 放弃 Jekyll 的原因
 
 ![烂掉的公式](https://cdn.duanyll.com/img/20230210162817.png)

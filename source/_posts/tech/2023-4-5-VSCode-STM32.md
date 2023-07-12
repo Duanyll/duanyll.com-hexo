@@ -3,9 +3,9 @@ title: 使用 Visual Studio Code 进行基于 STM32CubeMX 的嵌入式开发
 tags: [嵌入式, vscode, stm32]
 ---
 
-## 摘要
-
 本文介绍了一种在 Windows x86 上进行 STM32 嵌入式开发的软件环境搭建方法, 通过 STM32CubeMX 配置工程和硬件, 使用 Visual Studio Code 提供编辑代码和调试的前端, 使用 make 作为构建的后端, OpenOCD 作为调试后端. 本方法充分利用了 Visual Studio Code 提供的现代化 C / C++ 开发体验, 使用简便, 配置简明.
+
+<!-- more -->
 
 ## 安装软件
 
