@@ -118,6 +118,8 @@ mathjax:
     macros: {
       "R": "\\mathbb{R}",
       "N": "\\mathbb{N}",
+      "Z": "\\mathbb{Z}",
+      "C": "\\mathbb{C}",
       "lrArr": "\\Leftrightarrow",
       "lrarr": "\\leftrightarrow",
       "exist": "\\exists",
@@ -140,6 +142,8 @@ mathjax:
       "Ln": "\\operatorname{Ln}",
       "Res": "\\operatorname*{Res}",
       "Cov": "\\operatorname{Cov}",
+      "st": "\\mathrm{s.t.}",
+      "ord": "\\operatorname*{ord}"
     }
   }
     # you can put your extension options here
