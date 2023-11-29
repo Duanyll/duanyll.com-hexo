@@ -1,7 +1,7 @@
 ---
 title: 使用 CMake 构建 PyTorch 和 Numpy C++ 拓展
 tags:
-    - 深度学习
+    - 炼丹
     - Python
     - PyTorch
     - vscode
