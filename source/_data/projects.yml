@@ -1,16 +1,55 @@
-﻿notes:
-  name: 课程速通
-  title: 课程笔记
+﻿notes-optim:
+  name: 最优化算法
+  title: 最优化速通
   subtitle: 'by duanyll'
-  tags: 课程
-  description: 这里有一些课程的期末复习笔记, 可供需要时查阅. 
-  sections:
-    '目录': [0, 99]
-    '最优化': [100, 199]
-    '数学分析': [200, 299]
-    '大学物理 (英文)': [300, 399]
-    '复变函数': [400, 499]
-    '理论力学': [500, 599]
-    '数值分析': [600, 699]
-    '概率论与统计': [700, 799]  
-    '抽象代数': [800, 899]
+  tags: 课程笔记
+  description: 最优化算法的期末复习笔记。
+
+notes-calculus:
+  name: 数学分析
+  title: 数学分析速通
+  subtitle: 'by duanyll'
+  tags: 课程笔记
+  description: 数学分析 (高等微积分 III) 的期末复习笔记。
+
+notes-physics:
+  name: 大学物理 II (英文)
+  title: 大学物理速通
+  subtitle: 'by duanyll'
+  tags: 课程笔记
+  description: 大学物理 II 的期末复习笔记。
+
+notes-complex:
+  name: 复变函数
+  title: 复变函数速通
+  subtitle: 'by duanyll'
+  tags: 课程笔记
+  description: 复变函数的期末复习笔记。
+
+notes-clamacha:
+  name: 理论力学
+  title: 理论力学速通
+  subtitle: 'by duanyll'
+  tags: 课程笔记
+  description: 理论力学的期末复习笔记。
+
+notes-numeric:
+  name: 数值分析
+  title: 数值分析速通
+  subtitle: 'by duanyll'
+  tags: 课程笔记
+  description: 数值分析的期末复习笔记。
+
+notes-prob:
+  name: 概率论与统计
+  title: 概统速通
+  subtitle: 'by duanyll'
+  tags: 课程笔记
+  description: 概率论与统计的期末复习笔记。
+
+notes-aa:
+  name: 抽象代数
+  title: 抽象代数速通
+  subtitle: 'by duanyll'
+  tags: 课程笔记
+  description: 抽象代数的期末复习笔记。
