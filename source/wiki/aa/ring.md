@@ -139,6 +139,94 @@ order: 802
    - $\implies F$ 是 $p^n$ 元有限域
    - $\implies F^*=F-\{0\}$ 是 $p^n-1$ 阶循环群
 
+## 多项式环
+
+1. **未定元** 设 $R$ 是有单位元的环, $\bar{R}$ 是 $R$ 的扩环. $x\in\bar{R}$ 满足
+   1. $\forall r\in R,xr=rx$
+   2. $1x=x$
+   3. $\forall 0\neq a_0,a_1,\cdots,a_n\in R$ 有
+      $$
+      f(x)=a_0+a_1x+1_2x^2+\cdots+a_nx^n\neq 0
+      $$
+2. **定义** 对任意有单位元的环, 一定存在一个未定元 $x$. 构造集合
+   $$
+   \bar{S}=\{(a_0,a_1,\cdots,a_n,\cdots)|a_0,\cdots,a_n,\cdots\in R\}
+   $$
+   规定 $\bar{S}$ 上的加法和乘法
+   $$
+   \alpha+\beta=(a_0+b_0,\cdots,a_n+b_n,\cdots)
+   $$
+   $$
+   \alpha\cdot\beta=(c_0,\cdots,c_n,\cdots),c_k=\sum_{i+j=k}a_ib_j
+   $$
+   则 $\bar{S}$ 构成有单位元的环, 单位元为
+   $$
+   \bar{1}=(1,0,0,0,\cdots)
+   $$
+   取 $\bar{S}$ 的子环 $S$ 与 $R$ 同构
+   $$
+   S=\{\bar{r}=(r,0,0,0,\cdots)|r\in R\}
+   $$
+   未定元
+   $$
+   \bar{x}=(0,1,0,0,\cdots)
+   $$
+   满足以上三条定义, 且
+   $$
+   \bar{x}^n=(\underbrace{0,\cdots,0}_{n\ \mathrm{zeros}},1,0,0,\cdots)
+   $$
+   由环的扩张定理, 单同态 $\phi:R\to\bar{S},r\mapsto(r,0,0,0,\cdots)$, 知存在 $R$ 的扩环 $\bar{R}$ 中存在未定元
+3. **一元多项式** 形如
+   $$
+   f(x)=a_0+a_1x+a_2x^2+\cdots a_nx^n
+   $$
+   的表达式, $R[x]$ 构成多项式环
+
+## 整环的商域
+
+使用由整数构造分数类似的方法, 将整环扩充成一个域. 记 $D$ 是整环, $1$ 是单位元.
+
+1. 构造集合 $S$
+   $$
+   S=\{(a,b)|a,b\in D,b\neq 0\}
+   $$
+2. 定义 $S$ 上等价关系
+   $$
+   (a,b)\sim(c,d)\iff ad=bc
+   $$
+   容易验证反身性, 对称性, 传递性 (整环上成立消去律)
+3. 由等价关系得到商集 $F$, $(a,b)$ 所在的等价类
+   $$
+   \left[\frac{a}{b}\right]=\{(c,d)\in S|(c,d)\sim(a,b)\}
+   $$
+   划分得到商集
+   $$
+   F=S/\sim=\left\{\left[\frac{a}{b}\right]\bigg|a,b,\in D,n\neq 0\right\}
+   $$
+   $$
+   \left[\frac{a}{b}\right]=\left[\frac{c}{d}\right]\iff ad=bc
+   $$
+4. 规定代数运算
+   $$
+   \left[\frac{a}{b}\right]+\left[\frac{c}{d}\right]=\left[\frac{ad+bc}{bd}\right]\\
+   \left[\frac{a}{b}\right]\cdot\left[\frac{c}{d}\right]=\left[\frac{ac}{bd}\right]
+   $$
+   验证运算良定 (与代表元选取无关)
+5. 验证 $F$ 对加法和乘法构成域
+   1. 验证加法结合律, 乘法结合律
+   2. 验证加法交换律, 乘法交换律
+   3. 验证乘法对加法分配率
+   4. $F$ 的零元 $0_F=\left[\frac{0}{1}\right]$
+   5. $F$ 的单位元 $1_F=\left[\frac{1}{1}\right]$
+   6.  $\forall\left[\frac{a}{b}\right]\in F$ 有负元 $\left[\frac{-a}{b}\right]$
+   7.  $\forall\left[\frac{a}{b}\right]\neq 0_F$ 有逆元 $\left[\frac{b}{a}\right]$
+6. 由 $F$ 构造包含 $D$ 的域, 取映射 $\phi:D\to F,x\mapsto\left[\frac{x}{1}\right]$
+   1. $\phi$ 是单射
+   2. $\phi$ 是同态映射
+   3. 由环的扩张定理知存在 $D$ 的扩环 $Q$ 与 $F$ 同构
+   4. $Q$ 中每个元素都可表示为 $ab^{-1},a,b\in D,b\neq 0$ 的形式
+   5. 称 $Q$ 为整环 $D$ 的商域
+
 ## 惟一分解整环
 
 1. 约定 $D$ 是整环, $F$ 是 $D$ 的商域, $U$ 是 $D$ 的单位群
