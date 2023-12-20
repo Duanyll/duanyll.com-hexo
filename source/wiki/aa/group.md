@@ -130,3 +130,41 @@ order: 801
    3. $G$ 是交换群 $\implies$ $G/H$ 是交换群
    4. 商群的阶是群阶的因子
 6. 对 $n$ 阶交换群, 素数 $p|n$, 则 $G$ 中必有 $p$ 阶元素
+
+## 同态基本定理
+
+1. **群同态**: $\phi:G\to G'$ 两个群之间的映射满足
+   $$
+   \forall a,b\in G,\phi(ab)=\phi(a)\phi(b)
+   $$
+   则成 $\phi$ 是两个群之间的群同态
+2. 群同态的基本性质
+   - $\phi(e)=e'$
+   - $\phi(a^{-1})=\phi(a)^{-1}$
+   - $\phi(a^n)=\phi(a)^n$
+   - 若 $\ord a<\infty$, 则 $\ord\phi(a)<\infty$ 且 $\ord\phi(a)|\ord(a)$
+3. 记号: $A\subseteq G,B\subseteq G'$, 记
+   $$
+   \phi(A)\triangleq\{\phi(a)|a\in A\},\;\phi^{-1}(B)\triangleq\{a\in A|\phi(a)\in B\}
+   $$
+4. **定理**: $H\leq G,H'\leq G'$ 则有
+   - $\phi(H)\leq G'$
+   - $\phi^{-1}(H')\leq G$
+   - $H\lhd G\implies\phi(H)\lhd\phi(G)$
+   - $H'\lhd G'\implies\phi^{-1}(H')\lhd G$
+5. **核空间** 定义群同态 $\phi$ 的核为
+   $$
+   \ker\phi=\{x\in G|\phi(x)=e'\}=\phi^{-1}(e')\neq\varnothing
+   $$
+   满足
+   1. $\ker\phi\lhd G$
+   2. $\phi$ 单射 $\implies \ker\phi=\{e\}$ 
+6. **群同态基本定理** 设 $\phi:G\to G'$ 是群之间的满同态, 则
+   $$
+   G/\ker\phi\cong G'
+   $$
+   1. 规定映射 $\tilde{\phi}:G/K\to G',aK\mapsto\phi(a)$
+   2. 验证映射良定, 映射结果与代表元无关
+   3. 证明 $\tilde{\phi}$ 满射, 单射
+   4. 证明 $\tilde{\phi}$ 保持乘法运算
+7. 推论: 设 $\tau:G\to G'$ 是群同态, 则 $\tilde{\tau}:G\to\tau(G)$ 满同态, $G/\ker\tilde{\tau}\cong\tau(G)$

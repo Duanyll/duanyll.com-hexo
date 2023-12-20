@@ -26,6 +26,7 @@ hexo.extend.filter.register('before_post_render', async data => {
 
         if (matches) {
             data.date = moment(matches[1], 'YYYY-M-D');
+            data.updated = moment(data.updated).format('YYYY-M-D');
             data.title || (data.title = matches[2]);
         }
 
