@@ -12,7 +12,7 @@
     "\\Ln": "\\operatorname{Ln}",
     "\\Res": "\\operatorname*{Res}",
     "\\Cov": "\\operatorname{Cov}",
-    "\\st": "\\mathrm{s.t.}",
+    "\\st": "\\;\\mathrm{s.t.}\\;",
     "\\ord": "\\operatorname{ord}"
   },
   "markdown.styles": [

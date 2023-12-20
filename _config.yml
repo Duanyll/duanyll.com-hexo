@@ -142,8 +142,9 @@ mathjax:
       "Ln": "\\operatorname{Ln}",
       "Res": "\\operatorname*{Res}",
       "Cov": "\\operatorname{Cov}",
-      "st": "\\mathrm{s.t.}",
-      "ord": "\\operatorname*{ord}"
+      "st": "\\;\\mathrm{s.t.}\\;",
+      "ord": "\\operatorname*{ord}",
+      "empty": "\\varnothing",
     }
   }
     # you can put your extension options here
