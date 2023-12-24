@@ -26,10 +26,26 @@ order: 802
 6. **定理** $\Z$ 的子环均形如 $d\Z=\{dz|z\in\Z\},d\in\N$
 7. 幺环的子环可能是幺环, 单位元可能不同
 
+> 证明是环
+> 1. 加法封闭
+> 2. 乘法封闭
+> 3. 加法结合律
+> 4. 加法交换律
+> 5. 零元
+> 6. 负元
+> 7. 乘法结合律
+> 8. 乘法左右分配率
+> 9. (乘法单位元 $\implies$ 幺环)
+> 10. (乘法交换律 $\implies$ 交换环)
+>
+> 证明子环: 关于减法, 乘法封闭
+
+![](https://cdn.duanyll.com/img/20231222153500.png)
+
 ## 整环, 域和除环
 
 1. **左右零因子** 设 $R$ 是环, 非零元 $a,b$ 满足 $ab=0$, 则 $a$ 是 $R$ 的左零因子, $b$ 是右零因子, 统称为零因子 (只要和任意非零元相乘为零就是零因子)
-2. **定理** 无零因子环 $\iff$ 成立消去律
+2. **定理** 无零因子环 $\iff$ 成立消去律 ($ac=bc\implies a=b$)
 3. **整环** 无零因子的交换幺环
 4. **域** 两种等价的定义
    1. $(F,+,\cdot)$ 构成整环, 且非零元素构成乘法群
@@ -45,6 +61,27 @@ order: 802
    4. $\frac{a}{b}\div\frac{c}{d}=\frac{ad}{bc}$
 6. **除环** $R$ 是幺环且 $R^*$ 构成群, 则称 $R$ 是除环. 交换的除环即为域.
 7. 四元数除环是典型的非交换除环.
+   $$
+   H=\left\{\begin{pmatrix}
+      \alpha & \beta\\
+      -\conj{\beta} & \conj{\alpha}
+   \end{pmatrix}\middle|\alpha,\beta\in\mathbb{C} \right\}
+   $$
+
+![有点暴力](https://cdn.duanyll.com/img/20231222154056.png)
+
+![不用把逆元的形式求出来](https://cdn.duanyll.com/img/20231222153415.png)
+
+> 证明整环可说明
+> 1. 是常见域 (整环) 的子环 ($a-b,ab$ 封闭)
+> 2. 域 (整环) 中无零因子
+> 3. 包含单位元
+
+**定理** 有限整环都是域
+
+![证明有限整环都是域](https://cdn.duanyll.com/img/20231222160139.png)
+
+![](https://cdn.duanyll.com/img/20231222160245.png)
 
 ## 理想和商环
 
@@ -65,6 +102,7 @@ order: 802
    1. $\Z$ 是 PID
    2. $m\in\N^*\implies m\Z$ 是 PID
    3. $F$ 是域 $\implies$ $F[x]$ 是 PID
+      ![](https://cdn.duanyll.com/img/20231222171355.png)
 6. **商环** $R$ 是环, $I$ 是 $R$ 的主理想, 则对于加法 $I\lhd R$, 在加法商群 $R/I=\{a+I|a\in R\}$ 有加法运算
    $$
    (a+I)+(b+I)\triangleq ab+I
@@ -108,10 +146,20 @@ order: 802
    在交换环 $R$ 中, 理想 $I$ 满足什么条件使得 $R/I$ 是整环或域
 2. **素理想** 设 $P$ 是交换环的真理想, 满足 $ab\in P\iff a\in P$ 或 $b\in P$
 3. **定理** 设 $R$ 是交换幺环 ($1_R\neq 0$), $I$ 是 $R$ 的理想, 则 $I$ 是 $R$ 的素理想 $\iff$ $R/I=\{a+I|a\in R\}$ 是整环
+   ![](https://cdn.duanyll.com/img/20231222220312.png)
 4. **推论** $\Z_n=\Z/\langle n\rangle$ 是整环 $\iff$ $n$ 是素数或零
 5. **极大理想** 设 $M$ 是交换环 $R$ 的一个真理想, 若 $R$ 中不存在真包含于 $M$ 的真理想 $\iff$ $M\subseteq I\subseteq R \impliedby I=M$ 或 $I=R$ 则称 $M$ 是环 $R$ 的一个极大理想
-   - 证明 $I$ 是极大理想, 假设存在理想 $J$ 真包含 $I$, 证明 $J=R$
+   ![](https://cdn.duanyll.com/img/20231222221213.png)
 6. **定理** 构成有限域的基本方法. 设 $I$ 是交换幺环的一个理想, 则 $I$ 是 $R$ 的极大理想 $\iff$ $R/I$ 是域.
+   ![](https://cdn.duanyll.com/img/20231222222438.png)
+7. **推论** 交换幺环的极大理想是素理想
+
+> 证明极大理想的常见套路
+> 1. 先说明 $I$ 是真理想
+> 2. 假设 $\exist J\subsetneqq R,I\subsetneqq J$, 则 $\exist x\in J,x\notin I$
+> 3. 由加减法, 乘法的封闭性得到 $1_R\in J\implies J=R$
+
+![](https://cdn.duanyll.com/img/20231222222413.png)
 
 ## 特征
 
@@ -201,7 +249,7 @@ order: 802
    $$
    划分得到商集
    $$
-   F=S/\sim=\left\{\left[\frac{a}{b}\right]\bigg|a,b,\in D,n\neq 0\right\}
+   F=S/\sim=\left\{\left[\frac{a}{b}\right]\middle|a,b,\in D,n\neq 0\right\}
    $$
    $$
    \left[\frac{a}{b}\right]=\left[\frac{c}{d}\right]\iff ad=bc
@@ -271,5 +319,6 @@ order: 802
    3. 若 $D$ 中任意非零非单位元均有唯一的不可约分解式
    则称 $D$ 是一个惟一分解整环 UFD
 10. **定理** $D$ 是 UFD, 则 $p$ 不可约 $\implies$ $p$ 是素元
+    ![](https://cdn.duanyll.com/img/20231224202557.png)
 11. **整环中的真因子链** $a_1,a_2,\cdots,a_n,\cdots$, $a_{i-1}$ 是 $a_i$ 的真因子
 12. **定理** 在 UFD 中, 任意元的真因子链一定有限终止

@@ -39,7 +39,16 @@ order: 801
    \langle S\rangle=\{a_1^{l_1}a_2^{l_2}\cdots a_k^{l_k}|a_i\in S,l_i=\pm 1,k\in\N\}
    $$
    $a_i$ 可以相同
-   
+
+> 判定子群只需要说明 $ab^{-1}\in H$
+>
+> **中心化子** 与 $a\in G$ 可交换的元素
+> $$
+> C(a)=\{g\in G|ga=ag\}
+> $$
+>
+> **中心** 与所有元素都可交换的元素
+
 ## 同构
 
 1. 同构定义: 存在双射保运算 $\phi(ab)=\phi(a)\phi(b)$
@@ -96,7 +105,7 @@ order: 801
    2. 消去律 $gA=gB\implies A=B, Ag=Bg\implies A=B$
    3. $H\leq G\implies HH=H$
    4. $A,B\leq G,AB\leq G\iff AB=BA$ 利用乘法求逆运算的封闭性证明相互包含
-3. 左右陪集: $H\leq G, a\in G$, 左陪集 $aH\triangleq\{ah|h\in H\}$, 右陪集 $Ha\triangleq\{ha|h\in H\}$
+3. **左右陪集** $H\leq G, a\in G$, 左陪集 $aH\triangleq\{ah|h\in H\}$, 右陪集 $Ha\triangleq\{ha|h\in H\}$
 4. **定理** 陪集性质 $H\leq G, a,b\in G$
    1. $a\in aH, a\in Ha$
    2. $aH=H\iff a\in H$
@@ -110,10 +119,16 @@ order: 801
    3. $a^n=e$
 6. **定理** $\phi:G/H\to H\backslash G,aH\mapsto Ha^{-1}$ 是良定的双射
 
+> 证明集合相等 $\iff$ 证明相互包含 $\iff$ 任取左集合元素属于右集合, 任取右集合元素属于左集合
+>
+> 证明 A 或 B 成立, 证明 $\neg A\implies B$
+>
+> 证明集合元素相等, 构造集合之间双射 (单射 + 满射)
+
 ## 正规子群和商群
 
-1. 正规子群 $H\leq G, \forall a\in G, aH=Ha$
-2. 单群: $G\neq \{e\}$ 且 $G$ 不含非平凡正规子群
+1. **正规子群** $H\leq G, \forall a\in G, aH=Ha$
+2. **单群** $G\neq \{e\}$ 且 $G$ 不含非平凡正规子群
    1. 素数阶群必为单群
    2. 交换群的子群均为正规子群
    3. $H\lhd G,H\leq K\leq G\implies H\lhd K$
@@ -124,12 +139,14 @@ order: 801
    - $\iff\forall a\in G, \forall h\in H, aha^{-1}\in H$
 4. **定理** $H_1,H_2\lhd G\implies H_1\cap H_2, H_1H_2\lhd G$
    - **引理** $H\lhd G,K\leq G\implies HK\leq G$
-5. 商群: $H\lhd G$ 在集合 $G/H=\{gH|g\in G\}$ 上规定乘法运算 $aH\cdot bH\triangleq abH$, 运算良定且构成群, 称为 $G$ 模 $H$ 后的商群
+5. **商群** $H\lhd G$ 在集合 $G/H=\{gH|g\in G\}$ 上规定乘法运算 $aH\cdot bH\triangleq abH$, 运算良定且构成群, 称为 $G$ 模 $H$ 后的商群
    1. 商群的单位元是 $H$
    2. 商群 $aH$ 的逆元是 $a^{-1}H$
    3. $G$ 是交换群 $\implies$ $G/H$ 是交换群
    4. 商群的阶是群阶的因子
 6. 对 $n$ 阶交换群, 素数 $p|n$, 则 $G$ 中必有 $p$ 阶元素
+
+> 判断正规子群常先证子群 $ab^{-1}\in H$, 再 $ghg^{-1}\in H$
 
 ## 同态基本定理
 
@@ -158,8 +175,8 @@ order: 801
    $$
    满足
    1. $\ker\phi\lhd G$
-   2. $\phi$ 单射 $\implies \ker\phi=\{e\}$ 
-6. **群同态基本定理** 设 $\phi:G\to G'$ 是群之间的满同态, 则
+   2. $\phi$ 单射 $\iff \ker\phi=\{e\}$ 
+6. **群同态基本定理** 设 $\phi:G\to G'$ 是群之间的*满同态*, 则
    $$
    G/\ker\phi\cong G'
    $$
@@ -167,4 +184,29 @@ order: 801
    2. 验证映射良定, 映射结果与代表元无关
    3. 证明 $\tilde{\phi}$ 满射, 单射
    4. 证明 $\tilde{\phi}$ 保持乘法运算
-7. 推论: 设 $\tau:G\to G'$ 是群同态, 则 $\tilde{\tau}:G\to\tau(G)$ 满同态, $G/\ker\tilde{\tau}\cong\tau(G)$
+7. 推论 **第一同构定理** 设 $\tau:G\to G'$ 是群同态, 则 $\tilde{\tau}:G\to\tau(G)$ 满同态, $G/\ker\tilde{\tau}\cong\tau(G)$
+
+![群同态基本定理](https://cdn.duanyll.com/img/20231221214204.png)
+
+> 用群同态基本定理证明同构
+> 1. 构造同态映射, 先证明良定
+> 2. 证明满射
+> 3. 证明保运算
+> 4. 求 $\ker\phi$
+> 5. 得到 $G/\ker\phi\cong G'$
+
+**第二同构定理** $H\leq G,K\lhd HK\implies H\cap K\lhd H$ 且
+
+$$
+H/(H\cap K)\cong HK/K
+$$
+
+同态映射为 $\phi: H\to HK/K,h\mapsto hK$
+
+**第三同构定理** $H\lhd G,K\lhd G, K\subseteq H\implies$
+
+$$
+G/H\cong (G/K)\big/(H/K)
+$$
+
+同态映射为 $\phi: G\to (G/K)\big/(H/K),g\mapsto g(H/K)$ 或者 $\phi:(G/K)\to(G/H),gK\mapsto gH$

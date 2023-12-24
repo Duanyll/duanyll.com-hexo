@@ -4,5 +4,6 @@
  * /2020/5/5/2020-5-5-Derivative => /2020/5/5/Derivative
  */
 hexo.extend.filter.register('post_permalink', function (data) {
-    return data.replace(/[^/]*\d{4}-\d{1,2}-\d{1,2}-/, '');
+    data = data.replace(/[^/]*\d{4}-\d{1,2}-\d{1,2}-/, '');
+    return data;
 });
