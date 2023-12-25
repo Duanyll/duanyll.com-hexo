@@ -36,7 +36,7 @@ hexo.extend.filter.register('before_post_render', async data => {
         }
 
         for (const tag of data.tags.data) {
-            data.content = `{% tag ${tag.name} ${tag.permalink} %}\n` + data.content;
+            data.content = `{% hashtag ${tag.name} ${tag.permalink} %}\n` + data.content;
         }
     }
     return data;

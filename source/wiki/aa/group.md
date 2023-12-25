@@ -3,6 +3,8 @@ title: 抽象代数速通 - 群
 layout: wiki
 wiki: notes-aa
 order: 801
+references:
+  - '[近世代数答案](https://mp.weixin.qq.com/s?__biz=Mzk0NzMyNDg0Mg==&mid=2247484131&idx=6&sn=5549ee6c9158b0831a24ea854a04239e&chksm=c379d026f40e5930cf670d55dd2a525dce38dd6c0c411a6ff9d440e7fd0d46dd6e39d969b93c&scene=27)'
 ---
 
 ## 群

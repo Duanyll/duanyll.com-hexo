@@ -1,0 +1,11 @@
+name: 理论力学
+title: 理论力学速通
+subtitle: 'by duanyll'
+tags: 课程笔记
+description: 理论力学的期末复习笔记。
+path: /wiki/clamacha
+toc: 
+  - mass-point
+  - mass-point-system
+  - rigid-body
+  - analytics

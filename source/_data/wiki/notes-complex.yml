@@ -1,0 +1,10 @@
+name: 复变函数
+title: 复变函数速通
+subtitle: 'by duanyll'
+tags: 课程笔记
+description: 复变函数的期末复习笔记。
+path: /wiki/complex
+toc:
+  - analytic-function
+  - integral
+  - series

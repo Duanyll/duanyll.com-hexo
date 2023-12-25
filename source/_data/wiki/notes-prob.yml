@@ -1,0 +1,11 @@
+name: 概率论与统计
+title: 概统速通
+subtitle: 'by duanyll'
+tags: 课程笔记
+description: 概率论与统计的期末复习笔记。
+path: /wiki/prob
+toc:
+  - numerical-chars
+  - large-number
+  - stats
+  - distributions

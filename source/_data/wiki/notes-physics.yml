@@ -1,0 +1,11 @@
+name: 大学物理 II (英文)
+title: 大学物理速通
+subtitle: 'by duanyll'
+tags: 课程笔记
+description: 大学物理 II 的期末复习笔记。
+path: /wiki/physics
+toc:
+  - electric-field
+  - magnetic-field
+  - emi
+  - quantum

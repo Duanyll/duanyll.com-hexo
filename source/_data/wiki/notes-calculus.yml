@@ -1,0 +1,12 @@
+name: 数学分析
+title: 数学分析速通
+subtitle: 'by duanyll'
+tags: 课程笔记
+description: 数学分析 (高等微积分 III) 的期末复习笔记。
+path: /wiki/calculus
+toc:
+  - array-limit
+  - function-limit
+  - differential
+  - integral
+  - series

@@ -1,0 +1,10 @@
+name: 数值分析
+title: 数值分析速通
+subtitle: 'by duanyll'
+tags: 课程笔记
+description: 数值分析的期末复习笔记。
+path: /wiki/numeric
+toc:
+  - basic
+  - linear
+  - non-linear

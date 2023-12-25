@@ -3,4 +3,4 @@
 	url = https://github.com/Duanyll/hexo-theme-cactus
 [submodule "themes/stellar"]
 	path = themes/stellar
-	url = https://github.com/xaoxuu/hexo-theme-stellar
+	url = https://github.com/Duanyll/hexo-theme-stellar

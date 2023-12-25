@@ -5,8 +5,6 @@ wiki: notes-calculus
 order: 201
 ---
 
-# 数列极限
-
 ## Stolz 定理
 
 **定理** 设 $\{b_n\}$ 为*严格单增*的*正无穷大量*, 若
