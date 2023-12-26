@@ -137,6 +137,18 @@ references:
    $$
    \tilde{\sigma}:R/\ker\sigma\cong R'
    $$
+   - **环的第一同构定理** $\phi:R\to R'$ 的环同态, 有环同构
+     $$
+     \bar{\phi}:R/\ker\phi\cong\phi(R)
+     $$
+   - **环的第二同构定理** $S$ 是 $R$ 的子环, $I$ 是 $R$ 的理想, 则 $S\cap I$ 是 S 的理想且有环同构
+     $$
+     S/(S\cap I)\cong(S+I)/I
+     $$
+   - **环的第三同构定理** $I$ 和 $J$ 是 $R$ 的理想, $I\subseteq J$, 则 $J/I$ 是 $R/I$ 的理想且有环同构
+     $$
+     (R/I)\big/(J/I)\cong R/J
+     $$
 6. **环的扩张定理** 设环 $\bar{S}$ 与 $R$ 无交集. $\bar{\phi}:\bar{S}\to R$ 是单同态, 则存在一个与环 $R$ 同构的环 $S$ 以及环同构 $\phi:S\to R$ 满足 $\bar{S}$ 是 $S$ 的子环且 $\phi/\bar{S}=\bar{\phi}$
 
 ## 素理想与极大理想
@@ -302,7 +314,7 @@ references:
    $$
    \begin{aligned}
       N:\Z[\sqrt{d}]&\to\N\cup\{0\}\\
-      a+b\sqrt{d}&\mapsto a^2-db^2\forall a,b\in\Z
+      a+b\sqrt{d}&\mapsto |a^2-db^2|,\forall a,b\in\Z
    \end{aligned}
    $$
    满足以下性质
@@ -324,3 +336,15 @@ references:
     ![](https://cdn.duanyll.com/img/20231224202557.png)
 11. **整环中的真因子链** $a_1,a_2,\cdots,a_n,\cdots$, $a_{i-1}$ 是 $a_i$ 的真因子
 12. **定理** 在 UFD 中, 任意元的真因子链一定有限终止
+
+> 证明素元, 可借助环上范数是素数.
+>
+> ![](https://cdn.duanyll.com/img/20231226101633.png)
+>
+> 证明不可约元, 考虑其环上范数的可分解性. 环上范数是素数 $\implies$ 不可约元, 环上范数不是素数也可能是不可约元.
+>
+> ![](https://cdn.duanyll.com/img/20231226102002.png)
+>
+> 证明不是素元, 找一个反例
+>
+> ![](https://cdn.duanyll.com/img/20231226102044.png)
