@@ -36,6 +36,7 @@ sidebar:
 ######## Index ########
 post-index: # 近期发布 分类 标签 归档 and ...
   # '朋友文章': /friends/rss/
+  '笔记': /wiki/tags/课程笔记/
 
 
 ######## Main ########
@@ -94,7 +95,7 @@ comments:
     repo: duanyll/duanyll.com-comment
     issue_term: pathname
     label: Comment
-    theme: preferred-color-scheme
+    theme: switch
   # giscus
   # https://giscus.app/zh-CN
   giscus:
@@ -173,7 +174,7 @@ comments:
 footer:
   social:
     github:
-      icon: '<img src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/social/08a41b181ce68.svg"/>'
+      icon: '<img src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/08a41b181ce68.svg"/>'
       url: https://github.com/duanyll
     # music:
     #   icon: '<img src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/social/3845874.svg"/>'
@@ -182,8 +183,11 @@ footer:
     #   icon: '<img src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/social/3616429.svg"/>'
     #   url: /
     comments:
-      icon: '<img src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/social/942ebbf1a4b91.svg"/>'
+      icon: '<img src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/942ebbf1a4b91.svg"/>'
       url: /about/#comments
+    darkmode-switch:
+      icon: '<img src="/img/half-moon.svg"/>'
+      url: javascript:darkmode.next()
   sitemap:
     '博客':
       - '[近期](/)'
@@ -362,7 +366,7 @@ plugins:
     api: 5Q5mpqRK5DkwT1X9Gi5e
 
 style:
-  darkmode: auto # auto / always / false
+  darkmode: switch # auto / always / false / switch
   smooth_scroll: true # true / false
   font-size:
     root: 16px
