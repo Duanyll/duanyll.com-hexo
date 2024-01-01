@@ -1,0 +1,1311 @@
+---
+title: 马原
+author: Various Artists
+tags: [马原]
+license: false
+---
+
+<p class=MsoNormal align=center style='text-align:center'><b><span style='font-size:14.0pt;font-family:SimSun'>《马克思主义基本原理概论》期末复习指南</span></b></p>
+
+<p class=MsoNormal align=center style='text-align:center;text-indent:23.6pt'><b><span
+style='font-size:12.0pt;font-family:SimSun'>闭卷考试范围：绪论&#8212;&#8212;第四章</span></b></p>
+
+<p class=MsoNormal><b><span style='font-size:12.0pt;font-family:SimSun'>二、思考题：</span></b></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><span style='font-size:14.0pt;
+font-family:SimSun;color:#0070C0'>第<span lang=EN-US>0</span>章 绪论</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><b><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>1</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>、什么是马克思主义和马克思主义基本原理 <span
+lang=EN-US>p2-3</span></span></b></p>
+
+<p class=MsoNormal style='text-indent:24.1pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>马克思主义</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：由马克思恩格斯创立并为后继者所不断发展的科学理论体系，是关于自然、社会和人类思维发展一般规律的学说，是关于社会主义必然代替资本主义、最终实现共产主义的学说，是关于无产阶级解放、全人类解放和每个人自由全面发展的学说，是无产阶级政党和社会主义国家的指导思想，是指引人民创造美好生活的行动指南。</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><span style='font-size:12.0pt;
+font-family:SimSun'>马克思主义<b><u><span>三个基本组成部分</span></u></b>：马克思主义哲学、马克思主义政治经济学和科学社会主义。</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>马克思主义基本原理</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：是对马克思主义的立场、观点、方法的集中概括，是马克思主义在形成、发展和运用过程中经过实践反复检验而确立起来的具有普遍真理性的理论。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.1pt'><b><span
+lang=EN-US style='font-size:12.0pt;font-family:SimSun'>2、</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>马克思主义的特征<span lang=EN-US> p9-12</span></span></b></p>
+
+<p class=MsoNormal style='text-indent:24.1pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>特征</span></u></b><span style='font-size:
+12.0pt;font-family:SimSun'>：</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><span style='font-size:12.0pt;
+font-family:SimSun'>人民性：人民至上是马克思主义的政治立场</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><span style='font-size:12.0pt;
+font-family:SimSun'>科学性：科学的方法论和世界观，辩证唯物主义和历史唯物主义。</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><span style='font-size:12.0pt;
+font-family:SimSun'>实践性：从实践中来，到实践中去，在实践中接收检验，随实践而不断发展</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><span style='font-size:12.0pt;
+font-family:SimSun'>发展性：不断发展的学说，有与时俱进的理论品质。</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><span style='font-size:14.0pt;
+font-family:SimSun;color:#0070C0'>第一章 世界的物质性及发展规律</span></p>
+
+<p class=MsoNormal style='text-indent:24.1pt'><b><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>3</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>、哲学和哲学的基本问题、社会历史观的基本问题（两种根本对立的历史观）。<span
+lang=EN-US>P21</span></span></b></p>
+
+<p class=MsoNormal style='text-indent:24.1pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>哲学</span></u></b><span style='font-size:
+12.0pt;font-family:SimSun'>：系统化、理论化的世界观。</span></p>
+
+<p class=MsoNormal style='text-indent:24.1pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>哲学的基本问题</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：存在和思维的问题，又称物质和意识的问题。</span></p>
+
+<p class=MsoNormal style='text-indent:24.1pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>基本问题两个内容</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>1</span><span style='font-size:
+12.0pt;font-family:SimSun'>、存在和思维及物质和意识谁为本原：唯心主义、唯物主义。</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>2</span><span style='font-size:
+12.0pt;font-family:SimSun'>、存在和思维、物质和意识是否具有同一性：可知论、不可知论。</span></p>
+
+<p class=MsoNormal style='text-indent:24.1pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>社会历史观的基本问题</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：社会存在与社会意识的关系：唯物主义历史观、唯心主义历史观。（第三章）<span
+lang=EN-US>p111</span></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>4</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>、如何理解列宁的物质定义及其意义？<span lang=EN-US>P23</span>世界的物质统一性原理及其意义。<span
+lang=EN-US>P29-30</span></span></b></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>列宁原话</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：物质是标志客观实在的哲学范畴，这种客观实在是人通过感觉感</span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;font-family:SimSun'>知的，它不依赖于我们的感觉存在，为我们感觉所复写、摄影、反映。</span></p>
+
+<p class=MsoNormal style='text-indent:24.1pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>意义</span></u></b><span style='font-size:
+12.0pt;font-family:SimSun'>：物质不依赖于人类的意识而存在，并能为人类的意识所反映的客观实在。</span></p>
+
+<p class=MsoNormal style='text-indent:24.1pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>世界的物质统一性原理</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：</span><span style='font-size:
+12.0pt;font-family:SimSun'>世界是统一的，即世界的本原是一个；世界的统一性在于它的物质性，即世界统一的基础是物质，物质世界的统一性是多样性的统一。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>1、</span><span style='font-size:
+12.0pt;font-family:SimSun'>自然界是物质的。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>2、</span><span style='font-size:
+12.0pt;font-family:SimSun'>人类社会本质上是物质的。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>3、</span><span style='font-size:
+12.0pt;font-family:SimSun'>人的意识统一于物质，意识是物质世界长期发展的产物。</span></p>
+
+<p class=MsoNormal style='text-indent:24.1pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>意义</span></u></b><span style='font-size:
+12.0pt;font-family:SimSun'>：</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><span style='font-size:12.0pt;
+font-family:SimSun'>理论意义：它是唯物哲学的基石，维物哲学的一系列原理和原则都是以此为根据和前提的，从而成为彻底的唯物主义一元论的世界观。<span
+lang=EN-US><br>
+&nbsp;&nbsp;&nbsp; </span>实践意义：它是我们从事一切工作的立足点，一切从实际出发是唯物主义一元论的根本要求。我们在任何时候、任何地点和任何条件下从事任何工作，都要按照世界的本来面目去人认识世界。（百度）</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><span style='font-size:12.0pt;
+font-family:SimSun'>物质最本质的规定是<b><u><span>客观实在性</span></u></b>。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>5</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>、如何把握物质、运动、静止，时间和空间的含义、特点（或特性）及其相互关系？<span
+lang=EN-US>P24-25</span></span></b></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><span style='font-size:12.0pt;
+font-family:SimSun'>物质的根本属性是<b><u><span>运动</span></u></b>。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>物质世界的运动是绝对的，而物质在运动过程中又有某种相对的静止。</span></u></b></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><span style='font-size:12.0pt;
+font-family:SimSun'>运动的绝对性体现运动的：变动性、无条件性。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><span style='font-size:12.0pt;
+font-family:SimSun'>运动的相对性体现运动的：稳定性、有条件性。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><span style='font-size:12.0pt;
+font-family:SimSun'>无条件的绝对运动和有条件的相对静止之间构成了<b><u><span>对立统一</span></u></b>的关系。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>时间和空间</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：运动着的物质的基本存在形式。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><span style='font-size:12.0pt;
+font-family:SimSun'>时间：物质运动的持续性、顺序性，特点：一维性。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><span style='font-size:12.0pt;
+font-family:SimSun'>空间：物质运动的广延性、伸张性，特点：三维性。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><span style='font-size:12.0pt;
+font-family:SimSun'>物质、运动、时间、空间具有<b><u><span>内在统一性</span></u></b>。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>6</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>、意识的起源、涵义、本质及其作用？<span lang=EN-US>
+P25-26</span></span></b></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><span style='font-size:12.0pt;
+font-family:SimSun'>物质决定意识。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><span style='font-size:12.0pt;
+font-family:SimSun'>意识的<b><u><span>起源</span></u></b>：</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:0cm'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>1、</span><span style='font-size:
+12.0pt;font-family:SimSun'>自然界长期发展的产物。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:0cm'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>2、</span><span style='font-size:
+12.0pt;font-family:SimSun'>社会历史发展的产物。</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:12.0pt;font-family:SimSun'>&nbsp;&nbsp;
+</span><span style='font-size:12.0pt;font-family:SimSun'>意识的<b><u><span
+style='color:black'>本质</span></u></b>：意识是人脑这样一种特殊物质的机能和属性，是客观世界的主观映象。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><i><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>7</span></i></b><b><i><span
+style='font-size:12.0pt;font-family:SimSun'>、（新增）人工智能为何不能取代或超越人类智能？<span
+lang=EN-US>P28-29</span></span></i></b></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:0cm'><i><span
+lang=EN-US style='font-size:12.0pt;font-family:SimSun'>1、</span></i><i><span
+style='font-size:12.0pt;font-family:SimSun'>人类意识是知情意的统一体。</span></i></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:0cm'><i><span
+lang=EN-US style='font-size:12.0pt;font-family:SimSun'>2、</span></i><i><span
+style='font-size:12.0pt;font-family:SimSun'>社会性是人的意识所固有的本质属性，而人工智能不可能真正具备人类</span></i></p>
+
+<p class=MsoNormal><i><span style='font-size:12.0pt;font-family:SimSun'>的社会属性。</span></i></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><i><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>3</span></i><i><span
+style='font-size:12.0pt;font-family:SimSun'>、人类的自然语言是思维的物质外壳和意识的现实形式，而人工智能难以完全具备理解自然语言真实意义的能力。</span></i></p>
+
+<p class=MsoNormal style='text-indent:24.1pt'><b><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>8</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>、意识的能动作用，主观能动性和客观规律性的辩证统一。<span
+lang=EN-US>P26-28</span></span></b></p>
+
+<p class=MsoNormal style='text-indent:24.1pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>意识的能动作用</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：意识对物质具有反作用。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>1、</span><span style='font-size:
+12.0pt;font-family:SimSun'>意识具有目的性和计划性。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>2、</span><span style='font-size:
+12.0pt;font-family:SimSun'>意识具有创造性。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>3、</span><span style='font-size:
+12.0pt;font-family:SimSun'>意识具有指导实践改造客观世界的作用。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>4、</span><span style='font-size:
+12.0pt;font-family:SimSun'>意识具有调控人的行为和生理活动的作用。</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>辩证统一</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>1、</span><span style='font-size:
+12.0pt;font-family:SimSun'>尊重客观规律是发挥主观能动性的前提。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>2、</span><span style='font-size:
+12.0pt;font-family:SimSun'>只有充分发挥主观能动性才能正确认识和利用客观规律。</span></p>
+
+<p class=MsoNormal style='text-indent:24.1pt'><b><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>9</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>、如何全面理解唯物辩证法的联系观和发展观及其意义？<span
+lang=EN-US>P32-33</span></span></b></p>
+
+<p class=MsoNormal style='text-indent:24.1pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>联系</span></u></b><span style='font-size:
+12.0pt;font-family:SimSun'>：事物内部各要素之间和事物之间相互影响、相互制约、相互作用的关系。</span></p>
+
+<p class=MsoNormal style='text-indent:24.1pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>联系的特点</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：客观性、普遍性、多样性、条件性。</span></p>
+
+<p class=MsoNormal style='text-indent:24.1pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>发展观</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：新事物的产生和旧事物的灭亡。</span></p>
+
+<p class=MsoNormal style='text-indent:24.1pt'><b><i><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>10</span></i></b><b><i><span
+style='font-size:12.0pt;font-family:SimSun'>、如何理解社会的物质性、物质与意识的辩证关系是什么？<span
+lang=EN-US>P30</span></span></i></b></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><b><i><u><span style='font-size:
+12.0pt;font-family:SimSun'>社会的物质性</span></u></i></b><i><span
+style='font-size:12.0pt;font-family:SimSun'>：人类社会的<b><u><span style='color:
+black'>自然基础</span></u></b>是物质的，人类获取生活资料的<b><u><span>生产活动</span></u></b>是物质的，<b><u><span
+style='color:black'>物质资料的生产方式</span></u></b>构成了人类社会存在和发展的基础，集中体现着人类社会的物质性。</span></i></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><b><i><u><span style='font-size:
+12.0pt;font-family:SimSun'>物质与意识的辩证关系</span></u></i></b><i><span
+style='font-size:12.0pt;font-family:SimSun'>：物质决定意识，意识反作用于物质。</span></i></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>11</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>、如何理解矛盾的同一性与斗争性的内涵及其辩证关系和意义？<span
+lang=EN-US>P35</span></span></b></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><span style='font-size:12.0pt;
+font-family:SimSun'>矛盾的同一性与斗争性的<b><u><span>内涵</span></u></b>：相互依存、相互贯通、相互排斥、相互分离。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>辩证关系</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：相互联结、相辅相成。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>意义</span></u></b><span style='font-size:
+12.0pt;font-family:SimSun'>：</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:0cm'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>1、</span><span style='font-size:
+12.0pt;font-family:SimSun'>同一性是事物存在和发展的前提。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:0cm'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>2、</span><span style='font-size:
+12.0pt;font-family:SimSun'>同一性使矛盾双方相互吸收有利于自己的因素。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:0cm'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>3、</span><span style='font-size:
+12.0pt;font-family:SimSun'>同一性规定着事物转化的可能和发展的趋势。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:0cm'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>4、</span><span style='font-size:
+12.0pt;font-family:SimSun'>矛盾双方的斗争促使双方的力量发生变化，造成双方力量发展的不平衡，</span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;font-family:SimSun'>为对立面转化、事务的质变创造条件。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:0cm'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>5、</span><span style='font-size:
+12.0pt;font-family:SimSun'>矛盾双方的斗争是一种矛盾统一体向另一种矛盾统一体过渡的决定性力</span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;font-family:SimSun'>量。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:0cm'><b><span
+lang=EN-US style='font-size:12.0pt;font-family:SimSun'>12、</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>唯物辩证法的“一点论”和“两点论”的关系是怎样的？<span
+lang=EN-US>P37</span></span></b></p>
+
+<p class=MsoNormal style='text-indent:24.05pt'><span style='font-size:12.0pt;
+font-family:SimSun'>两点论和重点论的统一</span></p>
+
+<p class=MsoNormal style='text-indent:24.05pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>两点论</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：看到矛盾双方的对立和统一。</span></p>
+
+<p class=MsoNormal style='text-indent:24.05pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>重点论</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：把握主要矛盾、矛盾的主要方面。</span></p>
+
+<p class=MsoNormal style='text-indent:24.05pt'><span style='font-size:12.0pt;
+font-family:SimSun'>看问题要全面的看，又要看主流、大势、发展趋势。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:0cm'><b><span
+lang=EN-US style='font-size:12.0pt;font-family:SimSun'>13、</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>矛盾的普遍性和特殊性及其方法论意义是什么？<span
+lang=EN-US>P36-37</span></span></b></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>普遍性</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：矛盾存在于一切事物中，存在于一切事物发展的始终，旧的矛盾解</span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;font-family:SimSun'>决了，新的矛盾产生了，事物在矛盾中运动。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>特殊性</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：各个具体事物的矛盾、每一个矛盾的各个方面在发展的不同阶段上</span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;font-family:SimSun'>各有各的特点。</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:12.0pt;font-family:SimSun'>&nbsp;&nbsp;&nbsp;
+</span><span style='font-size:12.0pt;font-family:SimSun'>共性与个性相统一的关系。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><span style='font-size:12.0pt;
+font-family:SimSun'>矛盾的普遍性和特殊性是<b><u><span>辩证统一</span></u></b>的关系。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:0cm'><b><span
+lang=EN-US style='font-size:12.0pt;font-family:SimSun'>14、</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>“度”的含义及其方法论意义？<span lang=EN-US>P38</span></span></b></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>度</span></u></b><span style='font-size:
+12.0pt;font-family:SimSun'>：保持物质的稳定性的数量界限，事物的限度、幅度和范围。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>意义</span></u></b><span style='font-size:
+12.0pt;font-family:SimSun'>：在认识和处理问题时要掌握适度原则。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:0cm'><b><span
+lang=EN-US style='font-size:12.0pt;font-family:SimSun'>15、</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>量变和质变的辩证关系及其方法论意义是什么？<span
+lang=EN-US>P38</span></span></b></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>量变与质变的辩证关系</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:0cm'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>1、</span><span style='font-size:
+12.0pt;font-family:SimSun'>量变是质变的必要条件。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:0cm'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>2、</span><span style='font-size:
+12.0pt;font-family:SimSun'>质变是量变的必然结果，为新的量变开辟道路。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:0cm'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>3、</span><span style='font-size:
+12.0pt;font-family:SimSun'>质变和量变是相互渗透的。</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:12.0pt;font-family:SimSun'>&nbsp;&nbsp;
+</span><b><u><span style='font-size:12.0pt;font-family:SimSun'>意义</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>1、</span><span style='font-size:
+12.0pt;font-family:SimSun'>事物的发展处于量变阶段时，要踏实做好日常工作，为未来重大改变做准备。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>2、</span><span style='font-size:
+12.0pt;font-family:SimSun'>当质变来临时，要果断地、不失时机的抓住机会，促成质变，使工作迈上新台阶。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:0cm'><b><span
+lang=EN-US style='font-size:12.0pt;font-family:SimSun'>16、</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>辩证的否定观及其方法论意义是什么？<span lang=EN-US>P39</span></span></b></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>辩证的否定观</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：否定之否定规律。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:0cm'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>1、</span><span style='font-size:
+12.0pt;font-family:SimSun'>否定是事物自我否定、自我发展，是事物内部矛盾运动的结果。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:0cm'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>2、</span><span style='font-size:
+12.0pt;font-family:SimSun'>否定是事物发展的环节，是旧事物向新事物的转变，从旧质到新质的飞</span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;font-family:SimSun'>跃。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:0cm'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>3、</span><span style='font-size:
+12.0pt;font-family:SimSun'>否定是新旧事物联系的环节，新事物孕育产生于旧事物，通过否定联系</span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;font-family:SimSun'>在一起。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:0cm'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>4、</span><span style='font-size:
+12.0pt;font-family:SimSun'>辩证的否定的实质就是扬弃，新事物对旧事物批判又继承，克服其消极</span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;font-family:SimSun'>因素保留积极因素。</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:12.0pt;font-family:SimSun'>&nbsp;&nbsp;
+</span><b><u><span style='font-size:12.0pt;font-family:SimSun'>意义</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：树立辩证的否定观，反对形而上学的肯定一切、否定一切，对事物采取科学分析的态度，使实践活动符合事物自我否定的辩证本性。正确的看待事物发展的过程，既要看到道路的曲折，更要看到前途的光明。</span></p>
+
+<p class=MsoNormal style='text-indent:28.0pt'><span style='font-size:14.0pt;
+font-family:SimSun;color:#0070C0'>第二章 实践与认识及其发展规律</span></p>
+
+<p class=MsoNormal style='text-indent:24.1pt'><b><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>17</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>、认识的本质是什么？辩证唯物主义认识论与旧唯物主义认识论的联系和区别。<span
+lang=EN-US>P69-72</span></span></b></p>
+
+<p class=MsoNormal style='text-indent:24.1pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>认识的本质</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：主体在实践基础上对客体的能动反映。</span></p>
+
+<p class=MsoNormal style='text-indent:24.1pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>主观唯心主义</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：人的认识是主观自生的，是生而知之的。</span></p>
+
+<p class=MsoNormal style='text-indent:24.1pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>客观唯心主义</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：人的认识是上帝的启示或者某种客观精神的产物。</span></p>
+
+<p class=MsoNormal style='text-indent:24.1pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>旧唯物主义认识论</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：以感性直观为基础，把人的认识看成是消极的、被动的反映和接收外界对象。</span></p>
+
+<p class=MsoNormal style='text-indent:24.1pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>辩证唯物主义</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：主体在实践基础上对客体的能动反映。</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><span style='font-size:12.0pt;
+font-family:SimSun'>辩证唯物主义的<b><u><span>特点</span></u></b>：</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>1、</span><span style='font-size:
+12.0pt;font-family:SimSun'>把实践的观点引入认识论。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>2、</span><span style='font-size:
+12.0pt;font-family:SimSun'>把辩证法应用于反映论考察认识的发展过程。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>18</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>、实践和认识的关系是怎样的？<span lang=EN-US>P67-68</span></span></b></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><span style='font-size:12.0pt;
+font-family:SimSun'>实践是认识的<b><u><span>基础</span></u></b>，实践在认识活动中起着<b><u><span
+style='color:black'>决定性作用</span></u></b>。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:0cm'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>1、</span><span style='font-size:
+12.0pt;font-family:SimSun'>实践是认识的来源。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:0cm'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>2、</span><span style='font-size:
+12.0pt;font-family:SimSun'>实践是认识的目的。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:0cm'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>3、</span><span style='font-size:
+12.0pt;font-family:SimSun'>实践是认识发展的动力。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:0cm'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>4、</span><span style='font-size:
+12.0pt;font-family:SimSun'>实践是检验认识真理性的唯一标准。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.1pt'><b><span
+lang=EN-US style='font-size:12.0pt;font-family:SimSun'>19、</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>认识运动的基本规律，感性认识和理性认识的辩证关系。<span
+lang=EN-US>P72-79</span></span></b></p>
+
+<p class=MsoNormal style='text-indent:24.05pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>认识运动的规律</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.05pt'><span
+lang=EN-US style='font-size:12.0pt;font-family:SimSun'>1、</span><span
+style='font-size:12.0pt;font-family:SimSun'>从实践到认识：由感性认识能动的飞跃到理性认识，第一次能动飞跃。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.05pt'><span
+lang=EN-US style='font-size:12.0pt;font-family:SimSun'>2、</span><span
+style='font-size:12.0pt;font-family:SimSun'>从认识到实践：由认识再回到实践去，第二次能动飞跃。</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>辩证关系</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>1、</span><span style='font-size:
+12.0pt;font-family:SimSun'>理性认识依赖于感性认识。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>2、</span><span style='font-size:
+12.0pt;font-family:SimSun'>感性认识有待发展和深化为理性认识。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>3、</span><span style='font-size:
+12.0pt;font-family:SimSun'>感性认识和理性认识相互渗透、相互包含。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.1pt'><b><span
+lang=EN-US style='font-size:12.0pt;font-family:SimSun'>20、</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>如何理解真理的属性：客观性、绝对性和相对性？<span
+lang=EN-US>P79-84</span></span></b></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>客观性</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：真理的内容是对客观事物及其规律的正确反映，真理中包含着不依</span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;font-family:SimSun'>赖于人和人的意识的客观内容。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>绝对性</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：真理主客观统一的确定性和发展的无限性。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>相对性</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：人们在一定条件下对客观事物及其本质和发展规律的正确认识总是</span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;font-family:SimSun'>有限度的、不完善的。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><span style='font-size:12.0pt;
+font-family:SimSun'>真理的相对性和绝对性的辩证统一。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.1pt'><b><span
+lang=EN-US style='font-size:12.0pt;font-family:SimSun'>21、</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>真理与谬误的辩证关系。<span lang=EN-US>P85-86</span></span></b></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>辩证关系</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:0cm'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>1、</span><span style='font-size:
+12.0pt;font-family:SimSun'>真理和谬误相互对立。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:0cm'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>2、</span><span style='font-size:
+12.0pt;font-family:SimSun'>真理和谬误的对立又是相对的，在一定条件下，它们能够相互转化。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:0cm'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>3、</span><span style='font-size:
+12.0pt;font-family:SimSun'>真理总是同谬误相比较而存在，相斗争而发展。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.1pt'><b><span
+lang=EN-US style='font-size:12.0pt;font-family:SimSun'>22、</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>如何理解：实践是检验真理的唯一标准。<span lang=EN-US>P87-88</span></span></b></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>理解</span></u></b><span style='font-size:
+12.0pt;font-family:SimSun'>：由真理的本性和实践的特点决定</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:0cm'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>1、</span><b><u><span
+style='font-size:12.0pt;font-family:SimSun'>真理的本性</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：主观与客观相符合。只有社会实践这种，能够把主观认识</span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;font-family:SimSun'>和客观事物联系和沟通起来，从而使人们能够把两者加以比较和对照的东西，才能充当检验真理的标准。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:0cm'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>2、</span><b><u><span
+style='font-size:12.0pt;font-family:SimSun'>实践的特点</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：实践具有直接现实性。</span></p>
+
+<p class=MsoNormal style='text-indent:14.0pt'><span style='font-size:14.0pt;
+font-family:SimSun;color:#0070C0'>第三章 人类社会及其发展规律</span></p>
+
+<p class=MsoNormal style='text-indent:24.1pt'><b><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>23</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>、社会存在与社会意识及其辩证关系。<span lang=EN-US>P112-117</span></span></b></p>
+
+<p class=MsoNormal style='text-indent:24.1pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>社会存在</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：社会物质生活条件，是社会生活的物质方面，主要包括：自然地理环境、人口因素、物质生产方式。</span></p>
+
+<p class=MsoNormal style='text-indent:24.1pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>社会意识</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：是社会存在的反映，是社会生活的精神方面。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>1、</span><span style='font-size:
+12.0pt;font-family:SimSun'>社会心理：低层次的社会意识，自发的、不系统的、不定型的社会意识，以感性认识为主。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>2、</span><span style='font-size:
+12.0pt;font-family:SimSun'>社会意识形式：高层次的社会意识，自觉的、系统的、相对稳定的社会意识，以理性认识为主。</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>辩证关系</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：社会存在决定社会意识，社会意识是社会存在的反映，并反作用于社会存在。</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><span style='font-size:12.0pt;
+font-family:SimSun'>社会意识是具体的、历史的，它依赖于社会存在，又有其相对独立性。</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>社会意识的独立性</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>表现在：</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>1、</span><span style='font-size:
+12.0pt;font-family:SimSun'>社会意识和社会存在的发展具有不完全同步性和不平衡性。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>2、</span><span style='font-size:
+12.0pt;font-family:SimSun'>社会意识的内部各种形式之间存在相互影响且各自具有历史继承性。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>3、</span><span style='font-size:
+12.0pt;font-family:SimSun'>社会意识对社会存在具有能动的反作用，这是社会意识相对独立性的突出表现。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>24</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>、社会的基本规律及其意义。<span lang=EN-US>P120-129</span></span></b></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><span style='font-size:12.0pt;
+font-family:SimSun'>社会的基本规律：</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:0cm'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>1、</span><b><u><span
+style='font-size:12.0pt;font-family:SimSun'>生产力与生产关系矛盾运动规律</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:12.0pt;font-family:SimSun'>&nbsp;&nbsp;
+</span><span style='font-size:12.0pt;font-family:SimSun'>生产力基本要素：<span
+lang=EN-US>1.</span>劳动资料<span lang=EN-US>2.</span>劳动对象<span lang=EN-US>3.</span>劳动者。科学技术是生产力的重要因素。</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:12.0pt;font-family:SimSun'>&nbsp;&nbsp;
+</span><span style='font-size:12.0pt;font-family:SimSun'>生产关系：<span lang=EN-US>1.</span>以生产资料公有制为基础的生产关系。<span
+lang=EN-US>2.</span>生产资料私有制为基础的生产关系。</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:12.0pt;font-family:SimSun'>&nbsp;&nbsp;
+</span><span style='font-size:12.0pt;font-family:SimSun'>生产力决定生产关系。</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:12.0pt;font-family:SimSun'>&nbsp;&nbsp;
+</span><span style='font-size:12.0pt;font-family:SimSun'>生产关系对生产力具有能动的反作用。</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:12.0pt;font-family:SimSun'>&nbsp;&nbsp;
+</span><span style='font-size:12.0pt;font-family:SimSun'>意义：</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:12.0pt;font-family:SimSun'>&nbsp;&nbsp;
+1</span><span style='font-size:12.0pt;font-family:SimSun'>、第一次科学地确立了生产力发展是社会进步的最高标准，并且把生产力和生产关系矛盾运动的规律作为判断时代变革的客观依据。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:0cm'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>2、</span><b><u><span
+style='font-size:12.0pt;font-family:SimSun'>经济基础和上层建筑之间的矛盾运动规律</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:12.0pt;font-family:SimSun'>&nbsp;&nbsp;
+</span><span style='font-size:12.0pt;font-family:SimSun'>经济基础：社会一定发展阶段的生产力所决定的生产关系的总和。</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:12.0pt;font-family:SimSun'>&nbsp;&nbsp;
+</span><span style='font-size:12.0pt;font-family:SimSun'>上层建筑：建立在一定经济基础上的意识形态以及与之适应的制度、组织和设施。</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:12.0pt;font-family:SimSun'>&nbsp;&nbsp;
+</span><span style='font-size:12.0pt;font-family:SimSun'>经济基础决定上层建筑，上层建筑反作用于经济基础，二者相互影响，相互作用。</span></p>
+
+<p class=MsoNormal style='text-indent:24.1pt'><b><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>25</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>、社会意识的一般特点及其意义。<span lang=EN-US>P117</span></span></b></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>辩证关系</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：社会存在决定社会意识，社会意识是社会存在的反映，并反作用于社会存在。</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><span style='font-size:12.0pt;
+font-family:SimSun'>社会意识是具体的、历史的，它依赖于社会存在，又有其相对独立性。</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>社会意识的独立性</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>表现在：</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>1</span><span style='font-size:
+12.0pt;font-family:SimSun'>、社会意识和社会存在的发展具有不完全同步性和不平衡性。</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>2</span><span style='font-size:
+12.0pt;font-family:SimSun'>、社会意识的内部各种形式之间存在相互影响且各自具有历史继承性。</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>3</span><span style='font-size:
+12.0pt;font-family:SimSun'>、社会意识对社会存在具有能动的反作用，这是社会意识相对独立性的突出表现。</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><span style='font-size:12.0pt;
+font-family:SimSun'>社会意识的能动作用是通过指导人们的实践活动实现的。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.1pt'><b><span
+lang=EN-US style='font-size:12.0pt;font-family:SimSun'>26、</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>国家的涵义、产生、实质和一般职能？国体与政体的涵义及关系？<span
+lang=EN-US>P126-127</span></span></b></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>国家的涵义</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：按照地域来划分国民，并依靠强制性或暴力手段以及征收赋税来维系。</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>国家产生</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：阶级矛盾不可调和的产物。</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>国家实质</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：一个阶级统治另一个阶级的工具，是经济上占支配地位的阶级为了维护其根本利益而建立起来的强制性的暴力机关，以保证其在政治上也成为统治阶级。</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>国家一般职能</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：政治统治和社会管理。</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>国体</span></u></b><span style='font-size:
+12.0pt;font-family:SimSun'>：社会各阶级在国家中的地位。</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>政体</span></u></b><span style='font-size:
+12.0pt;font-family:SimSun'>：统治阶级实现其具体统治的具体组织形式。</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>关系</span></u></b><span style='font-size:
+12.0pt;font-family:SimSun'>：国体决定政体，政体服从于国体，政体为国体服务，并对保证国家的性质起重要作用。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.1pt'><b><span
+lang=EN-US style='font-size:12.0pt;font-family:SimSun'>27、</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>社会物质生活条件（社会存在）的含义及其在社会历史发展中的作用？<span
+lang=EN-US>P112-113</span></span></b></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>含义</span></u></b><span style='font-size:
+12.0pt;font-family:SimSun'>：社会物质生活条件，是社会的物质方面，包括：自然地理环境、人口</span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;font-family:SimSun'>因素和物质生产方式。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>作用</span></u></b><span style='font-size:
+12.0pt;font-family:SimSun'>：物质生产方式是社会存在和发展的基础和决定性力量。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.1pt'><b><span
+lang=EN-US style='font-size:12.0pt;font-family:SimSun'>28、</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>社会发展的动力有哪些？它们在社会发展中起何作用？<span
+lang=EN-US>P136-153</span></span></b></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>社会发展的动力</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:0cm'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>1、</span><b><u><span
+style='font-size:12.0pt;font-family:SimSun'>社会基本矛盾</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>。</span></p>
+
+<p class=MsoNormal style='text-indent:24.1pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>作用</span></u></b><span style='font-size:
+12.0pt;font-family:SimSun'>：</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>1.<span style='font:7.0pt "Times New Roman"'>&nbsp;
+</span></span><span style='font-size:12.0pt;font-family:SimSun'>生产力是社会基本矛盾运动中最基本的动力因素，是人类社会发展和进步的最终决定性力量。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>2.<span style='font:7.0pt "Times New Roman"'>&nbsp;
+</span></span><span style='font-size:12.0pt;font-family:SimSun'>生产力是社会进步的根本内容，是衡量社会进步的根本尺度。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>3.<span style='font:7.0pt "Times New Roman"'>&nbsp;
+</span></span><span style='font-size:12.0pt;font-family:SimSun'>社会基本矛盾决定着社会中其他矛盾的存在和发展。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>4.<span style='font:7.0pt "Times New Roman"'>&nbsp;
+</span></span><span style='font-size:12.0pt;font-family:SimSun'>社会基本矛盾具有不同的表现形式和解决方式，并从根本上影响和促进社会形态的变化和发展。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:0cm'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>2、</span><b><u><span
+style='font-size:12.0pt;font-family:SimSun'>阶级斗争和社会革命</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>。</span></p>
+
+<p class=MsoNormal style='text-indent:24.1pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>作用</span></u></b><span style='font-size:
+12.0pt;font-family:SimSun'>：阶级斗争是阶级社会发展的直接动力。</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><span style='font-size:12.0pt;
+font-family:SimSun'>社会革命：</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>1、</span><span style='font-size:
+12.0pt;font-family:SimSun'>实现社会形态更替的重要手段和决定性环节。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>2、</span><span style='font-size:
+12.0pt;font-family:SimSun'>社会革命能充分发挥人民群众创造历史的积极性和伟大作用。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>3、</span><span style='font-size:
+12.0pt;font-family:SimSun'>社会革命能极大地教育和锻炼包括革命阶级在内的广大群众人民。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>4、</span><span style='font-size:
+12.0pt;font-family:SimSun'>无产阶级革命将为消除阶级对抗，并充分利用全人类的文明成果促进社会全面进步创造条件。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:0cm'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>3、</span><b><u><span
+style='font-size:12.0pt;font-family:SimSun'>改革</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>。</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:12.0pt;font-family:SimSun'>&nbsp;&nbsp;&nbsp;
+</span><b><u><span style='font-size:12.0pt;font-family:SimSun'>作用</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：一定程度上解决社会基本矛盾、促进生产力发展、推动社会进步的有效途径和手段。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:0cm'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>4、</span><b><u><span
+style='font-size:12.0pt;font-family:SimSun'>科学技术</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>。</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:12.0pt;font-family:SimSun'>&nbsp;&nbsp;&nbsp;
+</span><b><u><span style='font-size:12.0pt;font-family:SimSun'>作用</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：每一次科技革命，都不同程度的引起了生产方式、生活方式和思维方式的深刻变化和社会的巨大进步。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.1pt'><b><span
+lang=EN-US style='font-size:12.0pt;font-family:SimSun'>29、</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>人民群众是历史的创造者，中国共产党的群众观点和群众路线。<span
+lang=EN-US>P159</span></span></b></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>群众观点</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：人民群众自己解放自己的观点、全心全意为人民服务的观点、一</span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;font-family:SimSun'>切向人民群众负责的观点、虚心向人民群众学习的观点。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>群众路线</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：一切为了群众，一切依靠群众，从群众中来，到群众中去。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.1pt'><b><span
+lang=EN-US style='font-size:12.0pt;font-family:SimSun'>30、</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>科学社会主义诞生的标志是什么、全人类解放的根本体现是实现共产主义。（书上没有）</span></b></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>诞生标志</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：《共产党宣言》发表。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><span style='font-size:14.0pt;
+font-family:SimSun;color:#0070C0'>第四章 资本主义的本质及规律</span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><b><span
+style='font-size:12.0pt;font-family:SimSun'>（政治经济学部分）</span></b></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.1pt'><b><span
+lang=EN-US style='font-size:12.0pt;font-family:SimSun'>1、</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>什么是商品、什么是商品二因素？<span lang=EN-US>P169-170</span></span></b></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>商品</span></u></b><span style='font-size:
+12.0pt;font-family:SimSun'>：用来交换、能满足人的某种需要的劳动产品。</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>二因素</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：使用价值、价值。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.1pt'><b><span
+lang=EN-US style='font-size:12.0pt;font-family:SimSun'>2、</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>什么是商品的使用价值、交换价值、价值？<span
+lang=EN-US>P169-170</span></span></b></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>使用价值</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：商品能满足人的某种需要的有用性。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>交换价值</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：一种使用价值同另一种使用价值之间交换的量的关系或比例。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>价值</span></u></b><span style='font-size:
+12.0pt;font-family:SimSun'>：凝结在商品中的无差别的一般人类劳动，即人的脑力和体力的耗费。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.1pt'><b><span
+lang=EN-US style='font-size:12.0pt;font-family:SimSun'>3、</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>如何理解使用价值和价值的关系、交换价值和价值的关系？<span
+lang=EN-US>P170</span></span></b></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>使用价值和价值的关系</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：对立统一</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><span style='font-size:12.0pt;
+font-family:SimSun'>对立：二者不可兼得，是相互排斥的，无法同时获得商品的使用价值和价值。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><span style='font-size:12.0pt;
+font-family:SimSun'>统一：作为商品，必须同时具有价值和使用价值。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>交换价值和价值的关系</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：价值是交换价值的基础，交换价值是价值的表现形</span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;font-family:SimSun'>式。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.1pt'><b><span
+lang=EN-US style='font-size:12.0pt;font-family:SimSun'>4、</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>如何理解劳动的二重性？<span lang=EN-US>P170-171</span></span></b></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><span style='font-size:12.0pt;
+font-family:SimSun'>具体劳动和抽象劳动</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>具体劳动</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：商品的使用价值，人和自然的关系，劳动的自然属性。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>抽象劳动</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：商品的价值，商品生产者的社会关系，劳动的社会属性。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><span style='font-size:12.0pt;
+font-family:SimSun'>对立统一的关系。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><span style='font-size:12.0pt;
+font-family:SimSun'>统一：时间空间的统一</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><span style='font-size:12.0pt;
+font-family:SimSun'>对立：反映劳动的不同属性。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.1pt'><b><span
+lang=EN-US style='font-size:12.0pt;font-family:SimSun'>5、</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>商品的价值量是怎么决定的？商品价值量如何变动？<span
+lang=EN-US>P171-173</span></span></b></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>价值量决定</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：社会必要劳动时间。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>变动</span></u></b><span style='font-size:
+12.0pt;font-family:SimSun'>：随劳动生产率的变化而变化。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.1pt'><b><span
+lang=EN-US style='font-size:12.0pt;font-family:SimSun'>6、</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>价值规律的内容是什么？表现形式是什么？有什么作用（积极<span
+lang=EN-US>+</span>消极）？<span lang=EN-US>P173-175</span></span></b></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>价值规律的内容</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：商品生产和商品交换的基本规律。商品的价值量由生产商</span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;font-family:SimSun'>品的社会必要劳动时间决定，商品交换以价值量为基础，以等价交换为原则。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>表现形式</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：商品的价格围绕商品的价值自发波动。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>作用</span></u></b><span style='font-size:
+12.0pt;font-family:SimSun'>：</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><span style='font-size:12.0pt;
+font-family:SimSun'>积极：</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:0cm'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>1、</span><span style='font-size:
+12.0pt;font-family:SimSun'>自发地调节生产资料和劳动力在社会各生产部门之间的分配比例。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:0cm'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>2、</span><span style='font-size:
+12.0pt;font-family:SimSun'>自发的刺激社会生产力的发展。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:0cm'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>3、</span><span style='font-size:
+12.0pt;font-family:SimSun'>自发的调节社会收入的分配。</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><span style='font-size:12.0pt;
+font-family:SimSun'>消极：</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>1、</span><span style='font-size:
+12.0pt;font-family:SimSun'>导致社会资源浪费。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>2、</span><span style='font-size:
+12.0pt;font-family:SimSun'>阻碍技术进步。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>3、</span><span style='font-size:
+12.0pt;font-family:SimSun'>导致收入两极分化。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.1pt'><b><span
+lang=EN-US style='font-size:12.0pt;font-family:SimSun'>7、</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>如何理解简单商品经济的基本矛盾？<span lang=EN-US>P176-178</span></span></b></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><span style='font-size:12.0pt;
+font-family:SimSun'>私人劳动和社会劳动的矛盾是商品经济的基本矛盾。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.1pt'><b><span
+lang=EN-US style='font-size:12.0pt;font-family:SimSun'>8、</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>什么是资本总公式的矛盾？货币是如何转化为资本的？<span
+lang=EN-US>P188-189</span></span></b></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>资本总公式</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：<span lang=EN-US>G-W-G</span>’，资本总公式与商品交换原则是矛盾的，资本总公式</span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;font-family:SimSun'>表明，资本在流通中创造了新的价值。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>G</span><span style='font-size:
+12.0pt;font-family:SimSun'>是资本的货币，<span lang=EN-US>W</span>是商品，<span
+lang=EN-US>G</span>’是价值增值之后的货币。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>货币转化为资本</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：一旦货币购买的劳动力带来剩余价值，货币就变成了资本。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.1pt'><b><span
+lang=EN-US style='font-size:12.0pt;font-family:SimSun'>9、</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>如何理解劳动力商品的价值和使用价值？<span lang=EN-US>P189</span></span></b></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>劳动力的价值</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:0cm'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>1、</span><span style='font-size:
+12.0pt;font-family:SimSun'>维持劳动者本人生存必需品的生活资料价值。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:0cm'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>2、</span><span style='font-size:
+12.0pt;font-family:SimSun'>维持劳动者家属生存锁必需的生活资料的价值。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:0cm'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>3、</span><span style='font-size:
+12.0pt;font-family:SimSun'>劳动者接收教育和训练所支出的费用。</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:12.0pt;font-family:SimSun'>&nbsp;&nbsp;
+</span><span style='font-size:12.0pt;font-family:SimSun'>劳动力的使用价值是价值的源泉，在消费中能够创造新的价值，而新的价值比劳动力本身的价值更大。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.1pt'><b><span
+lang=EN-US style='font-size:12.0pt;font-family:SimSun'>10、</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>资本主义工资的实质是什么？<span lang=EN-US>P204</span></span></b></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>实质</span></u></b><span style='font-size:
+12.0pt;font-family:SimSun'>：工人的工资表现为劳动力的价值或价格。</span></p>
+
+<p class=MsoNormal style='text-indent:24.1pt'><b><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>11</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>、如何理解资本主义生产过程的二重性？<span lang=EN-US>P192</span></span></b></p>
+
+<p class=MsoNormal style='text-indent:24.1pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>二重性</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>1、</span><span style='font-size:
+12.0pt;font-family:SimSun'>生产物质资料的劳动过程。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>2、</span><span style='font-size:
+12.0pt;font-family:SimSun'>生产剩余价值的过程，价值增殖过程。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.1pt'><b><span
+lang=EN-US style='font-size:12.0pt;font-family:SimSun'>12、</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>什么是不变资本、可变资本？<span lang=EN-US>P193-194</span></span></b></p>
+
+<p class=MsoNormal style='text-indent:24.05pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>不变资本</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：以生产资料存在的资本。</span></p>
+
+<p class=MsoNormal style='text-indent:24.05pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>可变资本</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：用来购买劳动力的那部分资本。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.1pt'><b><span
+lang=EN-US style='font-size:12.0pt;font-family:SimSun'>13、</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>什么是资本有机构成？其变动趋势是什么？</span></b></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>资本的有机构成</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：<span lang=EN-US>C</span>（不变资本）：<span
+lang=EN-US>V</span>（可变资本）</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>变动趋势</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：不断提高的趋势，不变资本所占比重增大，可变资本的比重减少。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.1pt'><b><span
+lang=EN-US style='font-size:12.0pt;font-family:SimSun'>14、</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>如何计算<span lang=EN-US>m</span>、<span
+lang=EN-US>m</span>&#714;？<span lang=EN-US>P194</span></span></b></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><span style='font-size:12.0pt;
+font-family:SimSun'>资本主义商品的<b><u><span>价值构成</span></u></b>：<span
+lang=EN-US>W=c+v+m</span></span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>m’</span></u></b><span
+lang=EN-US style='font-size:12.0pt;font-family:SimSun'>=m/v</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>c</span><span style='font-size:
+12.0pt;font-family:SimSun'>：不变资本，<span lang=EN-US>v</span>：可变资本，<span
+lang=EN-US>m</span>：剩余价值，<span lang=EN-US>m’</span>：剩余价值率。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.1pt'><b><span
+lang=EN-US style='font-size:12.0pt;font-family:SimSun'>15、</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>什么是绝对剩余价值生产、相对剩余价值生产？<span
+lang=EN-US>P195-196</span></span></b></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>绝对剩余价值生产</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：必要劳动时间不变的条件下，由于延长工作日的长度或</span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;font-family:SimSun'>提高劳动强度而生产的剩余价值。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>相对剩余价值生产</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：工作日长度不变的条件下，通过缩短必要劳动时间而相</span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;font-family:SimSun'>对延长剩余劳动时间所生产的剩余价值。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.1pt'><b><span
+lang=EN-US style='font-size:12.0pt;font-family:SimSun'>16、</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>如何理解超额剩余价值？<span lang=EN-US>P196</span></span></b></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>超额剩余价值</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：企业由于提高劳动生产率而使商品的个别价格低于社会价格</span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;font-family:SimSun'>的差额。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.1pt'><b><span
+lang=EN-US style='font-size:12.0pt;font-family:SimSun'>17、</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>如何理解利润、平均利润率的形成、平均利润、生产价格？<span
+lang=EN-US>P205</span></span></b></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>利润</span></u></b><span style='font-size:
+12.0pt;font-family:SimSun'>：把剩余价值看作全部预付资本的产物或增加额。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>平均利润率的形成</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：不同生产部门的资本家之间展开激烈的竞争，大量资本</span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;font-family:SimSun'>必然从利润率低的部门转投到利润率高的部门，导致利润率平均化。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>平均利润</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：按照平均利润率计算和获得的利润。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>生产价格</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：商品价值的转化形式，是生产成本与平均利润之和。</span></p>
+
+<p class=MsoNormal style='text-indent:24.1pt'><b><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>18</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>、什么是资本积累？<span lang=EN-US>P198</span></span></b></p>
+
+<p class=MsoNormal style='text-indent:24.1pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>资本积累</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：把剩余价值转化为资本，剩余价值资本化。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.1pt'><b><span
+lang=EN-US style='font-size:12.0pt;font-family:SimSun'>19、</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>什么是资本主义简单再生产、资本主义扩大再生产？<span
+lang=EN-US>P198</span></span></b></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>简单再生产</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：剩余价值完全用于个人消费，生产在原有规模的基础上重复进行。</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>扩大再生产</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：剩余价值不完全用于个人消费，将一部分转化为资本，用以购买追加的生产资料和劳动力，使生产在扩大的规模上重复进行。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.1pt'><b><span
+lang=EN-US style='font-size:12.0pt;font-family:SimSun'>20、</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>什么是资本循环？<span lang=EN-US>P201</span></span></b></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>资本循环</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：资本从一种形式出发，经过一系列形式的变化，又回到原来出发</span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;font-family:SimSun'>点的运动。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.1pt'><b><span
+lang=EN-US style='font-size:12.0pt;font-family:SimSun'>21、</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>如何理解产业资本循环的三个阶段、三种职能形式和三种循环形式？<span
+lang=EN-US>P201-202</span></span></b></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>三个阶段和职能形式</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:0cm'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>1、</span><b><u><span
+style='font-size:12.0pt;font-family:SimSun'>购买阶段</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：生产资料和劳动力的购买。产业资本执行的是货币资本的职</span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;font-family:SimSun'>能。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:0cm'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>2、</span><b><u><span
+style='font-size:12.0pt;font-family:SimSun'>生产阶段</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：生产资料和劳动力按比例结合在一起从事资本主义生产的阶</span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;font-family:SimSun'>段。产业资本执行的是生产资本的职能。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:0cm'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>3、</span><b><u><span
+style='font-size:12.0pt;font-family:SimSun'>售卖阶段</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：商品资本向货币资本的转化阶段。产业资本执行的是商品资</span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;font-family:SimSun'>本的职能。</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:12.0pt;font-family:SimSun'>&nbsp;&nbsp;&nbsp;
+</span><b><u><span style='font-size:12.0pt;font-family:SimSun'>三种循环形式</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：货币资本的循环、生产资本的循环和商品资本的循环三种形式。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.1pt'><b><span
+lang=EN-US style='font-size:12.0pt;font-family:SimSun'>22、</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>产业资本循环正常进行的前提条件是什么？<span
+lang=EN-US>P201-202</span></span></b></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>前提条件</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:0cm'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>1、</span><span style='font-size:
+12.0pt;font-family:SimSun'>产业资本的三种职能形式必须在空间上并存。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt;text-indent:0cm'><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>2、</span><span style='font-size:
+12.0pt;font-family:SimSun'>产业资本的三种职能形式必须在时间上继起。</span></p>
+
+<p class=MsoNormal style='text-indent:24.1pt'><b><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>23</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>、什么是资本周转？<span lang=EN-US>P202</span></span></b></p>
+
+<p class=MsoNormal style='text-indent:24.1pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>资本周转</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：资本在运动中增值，周而复始的循环，不断的带来剩余价值，这种不断重复的资本循环。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>24</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>、什么是固定资本、流动资本？</span></b></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>固定资本</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：厂房、机器设备等劳动资料的形式存在的生产资本。</span></p>
+
+<p class=MsoNormal style='margin-left:21.0pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>流动资本</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：生产资本中用于购买原料、燃料、辅助材料等劳动对象和用于购买劳动力的部分。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.1pt'><b><span
+lang=EN-US style='font-size:12.0pt;font-family:SimSun'>25、</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>如何计算预付总资本的周转次数？</span></b></p>
+
+<p class=MsoNormal><b><span lang=EN-US style='font-size:12.0pt;font-family:
+SimSun'>&nbsp;&nbsp;&nbsp; </span></b><b><u><span style='font-size:12.0pt;
+font-family:SimSun'>预付资本总周转次数</span></u></b><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>=</span><span style='font-size:
+12.0pt;font-family:SimSun'>预付资本的各部分<span lang=EN-US>×</span>相应周转次数<span
+lang=EN-US>/</span>预付资本总额<span lang=EN-US><br>
+=(</span>固定资本周转价值总额<span lang=EN-US>+</span>流动周转价值总额<span lang=EN-US>)/</span>预付资本总额。</span></p>
+
+<p class=MsoNormal style='text-indent:24.1pt'><b><span lang=EN-US
+style='font-size:12.0pt;font-family:SimSun'>26</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>、什么是社会总产品？<span lang=EN-US>P203</span></span></b></p>
+
+<p class=MsoNormal style='text-indent:24.1pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>社会总产品</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：社会在一定时期所生产的全部物质资料的总和。</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:24.1pt'><b><span
+lang=EN-US style='font-size:12.0pt;font-family:SimSun'>27、</span></b><b><span
+style='font-size:12.0pt;font-family:SimSun'>社会再生产的核心问题和理论前提是什么？<span
+lang=EN-US>P203</span></span></b></p>
+
+<p class=MsoNormal style='text-indent:24.05pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>核心问题</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：社会总产品的实现问题。</span></p>
+
+<p class=MsoNormal style='text-indent:24.05pt'><b><u><span style='font-size:
+12.0pt;font-family:SimSun'>理论前提</span></u></b><span
+style='font-size:12.0pt;font-family:SimSun'>：社会总产品在实物上得到替换，在价值上实现补偿，客观上要求两大部类内部各个产业部门之间和两大部类之间保持一定的比例关系。</span></p>
