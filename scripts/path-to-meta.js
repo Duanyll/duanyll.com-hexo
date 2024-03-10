@@ -16,7 +16,12 @@ const categoryMap = {
 function getGitUpdatedTime(filepath) {
     const cmd = `git log -1 --pretty=format:%cI ${filepath}`;
     const stdout = execSync(cmd);
-    return moment(stdout.toString().trim(), 'YYYY-MM-DDTHH:mm:ssZ');
+    const result = moment(stdout.toString().trim(), 'YYYY-MM-DDTHH:mm:ssZ');
+    if (result.isValid()) {
+        return result;
+    } else {
+        return null;
+    }
 }
 
 /**
@@ -33,7 +38,7 @@ hexo.extend.filter.register('before_post_render', async data => {
 
         if (matches) {
             data.date = moment(matches[1], 'YYYY-M-D');
-            data.updated = getGitUpdatedTime(path.join(hexo.source_dir, data.source));
+            data.updated = getGitUpdatedTime(path.join(hexo.source_dir, data.source)) || data.date;
             data.title || (data.title = matches[2]);
         }
 
