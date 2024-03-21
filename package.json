@@ -14,9 +14,10 @@
   },
   "dependencies": {
     "@types/glob": "^8.1.0",
-    "hexo": "^7.0.0",
     "ali-oss": "^6.19.0",
+    "hexo": "^7.0.0",
     "hexo-filter-mathjax": "^0.9.0",
+    "hexo-filter-mermaid-diagrams": "^1.0.5",
     "hexo-generator-archive": "^2.0.0",
     "hexo-generator-category": "^2.0.0",
     "hexo-generator-feed": "^3.0.0",
