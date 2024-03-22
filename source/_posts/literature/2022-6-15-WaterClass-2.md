@@ -1,4 +1,5 @@
 ---
+hidden: true
 title: 论亚当斯密悖论——“经济人”和“道德人”的统一
 author: duanyll
 tags: [通识教育]

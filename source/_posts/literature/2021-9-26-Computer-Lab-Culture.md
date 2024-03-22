@@ -1,4 +1,5 @@
 ---
+hidden: true
 title: "The Computer Lab Culture: Over Modesty"
 author: Duanyll
 tags: [废话]

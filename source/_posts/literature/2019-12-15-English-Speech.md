@@ -1,4 +1,5 @@
 ---
+hidden: true
 title: Do Things Right or Do the Right Things?
 tags: [文化课]
 author: duanyll

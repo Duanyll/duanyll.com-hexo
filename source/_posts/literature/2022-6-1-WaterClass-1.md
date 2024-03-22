@@ -1,4 +1,5 @@
 ---
+hidden: true
 title: 历史的混沌样貌——粗读《近代中国社会的新陈代谢》后杂谈
 author: duanyll
 tags: [通识教育]

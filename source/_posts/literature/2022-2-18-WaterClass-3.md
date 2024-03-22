@@ -1,4 +1,5 @@
 ---
+hidden: true
 title: 重读村上春树《1Q84》有感
 author: duanyll
 tags: [通识教育]
