@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>duanyll</title>
+  <icon>https://duanyll.com/icon.png</icon>
+  <subtitle>qwq | QWQ</subtitle>
+  <link href="https://duanyll.com/atom.xml" rel="self"/>
+  
+  <link href="https://duanyll.com/"/>
+  <updated>2024-03-23T14:51:55.000Z</updated>
+  <id>https://duanyll.com/</id>
+  
+  <author>
+    <name>duanyll</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>微分方程数值解作业 2</title>
+    <link href="https://duanyll.com/2024/03/23/DE-2/"/>
+    <id>https://duanyll.com/2024/03/23/DE-2/</id>
+    <published>2024-03-23T00:00:00.000Z</published>
+    <updated>2024-03-23T14:51:55.000Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;a class=&quot;tag-plugin colorful hashtag&quot; color=&quot;yellow&quot; href=&quot;https://duanyll.com/tags/%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/&quot;&gt;&lt;svg t=&quot;17014081</summary>
+      
+    
+    
+    
+    <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
+    
+    
+    <category term="微分方程" scheme="https://duanyll.com/tags/%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>强化学习作业 4</title>
+    <link href="https://duanyll.com/2024/03/20/RL-4/"/>
+    <id>https://duanyll.com/2024/03/20/RL-4/</id>
+    <published>2024-03-20T00:00:00.000Z</published>
+    <updated>2024-03-23T14:51:55.000Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;a class=&quot;tag-plugin colorful hashtag&quot; color=&quot;orange&quot; href=&quot;https://duanyll.com/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/&quot;&gt;&lt;svg t=&quot;17014081</summary>
+      
+    
+    
+    
+    <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
+    
+    
+    <category term="强化学习" scheme="https://duanyll.com/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>强化学习作业 3</title>
+    <link href="https://duanyll.com/2024/03/17/RL-3/"/>
+    <id>https://duanyll.com/2024/03/17/RL-3/</id>
+    <published>2024-03-17T00:00:00.000Z</published>
+    <updated>2024-03-23T14:51:55.000Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;a class=&quot;tag-plugin colorful hashtag&quot; color=&quot;red&quot; href=&quot;https://duanyll.com/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/&quot;&gt;&lt;svg t=&quot;17014081447</summary>
+      
+    
+    
+    
+    <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
+    
+    
+    <category term="强化学习" scheme="https://duanyll.com/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>微分方程数值解作业 1</title>
+    <link href="https://duanyll.com/2024/03/10/DE-1/"/>
+    <id>https://duanyll.com/2024/03/10/DE-1/</id>
+    <published>2024-03-10T00:00:00.000Z</published>
+    <updated>2024-03-23T14:51:55.000Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;a class=&quot;tag-plugin colorful hashtag&quot; color=&quot;cyan&quot; href=&quot;https://duanyll.com/tags/%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/&quot;&gt;&lt;svg t=&quot;1701408144</summary>
+      
+    
+    
+    
+    <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
+    
+    
+    <category term="微分方程" scheme="https://duanyll.com/tags/%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>强化学习作业 1</title>
+    <link href="https://duanyll.com/2024/03/07/RL-1/"/>
+    <id>https://duanyll.com/2024/03/07/RL-1/</id>
+    <published>2024-03-07T00:00:00.000Z</published>
+    <updated>2024-03-23T14:51:55.000Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;a class=&quot;tag-plugin colorful hashtag&quot; color=&quot;green&quot; href=&quot;https://duanyll.com/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/&quot;&gt;&lt;svg t=&quot;170140814</summary>
+      
+    
+    
+    
+    <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
+    
+    
+    <category term="强化学习" scheme="https://duanyll.com/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>强化学习作业 2</title>
+    <link href="https://duanyll.com/2024/03/07/RL-2/"/>
+    <id>https://duanyll.com/2024/03/07/RL-2/</id>
+    <published>2024-03-07T00:00:00.000Z</published>
+    <updated>2024-03-23T14:51:55.000Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;a class=&quot;tag-plugin colorful hashtag&quot; color=&quot;cyan&quot; href=&quot;https://duanyll.com/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/&quot;&gt;&lt;svg t=&quot;1701408144</summary>
+      
+    
+    
+    
+    <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
+    
+    
+    <category term="强化学习" scheme="https://duanyll.com/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>在 VSCode 上使用 CMake 开发 STM32CubeMX 项目</title>
+    <link href="https://duanyll.com/2024/03/01/STM32-CMake/"/>
+    <id>https://duanyll.com/2024/03/01/STM32-CMake/</id>
+    <published>2024-03-01T00:00:00.000Z</published>
+    <updated>2024-03-23T14:51:55.000Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;a class=&quot;tag-plugin colorful hashtag&quot; color=&quot;blue&quot; href=&quot;https://duanyll.com/tags/stm32/&quot;&gt;&lt;svg t=&quot;1701408144765&quot; class=&quot;icon&quot; viewBox=&quot;0 0 </summary>
+      
+    
+    
+    
+    <category term="技术" scheme="https://duanyll.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+    <category term="vscode" scheme="https://duanyll.com/tags/vscode/"/>
+    
+    <category term="cmake" scheme="https://duanyll.com/tags/cmake/"/>
+    
+    <category term="stm32" scheme="https://duanyll.com/tags/stm32/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>马原2</title>
+    <link href="https://duanyll.com/2024/01/03/Marxism-2/"/>
+    <id>https://duanyll.com/2024/01/03/Marxism-2/</id>
+    <published>2024-01-03T00:00:00.000Z</published>
+    <updated>2024-03-23T14:51:55.000Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;a class=&quot;tag-plugin colorful hashtag&quot; color=&quot;blue&quot; href=&quot;https://duanyll.com/tags/%E5%BA%9F%E8%AF%9D/&quot;&gt;&lt;svg t=&quot;1701408144765&quot; class=&quot;icon&quot; </summary>
+      
+    
+    
+    
+    <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
+    
+    
+    <category term="马原" scheme="https://duanyll.com/tags/%E9%A9%AC%E5%8E%9F/"/>
+    
+    <category term="废话" scheme="https://duanyll.com/tags/%E5%BA%9F%E8%AF%9D/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>马原1</title>
+    <link href="https://duanyll.com/2024/01/01/Marxism-1/"/>
+    <id>https://duanyll.com/2024/01/01/Marxism-1/</id>
+    <published>2024-01-01T00:00:00.000Z</published>
+    <updated>2024-03-23T14:51:55.000Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;a class=&quot;tag-plugin colorful hashtag&quot; color=&quot;yellow&quot; href=&quot;https://duanyll.com/tags/%E5%BA%9F%E8%AF%9D/&quot;&gt;&lt;svg t=&quot;1701408144765&quot; class=&quot;icon</summary>
+      
+    
+    
+    
+    <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
+    
+    
+    <category term="马原" scheme="https://duanyll.com/tags/%E9%A9%AC%E5%8E%9F/"/>
+    
+    <category term="废话" scheme="https://duanyll.com/tags/%E5%BA%9F%E8%AF%9D/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>时间序列分析作业 2</title>
+    <link href="https://duanyll.com/2023/12/20/TimeSeries-2/"/>
+    <id>https://duanyll.com/2023/12/20/TimeSeries-2/</id>
+    <published>2023-12-20T00:00:00.000Z</published>
+    <updated>2024-03-23T14:51:55.000Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;a class=&quot;tag-plugin colorful hashtag&quot; color=&quot;yellow&quot; href=&quot;https://duanyll.com/tags/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97/&quot;&gt;&lt;svg t=&quot;17014081</summary>
+      
+    
+    
+    
+    <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
+    
+    
+    <category term="时间序列" scheme="https://duanyll.com/tags/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>时间序列分析作业 1</title>
+    <link href="https://duanyll.com/2023/12/03/TimeSeries-1/"/>
+    <id>https://duanyll.com/2023/12/03/TimeSeries-1/</id>
+    <published>2023-12-03T00:00:00.000Z</published>
+    <updated>2024-03-23T14:51:55.000Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;a class=&quot;tag-plugin colorful hashtag&quot; color=&quot;green&quot; href=&quot;https://duanyll.com/tags/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97/&quot;&gt;&lt;svg t=&quot;170140814</summary>
+      
+    
+    
+    
+    <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
+    
+    
+    <category term="时间序列" scheme="https://duanyll.com/tags/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用 CMake 构建 PyTorch 和 Numpy C++ 拓展</title>
+    <link href="https://duanyll.com/2023/07/12/Python-CMake/"/>
+    <id>https://duanyll.com/2023/07/12/Python-CMake/</id>
+    <published>2023-07-12T00:00:00.000Z</published>
+    <updated>2024-03-23T14:51:55.000Z</updated>
+    
+    
+    <summary type="html">&lt;a class=&quot;tag-plugin colorful hashtag&quot; color=&quot;red&quot; href=&quot;https://duanyll.com/tags/cmake/&quot;&gt;&lt;svg t=&quot;1701408144765&quot; class=&quot;icon&quot; viewBox=&quot;0 0 1024 1024&quot; version=&quot;1.1&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; p-id=&quot;4228&quot; width=&quot;200&quot; height=&quot;200&quot;&gt;&lt;path d=&quot;M426.6 64.8c34.8 5.8 58.4 38.8 52.6 73.6l-19.6 117.6h190.2l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6s58.4 38.8 52.6 73.6l-19.4 117.6H896c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-42.6 256H832c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.6-117.4h-190.4l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.4-117.8H128c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l42.6-256H192c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6z m11.6 319.2l-42.6 256h190.2l42.6-256h-190.2z&quot; p-id=&quot;4229&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;cmake&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;tag-plugin colorful hashtag&quot; color=&quot;orange&quot; href=&quot;https://duanyll.com/tags/PyTorch/&quot;&gt;&lt;svg t=&quot;1701408144765&quot; class=&quot;icon&quot; viewBox=&quot;0 0 1024 1024&quot; version=&quot;1.1&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; p-id=&quot;4228&quot; width=&quot;200&quot; height=&quot;200&quot;&gt;&lt;path d=&quot;M426.6 64.8c34.8 5.8 58.4 38.8 52.6 73.6l-19.6 117.6h190.2l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6s58.4 38.8 52.6 73.6l-19.4 117.6H896c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-42.6 256H832c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.6-117.4h-190.4l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.4-117.8H128c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l42.6-256H192c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6z m11.6 319.2l-42.6 256h190.2l42.6-256h-190.2z&quot; p-id=&quot;4229&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;PyTorch&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;tag-plugin colorful hashtag&quot; color=&quot;yellow&quot; href=&quot;https://duanyll.com/tags/Python/&quot;&gt;&lt;svg t=&quot;1701408144765&quot; class=&quot;icon&quot; viewBox=&quot;0 0 1024 1024&quot; version=&quot;1.1&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; p-id=&quot;4228&quot; width=&quot;200&quot; height=&quot;200&quot;&gt;&lt;path d=&quot;M426.6 64.8c34.8 5.8 58.4 38.8 52.6 73.6l-19.6 117.6h190.2l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6s58.4 38.8 52.6 73.6l-19.4 117.6H896c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-42.6 256H832c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.6-117.4h-190.4l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.4-117.8H128c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l42.6-256H192c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6z m11.6 319.2l-42.6 256h190.2l42.6-256h-190.2z&quot; p-id=&quot;4229&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;Python&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;tag-plugin colorful hashtag&quot; color=&quot;green&quot; href=&quot;https://duanyll.com/tags/%E7%82%BC%E4%B8%B9/&quot;&gt;&lt;svg t=&quot;1701408144765&quot; class=&quot;icon&quot; viewBox=&quot;0 0 1024 1024&quot; version=&quot;1.1&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; p-id=&quot;4228&quot; width=&quot;200&quot; height=&quot;200&quot;&gt;&lt;path d=&quot;M426.6 64.8c34.8 5.8 58.4 38.8 52.6 73.6l-19.6 117.6h190.2l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6s58.4 38.8 52.6 73.6l-19.4 117.6H896c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-42.6 256H832c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.6-117.4h-190.4l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.4-117.8H128c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l42.6-256H192c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6z m11.6 319.2l-42.6 256h190.2l42.6-256h-190.2z&quot; p-id=&quot;4229&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;炼丹&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;tag-plugin colorful hashtag&quot; color=&quot;cyan&quot; href=&quot;https://duanyll.com/tags/vscode/&quot;&gt;&lt;svg t=&quot;1701408144765&quot; class=&quot;icon&quot; viewBox=&quot;0 0 1024 1024&quot; version=&quot;1.1&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; p-id=&quot;4228&quot; width=&quot;200&quot; height=&quot;200&quot;&gt;&lt;path d=&quot;M426.6 64.8c34.8 5.8 58.4 38.8 52.6 73.6l-19.6 117.6h190.2l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6s58.4 38.8 52.6 73.6l-19.4 117.6H896c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-42.6 256H832c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.6-117.4h-190.4l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.4-117.8H128c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l42.6-256H192c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6z m11.6 319.2l-42.6 256h190.2l42.6-256h-190.2z&quot; p-id=&quot;4229&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;vscode&lt;/span&gt;&lt;/a&gt;
+&lt;p&gt;使用 CMake 构建 PyTorch 和 Numpy C++ 拓展能适应更复杂的项目并使用灵活的编译选项. 然而, 许多互联网上的教程中的方法已经不能在较新版本的 PyTorch 和 CMake 使用. 本文介绍了几种作者在近期测试成功的使用 CMake 构建 PyTorch 和 Numpy 拓展的方案. 需要注意的是, 许多 CMake 配置文件都包含了对某个依赖历史版本的问题引入的 Workaround, 不能在新版本正常工作, 本文所述的方法也有极大概率无法在将来工作.&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="技术" scheme="https://duanyll.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+    <category term="vscode" scheme="https://duanyll.com/tags/vscode/"/>
+    
+    <category term="炼丹" scheme="https://duanyll.com/tags/%E7%82%BC%E4%B8%B9/"/>
+    
+    <category term="Python" scheme="https://duanyll.com/tags/Python/"/>
+    
+    <category term="PyTorch" scheme="https://duanyll.com/tags/PyTorch/"/>
+    
+    <category term="cmake" scheme="https://duanyll.com/tags/cmake/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>信息论速通</title>
+    <link href="https://duanyll.com/2023/06/26/Information/"/>
+    <id>https://duanyll.com/2023/06/26/Information/</id>
+    <published>2023-06-26T00:00:00.000Z</published>
+    <updated>2024-03-23T14:51:55.000Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;a class=&quot;tag-plugin colorful hashtag&quot; color=&quot;orange&quot; href=&quot;https://duanyll.com/tags/%E4%BF%A1%E6%81%AF%E8%AE%BA/&quot;&gt;&lt;svg t=&quot;1701408144765&quot; cl</summary>
+      
+    
+    
+    
+    <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
+    
+    
+    <category term="信息论" scheme="https://duanyll.com/tags/%E4%BF%A1%E6%81%AF%E8%AE%BA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数值分析作业 - 数值积分</title>
+    <link href="https://duanyll.com/2023/05/27/Numeric-10/"/>
+    <id>https://duanyll.com/2023/05/27/Numeric-10/</id>
+    <published>2023-05-27T00:00:00.000Z</published>
+    <updated>2024-03-23T14:51:55.000Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;a class=&quot;tag-plugin colorful hashtag&quot; color=&quot;red&quot; href=&quot;https://duanyll.com/tags/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/&quot;&gt;&lt;svg t=&quot;17014081447</summary>
+      
+    
+    
+    
+    <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
+    
+    
+    <category term="数值分析" scheme="https://duanyll.com/tags/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数值分析作业 - 数值微分</title>
+    <link href="https://duanyll.com/2023/05/17/Numeric-9/"/>
+    <id>https://duanyll.com/2023/05/17/Numeric-9/</id>
+    <published>2023-05-17T00:00:00.000Z</published>
+    <updated>2024-03-23T14:51:55.000Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;a class=&quot;tag-plugin colorful hashtag&quot; color=&quot;purple&quot; href=&quot;https://duanyll.com/tags/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/&quot;&gt;&lt;svg t=&quot;17014081</summary>
+      
+    
+    
+    
+    <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
+    
+    
+    <category term="数值分析" scheme="https://duanyll.com/tags/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数值分析作业 - 数据拟合与最小二乘</title>
+    <link href="https://duanyll.com/2023/05/15/Numeric-8/"/>
+    <id>https://duanyll.com/2023/05/15/Numeric-8/</id>
+    <published>2023-05-15T00:00:00.000Z</published>
+    <updated>2024-03-23T14:51:55.000Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;a class=&quot;tag-plugin colorful hashtag&quot; color=&quot;cyan&quot; href=&quot;https://duanyll.com/tags/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/&quot;&gt;&lt;svg t=&quot;1701408144</summary>
+      
+    
+    
+    
+    <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
+    
+    
+    <category term="数值分析" scheme="https://duanyll.com/tags/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数值分析作业 - 插值</title>
+    <link href="https://duanyll.com/2023/04/28/Numeric-7/"/>
+    <id>https://duanyll.com/2023/04/28/Numeric-7/</id>
+    <published>2023-04-28T00:00:00.000Z</published>
+    <updated>2024-03-23T14:51:55.000Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;a class=&quot;tag-plugin colorful hashtag&quot; color=&quot;green&quot; href=&quot;https://duanyll.com/tags/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/&quot;&gt;&lt;svg t=&quot;170140814</summary>
+      
+    
+    
+    
+    <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
+    
+    
+    <category term="数值分析" scheme="https://duanyll.com/tags/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数值分析作业 - 矩阵特征值的数值解法</title>
+    <link href="https://duanyll.com/2023/04/24/Numeric-6/"/>
+    <id>https://duanyll.com/2023/04/24/Numeric-6/</id>
+    <published>2023-04-24T00:00:00.000Z</published>
+    <updated>2024-03-23T14:51:55.000Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;a class=&quot;tag-plugin colorful hashtag&quot; color=&quot;yellow&quot; href=&quot;https://duanyll.com/tags/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/&quot;&gt;&lt;svg t=&quot;17014081</summary>
+      
+    
+    
+    
+    <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
+    
+    
+    <category term="数值分析" scheme="https://duanyll.com/tags/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数值分析作业 - 对称正定线性方程组的解法</title>
+    <link href="https://duanyll.com/2023/04/19/Numeric-5/"/>
+    <id>https://duanyll.com/2023/04/19/Numeric-5/</id>
+    <published>2023-04-19T00:00:00.000Z</published>
+    <updated>2024-03-23T14:51:55.000Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;a class=&quot;tag-plugin colorful hashtag&quot; color=&quot;orange&quot; href=&quot;https://duanyll.com/tags/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/&quot;&gt;&lt;svg t=&quot;17014081</summary>
+      
+    
+    
+    
+    <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
+    
+    
+    <category term="数值分析" scheme="https://duanyll.com/tags/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数值分析作业 - 线性方程组的迭代法</title>
+    <link href="https://duanyll.com/2023/04/05/Numeric-4/"/>
+    <id>https://duanyll.com/2023/04/05/Numeric-4/</id>
+    <published>2023-04-05T00:00:00.000Z</published>
+    <updated>2024-03-23T14:51:55.000Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;a class=&quot;tag-plugin colorful hashtag&quot; color=&quot;blue&quot; href=&quot;https://duanyll.com/tags/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/&quot;&gt;&lt;svg t=&quot;1701408144</summary>
+      
+    
+    
+    
+    <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
+    
+    
+    <category term="数值分析" scheme="https://duanyll.com/tags/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
+  
+</feed>
