@@ -1,5 +1,6 @@
 {
   "markdown.extension.katex.macros": {
+    "\\C": "\\mathbb{C}",
     "\\d": "\\mathrm{d}",
     "\\p": "\\partial",
     "\\label": "\\boxed{\\textrm{#1}}",
@@ -13,7 +14,8 @@
     "\\Res": "\\operatorname*{Res}",
     "\\Cov": "\\operatorname{Cov}",
     "\\st": "\\;\\mathrm{s.t.}\\;",
-    "\\ord": "\\operatorname{ord}"
+    "\\ord": "\\operatorname{ord}",
+    "\\rank": "\\operatorname{rank}",
   },
   "markdown.styles": [
     ".vscode/cobalt.css"

@@ -145,6 +145,7 @@ mathjax:
       "st": "\\;\\mathrm{s.t.}\\;",
       "ord": "\\operatorname*{ord}",
       "empty": "\\varnothing",
+      "rank": "\\operatorname{rank}",
     }
   }
     # you can put your extension options here
