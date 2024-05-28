@@ -1,0 +1,26 @@
+diff --git a/node_modules/hexo-filter-tikzjax/dist/render-tikzjax.js b/node_modules/hexo-filter-tikzjax/dist/render-tikzjax.js
+index a466a71..979e6ad 100644
+--- a/node_modules/hexo-filter-tikzjax/dist/render-tikzjax.js
++++ b/node_modules/hexo-filter-tikzjax/dist/render-tikzjax.js
+@@ -22,17 +22,18 @@ async function renderTikzjax(data) {
+     const error = (...args) => this.log.error.apply(this.log, [logPrefix, ...args]);
+     queue_1.default.setLogger({ debug, error });
+     // Find all TikZ code blocks in Markdown source.
+-    const regex = /```tikz([\s\S]+?)```/g;
++    const regex = /```{=latex}([\s\S]+?)```/g;
+     const matches = data.content.matchAll(regex);
+     for await (const match of matches) {
+         // Generate a hash for each TikZ code block as its cache key.
+         const hash = (0, common_1.md5)(JSON.stringify(match[0]) + JSON.stringify(config));
+         let svg = common_1.localStorage.getItem(hash);
+         if (!svg) {
+-            const input = match[1]?.trim();
+-            if (!input) {
++            let input = match[1]?.trim();
++            if (!input || !input.includes('tikz')) {
+                 continue;
+             }
++            input = `\\begin{document}\n${input}\n\\end{document}`
+             // Since `node-tikzjax` does not allow concurrent calls,
+             // we have to use a task queue to make sure that only one call is running at a time.
+             // This could be a bottleneck when generating a large number of posts.

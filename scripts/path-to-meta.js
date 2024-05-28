@@ -16,7 +16,7 @@ const categoryMap = {
 function getGitUpdatedTime(filepath) {
     const cmd = `git log -1 --pretty=format:%cI ${filepath}`;
     const stdout = execSync(cmd);
-    const result = moment(stdout.toString().trim(), 'YYYY-MM-DDTHH:mm:ssZ');
+    const result = moment(stdout.toString().trim());
     if (result.isValid()) {
         return result;
     } else {
@@ -33,15 +33,6 @@ function getGitUpdatedTime(filepath) {
  */
 hexo.extend.filter.register('before_post_render', async data => {
     if (data.layout === 'post') {
-        const filename = path.basename(data.source, path.extname(data.source));
-        const matches = filename.match(RE_FILENAME);
-
-        if (matches) {
-            data.date = moment(matches[1], 'YYYY-M-D');
-            data.updated = getGitUpdatedTime(path.join(hexo.source_dir, data.source)) || data.date;
-            data.title || (data.title = matches[2]);
-        }
-
         const dirname = path.basename(path.dirname(data.source));
         if (dirname in categoryMap) {
             await data.setCategories([categoryMap[dirname]]);
