@@ -89,6 +89,10 @@ function preprocessMarkdown(inFile, hexoConfigFile = '_config.yml') {
 }
 
 function makePdf(inputMdFile, outputPdfFile, tempDir = 'temp') {
+    // If the output directory does not exist, create it
+    if (!fs.existsSync(path.dirname(outputPdfFile))) {
+        fs.mkdirSync(path.dirname(outputPdfFile), { recursive: true });
+    }
     // Create temporary directory if not exists
     if (!fs.existsSync(tempDir)) {
         fs.mkdirSync(tempDir);
@@ -127,5 +131,12 @@ function makePdf(inputMdFile, outputPdfFile, tempDir = 'temp') {
 }
 
 if (require.main === module) {
-    makePdf(process.argv[2], process.argv[3]);
+    let inputPath = process.argv[2];
+    let outputPath = '';
+    if (process.argv.length >= 4) {
+        outputPath = process.argv[3];
+    } else {
+        outputPath = path.join('pdf', path.basename(inputPath, path.extname(inputPath)) + '.pdf');
+    }
+    makePdf(inputPath, outputPath);
 }

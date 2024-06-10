@@ -13,10 +13,10 @@ references:
    1. $R$ 对加法运算构成交换群
    2. $R$ 对乘法运算满足结合律 $(ab)c=a(bc)$
    3. 乘法对加法满足左右分配率 $a(b+c)=ab+ac,(b+c)a=ba+ca$
-2. **幺环**: 若 $\exist 1_R\in R\st\forall a\in R,1_R\cdot a=a\cdot 1_R=a$ 则称 $1_R$ 是 $R$ 的乘法单位元.
+2. **幺环**: 若 $\exist 1_R\in R\suchthat\forall a\in R,1_R\cdot a=a\cdot 1_R=a$ 则称 $1_R$ 是 $R$ 的乘法单位元.
    - 若有 $1_R=0_R$, 则必有 $\forall a\in R,a=0_R$. 默认 $1_R\neq 0_R$
    - 具有乘法单位元的环称为幺环
-   - 设 $R$ 是一个幺环. 在 $R$ 中乘法可逆的元素构成 $U(R)=\{a\in R|\exist b\in R\st ab=ba=1_R\}$ 则 $U(R)$ 是 $R$ 的一个乘法子群, 称为 $R$ 的*单位群*, *可逆元称为单位*
+   - 设 $R$ 是一个幺环. 在 $R$ 中乘法可逆的元素构成 $U(R)=\{a\in R|\exist b\in R\suchthat ab=ba=1_R\}$ 则 $U(R)$ 是 $R$ 的一个乘法子群, 称为 $R$ 的*单位群*, *可逆元称为单位*
    - 若乘法具有交换律, 则称为交换环
 3. 性质:
    1. $a\cdot 0=0\cdot a=0$
@@ -296,7 +296,7 @@ references:
    1. $a|b\implies\forall u\in U,au|b$
    2. $a|b,a|c\implies a|bx+cy$
    3. $a|b,b|c\implies a|c$
-   4. $a|b$ 且 $b|a$ $\implies$ $\exists u,v\in D\st b=au,a=bv=auv\implies uv=1$
+   4. $a|b$ 且 $b|a$ $\implies$ $\exists u,v\in D\suchthat b=au,a=bv=auv\implies uv=1$
 3. **相伴** $a,b\in D$ 且 $a|b,b|a$ 则称 $a,b$ 相伴, 记作 $a\sim b$
    - $a\in D$ 的**平凡因子** 单位和与 $a$ 相伴的因子
    - $a$ 的**真因子** $b|a$ 且 $b$ 不是 $a$ 的平凡因子
@@ -306,7 +306,7 @@ references:
 4. **整环上的不可约元** 非零, 非单位, 无真因子
 5. **素元** 非零, 非单位, $p\in D$ 且 $p|ab\implies p|a$ 或 $p|b$
 6. **定理** 在整环上, 素元都是不可约元
-7. **环上范数** 设整数 $d\neq0,1$ 且无平方因子 $\not\exist p\st p^2|d$, 对于以下整环
+7. **环上范数** 设整数 $d\neq0,1$ 且无平方因子 $\not\exist p\suchthat p^2|d$, 对于以下整环
    $$
    D=\Z[\sqrt{d}]=\{a+b\sqrt{d}|a,b\in\Z\},d<0
    $$
@@ -328,7 +328,7 @@ references:
    - $a=bc\implies b\sim 1$ 或者 $c\sim 1$
    - $a=bc\implies b\sim a$ 或者 $c\sim a$
 9. **惟一分解整环** 设 $D$ 是整环, $a\in D$ 非零非单位
-   1. 存在不可约元 $p_1,\cdots,p_s\in D\st a=p_1p_2\cdots p_s$, 则称 $a$ 有一个不可约分解式
+   1. 存在不可约元 $p_1,\cdots,p_s\in D\suchthat a=p_1p_2\cdots p_s$, 则称 $a$ 有一个不可约分解式
    2. 若 $a$ 的不可约分解式在相伴意义下唯一
    3. 若 $D$ 中任意非零非单位元均有唯一的不可约分解式
    则称 $D$ 是一个惟一分解整环 UFD

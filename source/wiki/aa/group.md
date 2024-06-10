@@ -57,7 +57,7 @@ references:
 2. 证明同构
    1. 构造映射
    2. 证明单射 $\forall x,y\in G,\phi(x)=\phi(y)\implies x=y$
-   3. 证明满射 $\forall x'\in G',\exist x\in G\st\phi(x)=x'$
+   3. 证明满射 $\forall x'\in G',\exist x\in G\suchthat\phi(x)=x'$
    4. 证明保运算
 3. **定理** 同构性质
    1. $\phi(e)=e'$

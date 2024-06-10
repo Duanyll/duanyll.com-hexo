@@ -13,7 +13,7 @@
     "\\Ln": "\\operatorname{Ln}",
     "\\Res": "\\operatorname*{Res}",
     "\\Cov": "\\operatorname{Cov}",
-    "\\st": "\\;\\mathrm{s.t.}\\;",
+    "\\suchthat": "\\;\\mathrm{s.t.}\\;",
     "\\ord": "\\operatorname{ord}",
     "\\rank": "\\operatorname{rank}",
   },
