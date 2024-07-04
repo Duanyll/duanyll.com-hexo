@@ -231,8 +231,122 @@ docker run --rm -it --gpus all pytorch/pytorch:2.3.1-cuda12.1-cudnn8-devel nvidi
 
 ## Docker 快速入门
 
-TBD.
+一个 Docker 镜像包含了运行程序所需的完整文件系统和环境变量。Docker 容器是一个特殊的进程，使用 Docker 镜像提供的文件系统和环境变量，并且网络栈和主机一般是隔离的（实际上，几乎所有的用户态要素都被隔离了）。相比于虚拟机，Docker 能快速地启动和停止，而且 Docker 镜像的大小通常比虚拟机的小很多。
+
+需要注意的是，Docker 容器被设计成无状态的，容器内的文件系统和环境变量都是临时的，**任何修改都会在容器停止后丢失**。如果需要向容器内安装新的程序或者修改配置文件，应该重新构建一个新的 Docker 镜像。如果需要保存容器内的数据，应该把数据文件挂载（Mount）到宿主机的文件夹或者 Docker Volume。`Docker Commit` 命令可以把运行中的容器保存为新的 Docker 镜像，但是*不推荐用来制作镜像*，只适合用于调试或者紧急保存数据的需求。
+
+可以方便地从 Docker Hub 上下载包含各类 Linux 发行版和软件的镜像，由于 Docker 提供了充分的隔离，几乎所有镜像都能下载后开箱即用，省去了手动安装各类环境的麻烦。如果需要自定义镜像，可以使用 Dockerfile 来描述镜像的构建过程，然后使用 `docker build` 命令构建镜像。Dockerfile 中的每一条指令都会生成一个新的镜像层，Docker 会尽量复用已有的镜像层，以减少镜像的大小。Dockerfile 通常包括 `FROM`, `RUN`, `COPY`, `CMD` 等指令。
+
+- `FROM` 指定基础镜像
+- `RUN` 在镜像中运行 Shell 命令，可以用来安装软件
+- `COPY` 复制文件到镜像中。由于 Docker 的设计，要复制的文件必须在构建上下文中，所以通常需要把文件放在 Dockerfile 同一目录下
+- `CMD` 指定容器启动时默认运行的命令
+- `ENV` 设置环境变量
+
+Docker 镜像的构建过程会被缓存，如果 Dockerfile 的某一步发生了变化，Docker 会重新构建这一步之后的所有步骤。下面是一个常见的 Dockerfile 示例：
+
+```Dockerfile
+# 有了 Docker，可以使用任意老版本的 PyTorch 和 CUDA，而不会影响其他的项目
+FROM pytorch/pytorch:1.7.1-cuda11.0-cudnn8-devel
+
+# Dockerfile 中 APT 包的安装比较复杂，建议复制下面的格式
+# rm /etc/apt/sources.list.d/cuda.list 如果镜像中没有 CUDA，则删掉这一行
+# 如果不指定 DEBIAN_FRONTEND=noninteractive TZ=Asia/Shanghai 和 -y 参数，构建镜像会因为 apt 等待用户输入而卡死
+RUN rm /etc/apt/sources.list.d/cuda.list \
+    && sed -i 's/archive.ubuntu.com/mirrors.ustc.edu.cn/g' /etc/apt/sources.list \
+    && sed -i 's/security.ubuntu.com/mirrors.ustc.edu.cn/g' /etc/apt/sources.list \
+    && apt-get update \
+    && DEBIAN_FRONTEND=noninteractive TZ=Asia/Shanghai apt-get install -y git gdb vim curl wget tmux zip cmake ffmpeg libsm6 libxext6 \
+    && rm -rf /var/lib/apt/lists/*
+
+# environment.yml 需要放在 Dockerfile 同一目录下
+COPY environment.yml /tmp/environment.yml
+RUN conda env create -f /tmp/environment.yml
+RUN conda init bash
+
+# 除了 Conda，也可以直接用 pip 安装 Python 包，Docker 已经提供了环境隔离
+RUN pip install -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com h5py einops tqdm matplotlib tensorboard torch-tb-profiler ninja scipy
+```
+
+可以用 `docker build` 命令构建 Docker 镜像：
+
+```bash
+docker build -t my-image-name .
+```
+
+`-t` 参数指定镜像的名字，只能包含小写字母和数字，可以用 `/` 分隔，`.` 指定 Dockerfile 所在的目录。构建完成后可以用 `docker images` 命令查看所有的镜像。
+
+要启动 Docker 镜像，可以使用 `docker run` 命令：
+
+```bash
+docker run --rm -it --gpus all -v $(pwd):/workspace -p 8080:80 my-image-name bash
+```
+
+- `--rm` 容器停止后自动删除，一般不用留着因为数据都清除了
+- `-it` 交互式启动，可以使用 Shell。如果需要作为后台进程运行，换成 `-d` 参数
+- `--gpus all` 允许容器使用所有的 GPU，不加用不了 CUDA
+- `-v $(pwd):/workspace` 把当前目录挂载到容器的 `/workspace` 目录，可以在容器内的 `/workspace` 目录中读写文件，数据会随时同步到宿主机，不会丢失
+- `-p 8080:80` 把容器的 80 端口映射到宿主机的 8080 端口，可以通过 `localhost:8080` 访问容器内 `80` 端口的 Web 服务。如果不需要映射端口，可以不加这个参数。
+  - 在 WSL2 上，这个命令只负责从容器映射到 WSL2 的网络栈
+  - 但通常 WSL2 上的端口能被自动映射到 Windows 上，可以直接在 Windows 上访问 `localhost:8080`
+- `my-image-name` 指定要启动的镜像名称
+- `bash` 指定容器启动时运行的命令，可不加，默认是 `CMD` 指定的命令
+
+使用 `docker ps` 命令可以查看所有正在运行的容器，使用 `docker stop` 命令可以停止容器（容器会在主进程退出后自动停止）。使用 `docker exec` 命令可以在运行中的容器中运行命令。使用 `docker cp` 命令可以从容器中复制文件到宿主机。具体用法略。
+
+Docker Compose 可以用来管理多个容器，也能方便的把容器的启动参数写到文件里。具体用法略。
 
 ## DevContainer 指北
 
-TBD.
+Visual Studio Code 的 DevContainer 功能可以让你在容器中开发代码，能自动启动容器并使用 VS Code 在容器内进行开发调试。DevContainer 会自动挂载当前目录到容器内的 `/workspace` 目录，所以容器内的文件会和宿主机同步，不会丢失。VS Code 还能自动配置端口映射和 X11 显示并兼容 WSLg，`plt.show()` 能在 Windows 上显示图像。
+
+要使用 DevContainer，需要安装 [Visual Studio Code](https://code.visualstudio.com/)、[Remote - WSL](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl) [Remote - Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) 插件。由于我们没有使用 Docker Desktop，所以需要先让 VSCode 连接到 WSL，才能使用 DevContainer 功能。
+
+首次配置大致需要以下几个步骤：
+
+1. 打开 VS Code，按左下角的 `><` 图标，选择 `Remote-WSL: New Window`
+2. 在 Terminal 窗口中 `git clone` 你的项目，或者打开一个已有的项目, 项目目录最好放在 WSL 的文件系统中 (如 `/home/username/project`), 然后 `cd` 到项目目录, 用 `code .` 命令打开项目
+3. 添加 DevContainer 配置文件 `.devcontainer/devcontainer.json` 和 `.devcontainer/Dockerfile`. Dockerfile 可以参考上一节的例子，DevContainer 配置文件可以参考下面的例子
+4. 按左下角的 `><` 图标，选择 `Remote-Containers: Reopen in Container`，VS Code 会自动构建镜像并启动容器，首次启动可能需要下载镜像和安装软件包，耗时较长。如果构建失败，可以在 VS Code 的 Terminal 窗口中查看构建日志。很多构建失败的原因是网络问题，请确保你已经按照上面的步骤在所有地方都设置好了代理。
+5. 在容器中可以使用 VS Code 的所有功能，包括调试、代码补全、代码格式化等。容器内的文件会和宿主机同步，不会丢失。容器内的代码修改会立即反映到宿主机，不需要手动同步文件。
+
+下面是 `.devcontainer/devcontainer.json` 模板，需要按需修改挂载数据集的配置（如果需要）
+
+```jsonc
+{
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-python.autopep8",
+                "ms-vscode.cmake-tools",
+                "ms-vscode.cpptools",
+                "GitHub.copilot",
+                "ms-vscode.hexeditor"
+                // Add more extensions here to use in the container
+            ]
+        }
+    },
+    "capAdd": [
+        "SYS_PTRACE" // Required to use gdb
+    ],
+    "runArgs": [
+        // Enable host.docker.internal DNS name
+        "--add-host=host.docker.internal:host-gateway",
+        // Enable CUDA support
+        "--gpus",
+        "all"
+    ],
+    "mounts": [
+        // UNCOMMENT AND TYPE YOUR ABSOLUTE PATH TO THE DATASETS FOLDER
+        // "type=bind,source=/absolute/path/to/datasets,target=/datasets"
+    ],
+    "shutdownAction": "none",
+    "hostRequirements": {
+        "gpu": true
+    }
+}
+```
