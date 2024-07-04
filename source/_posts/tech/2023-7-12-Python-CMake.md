@@ -6,6 +6,7 @@ tags:
     - PyTorch
     - vscode
     - cmake
+    - 指北
 ---
 
 使用 CMake 构建 PyTorch 和 Numpy C++ 拓展能适应更复杂的项目并使用灵活的编译选项. 然而, 许多互联网上的教程中的方法已经不能在较新版本的 PyTorch 和 CMake 使用. 本文介绍了几种作者在近期测试成功的使用 CMake 构建 PyTorch 和 Numpy 拓展的方案. 需要注意的是, 许多 CMake 配置文件都包含了对某个依赖历史版本的问题引入的 Workaround, 不能在新版本正常工作, 本文所述的方法也有极大概率无法在将来工作. 
