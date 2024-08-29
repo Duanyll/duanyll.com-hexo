@@ -76,6 +76,9 @@ function preprocessMarkdown(inFile, hexoConfigFile = '_config.yml') {
     // {% endfolding %}
     mdText = mdText.replace(/{%\s*endfolding\s*%}/g, "```{=latex}\n\\end{tcolorbox}\n```");
 
+    // Strip all other {% ... %} tags
+    mdText = mdText.replace(/{%\s*.*\s*%}/g, "");
+
     // if the document does not contain h1, replace all h2 -> h1, h3 -> h2, ...
     if (!mdText.match(/^# /m)) {
         mdText = mdText.replace(/^## /gm, '# ');
