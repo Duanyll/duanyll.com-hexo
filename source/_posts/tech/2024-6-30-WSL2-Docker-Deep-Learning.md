@@ -300,7 +300,7 @@ Docker Compose 可以用来管理多个容器，也能方便的把容器的启�
 
 Visual Studio Code 的 DevContainer 功能可以让你在容器中开发代码，能自动启动容器并使用 VS Code 在容器内进行开发调试。DevContainer 会自动挂载当前目录到容器内的 `/workspace` 目录，所以容器内的文件会和宿主机同步，不会丢失。VS Code 还能自动配置端口映射和 X11 显示并兼容 WSLg，`plt.show()` 能在 Windows 上显示图像。
 
-要使用 DevContainer，需要安装 [Visual Studio Code](https://code.visualstudio.com/)、[Remote - WSL](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl) [Remote - Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) 插件。由于我们没有使用 Docker Desktop，所以需要先让 VSCode 连接到 WSL，才能使用 DevContainer 功能。
+要使用 DevContainer，需要安装 [Visual Studio Code](https://code.visualstudio.com/)、[Remote - WSL](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl) 和 [Remote - Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) 插件。由于我们没有使用 Docker Desktop，所以需要先让 VSCode 连接到 WSL，才能使用 DevContainer 功能。
 
 首次配置大致需要以下几个步骤：
 
