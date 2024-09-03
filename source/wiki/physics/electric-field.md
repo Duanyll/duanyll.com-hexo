@@ -197,7 +197,7 @@ Inside the shell: $E=\frac{\rho r}{3\varepsilon_0},\rho=\frac{3Q}{4\pi R^3}$
 
 **Conductor in external field**
 
-![20230213231657](https://cdn.duanyll.com/img/20230213231657.png)
+![](https://cdn.duanyll.com/img/20230213231657.png)
 
 When in electorstatic equilibrium:
 
