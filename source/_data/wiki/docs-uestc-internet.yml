@@ -1,0 +1,11 @@
+name: UESTC 上网指南
+title: UESTC 上网指南
+subtitle: 'by UESTC NetUnion'
+tags: 文档
+description: 电子科技大学清水河校区教学区和生活区网络使用指南。
+path: /wiki/uestc-internet
+toc:
+  - cn
+  - en
+license: true
+share: true

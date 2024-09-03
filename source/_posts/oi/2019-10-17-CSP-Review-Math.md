@@ -156,7 +156,7 @@ $$
   
   ![image.png](https://i.loli.net/2019/10/17/vo1cxqn49SLHate.png)
 
-- $n\times n$的方格图中, 只能向右或向上, 从$(1,1)\rightarrow(n,n)$不跨越对角线的方法数. [HDU 3398](https://duanyll.com/2019/05/11/HDU-3398.html). 其他的一些也可以抽象为这个走格子的模型.
+- $n\times n$的方格图中, 只能向右或向上, 从$(1,1)\rightarrow(n,n)$不跨越对角线的方法数. [HDU 3398](/source/_posts/oi/2019-5-11-HDU-3398.md). 其他的一些也可以抽象为这个走格子的模型.
 - 由n对括号形成的合法括号表达式数: 类比出栈序列.
 - 用n个长方形去填充一个高度为n的阶梯图形的方法数:
   
