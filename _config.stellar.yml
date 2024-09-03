@@ -57,7 +57,8 @@ article:
   # 文章许可协议
   license: '本文采用 [署名-相同方式共享 4.0 国际](https://creativecommons.org/licenses/by-sa/4.0/) 许可协议，转载请注明出处。'
   # 分享
-  share: [wechat, weibo, email, link, print]
+  share: [wechat, weibo, email, link, print, source]
+  source_repo: https://github.com/duanyll/duanyll.com-hexo/blob/master/
   # 相关文章，需要安装插件 (for layout: post)
   # npm i hexo-related-popular-posts
   related_posts:
