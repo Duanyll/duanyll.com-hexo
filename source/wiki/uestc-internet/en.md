@@ -107,7 +107,8 @@ Even with proper setup, you may need to log in again approximately once a week.
   - Please make sure the WAN port of the router is connected to the wall network port, and the LAN port is connected to the computer or other devices. If the wall network port is mistakenly connected to the LAN port, only one device will be able to access the internet.
 
 - **I don't know my broadband account or password.**
-  - The broadband account for China Mobile is usually `SCXY` followed by your mobile number, and the password is the last 6 digits of your mobile number or a password you set yourself. The broadband account for China Telecom is usually your mobile number, and the password is the last 6 digits, the last 8 digits of your mobile number, or `123456`.
+  - **Update: The password for China Telecom broadband accounts activated in September 2024 is 12345678.**
+  - The broadband account for China Mobile is usually `SCXY` followed by your mobile number, and the password is the last 6 digits of your mobile number or a password you set yourself. The broadband account for China Telecom is usually your mobile number, and the password is the last 6 digits, the last 8 digits of your mobile number, or `12345678`.
   - If you don't know your broadband account and password, please call the ISP's customer service. The number `61831192` cannot help you retrieve your broadband account and password.
   - If you bind an incorrect account and password, there will be no prompt on the binding page. You will only see a login failure message after clicking the “电信登录” (Telecom Login) or “移动登录” (Mobile Login) button.
 
@@ -115,6 +116,7 @@ Even with proper setup, you may need to log in again approximately once a week.
   - No. The bound broadband account must be your own. A broadband account can only be bound to one unified identity authentication account; otherwise, it will cause errors.
 
 - **I entered my account and password on the campus network login page and clicked “电信登录” (Telecom Login) or “移动登录” (Mobile Login), but a window popped up saying login failed, with an error code in English.**
+  - **Update: For broadband services activated on the same day, the system information might not sync immediately. Please wait a day before attempting to log in.**
   - Please ensure that you entered your unified identity authentication account and password, not the broadband account and password.
   - Make sure you have bound the correct broadband account. After successful binding, you can check the bound account on the “自服务” (Self-service) -> “多运营商绑定” (Carriers Bound) page.
   - If you can't open the “自服务” (Self-service) page, it means the unified identity authentication account and password you entered are incorrect.
