@@ -53,7 +53,10 @@ article:
   auto_excerpt: 200
   # 分类颜色
   category_color:
-    '探索号': '#f44336'
+    '课程': '#FF5F5D'
+    'OI': '#3F7C85'
+    '项目': '#00CCBF'
+    '技术': '#72F2EB'
   # 文章许可协议
   license: '本文采用 [署名-相同方式共享 4.0 国际](https://creativecommons.org/licenses/by-sa/4.0/) 许可协议，转载请注明出处。'
   # 分享
@@ -198,12 +201,13 @@ footer:
     '项目':
       - '[开源库](https://github.com/duanyll)'
       - '[文档](/wiki/)'
+      - '[Scoop Bucket](https://github.com/duanyll/scoop-bucket)'
     # '社交':
     #   - '[友链](/)'
     #   - '[留言板](/)'
     '更多':
       - '[关于本站](/about)'
-      - '[GitHub](https://github.com/duanyll/duanyll.com-hexo)'
+      - '[GitHub 源码](https://github.com/duanyll/duanyll.com-hexo)'
       - '[Dashboard](https://duanyll.cloudflareaccess.com)'
   content: | # 支持 Markdown 格式
     本站由 [duanyll](https://github.com/duanyll) 使用 [Stellar](https://github.com/xaoxuu/hexo-theme-stellar) 主题创建。

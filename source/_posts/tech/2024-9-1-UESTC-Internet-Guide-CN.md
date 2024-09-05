@@ -4,4 +4,8 @@ tags:
   - UESTC
   - 上网指南
 redirect: /wiki/uestc-internet/cn
+hidden: true
+nopdf: true
 ---
+
+本页面已迁移至 [上网指南（中文）](/source/wiki/uestc-internet/cn.md)。
