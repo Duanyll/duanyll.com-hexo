@@ -202,9 +202,9 @@ footer:
       - '[开源库](https://github.com/duanyll)'
       - '[文档](/wiki/)'
       - '[Scoop Bucket](https://github.com/duanyll/scoop-bucket)'
-    # '社交':
-    #   - '[友链](/)'
-    #   - '[留言板](/)'
+    '社交':
+      - '[留言板](/about/#comments)'
+      - '[NetUnion](https://netunion.org)'
     '更多':
       - '[关于本站](/about)'
       - '[GitHub 源码](https://github.com/duanyll/duanyll.com-hexo)'

@@ -23,6 +23,9 @@ You can access the campus network via wireless or wired connections.
 1. Connect your computer to the wall network port using an Ethernet cable.
 2. Open a browser and visit any website to be automatically redirected to the login page. Alternatively, you can manually visit [http://aaa.uestc.edu.cn](http://aaa.uestc.edu.cn) or [http://10.253.0.237](http://10.253.0.237).
 3. Enter your student ID and unified identity authentication password, then click **“校园网登录”** (Campus Network Login).
+   ![](https://cdn.duanyll.com/img/20240909194745.png)
+4. When you see your IP address on the login page, you have successfully connected to the internet.
+   ![](https://cdn.duanyll.com/img/20240909194920.png)
 
 ## Dormitory Area
 
@@ -64,13 +67,14 @@ The first time you connect to the dormitory network, you need to bind your opera
 
 1. In the dormitory area, connect your computer to the configured router or directly to the wall network port.
 2. The network login page may open automatically; if not, manually visit [http://10.253.0.235](http://10.0.253.235).
+   ![](https://cdn.duanyll.com/img/20240909193323.png)
 3. Enter your **student ID and unified identity authentication password**, then click **“自服务”** (Self Service).
 4. Click **“多运营商绑定”** (Carriers Bound) on the left.
-   ![](https://cdn.duanyll.com/img/20240901164823.png)
+   ![](https://cdn.duanyll.com/img/20240909193910.png)
 5. Select your operator (China Mobile or China Telecom), and click **“绑定”** (Bind).
-   ![](https://cdn.duanyll.com/img/20240901164926.png)
+   ![](https://cdn.duanyll.com/img/20240909194033.png)
 6. Enter your broadband account and password, then click **“绑定”** (Bind).
-   ![](https://cdn.duanyll.com/img/20240901165038.png)
+   ![](https://cdn.duanyll.com/img/20240909194346.png)
 7. After successful binding, you can view the bound account on the "Carriers Bound" page.
 
 #### Logging into the Campus Network
@@ -79,6 +83,8 @@ Once binding is complete, you can use your unified identity authentication accou
 
 1. Open a browser and visit any website to be automatically redirected to the login page. Alternatively, you can manually visit [http://10.253.0.235](http://10.0.253.235).
 2. Enter your **student ID and unified identity authentication password**, and depending on your operator, click **“移动登录”** (Mobile Login) or **“电信登录”** (Telecom Login).
+3. When you see your IP address on the login page, you have successfully connected to the internet.
+   ![](https://cdn.duanyll.com/img/20240909193713.png)
 
 Even with proper setup, you may need to log in again approximately once a week.
 

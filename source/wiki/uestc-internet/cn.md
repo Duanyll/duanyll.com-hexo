@@ -23,6 +23,9 @@ wiki: docs-uestc-internet
 1. 使用网线连接墙面网口和电脑。
 2. 打开浏览器，访问任意网站，会自动跳转到登录页面。或者手动访问 [http://aaa.uestc.edu.cn](http://aaa.uestc.edu.cn) 或 [http://10.253.0.237](http://10.253.0.237)。
 3. 输入您的学号和统一身份认证密码，点击 “校园网登录”。
+   ![](https://cdn.duanyll.com/img/20240909194745.png)
+4. 当你看到你的 IP 地址时，就说明你已经成功登录校园网。
+   ![](https://cdn.duanyll.com/img/20240909194920.png)
 
 ## 宿舍区
 
@@ -62,13 +65,14 @@ wiki: docs-uestc-internet
 
 1. 在宿舍区，将电脑连接到上一步设置好的路由器或者直接连接到墙面网口。
 2. 网络登陆页面可能会自动打开，如果没有打开，请手动访问 [http://10.253.0.235](http://10.0.253.235)。
+   ![](https://cdn.duanyll.com/img/20240909193323.png)
 3. 输入您的 **学号和统一身份认证密码**，点击 **“自服务”** (Self Service)。
 4. 点击左侧的 **“多运营商绑定”** (Carriers Bound)。
-   ![](https://cdn.duanyll.com/img/20240901164823.png)
+   ![](https://cdn.duanyll.com/img/20240909193910.png)
 5. 选择您的运营商（移动或电信），点击 **“绑定”**。
-   ![](https://cdn.duanyll.com/img/20240901164926.png)
+   ![](https://cdn.duanyll.com/img/20240909194033.png)
 6. 输入您的宽带账号和密码，点击 **“绑定”**。
-   ![](https://cdn.duanyll.com/img/20240901165038.png)
+   ![](https://cdn.duanyll.com/img/20240909194346.png)
 7. 绑定成功后，您可以在 “多运营商绑定” 页面查看绑定的账号。
 
 #### 登录校园网
@@ -76,7 +80,10 @@ wiki: docs-uestc-internet
 完成绑定后，您可以使用统一身份认证账号登录校园网。操作方式如下：
 
 1. 打开浏览器，访问任意网站，会自动跳转到登录页面。或者手动访问 [http://10.253.0.235](http://10.0.253.235)。
+   ![](https://cdn.duanyll.com/img/20240909193323.png)
 2. 输入您的 **学号和统一身份认证密码**，根据您使用的运营商，点击 **“移动登录”** (Mobile Login) 或 **“电信登录”** (Telecom Login)。
+3. 当你看到你的 IP 地址时，就说明你已经成功登录校园网。
+   ![](https://cdn.duanyll.com/img/20240909193713.png)
 
 即使是设置妥当了，大约每周都需要重新登录一次。
 
