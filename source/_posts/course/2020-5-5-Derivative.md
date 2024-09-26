@@ -1,15 +1,16 @@
 ---
 title: 高中数学导数总结
-tags: [文化课]
+tags:
+  - 文化课
 author: duanyll
 ---
 
 ## 定义和几何意义
 
 - 定义
-   $$
-   f'(x)=\lim_{\Delta x \to 0}\frac{f(x+\Delta x)-f(x)}{\Delta x}
-   $$
+  $$
+  f'(x)=\lim_{\Delta x \to 0}\frac{f(x+\Delta x)-f(x)}{\Delta x}
+  $$
 - 几何意义: 切线斜率.
 - 割线斜率: $\frac{f(x_1)-f(x_2)}{x_1-x_2}$
 - 放缩: 证明恒成立可以证明恒大于(小于)交点处切线

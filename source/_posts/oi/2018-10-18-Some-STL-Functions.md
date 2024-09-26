@@ -1,8 +1,10 @@
 ---
 author: duanyll
-date: 2018-10-18
+date: 2018-10-18T00:00:00.000Z
 title: GCC/STL里面不那么常用又很有帮助的函数
-tags: ["OI","总结"]
+tags:
+  - oi
+  - 总结
 ---
 
 今天改以前的错题，发现了几个当初知道干嘛现在搞忘了的函数，能偷懒少写几行代码，再次做一个收集整理。
@@ -50,7 +52,7 @@ template< class ForwardIt, class Size, class T >
 void uninitialized_fill_n( ForwardIt first, Size count, const T& value );
 ```
 
-## G++的__builtin系列
+## G++的\_\_builtin系列
 
 `__builtin_popcount(x)`：x中1的个数
 

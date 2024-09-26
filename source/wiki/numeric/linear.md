@@ -229,7 +229,7 @@ $$
 \argmin_{x\in\R^n}q(x)=\frac{1}{2}\left<x,Ax\right>-\left<x,b\right>
 $$
 
-其中 $\left<x,y\right> =x^\top y$ 
+其中 $\left<x,y\right> =x^\top y$
 
 [梯度下降法](/source/wiki/optim/unconstrained.md#梯度下降法)迭代公式.
 
@@ -300,7 +300,7 @@ $$
 将矩阵反复作用于一个向量, 最终方向会接近于矩阵的一个特征向量. 将向量 $x$ 用特征向量 $v_1,\cdots,v_n$ 作为基表出, 迭代公式
 
 $$
-\begin{aligned} 
+\begin{aligned}
   x_k=A^kx_0&=A^k(c_1v_1+\cdots+c_nv_n)\\
   &=\lambda_1^k\left(c_1v_1+\left(\frac{\lambda_2}{\lambda_1}\right)^kc_2v_2+\cdots+\left(\frac{\lambda_n}{\lambda_1}\right)^kc_nv_n\right)
 \end{aligned}

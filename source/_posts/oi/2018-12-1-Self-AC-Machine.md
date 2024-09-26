@@ -1,6 +1,8 @@
 ---
 title: 全新自动AC机
-tags: ["搞事情","OI"]
+tags:
+  - 搞事情
+  - oi
 author: Duanyll
 ---
 

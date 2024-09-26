@@ -63,7 +63,7 @@ You can connect to the network using a wireless router or by directly connecting
 
 #### Binding the Operator Account
 
-The first time you connect to the dormitory network, you need to bind your operator account. Visit the China Telecom or China Mobile service office on campus, *ensure your phone card has broadband service, and ask the operator for your broadband account and password.* After obtaining your broadband account and password, you need to bind the broadband account to your unified identity authentication account as follows:
+The first time you connect to the dormitory network, you need to bind your operator account. Visit the China Telecom or China Mobile service office on campus, _ensure your phone card has broadband service, and ask the operator for your broadband account and password._ After obtaining your broadband account and password, you need to bind the broadband account to your unified identity authentication account as follows:
 
 1. In the dormitory area, connect your computer to the configured router or directly to the wall network port.
 2. The network login page may open automatically; if not, manually visit [http://10.253.0.235](http://10.0.253.235).
@@ -91,6 +91,7 @@ Even with proper setup, you may need to log in again approximately once a week.
 ## Frequently Asked Questions
 
 - **I can't open the login page, it says "Unable to connect to the website."**
+
   - There could be several reasons for this. First, ensure that you have closed any proxy servers, VPNs, or accelerators before logging in.
   - Open the Windows Settings app, select "Network & Internet" -> "Proxy," and turn off the proxy server.
     ![](https://cdn.duanyll.com/img/20240901155107.png)
@@ -98,30 +99,37 @@ Even with proper setup, you may need to log in again approximately once a week.
   - After successfully logging into the campus network, you can reopen these software programs.
 
 - **I frequently need to log in to the campus network again.**
+
   - **UESTC-WiFi**: Please ensure that the "Use random MAC address" or a similar option is turned off in the Wi-Fi details.
   - **Teaching Area Wired Network**: The same account can only log in to one device at a time. If your account is logged in on another device, it will cause the previous device to go offline. You will also need to log in again after restarting the computer.
   - **Dormitory Network**: Depending on the settings of the ISP, you usually need to log in again every week. Also, please check whether the wall network port is incorrectly connected to the LAN port. The ISP's settings may also cause you to need to log in repeatedly; you will need to contact the ISP to resolve this.
 
 - **I can't access certain servers in the teaching area from the dormitory, such as the library servers.**
+
   - There is a firewall between the dormitory network and the teaching area network, so some servers in the teaching area cannot be directly accessed. You can try using the [UESTC VPN](https://vpn.uestc.edu.cn).
   - Even when using the UESTC VPN, some servers may still be inaccessible. Please contact the server administrator or the information center for assistance.
 
 - **I set my router to DHCP or to obtain an IP address automatically, but the router says it cannot obtain an IP address, or it gets an IP address starting with 172. I can't open the login page.**
+
   - Your optical modem may be malfunctioning. Please call `61831192` to request a repair.
 
 - **I use a router in my dormitory, but only one device can connect to the internet at a time. I need to log in again or cannot access the internet with other devices.**
+
   - Please make sure the WAN port of the router is connected to the wall network port, and the LAN port is connected to the computer or other devices. If the wall network port is mistakenly connected to the LAN port, only one device will be able to access the internet.
 
 - **I don't know my broadband account or password.**
+
   - **Update: The password for China Telecom broadband accounts activated in September 2024 is 12345678.**
   - The broadband account for China Mobile is usually `SCXY` followed by your mobile number, and the password is the last 6 digits of your mobile number or a password you set yourself. The broadband account for China Telecom is usually your mobile number, and the password is the last 6 digits, the last 8 digits of your mobile number, or `12345678`.
   - If you don't know your broadband account and password, please call the ISP's customer service. The number `61831192` cannot help you retrieve your broadband account and password.
   - If you bind an incorrect account and password, there will be no prompt on the binding page. You will only see a login failure message after clicking the “电信登录” (Telecom Login) or “移动登录” (Mobile Login) button.
 
 - **Can I bind someone else's broadband account?**
+
   - No. The bound broadband account must be your own. A broadband account can only be bound to one unified identity authentication account; otherwise, it will cause errors.
 
 - **I entered my account and password on the campus network login page and clicked “电信登录” (Telecom Login) or “移动登录” (Mobile Login), but a window popped up saying login failed, with an error code in English.**
+
   - **Update: For broadband services activated on the same day, the system information might not sync immediately. Please wait a day before attempting to log in.**
   - Please ensure that you entered your unified identity authentication account and password, not the broadband account and password.
   - Make sure you have bound the correct broadband account. After successful binding, you can check the bound account on the “自服务” (Self-service) -> “多运营商绑定” (Carriers Bound) page.
@@ -130,15 +138,18 @@ Even with proper setup, you may need to log in again approximately once a week.
   - If you can open the “自服务” (Self-service) page, bind the account, but still cannot log in using the “电信登录” (Telecom Login) or “移动登录” (Mobile Login) buttons on the campus network, it means your broadband account password is incorrect or has been frozen by the ISP. Please contact the ISP's customer service, explain that your account cannot log in to the campus network, and tell them the error message you received.
 
 - **I can open the campus network login page, but after entering my unified identity authentication account and password, I cannot open the self-service page.**
+
   - You can use a mobile network to open the [Unified Identity Authentication Platform](https://idas.uestc.edu.cn/authserver/login) and try to reset your password.
   - If there is an issue with your unified identity authentication account, please contact the information center at `61831184`.
 
 - **I have transitioned from an undergraduate to a graduate student and have a new student ID. Do I need to rebind my broadband account?**
+
   - Your old student ID will soon be deactivated by the system, and you need to transfer the broadband account from your old student ID to your new student ID.
   - If your old student ID can still log in to the campus network, you need to unbind the broadband account on the “自服务” (Self-service) page of the old account, and then bind the broadband account on the “自服务” (Self-service) page of the new account.
   - If your old student ID has been deactivated, but you cannot bind the original broadband account to the new student ID, please call `61831184` to contact the information center for assistance.
 
 - **I opened the campus network login page, and it shows that I have successfully logged in, but I still cannot access the internet.**
+
   - Please first check if any proxies, VPNs, or accelerators are open as mentioned in the first question.
   - Ensure that you did not open the login page from the bookmarks bar, history, or favorites. You need to re-enter the URL and ensure that the browser does not automatically complete the parameters after the URL. (Specifically, if you saved the successfully logged-in page to the bookmarks bar, every time you open the URL from the bookmarks, it will include the parameters from the previous successful login, causing you to see the logged-in page without actually being logged in.)
 

@@ -5,8 +5,6 @@ wiki: notes-optim
 order: 104
 ---
 
-
-
 二次型函数
 
 $$
@@ -40,7 +38,7 @@ $$
 
 记 $g^{(k)}=\nabla f(x^{(k})$
 
-### 最速下降法 
+### 最速下降法
 
 $$
 \alpha_{k}={\underset{\alpha>0}{\operatorname{argmin} } }f(x^{(k)}-\alpha\nabla f(x^{(k)}))
@@ -62,7 +60,7 @@ $$
 
 ### 固定步长法
 
-只需要取 $\alpha_k=\alpha\in\R$, 
+只需要取 $\alpha_k=\alpha\in\R$,
 
 $$
 \alpha^{(k+1)}=\alpha^{(k)}-\alpha g^{(k)}
@@ -95,7 +93,7 @@ $$
 
 ## 共轭类方法
 
-- 共轭方向: $d^{(0)},d^{(1)},d^{(2)},\cdots d^{(m)}, \forall i\neq j, d^{(i)\top}Qd^{(j)}=0$.  
+- 共轭方向: $d^{(0)},d^{(1)},d^{(2)},\cdots d^{(m)}, \forall i\neq j, d^{(i)\top}Qd^{(j)}=0$.
 - $Q$ 对称正定, 则共轭向量组线性无关.
 - 构造共轭向量组: Gram-Shimidt 正交化, 给定一组线性无关变量 $\{p^{(0)},\ \cdots,\ p^{(n-1)}\}$
 
@@ -197,7 +195,7 @@ $$
 
 矩阵 $H_n$ 需要是对称矩阵, 目标函数是二次型函数时要满足 $H_{k+1}\Delta g^{(i)}=\Delta x^{(i)} ,0\leq i\leq k$. 二次型问题中记 Hessian 矩阵为 $Q$, 则能保证拟牛顿方向 $d^{(0)},d^{(1)},d^{(2)},\cdots d^{(k+1)}$ 是 $Q$ 共轭的.
 
-记 $\Delta x^{(k)}=\alpha_{k}d^{(k)}$, $\Delta g^{(k)}=g^{(k+1)}-g^{(k)}$ 拟牛顿方程: 
+记 $\Delta x^{(k)}=\alpha_{k}d^{(k)}$, $\Delta g^{(k)}=g^{(k+1)}-g^{(k)}$ 拟牛顿方程:
 
 $$
 H_{k+1}\Delta g^{(k)}=\Delta x^{(k)}

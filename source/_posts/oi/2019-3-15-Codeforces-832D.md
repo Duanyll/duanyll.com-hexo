@@ -1,6 +1,9 @@
 ---
 title: CF832D Misha, Grisha and Underground
-tags: [OI,题解,LCA]
+tags:
+  - oi
+  - 题解
+  - lca
 author: duanyll
 source: https://www.luogu.org/problemnew/show/CF832D
 ---
@@ -87,7 +90,7 @@ class LCA : public LFS{
         }
         return f[a][0];
     }
-    
+
     int querydis(int a,int b){
     	int lca = querylca(a,b);
     	return dep[a] + dep[b] - dep[lca]*2;

@@ -124,7 +124,6 @@ $$
 x_k=\cos\frac{(2k+1)\pi}{2n},k=0,1,\cdots n-1
 $$
 
-
 #### 证明
 
 ![Chebyshev 多项式是区间上值域最小的首一多项式](https://cdn.duanyll.com/img/20230618171446.png)
@@ -232,7 +231,7 @@ $$
 
 ![d 的下面部分与 x 无关, 则上面为 0 时模长最小](https://cdn.duanyll.com/img/20230618203106.png)
 
-只需进行完全 QR 分解, 然后求解 
+只需进行完全 QR 分解, 然后求解
 
 $$
 Rx=Q^\top b
@@ -355,7 +354,7 @@ $n$ 为奇数时, Newton-Cotes 具有 $n$ 阶代数精度. $n$ 为偶数时, New
   $$
   E(f)=-\frac{h^3}{24}f''(c)
   $$
-- 三点开 Newton-Cotes 积分: 
+- 三点开 Newton-Cotes 积分:
   $$
   I(f)=\frac{2h}{3}f(\frac{3a+b}{4})-\frac{h}{3}f(\frac{a+b}{2})+\frac{2h}{3}f(\frac{a+3b}{4})
   $$
@@ -384,7 +383,7 @@ $n$ 为奇数时, Newton-Cotes 具有 $n$ 阶代数精度. $n$ 为偶数时, New
 
 ![](https://cdn.duanyll.com/img/20230618223417.png)
 
-$R_{j1}$ 是 $m=2^{j-1}$ 的复合梯形法则, 可递推计算, 补充新增的插值点. 
+$R_{j1}$ 是 $m=2^{j-1}$ 的复合梯形法则, 可递推计算, 补充新增的插值点.
 
 ![](https://cdn.duanyll.com/img/20230618223647.png)
 

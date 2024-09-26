@@ -1,7 +1,11 @@
 ---
 title: CF852A Digits
 author: duanyll
-tags: [OI, 题解, 思维题, 分类讨论]
+tags:
+  - oi
+  - 题解
+  - 思维题
+  - 分类讨论
 source: https://www.luogu.org/problemnew/show/CF852A
 ---
 
@@ -21,90 +25,90 @@ $A$最多有$200000$位, 令$f(A)$表示$A$的各数位之和.
 - 当$f(A)=199$时, 加三次加号不行了, 第一步加成$199$, 第二步$1+99=100$, 第三步$1+00=1$
 - 当$200\leq f(A)\leq288$时, 也是三次加满加号
 - 对于$289\leq f(A)\leq999$的情况:
-  
-    令
 
-    $$
-    A = \overline{a_0a_1a_2\cdots a_n}, f(A)=\sum{a_i}
-    $$
+  令
 
-    以两位为间隔划分$A$, 假设$n$是奇数($A$有偶数位, 奇数位的情况同理), 令
+  $$
+  A = \overline{a_0a_1a_2\cdots a_n}, f(A)=\sum{a_i}
+  $$
 
-    $$
-    X = \overline{a_0a_1} + \overline{a_2a_3} + \cdots + \overline{a_{n-1}a_n}
-    $$
+  以两位为间隔划分$A$, 假设$n$是奇数($A$有偶数位, 奇数位的情况同理), 令
 
-    错开一位, 令
+  $$
+  X = \overline{a_0a_1} + \overline{a_2a_3} + \cdots + \overline{a_{n-1}a_n}
+  $$
 
-    $$
-    Y = a_0 + \overline{a_1a_2} + \overline{a_3a_4} + \cdots + a_n
-    $$
+  错开一位, 令
 
-    两式相加并整理得
+  $$
+  Y = a_0 + \overline{a_1a_2} + \overline{a_3a_4} + \cdots + a_n
+  $$
 
-    $$
-    X+Y = 11f(A)-9a_n > 10f(A)
-    $$
+  两式相加并整理得
 
-    令$X>Y$,
+  $$
+  X+Y = 11f(A)-9a_n > 10f(A)
+  $$
 
-    $$
-    X>5f(A)
-    $$
+  令$X>Y$,
 
-    考虑以下划分情况:
+  $$
+  X>5f(A)
+  $$
 
-    $$
-    a_0+a_1+a_2+\cdots+a_n (f(A))
-    $$
+  考虑以下划分情况:
 
-    $$
-    \overline{a_0a_1} + a_2 + a_3 + \cdots + a_n
-    $$
+  $$
+  a_0+a_1+a_2+\cdots+a_n (f(A))
+  $$
 
-    $$
-    \overline{a_0a_1} + \overline{a_2a_3} + \cdots + a_n
-    $$
+  $$
+  \overline{a_0a_1} + a_2 + a_3 + \cdots + a_n
+  $$
 
-    $$
-    \cdots
-    $$
+  $$
+  \overline{a_0a_1} + \overline{a_2a_3} + \cdots + a_n
+  $$
 
-    $$
-    \overline{a_0a_1} + \overline{a_2a_3} + \cdots + \overline{a_{n-1}a_n}(X)
-    $$
+  $$
+  \cdots
+  $$
 
-    第一项是$f(A)$, 是三位数, 最后一项是$X>5f(A)$, 一定是四位数, 易知以上两项之间不会相差$81$, 那么以上划分情况中一定存在一种满足$1000\leq S\leq 1080$,这样的$S$可以在剩下的两次操作中变成一位数
+  $$
+  \overline{a_0a_1} + \overline{a_2a_3} + \cdots + \overline{a_{n-1}a_n}(X)
+  $$
+
+  第一项是$f(A)$, 是三位数, 最后一项是$X>5f(A)$, 一定是四位数, 易知以上两项之间不会相差$81$, 那么以上划分情况中一定存在一种满足$1000\leq S\leq 1080$,这样的$S$可以在剩下的两次操作中变成一位数
 
 - 再推广到$f(A)\geq1000$的情况
 
-    令
+  令
 
-    $$
-    X = \overline{a_0a_1a_2} + \cdots + \overline{a_{n-2}a_{n-1}a_n}
-    $$
+  $$
+  X = \overline{a_0a_1a_2} + \cdots + \overline{a_{n-2}a_{n-1}a_n}
+  $$
 
-    $$
-    Y = a_0 + \overline{a_1a_2a_3} + \cdots + a_{n-1} + a_n
-    $$
+  $$
+  Y = a_0 + \overline{a_1a_2a_3} + \cdots + a_{n-1} + a_n
+  $$
 
-    $$
-    Z = a_0 + a_1 + \overline{a_2a_3a_4} + \cdots + a_{n}
-    $$
+  $$
+  Z = a_0 + a_1 + \overline{a_2a_3a_4} + \cdots + a_{n}
+  $$
 
-    (假设$n$凑的出来以上序列, 凑不出来的类推), 有
+  (假设$n$凑的出来以上序列, 凑不出来的类推), 有
 
-    $$
-    X + Y + Z > 98f(A)
-    $$
+  $$
+  X + Y + Z > 98f(A)
+  $$
 
-    令$X$最大(放缩一下,够用了)
+  令$X$最大(放缩一下,够用了)
 
-    $$
-    x > 30f(A)
-    $$
-    
-    再考虑刚才那样的依次合并连续两项的过程, 最开始是$f(A)$, 每次增加不超过$81$, 最后大于$30f(A)$, 位数多了一位, 一定存在一种情况满足$100\cdots000\leq S \leq 100\cdots080$, 可以两步解决.
+  $$
+  x > 30f(A)
+  $$
+
+  再考虑刚才那样的依次合并连续两项的过程, 最开始是$f(A)$, 每次增加不超过$81$, 最后大于$30f(A)$, 位数多了一位, 一定存在一种情况满足$100\cdots000\leq S \leq 100\cdots080$, 可以两步解决.
 
 ## 代码
 

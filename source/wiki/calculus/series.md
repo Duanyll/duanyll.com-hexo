@@ -25,7 +25,7 @@ a_n=\int_{x_n}^{x_{n+1}}f(x)\d x\,(n=1,2,\cdots)
 $$
 
 1. 正项级数 $\sum_{n=1}^\infty a_n$ 与反常积分 $\int_a^{+\infty}f(x)\d x$ 具有相同的敛散性
-2. 收敛时, 
+2. 收敛时,
    $$
    \sum_{n=1}^\infty a_n=\int_a^{+\infty}f(x)\d x=\sum_{n=1}^\infty\int_{x_n}^{x_{n+1}}f(x)\d x
    $$
@@ -126,14 +126,14 @@ $$
 \end{aligned}
 $$
 
-**定理** 
+**定理**
 
 1. $\sum_{n=1}^\infty a_n$ 绝对收敛 $\iff \sum_{n=1}^\infty a^+_n, \sum_{n=1}^\infty a^-_n$ 收敛
 2. $\sum_{n=1}^\infty a_n$ 条件收敛 $\implies \sum_{n=1}^\infty a^+_n, \sum_{n=1}^\infty a^-_n$ 发散到 $+\infty$
 
 **定义** 更序级数: 将 $\sum_{n=1}^\infty a_n$ 的项重新排列得到 $\sum_{n=1}^\infty a'_n$
 
-**定理** $\sum_{n=1}^\infty a_n$ 绝对收敛 $\implies\sum_{n=1}^\infty a'_n$ 绝对收敛且 
+**定理** $\sum_{n=1}^\infty a_n$ 绝对收敛 $\implies\sum_{n=1}^\infty a'_n$ 绝对收敛且
 
 $$
 \sum_{n=1}^\infty a_n=\sum_{n=1}^\infty a'_n
@@ -141,7 +141,7 @@ $$
 
 **定理** Riemann: $\sum_{n=1}^\infty a_n$ 条件收敛 $\implies$ $\forall a\in\R, \exists$ 更序级数 $\sum_{n=1}^\infty a'_n$ 收敛到 $a$
 
-**定义** Cauchy 乘积: 
+**定义** Cauchy 乘积:
 
 $$
 c_n=\sum_{k+l=n+1}a_kb_l=a_1b_n+a_2b_{n-1}+\cdots+a_nb_1
@@ -179,7 +179,7 @@ $$
 
 **定理** 函数列一致收敛的 Cauchy 收敛原理: $\{f_n(x)\}$ 在区间 $\mathcal{I}$ 上一致收敛到 $f(x)\iff$
 
-$\forall\epsilon>0,\exist N\in\N,\forall n',n''>N,x\in\mathcal{I}$ 有 
+$\forall\epsilon>0,\exist N\in\N,\forall n',n''>N,x\in\mathcal{I}$ 有
 
 $$
 |f_{n'}(x)-f_{n''}(x)|<\epsilon
@@ -201,7 +201,7 @@ $$
 \lim_{x\to x_{0}}f(x)=\lim_{x\to x_{0}}\lim_{n\to\infty}f_{n}(x)=\lim_{n\to\infty}\lim_{x\to x_{0}}f_{n}(x)=\lim_{n\to\infty}f_{n}(x_{0})=f(x_{0})\label{label2}
 $$
 
-**定理** 逐项求导定理: 
+**定理** 逐项求导定理:
 
 1. $f_n\in C^1(\mathcal{I})$
 2. $\{f_n(x)\}$ 在区间 $\mathcal{I}$ 上逐点收敛
@@ -223,7 +223,7 @@ $$
 > |f_n(x_n)-f(x_0)|\leq\underbrace{|f_n(x_n)-f(x_n)|}_\textrm{定义(\ref{label1})}+\underbrace{|f(x_n)-f(x_0)|}_{(\ref{label2})\rArr\textrm{连续}\rArr\textrm{Heine}}
 > $$
 
-**定理** Dini 定理: 
+**定理** Dini 定理:
 
 1. $f_n\in C([a,b])$
 2. $\forall x\in[a,b],\{f_n(x)\}$ *单调*收敛于 $f(x)$
@@ -253,7 +253,7 @@ $$
 \lim_{x\to x_{0}}S(x)=\lim_{x\to x_{0}}\sum_{n=1}^{\infty}u_n(x)=\sum_{n=1}^{\infty}\lim_{x\to x_{0}}u_{n}(x)=S(x_{0})
 $$
 
-**定理** 逐项求导定理: 
+**定理** 逐项求导定理:
 
 1. $u_n\in C^1(\mathcal{I})$
 2. $\sum_{n=1}^\infty u_n(x)$ 在 $\mathcal{I}$ 逐点收敛 到 $S(x)$
@@ -292,6 +292,7 @@ R=
 $$
 
 > 更简单的情况也可行,
+>
 > $$
 > A=\lim_{n\to\infty}\frac{|a_{n+1}|}{|a_n|}\implies R=\frac{1}{A}
 > $$
@@ -322,7 +323,7 @@ $$
 $$
 
 > 上式右端幂级数收敛半径也为 $R$
- 
+
 **定理** Tauber 定理
 
 1. $\sum_{n=0}^\infty a_nx^n$ 收敛半径为 $1$

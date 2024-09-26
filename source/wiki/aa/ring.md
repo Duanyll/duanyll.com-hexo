@@ -4,7 +4,8 @@ layout: wiki
 wiki: notes-aa
 order: 802
 references:
-  - '[近世代数答案](https://mp.weixin.qq.com/s?__biz=Mzk0NzMyNDg0Mg==&mid=2247484131&idx=6&sn=5549ee6c9158b0831a24ea854a04239e&chksm=c379d026f40e5930cf670d55dd2a525dce38dd6c0c411a6ff9d440e7fd0d46dd6e39d969b93c&scene=27)'
+  - >-
+    [近世代数答案](https://mp.weixin.qq.com/s?__biz=Mzk0NzMyNDg0Mg==&mid=2247484131&idx=6&sn=5549ee6c9158b0831a24ea854a04239e&chksm=c379d026f40e5930cf670d55dd2a525dce38dd6c0c411a6ff9d440e7fd0d46dd6e39d969b93c&scene=27)
 ---
 
 ## 环的基本概念
@@ -16,7 +17,7 @@ references:
 2. **幺环**: 若 $\exist 1_R\in R\suchthat\forall a\in R,1_R\cdot a=a\cdot 1_R=a$ 则称 $1_R$ 是 $R$ 的乘法单位元.
    - 若有 $1_R=0_R$, 则必有 $\forall a\in R,a=0_R$. 默认 $1_R\neq 0_R$
    - 具有乘法单位元的环称为幺环
-   - 设 $R$ 是一个幺环. 在 $R$ 中乘法可逆的元素构成 $U(R)=\{a\in R|\exist b\in R\suchthat ab=ba=1_R\}$ 则 $U(R)$ 是 $R$ 的一个乘法子群, 称为 $R$ 的*单位群*, *可逆元称为单位*
+   - 设 $R$ 是一个幺环. 在 $R$ 中乘法可逆的元素构成 $U(R)=\{a\in R|\exist b\in R\suchthat ab=ba=1_R\}$ 则 $U(R)$ 是 $R$ 的一个乘法子群, 称为 $R$ 的*单位群*, _可逆元称为单位_
    - 若乘法具有交换律, 则称为交换环
 3. 性质:
    1. $a\cdot 0=0\cdot a=0$
@@ -29,6 +30,7 @@ references:
 7. 幺环的子环可能是幺环, 单位元可能不同
 
 > 证明是环
+>
 > 1. 加法封闭
 > 2. 乘法封闭
 > 3. 加法结合律
@@ -75,6 +77,7 @@ references:
 ![不用把逆元的形式求出来](https://cdn.duanyll.com/img/20231222153415.png)
 
 > 证明整环可说明
+>
 > 1. 是常见域 (整环) 的子环 ($a-b,ab$ 封闭)
 > 2. 域 (整环) 中无零因子
 > 3. 包含单位元
@@ -153,7 +156,7 @@ references:
 
 ## 素理想与极大理想
 
-1. 在整数环 $\Z$ 中, 考虑素数 $p$ 生成的理想 $p\Z$ 
+1. 在整数环 $\Z$ 中, 考虑素数 $p$ 生成的理想 $p\Z$
    $$
    ab\in P\iff p|ab\iff p|a\;\mathrm{or}\;p|b\iff a\in P\;\mathrm{or}\;b\in P
    $$
@@ -169,6 +172,7 @@ references:
 7. **推论** 交换幺环的极大理想是素理想
 
 > 证明极大理想的常见套路
+>
 > 1. 先说明 $I$ 是真理想
 > 2. 假设 $\exist J\subsetneqq R,I\subsetneqq J$, 则 $\exist x\in J,x\notin I$
 > 3. 由加减法, 乘法的封闭性得到 $1_R\in J\implies J=R$
@@ -177,7 +181,7 @@ references:
 
 ## 特征
 
-1. **特征** 含乘法幺元的环, 
+1. **特征** 含乘法幺元的环,
    - 若 $1_R$ 的加法阶为 $+\infty$ 则 $\operatorname{char}R=0$
    - 若 $1_R$ 的加法阶为 $n$ 则 $\operatorname{char}R=n$
 2. **定理** 整环 (域) 的特征是零或素数
@@ -197,7 +201,7 @@ references:
 8. 若 $F$ 是有限域
    - $\implies\operatorname{char}F$ 为素数 $p$
    - $\implies\Z_p$ 可视为 $F$ 子域
-   - $\implies F$ 可视为 $\Z_p$ 上的一个 $n$ 维 $\Z_p$ -  线性空间
+   - $\implies F$ 可视为 $\Z_p$ 上的一个 $n$ 维 $\Z_p$ - 线性空间
    - $\implies F$ 是 $p^n$ 元有限域
    - $\implies F^*=F-\{0\}$ 是 $p^n-1$ 阶循环群
 
@@ -280,8 +284,8 @@ references:
    3. 验证乘法对加法分配率
    4. $F$ 的零元 $0_F=\left[\frac{0}{1}\right]$
    5. $F$ 的单位元 $1_F=\left[\frac{1}{1}\right]$
-   6.  $\forall\left[\frac{a}{b}\right]\in F$ 有负元 $\left[\frac{-a}{b}\right]$
-   7.  $\forall\left[\frac{a}{b}\right]\neq 0_F$ 有逆元 $\left[\frac{b}{a}\right]$
+   6. $\forall\left[\frac{a}{b}\right]\in F$ 有负元 $\left[\frac{-a}{b}\right]$
+   7. $\forall\left[\frac{a}{b}\right]\neq 0_F$ 有逆元 $\left[\frac{b}{a}\right]$
 6. 由 $F$ 构造包含 $D$ 的域, 取映射 $\phi:D\to F,x\mapsto\left[\frac{x}{1}\right]$
    1. $\phi$ 是单射
    2. $\phi$ 是同态映射
@@ -300,9 +304,9 @@ references:
 3. **相伴** $a,b\in D$ 且 $a|b,b|a$ 则称 $a,b$ 相伴, 记作 $a\sim b$
    - $a\in D$ 的**平凡因子** 单位和与 $a$ 相伴的因子
    - $a$ 的**真因子** $b|a$ 且 $b$ 不是 $a$ 的平凡因子
-   $$
-   a\sim b\iff\langle a\rangle=\langle b\rangle\iff \exist u\in U,a=bu
-   $$
+     $$
+     a\sim b\iff\langle a\rangle=\langle b\rangle\iff \exist u\in U,a=bu
+     $$
 4. **整环上的不可约元** 非零, 非单位, 无真因子
 5. **素元** 非零, 非单位, $p\in D$ 且 $p|ab\implies p|a$ 或 $p|b$
 6. **定理** 在整环上, 素元都是不可约元
@@ -331,7 +335,7 @@ references:
    1. 存在不可约元 $p_1,\cdots,p_s\in D\suchthat a=p_1p_2\cdots p_s$, 则称 $a$ 有一个不可约分解式
    2. 若 $a$ 的不可约分解式在相伴意义下唯一
    3. 若 $D$ 中任意非零非单位元均有唯一的不可约分解式
-   则称 $D$ 是一个惟一分解整环 UFD
+      则称 $D$ 是一个惟一分解整环 UFD
 10. **定理** $D$ 是 UFD, 则 $p$ 不可约 $\implies$ $p$ 是素元
     ![](https://cdn.duanyll.com/img/20231224202557.png)
 11. **整环中的真因子链** $a_1,a_2,\cdots,a_n,\cdots$, $a_{i-1}$ 是 $a_i$ 的真因子

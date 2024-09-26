@@ -1,6 +1,9 @@
 ---
 title: CF273D Dima and Figure
-tags: [OI, 题解, DP]
+tags:
+  - oi
+  - 题解
+  - dp
 source: http://codeforces.com/problemset/problem/273/D
 author: duanyll
 ---

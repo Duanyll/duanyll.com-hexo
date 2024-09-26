@@ -1,7 +1,10 @@
 ---
 layout: post
-title: "Standard-TLE-Library"
-tags: [项目,OI,施工现场]
+title: Standard-TLE-Library
+tags:
+  - 项目
+  - oi
+  - 施工现场
 comment: true
 published: true
 date: 2018-8-31

@@ -1,6 +1,7 @@
 ---
 title: 解决Ubuntu使用中遇到的几个问题
-tags: [Ubuntu]
+tags:
+  - ubuntu
 author: duanyll
 ---
 

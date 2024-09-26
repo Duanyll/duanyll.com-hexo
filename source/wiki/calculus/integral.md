@@ -179,7 +179,7 @@ $$
 
 > 乘积的积分, 可将其中一项用积分区间内某一点代替. 注意 $f$ 在闭区间可积, 但是 $\xi$ 在开区间中
 
-**定理** 积分第二中值定理: $\phi\in R([a,b])$, 
+**定理** 积分第二中值定理: $\phi\in R([a,b])$,
 
 1. 若 $f$ 在 $[a,b]$ 非负递减, 则 $\exist\xi\in[a,b]$
    $$
@@ -216,7 +216,7 @@ $$
 \int_{-\infty}^{+\infty}f(x)\d x=\int_{-\infty}^0f(x)\d x+\int_0^{+\infty}f(x)\d x
 $$
 
-**定理**  $\int_a^{+\infty}f(x)\d x$ 收敛 $\iff$
+**定理** $\int_a^{+\infty}f(x)\d x$ 收敛 $\iff$
 
 $$
 F(A)=\int_a^Af(x)\d x
@@ -285,7 +285,7 @@ $\implies \int_a^{+\infty}f(x)\phi(x)\d x$ 收敛
 
 $f$ 在 $(a,b]$ 有定义, $a$ 是 $f$ 唯一瑕点, 在任意 $[a+\eta,b]\sub(a,b]$ 上 Riemann 可积
 
-**定义** 瑕积分: 
+**定义** 瑕积分:
 
 $$
 \int_a^bf(x)\d x=\lim_{\eta\to0+}\int_{a+\eta}^bf(x)\d x
@@ -317,7 +317,7 @@ $$
 
 **定理** 积分次序交换定理: $f\in C([a,b]\times[c,d])$, 则 $\phi(y)=\int_a^bf(x,y)\d x$ 在 $[c,d]$ Riemann 可积, 且
 
-$$ 
+$$
 \int_c^d\d y\int_a^bf(x,y)\d x=\int_a^b\d x\int_c^df(x,y)\d y
 $$
 
@@ -371,7 +371,7 @@ $$
 
 **定理** 含参变量反常积分一致收敛 Cauchy 收敛原理:
 
-$\forall\epsilon>0,\exist A_0>a,\forall A',A''>A_0,y\in\mathcal{I}$ 有 
+$\forall\epsilon>0,\exist A_0>a,\forall A',A''>A_0,y\in\mathcal{I}$ 有
 
 $$
 \left|\int_{A'}^{A''}f(x,y)\d x\right|<\epsilon
@@ -400,13 +400,13 @@ $$
 **定理** Abel 判别法:
 
 1. $\int_a^{+\infty}f(x,y)\d x$ 关于 $y$ 在 $\mathcal{I}$ 上*一致收敛*
-2. $\phi(x,y)$ 对于任意固定的 $y\in\mathcal{I}$ 关于 $x$ 在 $[a,+\infty)$ *单调*, 且*一致有界* [^1]
+2. $\phi(x,y)$ 对于任意固定的 $y\in\mathcal{I}$ 关于 $x$ 在 $[a,+\infty)$ _单调_, 且*一致有界* [^1]
 
 $\implies \int_a^{+\infty}f(x,y)\phi(x,y)\d x$ 关于 $y$ 在 $\mathcal{I}$ 一致收敛
 
 **定理** Dirichlet 判别法:
 
-1. $\int_a^Af(x,y)\d x$ 在 $[a,+\infty)$ *一致有界*
+1. $\int_a^Af(x,y)\d x$ 在 $[a,+\infty)$ _一致有界_
 2. $\phi(x,y)$ 对于任意固定的 $y\in\mathcal{I}$ 关于 $x$ 在 $[a,+\infty)$ *单调*且 $\lim_{x\to+\infty}\phi(x,y)=0$ *一致收敛*到零
 
 $\implies \int_a^{+\infty}f(x,y)\phi(x,y)\d x$ 关于 $y$ 在 $\mathcal{I}$ 一致收敛
@@ -459,11 +459,11 @@ $$
 
 > 用于计算积分值, 先证明满足条件, 然后对偏导数中的积分形式应用分部积分, 构造微分方程
 
-**定理** Dini 定理: 
+**定理** Dini 定理:
 
-1. $f\in C([a,\infty)\times[c,d])$ 且 $f$ *不变号*
+1. $f\in C([a,\infty)\times[c,d])$ 且 $f$ _不变号_
 2. $\phi(y)=\int_a^{+\infty}f(x,y)\d x$ 关于 $y$ 在区间 $[c,d]$ 连续
 
 则有 $\phi(y)=\int_a^{+\infty}f(x,y)\d x$ 关于 $y$ 在区间 $[c,d]$ 一致收敛
 
-> 连续 $+$ 不变号 $\implies$ 一致收敛    
+> 连续 $+$ 不变号 $\implies$ 一致收敛

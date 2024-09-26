@@ -22,7 +22,7 @@ $$
 \vec{F}=I\vec{l}\times\vec{B}\label{label1}
 $$
 
-The magnetic field $\vec{B}$ is defind by the formula $(\ref{label1})$. SI Unit for $B$: Tesla 
+The magnetic field $\vec{B}$ is defind by the formula $(\ref{label1})$. SI Unit for $B$: Tesla
 
 $$
 1\un{T}=1\un{N/A\cdot M}=10^4\un{G}
@@ -74,7 +74,7 @@ $$
 \vec{\tau}=\vec{\mu}\times\vec{B}
 $$
 
-> Valid for any plane current loop. A small circular current is called a *magnetic dipole*.
+> Valid for any plane current loop. A small circular current is called a _magnetic dipole_.
 
 For a $N$ loops coil / solenoid: $\vec{\mu}=NI\vec{S}$
 
@@ -196,7 +196,7 @@ $$
 B=\frac{\mu_0IR^2}{2(R^2+x^2)^{3/2}}
 $$
 
-Magnetic dipole moment: 
+Magnetic dipole moment:
 
 $$
 \mu=I\cdot\pi R^2
@@ -248,14 +248,14 @@ $$
 \nabla\times\vec{B}=\mu_0\vec{j}
 $$
 
-> Maxwell equations for *steady* magnetic field and electrostatic field:
+> Maxwell equations for _steady_ magnetic field and electrostatic field:
 >
 > $$
 > \begin{cases}
 >     \nabla\cdot\vec{E}=\rho_E/\varepsilon_0\\
 >     \nabla\times\vec{E}=0\\
 >     \nabla\cdot\vec{B}=0\\
->     \nabla\times\vec{B}=\mu_0\vec{j}   
+>     \nabla\times\vec{B}=\mu_0\vec{j}
 > \end{cases}
 > $$
 

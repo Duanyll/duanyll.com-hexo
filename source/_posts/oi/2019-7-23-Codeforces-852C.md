@@ -1,7 +1,10 @@
 ---
 title: CF852C Property
 author: duanyll
-tags: [OI, 题解, 思维题]
+tags:
+  - oi
+  - 题解
+  - 思维题
 source: https://www.luogu.org/problemnew/show/CF852C
 ---
 

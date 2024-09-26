@@ -1,6 +1,9 @@
 ---
 title: CF575G Run for beer
-tags: [OI, 题解, 图论]
+tags:
+  - oi
+  - 题解
+  - 图论
 source: http://codeforces.com/problemset/problem/575/G
 author: duanyll
 ---
@@ -82,7 +85,7 @@ class lfs {
         vector<int> bfs_order;
         memset(dis, INF, sizeof dis);
         dis[0] = 0;
-        bfs_order.push_back(0); 
+        bfs_order.push_back(0);
         int cur = 0; // bfs队列不用pop, 空间换时间
         while (cur < bfs_order.size()) {
             int u = bfs_order[cur];

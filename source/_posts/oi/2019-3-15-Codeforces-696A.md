@@ -1,6 +1,9 @@
 ---
 title: CF696A Lorenzo Von Matterhorn
-tags: [OI,题解,思维题]
+tags:
+  - oi
+  - 题解
+  - 思维题
 author: duanyll
 source: https://www.luogu.org/problemnew/show/CF696A
 ---
@@ -11,7 +14,7 @@ source: https://www.luogu.org/problemnew/show/CF696A
 
 然而n高达1e18，所以建图是不可能的了。注意观察q只有1000，就是说只会涉及最多2000个点，因此就可以离散化+LCA瞎搞。然而这是一颗满二叉树，所以不用建图，直接开一个`map<int64,int64>`表示每个节点到父亲的距离，按照LCA的求法边跳边更新答案就是了。
 
-2000个点，最多处理2000*64次边，爆不了。
+2000个点，最多处理2000\*64次边，爆不了。
 
 ```cpp
 #include <algorithm>
@@ -57,5 +60,5 @@ int main(){
 			cout << ans << endl;
 		}
 	}
-} 
+}
 ```

@@ -1,7 +1,10 @@
 ---
-date: 2018-10-22
+date: 2018-10-22T00:00:00.000Z
 author: Duanyll
-tags: ["OI","算法","分块"]
+tags:
+  - oi
+  - 算法
+  - 分块
 title: 初步认识分块算法
 ---
 
@@ -28,7 +31,7 @@ blo = sqrt(n);
 for(int64 i = 1;i<=n;i++){
     v[i] = read();
     bl[i] = (int64)(i-1)/blo+1;
-    sum[bl[i]]+=v[i]; 
+    sum[bl[i]]+=v[i];
 }
 ```
 
@@ -38,8 +41,8 @@ for(int64 i = 1;i<=n;i++){
 
 ```cpp
 void add(int64 l,int64 r,int64 x){
-    int64 first = min(r,bl[l]*blo); //<--- 
-    for(int64 i = l;i<=first;i++){  
+    int64 first = min(r,bl[l]*blo); //<---
+    for(int64 i = l;i<=first;i++){
         v[i]+=x;
         sum[bl[i]]+=x;
     }
@@ -51,7 +54,7 @@ void add(int64 l,int64 r,int64 x){
             v[i]+= x;
             sum[bl[i]]+=x;
         }
-    }    
+    }
 }
 ```
 
@@ -78,4 +81,4 @@ int64 query(int64 l,int64 r){
 }
 ```
 
-注意分块算法涉及for循环操作较多，经`KING_LRL`提醒，`i`使用`register int`能有效提升速度。分块算法最坏情况时间复杂度为O(3*sqrt(n))。
+注意分块算法涉及for循环操作较多，经`KING_LRL`提醒，`i`使用`register int`能有效提升速度。分块算法最坏情况时间复杂度为O(3\*sqrt(n))。

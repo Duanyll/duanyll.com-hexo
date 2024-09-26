@@ -7,7 +7,8 @@
     "clean": "hexo clean",
     "deploy": "hexo deploy",
     "server": "hexo server",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package",
+    "prepare": "husky"
   },
   "hexo": {
     "version": "7.2.0"
@@ -32,9 +33,18 @@
     "hexo-renderer-pandoc": "^0.4.0",
     "hexo-renderer-stylus": "^3.0.0",
     "hexo-server": "^3.0.0",
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
     "lodash": "^4.17.21",
     "patch-package": "^7.0.0",
     "postinstall-postinstall": "^2.1.0",
+    "prettier": "^3.3.3",
     "prompt-sync": "^4.2.0"
+  },
+  "lint-staged": {
+    "source/**/*.md": [
+      "yarn prettier --write",
+      "git add"
+    ]
   }
 }

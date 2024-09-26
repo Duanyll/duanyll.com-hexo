@@ -2,26 +2,24 @@ const fs = require('fs/promises');
 const promisify = require('util').promisify;
 const glob = promisify(require('glob'));
 const os = require('os');
+const yaml = require('js-yaml');
+const _ = require('lodash');
 
 function processPost(text) {
-    // Find one source link in yaml front matter
-    const regex = /source: ([^\n]*)/g;
-    const source = regex.exec(text);
-    if (source) {
-        const sourceLink = source[1].trim();
-        // Find the end of yaml front matter
-        const endTag = `---${os.EOL}`
-        const endOfYaml = text.indexOf(endTag, source.index);
-        // Insert the link as swig tag after the yaml front matter
-        // ---
-        // 
-        // {% link sourceLink desc:true %}
-        // 
-        // (rest of the post)
-        return text.slice(0, endOfYaml + endTag.length)
-            + `${os.EOL}{% link ${sourceLink} desc:true %}${os.EOL}`
-            + text.slice(endOfYaml + endTag.length);
+    const hasFrontMatter = text.startsWith('---');
+    if (!hasFrontMatter) {
+        return;
     }
+    // Find second `---`
+    const endOfFrontMatter = text.indexOf('---', 4);
+    const frontMatter = text.slice(4, endOfFrontMatter).trim();
+    const content = text.slice(endOfFrontMatter + 3);
+    const data = yaml.load(frontMatter);
+    if (data.tags) {
+        data.tags = _.map(data.tags, _.toLower);
+    }
+    const newFrontMatter = yaml.dump(data);
+    return `---${os.EOL}${newFrontMatter}---${content}`;
 }
 
 async function main() {

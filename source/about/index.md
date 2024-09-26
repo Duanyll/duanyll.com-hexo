@@ -1,8 +1,8 @@
 ---
 title: About
-date: 2023-02-05 16:32:37
+date: 2023-02-05T16:32:37.000Z
 menu-id: about
-sidebar: 
+sidebar:
   - ghuser
 ---
 

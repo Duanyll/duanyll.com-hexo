@@ -1,7 +1,7 @@
 ---
 title: 时间序列分析作业 1
-tags: 
-    - 时间序列
+tags:
+  - 时间序列
 author: duanyll
 ---
 
@@ -130,13 +130,13 @@ ListPlot[data, Filling -> Axis]
 ```mathematica
 gamma = CovarianceFunction[data, {10}];
 Normal[gamma]
-ListPlot[{gamma, CovarianceFunction[model, {10}]}, Filling -> Axis, 
+ListPlot[{gamma, CovarianceFunction[model, {10}]}, Filling -> Axis,
  PlotLegends -> {"模拟数据", "理论"}]
 ```
 
 ```mathematica
-{{0, 2.04243}, {1, -1.01932}, {2, 0.918475}, {3, -0.0514594}, {4, 
-  0.0929306}, {5, -0.0248783}, {6, 0.0382432}, {7, -0.124687}, {8, 
+{{0, 2.04243}, {1, -1.01932}, {2, 0.918475}, {3, -0.0514594}, {4,
+  0.0929306}, {5, -0.0248783}, {6, 0.0382432}, {7, -0.124687}, {8,
   0.0575548}, {9, -0.129289}, {10, 0.0371609}}
 ```
 
@@ -147,13 +147,13 @@ ListPlot[{gamma, CovarianceFunction[model, {10}]}, Filling -> Axis,
 ```mathematica
 phi = PartialCorrelationFunction[data, {10}];
 Normal[phi]
-ListPlot[{phi, PartialCorrelationFunction[model, {10}]}, 
+ListPlot[{phi, PartialCorrelationFunction[model, {10}]},
  Filling -> Axis, PlotLegends -> {"模拟数据", "理论"}]
 ```
 
 ```mathematica
-{{1, -0.49907}, {2, 0.267171}, {3, 0.390937}, {4, 
-  0.0750153}, {5, -0.228319}, {6, -0.165794}, {7, -0.0293216}, {8, 
+{{1, -0.49907}, {2, 0.267171}, {3, 0.390937}, {4,
+  0.0750153}, {5, -0.228319}, {6, -0.165794}, {7, -0.0293216}, {8,
   0.095243}, {9, 0.0337099}, {10, -0.0334262}}
 ```
 
@@ -175,12 +175,12 @@ ListPlot[data, Filling -> Axis]
 估计自回归系数
 
 ```mathematica
-eproc = EstimatedProcess[data, 
+eproc = EstimatedProcess[data,
   ARProcess[{\[Phi]1, \[Phi]2, \[Phi]3, \[Phi]4, \[Phi]5}, \[Sigma]]]
 ```
 
 ```mathematica
-ARProcess[{1.45937, -0.847174, 0.238211, 
+ARProcess[{1.45937, -0.847174, 0.238211,
   0.00292631, -0.0436659}, 1.0762]
 ```
 
@@ -190,7 +190,7 @@ $$
 \hat{\phi}_{mm}\sim N(1,\frac{1}{N})
 $$
 
-取出错概率为, 则自回归系数的置信区间为 
+取出错概率为, 则自回归系数的置信区间为
 
 ```mathematica
 Quantile[NormalDistribution[0, Sqrt[1/N]], 1 - \[Alpha]/2]
@@ -260,7 +260,7 @@ $$
 
 ```mathematica
 \[Gamma] = CovarianceFunction[data, {2}];
-\[Phi] = 
+\[Phi] =
  LinearSolve[{{\[Gamma][0], \[Gamma][1]}, {\[Gamma][1], \[Gamma][
      0]}}, {\[Gamma][1], \[Gamma][2]}]
 \[Sigma]2 = \[Gamma][0] - \[Phi] . {\[Gamma][1], \[Gamma][2]}
@@ -285,7 +285,7 @@ $$
 求解 Y-W 方程得二阶 MA 模型参数
 
 ```mathematica
-\[Theta] = 
+\[Theta] =
  LinearSolve[{{\[Gamma]0, \[Gamma]1}, {\[Gamma]1, \[Gamma]0}}, {\
 \[Gamma]1, \[Gamma]2}]
 \[Sigma]2 = \[Gamma]0 - \[Theta] . {\[Gamma]1, \[Gamma]2}
@@ -298,8 +298,8 @@ $$
 ### 极大似然估计
 
 ```mathematica
-eproc = EstimatedProcess[data, 
-  MAProcess[{\[Theta]1, \[Theta]2}, \[Sigma]], 
+eproc = EstimatedProcess[data,
+  MAProcess[{\[Theta]1, \[Theta]2}, \[Sigma]],
   ProcessEstimator -> "MaximumLikelihood"]
 ```
 
@@ -307,7 +307,7 @@ eproc = EstimatedProcess[data,
 MAProcess[{-0.617286, 0.712392}, 1.06552]
 ```
 
-置信区间为 
+置信区间为
 
 ```mathematica
 Quantile[NormalDistribution[0, Sqrt[1/N]], 1 - \[Alpha]/2]

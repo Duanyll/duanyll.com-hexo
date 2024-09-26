@@ -1,7 +1,8 @@
 ---
 hidden: true
 title: Do Things Right or Do the Right Things?
-tags: [文化课]
+tags:
+  - 文化课
 author: duanyll
 ---
 
@@ -13,8 +14,8 @@ relates to the ‘what’ aspect of action. All in all, there is a word saying
 
 [^1]: 伦理道德
 
->   “Efficiency[^2] is doing things right; effectiveness[^3] is doing the right
->   things.”
+> “Efficiency[^2] is doing things right; effectiveness[^3] is doing the right
+> things.”
 
 [^2]: 效率
 
@@ -35,9 +36,9 @@ doing things right can mean getting things more organized, while doing the right
 things stands for having a further vision and goal. I’ve read a good metaphor on
 the internet to describe this:
 
->   A manager will teach you how to climb the ladder of success faster, but a
->   true leader will first check whether the ladder of success is leaning
->   against the right wall.
+> A manager will teach you how to climb the ladder of success faster, but a
+> true leader will first check whether the ladder of success is leaning
+> against the right wall.
 
 Thank you for your listening.
 

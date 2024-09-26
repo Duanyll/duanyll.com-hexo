@@ -1,6 +1,9 @@
 ---
 title: CF733E Sleep in Class [思维题]
-tags: [OI,题解,思维题]
+tags:
+  - oi
+  - 题解
+  - 思维题
 author: duanyll
 source: https://www.luogu.org/problemnew/show/CF733E
 ---
@@ -30,7 +33,7 @@ DUU ...
 
 手工模拟几次样例之后容易发现人会一直沿着一段连续相同的标记往前走，遇到第一个不同的标记就返回后一直往回走，再碰到一个不一样的标记后继续向开始的方向走，回到刚才的折返点时不同的标记已经被清除掉了，就可以继续向前走了……
 
-相当于这个人从出发点开始，以 $ 2*dis $ 的代价依次消除两侧颜色不一样的点，最后获得一条连续的颜色相同的路走出去，不存在走不出去的情况。
+相当于这个人从出发点开始，以 $ 2\*dis $ 的代价依次消除两侧颜色不一样的点，最后获得一条连续的颜色相同的路走出去，不存在走不出去的情况。
 
 ```
 DUDUDDDUU
@@ -88,35 +91,35 @@ int main(){
 			ans[i] = n-i+1;
 		}
 	}
-	
+
 	int head = 0,tail = 0;
 	int64 tot = 0;
 	for(int i = 1;i<=n;i++){
-		tot += head-tail;			//向前推进一格，距离当前队列中折返点距离之和增加为折返点个数 
+		tot += head-tail;			//向前推进一格，距离当前队列中折返点距离之和增加为折返点个数
 		while(head-tail > sumd[i]){
-			tot -= i - q[tail++];	//出队多余折返点 
+			tot -= i - q[tail++];	//出队多余折返点
 		}
 		ans[i] += tot*2;
 		if(a[i] == 'U'){
 			q[head++] = i;
-		} 
+		}
 	}
-	
+
 	head = 0,tail = 0;
 	tot = 0;
 	for(int i = n;i>=1;i--){
 		tot += head-tail;
 		while(head-tail > sumu[i]){
-			tot += i - q[tail++];	//出队多余折返点 
+			tot += i - q[tail++];	//出队多余折返点
 		}
 		ans[i] += tot*2;
 		if(a[i] == 'D'){
 			q[head++] = i;
-		} 
+		}
 	}
-	
+
 	for(int i = 1;i<=n;i++){
-		cout << ans[i] << ' '; 
+		cout << ans[i] << ' ';
 	}
 	cout << endl;
 }

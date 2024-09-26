@@ -21,22 +21,23 @@ order: 101
   3. 乘以可逆矩阵
   4. 转置, 旋转, 镜像
 - 矩阵的逆和计算
+
   - 主逆副反号
-$$
-\left(
-\begin{matrix}
-    A & B \\
-    C & D
-\end{matrix}
-\right)^{-1} = 
-\frac{1}{AD-BC}
-\left(
-\begin{matrix}
-    D & -B \\
-    -C & A
-\end{matrix}
-\right)
-$$
+    $$
+    \left(
+    \begin{matrix}
+        A & B \\
+        C & D
+    \end{matrix}
+    \right)^{-1} =
+    \frac{1}{AD-BC}
+    \left(
+    \begin{matrix}
+        D & -B \\
+        -C & A
+    \end{matrix}
+    \right)
+    $$
 
 - 线性方程组的解的存在性 (增广矩阵的秩)
 - 方程组的解的表达

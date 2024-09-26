@@ -1,7 +1,8 @@
 ---
 layout: post
 title: "[已补档]山寨金山打字——KeyboardExercise"
-tags: [项目]
+tags:
+  - 项目
 comment: true
 published: true
 date: 2018-8-6

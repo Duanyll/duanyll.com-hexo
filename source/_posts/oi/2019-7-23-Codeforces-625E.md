@@ -1,7 +1,10 @@
 ---
 title: CF625E Frog Fights
 author: duanyll
-tags: [OI, 题解, 思维题]
+tags:
+  - oi
+  - 题解
+  - 思维题
 source: https://www.luogu.org/problemnew/show/CF625E
 ---
 
@@ -78,7 +81,7 @@ int time_to_hit(const frog& a, const frog& b) {
         d = (d + b.a) % m;
     }
     if (d <= a.a) return 1; // 即使a的速度不够也能跳到
-    if (a.a <= b.a) return INF; 
+    if (a.a <= b.a) return INF;
     // return ceil((double)(d - b.a) / (a.a - b.a));
     return (d - b.a - 1) / (a.a - b.a) + 1;
 }

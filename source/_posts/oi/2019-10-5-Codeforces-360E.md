@@ -1,6 +1,9 @@
 ---
 title: CF360E Levko and Game
-tags: [OI, 题解, 贪心]
+tags:
+  - oi
+  - 题解
+  - 贪心
 author: duanyll
 source: http://codeforces.com/problemset/problem/360/E
 ---

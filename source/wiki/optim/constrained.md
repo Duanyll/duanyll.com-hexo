@@ -5,13 +5,11 @@ wiki: notes-optim
 order: 106
 ---
 
-
-
 $$
 \begin{aligned}
     \mathrm{minimize}\;\;&f(x)\\
     \mathrm{subject\ to}\;\;&h_i(x)=0,&i=1,\cdots,m\\
-                            &g_j(x)\leq0,&j=1,\cdots,p 
+                            &g_j(x)\leq0,&j=1,\cdots,p
 \end{aligned}
 $$
 
@@ -27,7 +25,7 @@ $$
 - 正则点: 对于满足等式约束的点 $x^*$, 梯度向量 $\nabla h_{1}(x^{\ast}),\ldots,\nabla h_{m}(x^{\ast})$ 线性无关.
   - $x^*$ 是正则点 $\iff \operatorname{rank}Dh(x^*)=m$
 - 曲面 $S=\{x\in R^{n}\colon h_{1}(x){=}0,\ldots,h_{m}(x){=}0\}$, 若 $S$ 上所有点都是正则点, 则维数为 $n-m$
-- 切线空间 $T(x^{\ast})\;=\;\left\{\:y:D h(x^{\ast})y=0\right\}$, 即 $Dh(x^*)$ 的零空间. 
+- 切线空间 $T(x^{\ast})\;=\;\left\{\:y:D h(x^{\ast})y=0\right\}$, 即 $Dh(x^*)$ 的零空间.
   - 正则点的切空间维数是 $n-m$
   - 切平面 $T P(x^{*})=T(x^{*})+x^{*}=\{x+x^{*}:x\in T(a x^{*})\}$
 - 法线空间 $N(x^{*})=\{x\in\mathbb{R}^{*}:x=D h(x^{*})^{\top}z,\ z\in\mathbb{R}^{m}\}$
@@ -92,7 +90,7 @@ $$
 
 ![](https://cdn.duanyll.com/img/2022-12-07-16-05-32.png)
 
-Lagrange 函数 
+Lagrange 函数
 
 $$
 l(x,\lambda)={\frac{1}{2} }x^{\top}Q x+\lambda^{\top}(b-A x)
@@ -119,7 +117,7 @@ $$
 \begin{aligned}
     \mathrm{minimize}\;\;&f(x)\\
     \mathrm{subject\ to}\;\;&h_i(x)=0,&i=1,\cdots,m\\
-                            &g_j(x)\leq0,&j=1,\cdots,p 
+                            &g_j(x)\leq0,&j=1,\cdots,p
 \end{aligned}
 $$
 
@@ -301,7 +299,7 @@ $$
 \mathrm{minimize}\;\;f(x)+\gamma P(x), \gamma>0
 $$
 
-指示函数 
+指示函数
 
 $$
 l_\Omega(x):=

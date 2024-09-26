@@ -84,10 +84,10 @@ $$
 
 一致连续例题
 
-- 通过定义的直接否定 $(\ref{negdef})$ 证明不一致连续. 
+- 通过定义的直接否定 $(\ref{negdef})$ 证明不一致连续.
 - 通过构造函数值极限不同的点列来证明不一致连续, 常见于涉及三角函数证明
 - 证明是一致连续, 可通过放缩找到 Lipschitz 连续的系数 $M$
-- 在 $[0,+\infty)$ 一致连续 $\implies\exist A,B,|f(x)|\leq Ax+B$ 
+- 在 $[0,+\infty)$ 一致连续 $\implies\exist A,B,|f(x)|\leq Ax+B$
 - 利用极限相关证明的常见技巧, $|a-b|\leq|a-c|+|c-b|\leq2\epsilon$
 
 {% endfolding %}

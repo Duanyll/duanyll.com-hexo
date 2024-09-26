@@ -1,7 +1,9 @@
 ---
 title: NOI Linux 存活指北
 author: duanyll
-tags: [OI, Linux]
+tags:
+  - oi
+  - linux
 ---
 
 ## 启动
@@ -26,7 +28,7 @@ tags: [OI, Linux]
 
 CCF 为我们预装了一个叫做 GUIDE 的 C++ IDE, 类似 Dev-C++, 但是界面丑陋, Bug 繁多, 此处不讲解也不推荐使用.
 
-在电子科大的 VMWare 环境下, 你可以直接将 `cpp` 文件和大样例拖到虚拟机的桌面上, 或者直接使用剪贴板复制粘贴文件. 当然, 你也可以直接在 NOI Linux 里写题. 
+在电子科大的 VMWare 环境下, 你可以直接将 `cpp` 文件和大样例拖到虚拟机的桌面上, 或者直接使用剪贴板复制粘贴文件. 当然, 你也可以直接在 NOI Linux 里写题.
 
 推荐直接使用终端编译和运行你的程序, 方法如下
 
@@ -44,7 +46,7 @@ g++ filename.cpp -o filename.out -Wall -Wextra
 1. 在 Linux 下, 如果一条指令没有任何输出, 说明他执行成功了.
    > 没有消息就是最好的消息
 2. 不同于 Windows 的可执行文件一定是 `*.exe` (严谨来说, 还有 `*.com`, `*.bat` 等等), Linux 并不按照扩展名区分是否可执行文件. 也就是说, 可执行文件可以使任意扩展名, 或者没有扩展名 (多数情况是这样). 要执行当前目录下一个叫做 `filename.out` 的可执行文件, 输入 `./filename.out`
-3. Linux 对于内存越界等错误的检测更加严格. 
+3. Linux 对于内存越界等错误的检测更加严格.
 4. 如果你不会 Vim 或者是 Emacs, 请使用 GEdit, 他就是一个普通的记事本.
 5. 在终端里复制和粘贴要使用 `Ctrl + Shift + C` 和 `Ctrl + Shift + V`, 按 `Ctrl + C` 终止正在运行的程序(比如无限死循环了), 然而在终端和 Vim / Emacs 以外的地方就是普通的 `Ctrl + C/V` 了.
 6. 加栈用 `ulimit -s 1000000000`, 仅对当前终端会话有效.
@@ -64,7 +66,7 @@ g++ filename.cpp -o filename.out -Wall -Wextra
 - `next`
 - `data`
 
-这些标识符可以用于重载的函数, 局部变量, 但不能用于全局变量. 
+这些标识符可以用于重载的函数, 局部变量, 但不能用于全局变量.
 
 解决全局变量重名的根本办法:
 

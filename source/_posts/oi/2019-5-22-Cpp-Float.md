@@ -1,6 +1,7 @@
 ---
 title: C++(Dev-Cpp附赠的Mingw32)的浮点数的坑
-tags: [OI]
+tags:
+  - oi
 author: duanyll
 ---
 

@@ -1,9 +1,9 @@
 ---
 title: 基于 PY32 和 INA219 的 USB3.0 电流表
-tags: 
+tags:
   - 电子设计
-  - PY32
-  - 嘉立创EDA
+  - py32
+  - 嘉立创eda
 cover: https://cdn.duanyll.com/img/20240829160316.png
 description: 基于 PY32F002A 和 INA219 的 USB3.0 电流表，成本不到 10 元，提供 Type-A 和 Type-C 版本
 repo: Duanyll/py32-ina219-usb-meter

@@ -1,8 +1,11 @@
 ---
 author: duanyll
-date: 2018-10-16
+date: 2018-10-16T00:00:00.000Z
 title: 玄(pian)学(fen)算法——模拟退火
-tags: ["OI","算法","模拟退火"]
+tags:
+  - oi
+  - 算法
+  - 模拟退火
 ---
 
 NOIP在即，还是复习一下经典玄(pian)学(fen)算法，多骗个二三十分，以免爆零。
@@ -49,7 +52,7 @@ T SA(T s){
 	return now;
 }
 
-const double MAX_TIME = 0.8; 
+const double MAX_TIME = 0.8;
 template<typename T,typename TComp>
 T SA_Time(T s){
 	state ans = SA<state,less<double> >(s);

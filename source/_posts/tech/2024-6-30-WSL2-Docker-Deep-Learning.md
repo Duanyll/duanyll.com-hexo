@@ -1,10 +1,10 @@
 ---
 title: 基于 WSL2 和 Docker 的深度学习环境指北
-tags: 
+tags:
   - 炼丹
-  - Docker
+  - docker
   - 指北
---- 
+---
 
 为什么要使用 WSL2 和 Docker 来管理深度学习环境？本教程的配置方法旨在日常使用的 Windows 机器上建立 CUDA 加速的深度学习环境，以便进行快速的调试与开发代码，而无需忍受连接到远程服务器的延迟。许多的深度学习库不能在 Windows 上开箱即用（尽管许多库只需少量的代码修改即可兼容 Windows 和 MSVC），或者在 Windows 上难以复现行为，所以需要使用 WSL2。作为虚拟机，WSL2 支持绝大多数的 Linux 内核的特性，相较于其他的虚拟化平台，WSL2 能优雅地与 Windows 宿主机共享同一张 CUDA 显卡。我不喜欢使用 Conda，第一是因为 Resolving Environment 太慢了，第二是 conda 的环境隔离程度实际上并不能满足深度学习的需求。Conda 不能隔离 CUDA 运行库，和其他 apt 管理的 C 库，而 Docker 可以，DevContainers 已包含了一套易用的将 Docker 容器用于开发的方案。
 
@@ -113,7 +113,7 @@ echo "Acquire::https::Proxy \"http://$(hostname).local:7890\";" | sudo tee -a /e
 sudo apt update
 ```
 
-## Step 5 - 在 WSL 中安装 CUDA 
+## Step 5 - 在 WSL 中安装 CUDA
 
 无论最后需要用什么版本的 CUDA，都在 WSL 中安装最新版的 CUDA Toolkit。
 
@@ -314,39 +314,39 @@ Visual Studio Code 的 DevContainer 功能可以让你在容器中开发代码�
 
 ```jsonc
 {
-    "build": {
-        "dockerfile": "Dockerfile"
+  "build": {
+    "dockerfile": "Dockerfile",
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.autopep8",
+        "ms-vscode.cmake-tools",
+        "ms-vscode.cpptools",
+        "GitHub.copilot",
+        "ms-vscode.hexeditor",
+        // Add more extensions here to use in the container
+      ],
     },
-    "customizations": {
-        "vscode": {
-            "extensions": [
-                "ms-python.python",
-                "ms-python.autopep8",
-                "ms-vscode.cmake-tools",
-                "ms-vscode.cpptools",
-                "GitHub.copilot",
-                "ms-vscode.hexeditor"
-                // Add more extensions here to use in the container
-            ]
-        }
-    },
-    "capAdd": [
-        "SYS_PTRACE" // Required to use gdb
-    ],
-    "runArgs": [
-        // Enable host.docker.internal DNS name
-        "--add-host=host.docker.internal:host-gateway",
-        // Enable CUDA support
-        "--gpus",
-        "all"
-    ],
-    "mounts": [
-        // UNCOMMENT AND TYPE YOUR ABSOLUTE PATH TO THE DATASETS FOLDER
-        // "type=bind,source=/absolute/path/to/datasets,target=/datasets"
-    ],
-    "shutdownAction": "none",
-    "hostRequirements": {
-        "gpu": true
-    }
+  },
+  "capAdd": [
+    "SYS_PTRACE", // Required to use gdb
+  ],
+  "runArgs": [
+    // Enable host.docker.internal DNS name
+    "--add-host=host.docker.internal:host-gateway",
+    // Enable CUDA support
+    "--gpus",
+    "all",
+  ],
+  "mounts": [
+    // UNCOMMENT AND TYPE YOUR ABSOLUTE PATH TO THE DATASETS FOLDER
+    // "type=bind,source=/absolute/path/to/datasets,target=/datasets"
+  ],
+  "shutdownAction": "none",
+  "hostRequirements": {
+    "gpu": true,
+  },
 }
 ```

@@ -4,7 +4,8 @@ layout: wiki
 wiki: notes-aa
 order: 801
 references:
-  - '[近世代数答案](https://mp.weixin.qq.com/s?__biz=Mzk0NzMyNDg0Mg==&mid=2247484131&idx=6&sn=5549ee6c9158b0831a24ea854a04239e&chksm=c379d026f40e5930cf670d55dd2a525dce38dd6c0c411a6ff9d440e7fd0d46dd6e39d969b93c&scene=27)'
+  - >-
+    [近世代数答案](https://mp.weixin.qq.com/s?__biz=Mzk0NzMyNDg0Mg==&mid=2247484131&idx=6&sn=5549ee6c9158b0831a24ea854a04239e&chksm=c379d026f40e5930cf670d55dd2a525dce38dd6c0c411a6ff9d440e7fd0d46dd6e39d969b93c&scene=27)
 ---
 
 ## 群
@@ -26,7 +27,7 @@ references:
    1. 结合律
    2. 左单位元 $\exist e\in G, \forall a\in G, ea=a$
    3. 左逆元 $\forall a\in G, \exist a'\in G, a'a=e$
-9.  **定理** 结合律成立, $G$ 构成群 $\iff$ $\forall a,b\in G$, $ax=b,ya=b$ 在 $G$ 中都有解
+9. **定理** 结合律成立, $G$ 构成群 $\iff$ $\forall a,b\in G$, $ax=b,ya=b$ 在 $G$ 中都有解
 10. **定理** 具有左右消去律的**有限**半群 (结合律成立) 一定是群
 
 ## 子群
@@ -45,6 +46,7 @@ references:
 > 判定子群只需要说明 $ab^{-1}\in H$
 >
 > **中心化子** 与 $a\in G$ 可交换的元素
+>
 > $$
 > C(a)=\{g\in G|ga=ag\}
 > $$
@@ -177,7 +179,7 @@ references:
    $$
    满足
    1. $\ker\phi\lhd G$
-   2. $\phi$ 单射 $\iff \ker\phi=\{e\}$ 
+   2. $\phi$ 单射 $\iff \ker\phi=\{e\}$
 6. **群同态基本定理** 设 $\phi:G\to G'$ 是群之间的*满同态*, 则
    $$
    G/\ker\phi\cong G'
@@ -191,7 +193,7 @@ references:
 ![群同态基本定理](https://cdn.duanyll.com/img/20231221214204.png)
 
 > 用群同态基本定理证明同构
-> 
+>
 > 1. 构造同态映射, 先证明良定
 > 2. 证明满射
 > 3. 证明保运算

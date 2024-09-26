@@ -5,8 +5,6 @@ wiki: notes-optim
 order: 102
 ---
 
-
-
 ## 几何概念
 
 - 线段: $\{\alpha x+(1-\alpha)y:\alpha\in[0,1]\}$
@@ -103,7 +101,7 @@ $f: m \rarr n, g:n\rarr p, f(g): m \rarr p, (p \times n) (n\times m) \rarr (p\ti
 
 ## Taylor 展开
 
-可微函数 $f$ 在 $x_0$ 的切线超平面: 
+可微函数 $f$ 在 $x_0$ 的切线超平面:
 
 $$
 z-z_{0}=D f(x_{0})(x-x_{0})=(x-x_{0})^{\mathsf{T} }\nabla f(x_{0})

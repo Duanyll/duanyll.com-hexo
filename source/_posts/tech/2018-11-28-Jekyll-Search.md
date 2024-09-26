@@ -1,7 +1,9 @@
 ---
 author: duanyll
 title: 为你的Jekyll博客添加搜索文章功能
-tags: ["教程","Jekyll"]
+tags:
+  - 教程
+  - jekyll
 ---
 
 众所周知，Github上的Jekyll上实现自定义插件很困难，因此即使有Jekyll的搜索插件，也只能手写js代码。静态网站实现搜索原理是这样的，通过HTTP请求获取`posts.json`，然后本地解析里面内容实现搜索。
@@ -49,20 +51,20 @@ permalink: /posts.json
 ## HTTP请求
 
 ```js
-let requestURL = '/posts.json';
+let requestURL = "/posts.json";
 let request = new XMLHttpRequest();
-request.open('GET', requestURL);
-request.responseType = 'text';
+request.open("GET", requestURL);
+request.responseType = "text";
 request.send();
 
 var posts;
 let section = null;
 
 request.onload = function () {
-	let postsText = request.response;
-	posts = JSON.parse(postsText);
-	//console.log(postsText);
-	initPosts(posts['posts']);
+  let postsText = request.response;
+  posts = JSON.parse(postsText);
+  //console.log(postsText);
+  initPosts(posts["posts"]);
 };
 ```
 
@@ -70,26 +72,26 @@ request.onload = function () {
 
 ```js
 function initSearchBox() {
-	var box = document.createElement('input');
-	box.setAttribute('type', 'text');
-	box.setAttribute('id', 'search-box');
-	box.setAttribute('placeholder', '搜索文章...');
-	box.oninput = function () {
-		var text = this.value;
-		if (text != "") {
-			var list = [];
-			postList.forEach(post => {
-				if (post.title.search(text) > -1 || post.excerpt.search(text) > -1) {
-					list.push(post);
-				}
-			});
-			showSelectedPost(list);
-		} else {
-			showAllPost();
-		}
-	}
+  var box = document.createElement("input");
+  box.setAttribute("type", "text");
+  box.setAttribute("id", "search-box");
+  box.setAttribute("placeholder", "搜索文章...");
+  box.oninput = function () {
+    var text = this.value;
+    if (text != "") {
+      var list = [];
+      postList.forEach((post) => {
+        if (post.title.search(text) > -1 || post.excerpt.search(text) > -1) {
+          list.push(post);
+        }
+      });
+      showSelectedPost(list);
+    } else {
+      showAllPost();
+    }
+  };
 
-	document.getElementById('nav-ul').appendChild(box);
+  document.getElementById("nav-ul").appendChild(box);
 }
 ```
 
@@ -97,13 +99,13 @@ function initSearchBox() {
 
 ```js
 $(window).scroll(function () {
-	var htmlHeight = $(document).height();
-	var clientHeight = $(window).height();
-	var scrollTop = $(document).scrollTop();
-	var he = scrollTop + clientHeight;
-	if (he >= htmlHeight * 0.9) {
-		addListMore();
-	}
+  var htmlHeight = $(document).height();
+  var clientHeight = $(window).height();
+  var scrollTop = $(document).scrollTop();
+  var he = scrollTop + clientHeight;
+  if (he >= htmlHeight * 0.9) {
+    addListMore();
+  }
 });
 ```
 

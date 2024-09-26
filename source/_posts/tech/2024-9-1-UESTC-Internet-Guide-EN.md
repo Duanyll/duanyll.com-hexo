@@ -1,7 +1,7 @@
 ---
 title: UESTC Internet Guide
-tags: 
-  - UESTC
+tags:
+  - uestc
   - 上网指南
 redirect: https://netunion.org/2024/uestc-internet/
 hidden: true

@@ -1,6 +1,8 @@
 ---
 layout: post
-tags: ["OI","总结"]
+tags:
+  - oi
+  - 总结
 title: GDB常用命令
 author: Duanyll
 ---
@@ -27,4 +29,4 @@ author: Duanyll
 | `kill`      | `k`    | 停止执行                              |
 | `quit`      | `q`    | 退出GDB                               |
 
-注意在学校的电脑上手动用GDB时，分清楚打开的是 *Pascal的GDB还是C++的GDB* ，否则行号会错乱！
+注意在学校的电脑上手动用GDB时，分清楚打开的是 _Pascal的GDB还是C++的GDB_ ，否则行号会错乱！

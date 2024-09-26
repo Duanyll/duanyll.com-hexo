@@ -15,7 +15,7 @@ $$
 \varepsilon=-\frac{\d\Phi_B}{\d t}
 $$
 
-For a $N$-loop coil: 
+For a $N$-loop coil:
 
 $$
 \varepsilon=-N\frac{\d\Phi_B}{\d t}
@@ -32,7 +32,7 @@ An induced EMF is always in a direction that opposes the original change in flux
 > $$
 > E=\frac{\d\Phi_B}{\d t},I=\frac{E}{R}=\frac{\d\Phi_B}{R\d t}
 > $$
-> 
+>
 > $$
 > Q=\int I\d t=\frac{\Delta\Phi_B}{R}
 > $$
@@ -123,7 +123,7 @@ $$
 
 ## Inductor
 
-### Self Inductance 
+### Self Inductance
 
 ![Self inductance](https://cdn.duanyll.com/img/20230215112920.png)
 
@@ -131,7 +131,7 @@ Magnetic flux $\Phi_B\propto$ current $I$
 
 Self inductance of the coil $L$, unit: Henry $\un{H}$
 
-A coil with significant $L$ is an inductor. EMF induced in an inductor: 
+A coil with significant $L$ is an inductor. EMF induced in an inductor:
 
 $$
 \varepsilon=-N\frac{\d\Phi_B}{\d t}=-L\frac{\d I}{\d t}
@@ -217,7 +217,7 @@ $$
 M=\sqrt{L_1L_2}
 $$
 
-Generally, 
+Generally,
 
 $$
 M=k\sqrt{L_1L_2}
@@ -278,7 +278,7 @@ $$
 I=-\frac{\d Q}{\d t}=\omega Q_0\sin(\omega t+\varphi)
 $$
 
-## Displacement Current 
+## Displacement Current
 
 ![the discontinuity of current in a charging capacitor](https://cdn.duanyll.com/img/20230215165752.png)
 
@@ -288,7 +288,7 @@ $$
 \oint_{S_1}\vec{B}\cdot\d\vec{l}=\mu_0I
 $$
 
-However, under the pervious defination of steady current model, the *current* enclosed by $S_2$ equals to zero, indicating that 
+However, under the pervious defination of steady current model, the _current_ enclosed by $S_2$ equals to zero, indicating that
 
 $$
 \oint_{S_2}\vec{B}\cdot\d\vec{l}=0
@@ -339,14 +339,14 @@ $$
 Electric field:
 
 | Electrostatic Field                                         | Induced (Vortex) Electric Field                       | Total Electric Field                                 |
-|-|-|-|
+| ----------------------------------------------------------- | ----------------------------------------------------- | ---------------------------------------------------- |
 | $\oint\vec{E_s}\cdot\d\vec{S}=\frac{Q_{in}}{\varepsilon_0}$ | $\oint\vec{E_i}\cdot\d\vec{S}=0$                      | $\oint\vec{E}\cdot\d\vec{S}=\frac{Q}{\varepsilon_0}$ |
 | $\oint\vec{E_s}\cdot\d\vec{l}=0$                            | $\oint\vec{E_i}\cdot\d\vec{l}=-\frac{\d\Phi_B}{\d t}$ | $\oint\vec{E}\cdot\d\vec{l}=-\frac{\d\Phi_B}{\d t}$  |
 
 Magnetic field:
 
 | Conduction Current                  | Displacement Current                                                 | Total Current                                                               |
-|-|-|-|
+| ----------------------------------- | -------------------------------------------------------------------- | --------------------------------------------------------------------------- |
 | $\oint\vec{B}\cdot\d\vec{S}=0$      | $\oint\vec{B}\cdot\d\vec{S}=0$                                       | $\oint\vec{B}\cdot\d\vec{S}=0$                                              |
 | $\oint\vec{B}\cdot\d\vec{l}=\mu_0I$ | $\oint\vec{B}\cdot\d\vec{l}=\mu_0\varepsilon_0\frac{\d\Phi_E}{\d t}$ | $\oint\vec{B}\cdot\d\vec{l}=\mu_0I+\mu_0\varepsilon_0\frac{\d\Phi_E}{\d t}$ |
 
@@ -379,7 +379,7 @@ $$
     \nabla\cdot\vec{E}=\rho_E/\varepsilon_0\\
     \nabla\cdot\vec{B}=0\\
     \nabla\times\vec{E}=0\\
-    \nabla\times\vec{B}=\mu_0\vec{j}   
+    \nabla\times\vec{B}=\mu_0\vec{j}
 \end{cases}
 $$
 

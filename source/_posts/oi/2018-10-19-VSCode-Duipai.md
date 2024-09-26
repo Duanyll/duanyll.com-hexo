@@ -1,8 +1,11 @@
 ---
 author: duanyll
-date: 2018-10-19
+date: 2018-10-19T00:00:00.000Z
 title: Linux下对拍sh
-tags: ["OI","linux","vscode"]
+tags:
+  - oi
+  - linux
+  - vscode
 ---
 
 不多说,上代码
@@ -34,24 +37,24 @@ done
 
 ```json
 {
-	"Duipai":{
-		"prefix": "duipai",
-		"body": [
-			"g++ $1.cpp -o $1.out",
-			"g++ $1_std.cpp -o $1_std.out",
-			"g++ $1_dm.cpp -o $1_dm.out",
-			"while true; do",
-			"\t./$1_dm.out > $1.in",
-			"\t./$1_std.out < $1.in > $1_std.ans",
-			"\t./$1.out < $1.in > $1.ans",
-			"\tif diff $1.ans $1_std.ans; then",
-			"\t\tprintf \"AC\\n\"",
-			"\telse",
-			"\t\tprintf \"WA\\n\"",
-			"\t\texit 0",
-			"\tfi",
-			"done"
-		]
-	}
+  "Duipai": {
+    "prefix": "duipai",
+    "body": [
+      "g++ $1.cpp -o $1.out",
+      "g++ $1_std.cpp -o $1_std.out",
+      "g++ $1_dm.cpp -o $1_dm.out",
+      "while true; do",
+      "\t./$1_dm.out > $1.in",
+      "\t./$1_std.out < $1.in > $1_std.ans",
+      "\t./$1.out < $1.in > $1.ans",
+      "\tif diff $1.ans $1_std.ans; then",
+      "\t\tprintf \"AC\\n\"",
+      "\telse",
+      "\t\tprintf \"WA\\n\"",
+      "\t\texit 0",
+      "\tfi",
+      "done"
+    ]
+  }
 }
 ```

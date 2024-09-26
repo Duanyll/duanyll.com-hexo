@@ -19,7 +19,7 @@ $$
 
 $k=9.0\times10^9\un{N\cdot m^2/C^2}$
 
-*Premittivity* of free space $\varepsilon_0=8.85\times10^{-12}\un{C^2/N\cdot m^2}$
+_Premittivity_ of free space $\varepsilon_0=8.85\times10^{-12}\un{C^2/N\cdot m^2}$
 
 ## Electric Field
 
@@ -134,8 +134,8 @@ $$
 
 1. The field point is in the direction **tangent** to the field line.
 2. **Magnitude** of $E\propto$ numbers of lines crossing unit area $\perp$ the lines.
-3. *Starts on + charges, ends on - charges.*
-4. *Never cross. Never closed.*
+3. _Starts on + charges, ends on - charges._
+4. _Never cross. Never closed._
 
 ### Electric Flux
 
@@ -153,7 +153,7 @@ For a closed surface, define **outward as positive**, the net flux: $\Phi_E=\oin
 
 ### Gauss's Law
 
-The Gauss's law: 
+The Gauss's law:
 
 $$
 \oint\vec{E}\cdot\d\vec{S}=\frac{Q_{in}}{\varepsilon_0}
@@ -166,7 +166,7 @@ $$
 $$
 
 > Useful when the charge distribution is highly symmetric, may determine the magnitude of electric field by
-> 
+>
 > $$
 > E=\frac{Q_{in}}{\varepsilon_0S}
 > $$
@@ -218,7 +218,7 @@ $$
 
 Electric potential: $V=U/q$
 
-Potential difference / voltage: 
+Potential difference / voltage:
 
 $$
 V_{ab}=V_a-V_b=\frac{U_a-U_b}{q}=\int_a^b\vec{E}\cdot\d\vec{l}
@@ -261,7 +261,7 @@ $$
 
 ## Capacitors
 
-Capacitance of capacitor: 
+Capacitance of capacitor:
 
 $$
 Q=CV,C=\frac{Q}{V}
@@ -354,4 +354,3 @@ Energy density in a dielectric:
 $$
 u=\frac{1}{2}\varepsilon E^2
 $$
-

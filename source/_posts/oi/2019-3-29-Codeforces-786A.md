@@ -1,7 +1,10 @@
 ---
 title: CF786A Berzerk
 author: duanyll
-tags: [OI,题解,博弈论]
+tags:
+  - oi
+  - 题解
+  - 博弈论
 source: https://www.luogu.org/problemnew/show/CF786A
 ---
 
@@ -37,7 +40,7 @@ const int INF = 0x3f3f3f3f;
 vector<int> s[2];
 bool ans[MAXN][2];
 bool vis[MAXN][2];
-int cnt[MAXN][2];	//统计当前状态可以到达的必胜态的数量 
+int cnt[MAXN][2];	//统计当前状态可以到达的必胜态的数量
 int n;
 
 void dfs(int pos,int player){

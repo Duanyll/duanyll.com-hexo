@@ -1,6 +1,10 @@
 ---
 title: CF95B Lucky Numbers [毒瘤分类讨论贪心/DFS]
-tags: [OI,题解,贪心,思维题]
+tags:
+  - oi
+  - 题解
+  - 贪心
+  - 思维题
 author: duanyll
 source: https://www.luogu.org/problemnew/show/CF95B
 ---
@@ -35,7 +39,7 @@ ODD_N:
 			putchar('7');
 		}
 		putchar('\n');
-	}else{	
+	}else{
 		int lead4 = 0,lead7 = 0,now = 1;
 		while(now <= n){
 			if(a[now] < '4'){
@@ -55,7 +59,7 @@ ODD_N:
 			}else{
 				goto TRY_LAST_USE_7;
 			}
-		} 
+		}
 		if(false){
 TRY_LAST_USE_7:
 			while(--now){

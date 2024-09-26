@@ -11,7 +11,7 @@ The light ought to be emitted, transported, and absorbed as tiny particles, or *
 
 ### Blackbody Radiation
 
-All object emit thermal radiation. The total intensity of radiation $\propto T^4$. 
+All object emit thermal radiation. The total intensity of radiation $\propto T^4$.
 
 ![Differnent theories on the spectrum of blackbody radiation](https://cdn.duanyll.com/img/20230215221748.png)
 
@@ -27,7 +27,7 @@ $$
 I(\lambda,T)=\frac{2\pi hc^2\lambda^{-5}}{e^\frac{hc}{\lambda kT}-1}
 $$
 
-Planck's hypothesis: The energy of any molecular vibration could be only some whole number multiply of $hf$, where the Planck constant 
+Planck's hypothesis: The energy of any molecular vibration could be only some whole number multiply of $hf$, where the Planck constant
 
 $$
 h=6.626\times10^{-34}\un{J\cdot s}
@@ -59,7 +59,7 @@ The photocurrent $I$ changes with voltage $V$
    which is independent of the intensity of light. $V_0$ and $E_{k\max}$ changes over the **frequency** of light.
 3. When $f$ is low, there is a **cutoff frequency** $f_0$, under which there will not be any photoelectrons.
 
-An electron is ejected out of the metal atom by an inelastic collition with a *single* photon. To get out of the atom, the electron need to absorb a constant amount of energy from the photon, and the rest of the photon's energy transforms into the electron's kinetic energy $E_k$. The minimum energy to get out depends on the atom's type, and is called **work function** $W_0$. There is the **photoelectric equation**:
+An electron is ejected out of the metal atom by an inelastic collition with a _single_ photon. To get out of the atom, the electron need to absorb a constant amount of energy from the photon, and the rest of the photon's energy transforms into the electron's kinetic energy $E_k$. The minimum energy to get out depends on the atom's type, and is called **work function** $W_0$. There is the **photoelectric equation**:
 
 $$
 hf=E_{k\max}+W_0
@@ -78,7 +78,7 @@ Scattering means light propagate in different directions when passing through ma
 
 ![Wavelength changed after scattering](https://cdn.duanyll.com/img/20230216113232.png)
 
-$\Delta\lambda=\lambda-\lambda_0$ depends on the **scattering angle** $\phi$. In the view of photon theory, in Compton scattering, a *single* photon hits an electroin and knocks it out of the atom, which is an elastic collision procedure. Energy is conserved during the procedure:
+$\Delta\lambda=\lambda-\lambda_0$ depends on the **scattering angle** $\phi$. In the view of photon theory, in Compton scattering, a _single_ photon hits an electroin and knocks it out of the atom, which is an elastic collision procedure. Energy is conserved during the procedure:
 
 $$
 \frac{hc}{\lambda_0}+m_0c^2=\frac{hc}{\lambda}+mc^2
@@ -236,14 +236,19 @@ $$
 ![Energy level digram](https://cdn.duanyll.com/img/20230216152420.png)
 
 > From de Borglie's hypothesis, we may consider the stable orbit for electron as a standing wave. For de Broglie wave:
+>
 > $$
 > \lambda=\frac{h}{mv}
 > $$
+>
 > and for a circular standing wave:
+>
 > $$
 > 2\pi r=n\lambda
 > $$
+>
 > We can get the quantum condition by Bohr:
+>
 > $$
 > L=\frac{nh}{2\pi}
 > $$
@@ -252,17 +257,17 @@ $$
 
 ### Wave Function
 
-The wave function $\Psi$ is the *displacement* of wave. The energy density of EM wave satisfies $u\propto E^2$. In the view of particle theory, the number density of photon should satisfy $\rho_N\propto u\propto E^2$. As discrete particles we can consider the **probability density** of finding photon, and let $p\propto|\Psi|^2$. As a probability distribution, the wave function should satisfy the **normallization condition**:
+The wave function $\Psi$ is the _displacement_ of wave. The energy density of EM wave satisfies $u\propto E^2$. In the view of particle theory, the number density of photon should satisfy $\rho_N\propto u\propto E^2$. As discrete particles we can consider the **probability density** of finding photon, and let $p\propto|\Psi|^2$. As a probability distribution, the wave function should satisfy the **normallization condition**:
 
 $$
 \int|\Psi|^2\d V=1
 $$
 
-Therefore we can treat the de Broglie wave as a probability wave. $|\Psi|^2\d V$ at a certain point represents the probability of finding the particle within volume $\d V$ aboud the given position and time. 
+Therefore we can treat the de Broglie wave as a probability wave. $|\Psi|^2\d V$ at a certain point represents the probability of finding the particle within volume $\d V$ aboud the given position and time.
 
 ![Conherent wave functions](https://cdn.duanyll.com/img/20230216155126.png)
 
-There is interference between **coherent** wave functions. 
+There is interference between **coherent** wave functions.
 
 $$
 P_1=|\Psi_1|^2,P_2=|\Psi_2|^2\\
@@ -271,7 +276,7 @@ $$
 
 ![De-conherence of wave functions](https://cdn.duanyll.com/img/20230216155332.png)
 
-When **de-conherence** occurs, 
+When **de-conherence** occurs,
 
 $$
 P'_{12}=P_1+P_2
@@ -305,7 +310,7 @@ The principle indicates that
 
 ![Diffraction of electron](https://cdn.duanyll.com/img/20230216160329.png)
 
-The central bright fringe satisfies the uncertainty relation 
+The central bright fringe satisfies the uncertainty relation
 
 $$
 \Delta x\Delta p_x=h
@@ -359,7 +364,7 @@ Solve the equation
 
 1. Each solution represents a **stationary** state
 2. The system may be in a **superposition** state
-3. The wave function of the system should be *continuous, finite and normalized*.
+3. The wave function of the system should be _continuous, finite and normalized_.
 
 ---
 

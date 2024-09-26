@@ -5,8 +5,6 @@ wiki: notes-optim
 order: 103
 ---
 
-
-
 在区间 $[a_0, b_0]$ 上求一元单值函数的极小值点.
 
 ## 区间压缩方法
@@ -24,7 +22,7 @@ $$
 $$
 
 ```mathematica
-goldenSearch[fun_, var_, l0_, r0_, delta_] := 
+goldenSearch[fun_, var_, l0_, r0_, delta_] :=
   Module[{f, a, b, fa, fb, l, r, \[Rho], n}, (
     f[x_] = N[fun /. var -> x, precision];
     \[Rho] = 2 - GoldenRatio;
@@ -48,9 +46,9 @@ goldenSearch[fun_, var_, l0_, r0_, delta_] :=
      ];
     Print[
      TableForm[
-      Table[{a[i], b[i], fa[i], fb[i], 
-        Interval[{l[i + 1], r[i + 1]}]}, {i, 1, n - 1}], 
-      TableHeadings -> {Range[n - 1], {"a", "b", "f(a)", "f(b)", 
+      Table[{a[i], b[i], fa[i], fb[i],
+        Interval[{l[i + 1], r[i + 1]}]}, {i, 1, n - 1}],
+      TableHeadings -> {Range[n - 1], {"a", "b", "f(a)", "f(b)",
          "Next Interval"} }]];
     Return[{l[n], r[n]}];
     )];
@@ -66,7 +64,7 @@ goldenSearch[fun_, var_, l0_, r0_, delta_] :=
 
 ![](https://cdn.duanyll.com/img/2022-12-06-20-23-04.png)
 
-满足下式时能利用之前的取值: 
+满足下式时能利用之前的取值:
 
 $$
 {\rho}_{k+1}(1-{\rho}_{k})=1-2{\rho}_{k}
@@ -95,7 +93,7 @@ $$
 注意最后一次迭代 ${\rho_{N}=1-{\frac{F_{1} }{F_{2} } } }=\frac{1}{2}$, 为了保证能产生两个不同的新点以便后续处理, 可取 $\rho_{N}=1/2-\varepsilon$, 总压缩比变为 $\frac{1+2\varepsilon}{F_{N+1} }$
 
 ```mathematica
-fibonacciSearch[fun_, var_, l0_, r0_, delta_] := 
+fibonacciSearch[fun_, var_, l0_, r0_, delta_] :=
   Module[{f, a, b, fa, fb, l, r, \[Rho], \[Epsilon], n, i}, (
     f[x_] = N[fun /. var -> x, precision];
     \[Epsilon] = delta/10;
@@ -103,8 +101,8 @@ fibonacciSearch[fun_, var_, l0_, r0_, delta_] :=
     While[(1 + 2 \[Epsilon])/Fibonacci[n + 2] > delta/(r0 - l0), n++];
     l[1] = l0;
     r[1] = r0;
-    \[Rho][i_] = 
-     If[i == n, 1/2 - \[Epsilon], 
+    \[Rho][i_] =
+     If[i == n, 1/2 - \[Epsilon],
       1 - Fibonacci[n + 2 - i]/Fibonacci[n + 3 - i]];
     a[i_] = l[i] + \[Rho][i] (r[i] - l[i]);
     b[i_] = l[i] + (1 - \[Rho][i]) (r[i] - l[i]);
@@ -121,11 +119,11 @@ fibonacciSearch[fun_, var_, l0_, r0_, delta_] :=
       ],
      {i, n}
      ];
-    
+
     Print[
      TableForm[
-      Table[{\[Rho][i], a[i], b[i], fa[i], fb[i], 
-        Interval[{l[i + 1], r[i + 1]}]}, {i, 1, n}], 
+      Table[{\[Rho][i], a[i], b[i], fa[i], fb[i],
+        Interval[{l[i + 1], r[i + 1]}]}, {i, 1, n}],
       TableHeadings -> {Range[n], {"\[Rho]", "a", "b", "f(a)", "f(b)",
           "Next Interval"} }]];
     Return[{l[n + 1], r[n + 1]}];
@@ -180,7 +178,7 @@ $$
 x^{(k+1)}=x^{(k)}-{\frac{x^{(k)}-x^{(k-1)} }{f^{\prime}(x^{(k)})-f^{\prime}(x^{(k-1)})} }f^{\prime}(x^{(k)})={\frac{f^{\prime}(x^{(k)})x^{(k-1)}-f^{\prime}(x^{(k-1)})x^{(k)} }{f^{\prime}(x^{(k)})-f^{\prime}(x^{(k-1)})} }
 $$
 
-若用于求根, 减少一次导数: 
+若用于求根, 减少一次导数:
 
 $$
 x^{(k+1)}=x^{(k)}-{\frac{x^{(k)}-x^{(k-1)} }{g(x^{(k)})-g(x^{(k-1)})} }g(x^{(k)})={\frac{g(x^{(k)})x^{(k-1)}-g(x^{(k-1)})x^{(k)} }{g(x^{(k)})-g(x^{(k-1)})} }
@@ -227,7 +225,7 @@ $$
 
 ### 步长选取
 
-#### 精确步长 
+#### 精确步长
 
 $$
 \alpha_k=\arg\min_{\alpha>0}f(x_k+\alpha p_k), \phi(\alpha):=f(x_k+\alpha p_k)
@@ -245,7 +243,7 @@ $$
 
 ![](https://cdn.duanyll.com/img/2022-12-06-22-12-20.png)
 
-Armijo 准则: 给定参数 $c\in(0,1)$, 通过起点处斜率的倍率划线, 保证下降的程度足够大, 只要 $\alpha$ 足够小总能满足, 公式 
+Armijo 准则: 给定参数 $c\in(0,1)$, 通过起点处斜率的倍率划线, 保证下降的程度足够大, 只要 $\alpha$ 足够小总能满足, 公式
 
 $$
 f(x_{k}+\alpha p_{k})\leq f(x_{k})+c\alpha p_{k}^{\top}\nabla f(x_{k}), c\in(0,1)

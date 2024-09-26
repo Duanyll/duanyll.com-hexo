@@ -1,6 +1,8 @@
 ---
 layout: post
-tags: ["linux","教程"]
+tags:
+  - linux
+  - 教程
 title: 单硬盘安装Ubuntu18.04与Win10
 author: Duanyll
 ---

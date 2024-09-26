@@ -89,7 +89,7 @@ $$
 
 则 $\{a_n\}$ 单增有上界, $\{b_n\}$ 单减有下界, 两数列极限存在. $\lim_{n\to\infty}a_n=\lim_{n\to\infty}b_n$ 知两数列极限相等, 存在性得证.
 
-唯一性, 再设 $\lim_{n\to\infty}a_n=\lim_{n\to\infty}b_n=\xi^\prime$, 则 
+唯一性, 再设 $\lim_{n\to\infty}a_n=\lim_{n\to\infty}b_n=\xi^\prime$, 则
 
 $$
 \xi-\xi^\prime=\lim_{n\to\infty}(b_n-a_n)=0
@@ -107,7 +107,7 @@ $$
 
 **推论** 有界发散数列必存在两个子列收敛到不同的数.
 
-**简要证明** 由 B-W 定理取一子列 $\{a_{n_k}^{(1)}\}$ 收敛到 $a$, 
+**简要证明** 由 B-W 定理取一子列 $\{a_{n_k}^{(1)}\}$ 收敛到 $a$,
 
 $$
 \lim_{n\to\infty}a_n\neq a\implies\forall\epsilon_0,\forall N,\exist n_N>N, |a_{n_N}^{(2)}-a|\geq\epsilon0
@@ -168,7 +168,7 @@ $\exist N,\forall n>N,\lambda-\lambda_n\leq\frac{1}{2}\epsilon\implies\lambda=\l
 
 ### Heine-Borel 有限覆盖定理
 
-**定义** 开覆盖: 设 $S\sub\R$ 非空, 若开区间族 $\{S_\alpha\}$ 满足 
+**定义** 开覆盖: 设 $S\sub\R$ 非空, 若开区间族 $\{S_\alpha\}$ 满足
 
 $$
 \bigcup_\alpha S_\alpha\supset S
@@ -178,7 +178,7 @@ $$
 
 易知 $\forall S\in\R$, 开覆盖存在.
 
-**定理** *闭区间* $[a,b]$ 的任意一个开覆盖 $\{S_\alpha\}$ 存在有限子覆盖, 即在 $\{S_\alpha\}$ 中存在有限个开区间 $\{S_{\alpha_k}\}^p_{k=1}$ 满足
+**定理** _闭区间_ $[a,b]$ 的任意一个开覆盖 $\{S_\alpha\}$ 存在有限子覆盖, 即在 $\{S_\alpha\}$ 中存在有限个开区间 $\{S_{\alpha_k}\}^p_{k=1}$ 满足
 
 $$
 \bigcup_{k=1}^pS_{\alpha_k}\supset[a,b]
@@ -232,7 +232,7 @@ $$
 |a_{n_k}-H|\leq|a_{n_k}-\xi_n|+|\xi_n-H|\leq\frac{1}{k}+|\xi_n-H|\to0
 $$
 
-记 
+记
 
 $$
 H=\varlimsup_{n\to\infty}a_n,h=\varliminf_{n\to\infty}b_n
@@ -311,7 +311,7 @@ $$
 - 用调几算平处理连加连乘 ($n$ 在指数上)
 - 通过放缩证明时, 若不能先说明 $\lim$ 的存在性, 可以在处理上界时写 $\varlimsup$, 处理下界写 $\varliminf$
 - 类似 $a_{m+n}=a_m+a_n$ 的式子, 通过 $n=km+l$ 处理下标到有限范围 $l$ 内
- 
+
 {% endfolding %}
 
 ## 压缩映射原理

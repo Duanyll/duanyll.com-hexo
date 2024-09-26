@@ -35,6 +35,7 @@ $$
 为 $\xi$ 的**数学期望**或**均值**
 
 > 对于任意随机变量 $\xi$, 都可用分布函数 $F(x)$ 的 Riemann–Stieltjes 积分定义期望 (要求绝对可积)
+>
 > $$
 > E(\xi)=\int_{-\infty}^{+\infty}x\d F(x)
 > $$
@@ -152,7 +153,7 @@ $$
    P\{|\xi-E(\xi)\geq\epsilon\}\leq\frac{D(\xi)}{\epsilon^2}
    $$
    > 粗略地通过方差限制了随机变量偏离均值的程度
-   $\implies$
+   > $\implies$
    $$
    D(\xi)=0\iff P\{\xi=E(\xi)\}=1
    $$
@@ -183,7 +184,7 @@ $$
   \mu_0=1,\mu_1=0,\mu_2=D(\xi)
   $$
 - $k$ 阶绝对中心矩 $\beta_k=E(|\xi-E(\xi)|^k)$
-  
+
 $$
 \begin{aligned}
   \nu_k&=\sum_{i=0}^kC_k^i\nu_1^i\mu_{k-i}\\
@@ -262,7 +263,7 @@ $$
 **性质**
 
 1. $|\rho|\leq1$
-2. $|\rho|=1\iff$ *以概率 1 线性相关*
+2. $|\rho|=1\iff$ _以概率 1 线性相关_
 3. 称 $|\rho|=0$ 为*不相关*
 
 > 独立 $\implies$ 不相关
@@ -277,7 +278,7 @@ $$
 E(\eta|x)=E(\eta|\xi=x)\triangleq\int_{-\infty}^{+\infty}y\d F_{\eta|\xi}(y|x)
 $$
 
-是 $x$ 的函数. 
+是 $x$ 的函数.
 
 实际上, $E(\xi),E(\eta)$ 等是常数, 而 $E(\eta|\xi), E(\xi|\eta)$ 是随机变量.
 

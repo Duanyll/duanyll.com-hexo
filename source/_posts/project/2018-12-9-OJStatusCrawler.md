@@ -1,10 +1,13 @@
 ---
 title: OJStatusCrawler-爬取大佬的做题记录
 author: duanyll
-tags: ["项目","Dotnet","施工现场"]
+tags:
+  - 项目
+  - dotnet
+  - 施工现场
 ---
 
->　~~我才不会告诉你我做这个项目是为了山寨llf0703~~,主要是为了dotnet core练手,顺便学习regex.
+> ~~我才不会告诉你我做这个项目是为了山寨llf0703~~,主要是为了dotnet core练手,顺便学习regex.
 
 基于dotnet core的爬虫，主要用于爬取大佬的提交记录，用于了解大佬的做题顺序。
 

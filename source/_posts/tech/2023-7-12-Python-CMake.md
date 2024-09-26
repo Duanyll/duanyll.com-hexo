@@ -1,15 +1,15 @@
 ---
 title: 使用 CMake 构建 PyTorch 和 Numpy C++ 拓展
 tags:
-    - 炼丹
-    - Python
-    - PyTorch
-    - vscode
-    - cmake
-    - 指北
+  - 炼丹
+  - python
+  - pytorch
+  - vscode
+  - cmake
+  - 指北
 ---
 
-使用 CMake 构建 PyTorch 和 Numpy C++ 拓展能适应更复杂的项目并使用灵活的编译选项. 然而, 许多互联网上的教程中的方法已经不能在较新版本的 PyTorch 和 CMake 使用. 本文介绍了几种作者在近期测试成功的使用 CMake 构建 PyTorch 和 Numpy 拓展的方案. 需要注意的是, 许多 CMake 配置文件都包含了对某个依赖历史版本的问题引入的 Workaround, 不能在新版本正常工作, 本文所述的方法也有极大概率无法在将来工作. 
+使用 CMake 构建 PyTorch 和 Numpy C++ 拓展能适应更复杂的项目并使用灵活的编译选项. 然而, 许多互联网上的教程中的方法已经不能在较新版本的 PyTorch 和 CMake 使用. 本文介绍了几种作者在近期测试成功的使用 CMake 构建 PyTorch 和 Numpy 拓展的方案. 需要注意的是, 许多 CMake 配置文件都包含了对某个依赖历史版本的问题引入的 Workaround, 不能在新版本正常工作, 本文所述的方法也有极大概率无法在将来工作.
 
 <!-- more -->
 
@@ -19,13 +19,14 @@ tags:
 
 {% link https://github.com/src-d/kmcuda/blob/master/src/CMakeLists.txt %}
 
-[kmcuda](https://github.com/src-d/kmcuda) 项目通过原生的 Python 和 Numpy 头文件实现了从 Python 调用 C++ 库, 并通过 Numpy ndarray 传递数据, 通过手动在 CMake 文件中配置 CUDA 相关静态链接库来使用 CUDA 加速计算. 原仓库的 `CMakeLists.txt` 文件无法在 Windows 上正常使用, 其 CUDA 命令行参数和 macOS 上的 Workaround 也很可能过时. 
+[kmcuda](https://github.com/src-d/kmcuda) 项目通过原生的 Python 和 Numpy 头文件实现了从 Python 调用 C++ 库, 并通过 Numpy ndarray 传递数据, 通过手动在 CMake 文件中配置 CUDA 相关静态链接库来使用 CUDA 加速计算. 原仓库的 `CMakeLists.txt` 文件无法在 Windows 上正常使用, 其 CUDA 命令行参数和 macOS 上的 Workaround 也很可能过时.
 
 {% link https://github.com/Duanyll/kmcuda/blob/windows-build/src/CMakeLists.txt %}
 
 这个分支的 `CMakeLists.txt` 文件能在 Windows 上工作.
 
 {% folding 完整 CMakeLists.txt %}
+
 ```cmake
 cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 
@@ -92,11 +93,12 @@ if (SUFFIX)
   set_target_properties(KMCUDA PROPERTIES SUFFIX ${SUFFIX})
 endif()
 ```
+
 {% endfolding %}
 
 ### 使用正确的 Conda 环境
 
-由于 Conda 的实现方式, 不能通过在 `CMakeLists.txt` 中调用 `conda`  命令来设置 Python 环境 ^[https://discourse.cmake.org/t/create-and-activate-python-conda-environment-with-cmake/5777]. 需要先在终端中激活 Conda 环境
+由于 Conda 的实现方式, 不能通过在 `CMakeLists.txt` 中调用 `conda` 命令来设置 Python 环境 ^[https://discourse.cmake.org/t/create-and-activate-python-conda-environment-with-cmake/5777]. 需要先在终端中激活 Conda 环境
 
 ```sh
 conda activate my_env
@@ -128,7 +130,7 @@ endif()
 include_directories(${PYTHON_INCLUDE_DIRS} ${NUMPY_INCLUDES})
 ```
 
-另外, 
+另外,
 
 ```cmake
 find_package(PythonLibs 3 REQUIRED)
@@ -260,7 +262,7 @@ endif()
 pip install swig
 ```
 
-SWIG 将 `.i` 文件展开成胶水 C++ 代码. 
+SWIG 将 `.i` 文件展开成胶水 C++ 代码.
 
 {% link https://github.com/Duanyll/alpha-zero-gomoku/blob/b05f3327f28e8e0b1a4088536aae23d5c66d54d4/src/libzerogomoku.i %}
 
@@ -319,8 +321,7 @@ Numpy 提供对 SWIG 的支持, 可以不在 C 代码中引用 Numpy 的头文�
 %}
 ```
 
-在接口胶水代码中插入这段代码, 并保证 `_import_array()` 函数只被调用一次 ^[通常也不会多次调用它, 其他部分的 C++ 代码都不需要引用 Numpy 的头文件]. 这个函数将会设置 Numpy 函数调用的基地址. 
-
+在接口胶水代码中插入这段代码, 并保证 `_import_array()` 函数只被调用一次 ^[通常也不会多次调用它, 其他部分的 C++ 代码都不需要引用 Numpy 的头文件]. 这个函数将会设置 Numpy 函数调用的基地址.
 
 ### 在 CMake 中使用 SWIG
 
@@ -428,7 +429,7 @@ message("CUDA_NVCC_FLAGS: ${CUDA_NVCC_FLAGS}")
 include_directories(${PYTHON_INCLUDE_DIRS})
 
 add_library(conv_by_cluster SHARED "kernel.cpp")
-target_link_libraries(conv_by_cluster 
+target_link_libraries(conv_by_cluster
   ${PYTHON_LIBRARIES}
   ${TORCH_LIBRARIES}
   ${TORCH_PYTHON_LIBRARY}
@@ -453,7 +454,7 @@ find_package(Torch REQUIRED)
 `FindTorch` 已经把 `PyTorch` 的头文件添加到包含目录中, 还需要静态链接 `TORCH_LIBRARIES`
 
 ```cmake
-target_link_libraries(conv_by_cluster 
+target_link_libraries(conv_by_cluster
   ${PYTHON_LIBRARIES}
   ${TORCH_LIBRARIES}
 )
@@ -479,7 +480,7 @@ PyTorch 的包含文件中已经引用了 pybind11. 还需要额外静态链接�
 ```cmake
 find_library(TORCH_PYTHON_LIBRARY torch_python PATHS "${TORCH_INSTALL_PREFIX}/lib")
 
-target_link_libraries(conv_by_cluster 
+target_link_libraries(conv_by_cluster
   ${PYTHON_LIBRARIES}
   ${TORCH_LIBRARIES}
   ${TORCH_PYTHON_LIBRARY}
@@ -539,7 +540,7 @@ if (WIN32)
 endif (WIN32)
 ```
 
-才能正常运行. 如果是生成了 pybind11 接口库, 则不需要这么做, 应当在 Python 代码中先引入 PyTorch 再引入拓展库. 
+才能正常运行. 如果是生成了 pybind11 接口库, 则不需要这么做, 应当在 Python 代码中先引入 PyTorch 再引入拓展库.
 
 ```python
 import torch
@@ -584,10 +585,10 @@ add_compile_definitions(SWIG_PYTHON_INTERPRETER_NO_DEBUG)
 
 ```json
 {
-    "name": "(Windows) 附加",
-    "type": "cppvsdbg",
-    "request": "attach",
-    "processId": "${command:pickProcess}"
+  "name": "(Windows) 附加",
+  "type": "cppvsdbg",
+  "request": "attach",
+  "processId": "${command:pickProcess}"
 }
 ```
 

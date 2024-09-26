@@ -1,7 +1,7 @@
 ---
 title: 时间序列分析作业 2
-tags: 
-    - 时间序列
+tags:
+  - 时间序列
 author: duanyll
 ---
 
@@ -24,9 +24,9 @@ ListPlot[data, Filling -> Axis]
 用不同阶数 ARMA 模型进行拟合并计算 AIC, BIC
 
 ```mathematica
-results = 
-  Table[Module[{tsm}, 
-    tsm = TimeSeriesModelFit[data, {"ARMA", {p, q}}]; {tsm["AIC"], 
+results =
+  Table[Module[{tsm},
+    tsm = TimeSeriesModelFit[data, {"ARMA", {p, q}}]; {tsm["AIC"],
      tsm["BIC"]}], {p, 1, 10}, {q, 1, 10}];
 aic = results[[All, All, 1]];
 bic = results[[All, All, 2]];
@@ -52,17 +52,17 @@ Position[bic, Min[bic]]
 ```mathematica
 result100 = ParallelTable[Module[{data, results, aic, bic},
     data = RandomFunction[model, {1001, n + 1000}];
-    results = 
-     Table[Module[{tsm}, 
-       tsm = TimeSeriesModelFit[data, {"ARMA", {p, q}}]; {tsm["AIC"], 
+    results =
+     Table[Module[{tsm},
+       tsm = TimeSeriesModelFit[data, {"ARMA", {p, q}}]; {tsm["AIC"],
         tsm["BIC"]}], {p, 1, 10}, {q, 1, 10}];
     aic = results[[All, All, 1]];
     bic = results[[All, All, 2]];
     Flatten[{Position[aic, Min[aic]], Position[bic, Min[bic]]}]
     ], 100];
 TableForm[
- Map[{N[Mean[#]], N[StandardDeviation[#]]} &, Transpose[result100]], 
- TableHeadings -> {{"AIC p", "AIC q", "BIC p", "BIC q"}, {"Mean", 
+ Map[{N[Mean[#]], N[StandardDeviation[#]]} &, Transpose[result100]],
+ TableHeadings -> {{"AIC p", "AIC q", "BIC p", "BIC q"}, {"Mean",
     "StdDev"}}]
 ```
 
@@ -97,7 +97,7 @@ g4 = Sqrt[n/24] Kurtosis[datanormal] - 3
 m = 20;
 xi = Mean[Partition[datanormal, m]];
 k = Length[xi];
-a = Sum[If[i < j && xi[[i]] < xi[[j]], 1, 0], {i, 1, k - 1}, {j, 
+a = Sum[If[i < j && xi[[i]] < xi[[j]], 1, 0], {i, 1, k - 1}, {j,
     i + 1, k}];
 z = (a - 1/4 k (k - 1))/Sqrt[(2 k^3 + 3 k^2 - 5 k)/72]
 ```
@@ -134,7 +134,7 @@ Sqrt[varx]
 ```mathematica
 gamma = CovarianceFunction[data, {10}];
 Normal[gamma]
-ListPlot[{gamma, CovarianceFunction[model, {10}]}, Filling -> Axis, 
+ListPlot[{gamma, CovarianceFunction[model, {10}]}, Filling -> Axis,
  PlotLegends -> {"模拟数据", "理论"}]
 ```
 
@@ -145,7 +145,7 @@ ListPlot[{gamma, CovarianceFunction[model, {10}]}, Filling -> Axis,
 ```mathematica
 phi = PartialCorrelationFunction[data, {10}];
 Normal[phi]
-ListPlot[{phi, PartialCorrelationFunction[model, {10}]}, 
+ListPlot[{phi, PartialCorrelationFunction[model, {10}]},
  Filling -> Axis, PlotLegends -> {"模拟数据", "理论"}]
 ```
 
@@ -158,7 +158,7 @@ ListPlot[{phi, PartialCorrelationFunction[model, {10}]},
 ![](https://cdn.duanyll.com/img/20231220220512.png)
 
 ```mathematica
-model = SARIMAProcess[{0.1, 0.12}, 
+model = SARIMAProcess[{0.1, 0.12},
    1, {-0.6}, {10, {0.7, -0.1}, 1, {0.8}}, 1];
 SeedRandom[42];
 n = 1000;
@@ -212,10 +212,10 @@ $$
 ![](https://cdn.duanyll.com/img/20231220225941.png)
 
 ```mathematica
-data = TimeSeries[{184.61, 205.76, 229.31, 242.32, 275.23, 311, 
-   358.06, 421.15, 458.23, 530.86, 659.69, 744.98, 890.95, 1016.31, 
-   1177.27, 1486.08, 2001.41, 2443.21, 2871.65, 3241.47, 3474.09, 
-   3649.12, 3928.2, 4293.49, 4725.01, 5333.09, 6379.63, 7385.1, 
+data = TimeSeries[{184.61, 205.76, 229.31, 242.32, 275.23, 311,
+   358.06, 421.15, 458.23, 530.86, 659.69, 744.98, 890.95, 1016.31,
+   1177.27, 1486.08, 2001.41, 2443.21, 2871.65, 3241.47, 3474.09,
+   3649.12, 3928.2, 4293.49, 4725.01, 5333.09, 6379.63, 7385.1,
    8690.24, 10562.39, 12601.23, 14151.28, 17185.48, 21026.68, 23872.8,
     26260.77, 28536.7, 30103.1, 32680.5, 36980.2}, {1978}]
 ListLinePlot[data]

@@ -13,7 +13,7 @@ order: 601
 - 相对误差 $e(x)=(x-x^*)/x^*$
 - $$
   e(x\pm y)=e(x)\pm e(y)
-  $$ 
+  $$
   相近的数相减, 相对误差增大
 - $$
   e(xy)=ye(x)+x^*e(y)
@@ -39,7 +39,6 @@ order: 601
 ### 不动点迭代
 
 ![不动点迭代伪代码](https://cdn.duanyll.com/img/20230617100816.png)
-
 
 $$
 \lim_{i\to\infty}x_i=r,g(r)=g(\lim_{i\to\infty}x_i)=\lim_{i\to\infty} g(x_i)=\lim_{i\to\infty}x_{i+1}=r

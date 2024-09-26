@@ -1,7 +1,9 @@
 ---
 title: 电子科技大学第十二届ACM趣味程序设计竞赛第一场（热身赛）
 author: duanyll
-tags: [OI, 比赛]
+tags:
+  - oi
+  - 比赛
 source: https://acm.uestc.edu.cn/contest/151/summary
 ---
 

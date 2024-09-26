@@ -1,6 +1,9 @@
 ---
 title: CF932D Tree
-tags: [OI,题解,LCA]
+tags:
+  - oi
+  - 题解
+  - lca
 author: duanyll
 source: https://www.luogu.org/problemnew/show/CF932D
 ---
@@ -35,9 +38,9 @@ typedef long long int64;
 const int MAXN = 500010;
 const int64 INF = 0x3f3f3f3f3f3f3f3fll;
 
-int fa[MAXN][22];	//向上跳1<<i个权值大于u的点的编号，忽视权值小于u的点 
+int fa[MAXN][22];	//向上跳1<<i个权值大于u的点的编号，忽视权值小于u的点
 int64 w[MAXN];
-int64 sum[MAXN][22];	//到第1<<i个满足要求的祖先的和 
+int64 sum[MAXN][22];	//到第1<<i个满足要求的祖先的和
 
 void adde(int u,int v){
 	if(w[u] >= w[v]){
@@ -57,8 +60,8 @@ void adde(int u,int v){
 			sum[v][i] = sum[v][i-1] + sum[fa[v][i-1]][i-1];
 		}else{
 			sum[v][i] = INF;
-		}		
-	} 
+		}
+	}
 }
 
 int query(int r,int64 x){
@@ -73,7 +76,7 @@ int query(int r,int64 x){
 			ans += 1<<i;
 			now = fa[now][i];
 		}
-	} 
+	}
 	return ans;
 }
 
@@ -102,7 +105,7 @@ inline void write(T x) {
 }
 
 int main(){
-	w[0] = INF;	//边界条件  
+	w[0] = INF;	//边界条件
 	memset(sum[1],INF,sizeof sum[1]);
 	int64 last = 0;
 	int q,cnt = 1;

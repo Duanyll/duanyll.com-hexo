@@ -1,7 +1,10 @@
 ---
 title: 2022 UESTC ICPC Training for Graph
 author: duanyll
-tags: ["OI", "题解", "图论"]
+tags:
+  - oi
+  - 题解
+  - 图论
 source: http://acm-uestc-edu-cn-s.vpn.uestc.edu.cn:8118/contest/170/summary
 ---
 
@@ -23,13 +26,13 @@ source: http://acm-uestc-edu-cn-s.vpn.uestc.edu.cn:8118/contest/170/summary
 
 ## J
 
-几乎是无向图上 Tarjan 算法模版了. 
+几乎是无向图上 Tarjan 算法模版了.
 
 注意两割点之间连边也算点双的要求其实并不需要特殊处理. 需要处理的是此题并不认为孤立的点算作点双.
 
 ## K
 
-LCA 模版, 可以写倍增, 可以写 Tarjan 离线, 甚至可以写树剖, 也可以写 LCT. 
+LCA 模版, 可以写倍增, 可以写 Tarjan 离线, 甚至可以写树剖, 也可以写 LCT.
 
 要说倍增写法有什么坑点的话, 恐怕就是记得改了 `MAXN` 后, 记得对应修改 `log` 次数, 别没开够.
 
@@ -43,7 +46,7 @@ LCA 模版, 可以写倍增, 可以写 Tarjan 离线, 甚至可以写树剖, 也
 
 ## K
 
-Dijkstra 模版. 记得开 `int64`, 记得优先队列用 `greater`, 没了. 
+Dijkstra 模版. 记得开 `int64`, 记得优先队列用 `greater`, 没了.
 
 ## Q
 

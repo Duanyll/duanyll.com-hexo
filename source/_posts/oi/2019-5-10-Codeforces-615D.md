@@ -1,6 +1,10 @@
 ---
 title: CF615D Multipliers
-tags: [OI,题解,数论,组合数学]
+tags:
+  - oi
+  - 题解
+  - 数论
+  - 组合数学
 author: duanyll
 source: https://www.luogu.org/problemnew/show/CF615D
 ---

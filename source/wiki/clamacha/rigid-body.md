@@ -54,7 +54,7 @@ order: 503
 
 1. 进动角 $\varphi$: 绕 $z$ 轴, $x'$ 轴转向 $y$ 轴
 2. 章动角 $\theta$: 绕 $y'$ 轴, $z'$ 轴转向 $x$ 轴
-3. 自转角 $\psi$: 绕 $z'$ 轴, $y'$ 轴转向 $z$ 轴 
+3. 自转角 $\psi$: 绕 $z'$ 轴, $y'$ 轴转向 $z$ 轴
 
 <p style="color: blue">动系中</p>
 
@@ -89,7 +89,6 @@ $$
 $$
 I=\sum m_{i}r_{i}^{2}\sin\theta_{i}^{2}=\sum m_{i}\rho_{i}^{2}
 $$
-
 
 ![欧拉角](https://cdn.duanyll.com/img/20230223214652.png)
 

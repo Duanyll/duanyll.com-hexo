@@ -62,7 +62,7 @@ $$
 
 用分布函数列收敛来定义随机变量序列收敛.
 
-**定义** 随机变量序列 $\{\xi_n\}$ 的分布函数列 $\{F_n(x)\}$ 弱收敛于 $\xi$ 的分布函数 $F(x)$, 称 $\{\xi_n\}$ *依分布收敛* 于 $\xi$ (随机变量或常数), 记为
+**定义** 随机变量序列 $\{\xi_n\}$ 的分布函数列 $\{F_n(x)\}$ 弱收敛于 $\xi$ 的分布函数 $F(x)$, 称 $\{\xi_n\}$ _依分布收敛_ 于 $\xi$ (随机变量或常数), 记为
 
 $$
 \xi_n\xrightarrow{W}\xi,\mathrm{as}\ n\to\infty
@@ -86,7 +86,7 @@ $$
 \lim_{n\to\infty}P\{|\xi_n(\omega)-\xi(\omega)|<\epsilon\}=1
 $$
 
-称 $\{\xi_n\}$ *依概率收敛* 到 $\xi$, 记为
+称 $\{\xi_n\}$ _依概率收敛_ 到 $\xi$, 记为
 
 $$
 \lim_{n\to\infty}\xi_n=\xi\;(p)
@@ -142,10 +142,13 @@ $$
 
 > $\xi_k$ 前 $n$ 项的算术平均值将紧密的聚集在其期望附近
 > 对应的随机变量收敛
+>
 > $$
 > \frac{1}{n}\sum_{k=1}^n\xi_k-E\left(\frac{1}{n}\sum_{k=1}^n\right)\xrightarrow{p}0
 > $$
+>
 > 而不是
+>
 > $$
 > \frac{1}{n}\sum_{k=1}^n\xi_k\xrightarrow{p}E\left(\frac{1}{n}\sum_{k=1}^n\right)
 > $$
@@ -195,7 +198,7 @@ $$
 \end{aligned}
 $$
 
-若 $D(\xi_k)$ 一致有界, 则由夹逼准则知 
+若 $D(\xi_k)$ 一致有界, 则由夹逼准则知
 
 $$
 \lim_{n\to\infty}P\left\{\left|\frac{1}{n}\sum_{k=1}^n\xi_k-\frac{1}{n}\sum_{k=1}^nE(\xi_k)\right|<\epsilon\right\}=1
@@ -239,17 +242,17 @@ $$
 
 > 服从强大数定律 $\implies$ 服从弱大数定律
 
-- 博雷尔强大数定律: 
+- 博雷尔强大数定律:
   $$
   P\{\xi_n=1\}=p, P\{\xi_n=0\}=1-p
-  $$ 
+  $$
   服从强大数定律
 - 科尔莫哥洛夫判别法: 独立随机变量序列
   $$
   \sum_{k=1}^\infty\frac{D(\xi_k)}{k^2}<\infty
   $$
   服从强大数定律
-- 科尔莫哥洛夫定理: 独立同分布随机变量序列满足 $E(|\xi_k|)<\infty$ 服从强大数定律 
+- 科尔莫哥洛夫定理: 独立同分布随机变量序列满足 $E(|\xi_k|)<\infty$ 服从强大数定律
 
 ## 中心极限定理
 
@@ -259,9 +262,10 @@ $$
 \lim_{n\to\infty}P\left\{\frac{\sum_{k=1}^n\xi_k-E\left(\sum_{i=1}^n\xi_k\right)}{\sqrt{D(\sum_{k=1}^n\xi_k)}}\leq x\right\}=\Phi(x)=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^xe^{-\frac{1}{2}y^2}\d y
 $$
 
-> 随机变量序列服从中心极限定理 $\implies$ $\{\xi_k\}$ 前 $n$ 项和的标准化随机变量序列依分布收敛到标准正态分布. 
+> 随机变量序列服从中心极限定理 $\implies$ $\{\xi_k\}$ 前 $n$ 项和的标准化随机变量序列依分布收敛到标准正态分布.
 >
 > 服从中心极限定理的随机变量序列可进行概率的近似计算
+>
 > $$
 > P\left\{x_1<\frac{\sum_{k=1}^n\xi_k-E\left(\sum_{i=1}^n\xi_k\right)}{\sqrt{D(\sum_{k=1}^n\xi_k)}}\leq x_2\right\}\approx\Phi(x_2)-\Phi(x_1)
 > $$
@@ -287,10 +291,13 @@ $$
 服从中心极限定理
 
 > 随机变量序列 $\{\eta_n\}$, $\eta_n\sim B(n,p)$, 则
+>
 > $$
 > \lim_{n\to\infty}P\left\{\frac{\eta_n-np}{\sqrt{np(1-p)}}\leq x\right\}=\Phi(x)
 > $$
+>
 > $n$ 很大的二项分布可近似看成正态分布, 一般要求
+>
 > $$
 > np\geq5,np(1-p)\geq5
 > $$

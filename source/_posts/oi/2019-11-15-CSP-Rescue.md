@@ -1,7 +1,8 @@
 ---
 title: CSP 考前急救
 author: duanyll
-tags: [OI]
+tags:
+  - oi
 ---
 
 ## 背板
@@ -25,7 +26,7 @@ int64 exgcd(int64 a, int64 b, int64& x, int64& y) {
 int64 inv1(int64 a, int64 mod) {
     int64 x, y;
     exgcd(a, mod, x, y);
-    return (x % mod + mod) % mod;  
+    return (x % mod + mod) % mod;
 }
 ```
 
@@ -57,7 +58,7 @@ matrix<T, h, w> operator*(const matrix<T, h, w1>& a, const matrix<T, w1, w>& b) 
 }
 ```
 
-关键一句话: 
+关键一句话:
 
 ```cpp
 ans[i][j] += a[i][k] * b[k][j];
@@ -256,7 +257,7 @@ void make_prime() {
 
 以上两者返回指向目标元素的指针, 减去数组开头地址得到 0 开始的下标.
 
-强行用 `unordered_map` 救急: 
+强行用 `unordered_map` 救急:
 
 ```cpp
 #include <tr1/unordered_map>
@@ -298,14 +299,14 @@ while true; do
     ./problem_std
     if diff problem.out problem1.out; then
         printf "AC\n"
-    else 
+    else
         printf "WA\n"
         exit 0;
     fi
 done
 ```
 
-### 常见的 DFS 优化: 
+### 常见的 DFS 优化:
 
 1. 优化搜索顺序
 2. 结合二分
