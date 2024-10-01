@@ -383,7 +383,7 @@ style:
     body: '"WenQuanYi Micro Hei", system-ui, "Microsoft Yahei", "Segoe UI", -apple-system, Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif'
     code: '"Fira Code", Menlo, Monaco, Consolas, system-ui, "Courier New", monospace, sans-serif'
     codeblock: '"Fira Code", Menlo, Monaco, Consolas, system-ui, "Courier New", monospace, sans-serif'
-  text-align: left
+  text-align: justify
   border-radius:
     card: 12px
     block: 12px

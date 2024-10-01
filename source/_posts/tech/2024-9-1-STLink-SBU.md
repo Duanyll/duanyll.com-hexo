@@ -11,6 +11,8 @@ description: >-
   标准接口，带下游供电短路和倒灌保护。
 ---
 
+{% link https://oshwhub.com/duanyll/stlink-sbu %}
+
 ![省流](https://cdn.duanyll.com/img/20240902140957.png)
 
 ## 摘要
@@ -233,6 +235,9 @@ Type-C 公口旁边的 LED 灯的含义如下：
 ### 更多图片
 
 {% swiper width:max effect:cards/coverflow %}
+
 ![](https://cdn.duanyll.com/img/1725195123586.jpg)
 ![](https://cdn.duanyll.com/img/1725195123565.jpg)
-![](https://cdn.duanyll.com/img/1725195123582.jpg) {% endswiper %}
+![](https://cdn.duanyll.com/img/1725195123582.jpg)
+
+{% endswiper %}
