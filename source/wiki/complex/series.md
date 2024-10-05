@@ -94,7 +94,7 @@ $$
 r<|z-a|<R
 $$
 
-![特殊圆环域](https://cdn.duanyll.com/img/20230228093642.png)
+![特殊圆环域](https://img.duanyll.com/img/20230228093642.png)
 
 双边幂级数在收敛域内满足
 
@@ -116,7 +116,7 @@ $\Gamma_\rho$ 为任意圆周 $|z-a|=\rho, r<\rho<R$
 
 ### 孤立奇点
 
-![奇点的分类](https://cdn.duanyll.com/img/20230228095340.png)
+![奇点的分类](https://img.duanyll.com/img/20230228095340.png)
 
 **定义** 孤立奇点: 复变函数在某点不解析, 但存在该点的去心邻域, 函数在此邻域内解析
 
@@ -281,7 +281,7 @@ $$
 
 $f(z)$ 是有理函数且满足留数定理的条件, 只需求*单位圆周内*各个奇点处的留数.
 
-![围道积分法](https://cdn.duanyll.com/img/20230301093334.png)
+![围道积分法](https://img.duanyll.com/img/20230301093334.png)
 
 $P(z), Q(z)$ 为多项式, $\deg Q-\deg P\geq 2$, 实轴上 $Q(z)\neq 0$,
 

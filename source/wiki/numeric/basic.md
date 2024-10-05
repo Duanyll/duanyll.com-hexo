@@ -34,11 +34,11 @@ order: 601
 
 ### 二分法
 
-![二分法伪代码](https://cdn.duanyll.com/img/20230617100739.png)
+![二分法伪代码](https://img.duanyll.com/img/20230617100739.png)
 
 ### 不动点迭代
 
-![不动点迭代伪代码](https://cdn.duanyll.com/img/20230617100816.png)
+![不动点迭代伪代码](https://img.duanyll.com/img/20230617100816.png)
 
 $$
 \lim_{i\to\infty}x_i=r,g(r)=g(\lim_{i\to\infty}x_i)=\lim_{i\to\infty} g(x_i)=\lim_{i\to\infty}x_{i+1}=r
@@ -60,7 +60,7 @@ $\implies g(x)$ 在 $[a,b]$ 上存在唯一不动点
 
 ### 精度的极限
 
-![精度的极限](https://cdn.duanyll.com/img/20230617103102.png)
+![精度的极限](https://img.duanyll.com/img/20230617103102.png)
 
 - 前向误差: 迭代点值不准确 $|x_n|-r$
 - 后向误差: 迭代公式计算不准确 (如存在浮点误差) $f(x_n)$
@@ -151,7 +151,7 @@ $$
 \lim_{i\to\infty}\frac{e_{i+1}}{e_i^2}=\frac{1}{m(m+1)}\left|\frac{f^{(m+1)}(r)}{f^{(m)}(r)}\right|
 $$
 
-![牛顿下山法](https://cdn.duanyll.com/img/20230617111425.png)
+![牛顿下山法](https://img.duanyll.com/img/20230617111425.png)
 
 推广到非线性方程组
 

@@ -7,7 +7,7 @@ author: duanyll
 
 ## Problem 1
 
-![](https://cdn.duanyll.com/img/20231220195434.png)
+![](https://img.duanyll.com/img/20231220195434.png)
 
 生成数据
 
@@ -19,7 +19,7 @@ data = RandomFunction[model, {1001, n + 1000}];
 ListPlot[data, Filling -> Axis]
 ```
 
-![](https://cdn.duanyll.com/img/20231220204433.png)
+![](https://img.duanyll.com/img/20231220204433.png)
 
 用不同阶数 ARMA 模型进行拟合并计算 AIC, BIC
 
@@ -34,9 +34,9 @@ ListPlot3D[aic, AxesLabel -> {p, q, "AIC"}]
 ListPlot3D[bic, AxesLabel -> {p, q, "BIC"}]
 ```
 
-![AIC](https://cdn.duanyll.com/img/20231220204536.png)
+![AIC](https://img.duanyll.com/img/20231220204536.png)
 
-![BIC](https://cdn.duanyll.com/img/20231220204549.png)
+![BIC](https://img.duanyll.com/img/20231220204549.png)
 
 求最小阶数
 
@@ -79,7 +79,7 @@ $$
 
 ## Problem 2
 
-![](https://cdn.duanyll.com/img/20231220205912.png)
+![](https://img.duanyll.com/img/20231220205912.png)
 
 使用上一题的代码生成数据, 进行正态白噪声检验
 
@@ -138,7 +138,7 @@ ListPlot[{gamma, CovarianceFunction[model, {10}]}, Filling -> Axis,
  PlotLegends -> {"模拟数据", "理论"}]
 ```
 
-![](https://cdn.duanyll.com/img/20231220215903.png)
+![](https://img.duanyll.com/img/20231220215903.png)
 
 绘制偏相关图
 
@@ -149,13 +149,13 @@ ListPlot[{phi, PartialCorrelationFunction[model, {10}]},
  Filling -> Axis, PlotLegends -> {"模拟数据", "理论"}]
 ```
 
-![](https://cdn.duanyll.com/img/20231220220007.png)
+![](https://img.duanyll.com/img/20231220220007.png)
 
 发现自相关函数在 2 步截尾, 偏相关函数拖尾, 有可能认为是 $\mathrm{MA}(2)$ 模型, 但还是认为是 ARMA 模型, 然后按照第一题的方法来定阶比较稳妥.
 
 ## Problem 3
 
-![](https://cdn.duanyll.com/img/20231220220512.png)
+![](https://img.duanyll.com/img/20231220220512.png)
 
 ```mathematica
 model = SARIMAProcess[{0.1, 0.12},
@@ -166,7 +166,7 @@ data = RandomFunction[model, {1001, n + 1000}];
 ListPlot[data, Filling -> Axis]
 ```
 
-![](https://cdn.duanyll.com/img/20231220221549.png)
+![](https://img.duanyll.com/img/20231220221549.png)
 
 进行模型识别，绘制一阶差分的自相关图
 
@@ -176,7 +176,7 @@ Normal[gamma]
 ListPlot[gamma, Filling -> Axis]
 ```
 
-![](https://cdn.duanyll.com/img/20231220222317.png)
+![](https://img.duanyll.com/img/20231220222317.png)
 
 注意到数据有明显的季节性，且均值随时间明显地变化，则使用 SARIMA 模型是合适的，$S=10$
 
@@ -207,9 +207,9 @@ $$
 
 ## Problem 4
 
-![](https://cdn.duanyll.com/img/20231220225931.png)
+![](https://img.duanyll.com/img/20231220225931.png)
 
-![](https://cdn.duanyll.com/img/20231220225941.png)
+![](https://img.duanyll.com/img/20231220225941.png)
 
 ```mathematica
 data = TimeSeries[{184.61, 205.76, 229.31, 242.32, 275.23, 311,
@@ -221,7 +221,7 @@ data = TimeSeries[{184.61, 205.76, 229.31, 242.32, 275.23, 311,
 ListLinePlot[data]
 ```
 
-![](https://cdn.duanyll.com/img/20231220223311.png)
+![](https://img.duanyll.com/img/20231220223311.png)
 
 从图像上认为数据存在类似于指数增长的确定性趋势，考虑
 
@@ -246,7 +246,7 @@ res = data - Table[(a + b E^(c t)) /. fit, {t, Length[data]}];
 ListPlot[res, Filling -> Axis]
 ```
 
-![](https://cdn.duanyll.com/img/20231220224545.png)
+![](https://img.duanyll.com/img/20231220224545.png)
 
 并不算是平稳，但本来数据量就不多，将就吧
 

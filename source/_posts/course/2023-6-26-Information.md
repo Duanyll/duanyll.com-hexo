@@ -145,7 +145,7 @@ tags:
       h(X_1|\hat{X_1})=\frac{1}{2}\log(2\pi e D_1)
       $$
 
-![G711 Law A](https://cdn.duanyll.com/img/20230627123451.png)
+![G711 Law A](https://img.duanyll.com/img/20230627123451.png)
 
 ## 证明
 

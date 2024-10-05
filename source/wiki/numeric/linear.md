@@ -9,21 +9,21 @@ order: 602
 
 ### 高斯消元
 
-![高斯消元](https://cdn.duanyll.com/img/20230617115549.png)
+![高斯消元](https://img.duanyll.com/img/20230617115549.png)
 
 得到左侧上三角阵, 回代求解. 消元复杂度 $O(n^3)$, 回代复杂度 $O(n^2)$
 
 ### LU 分解
 
-![](https://cdn.duanyll.com/img/20230617120152.png)
+![](https://img.duanyll.com/img/20230617120152.png)
 
 LU 分解不唯一, 可规定对角线上元素为 1
 
-![](https://cdn.duanyll.com/img/20230617120257.png)
+![](https://img.duanyll.com/img/20230617120257.png)
 
-![](https://cdn.duanyll.com/img/20230617120343.png)
+![](https://img.duanyll.com/img/20230617120343.png)
 
-![伪代码](https://cdn.duanyll.com/img/20230617120510.png)
+![伪代码](https://img.duanyll.com/img/20230617120510.png)
 
 LU 分解定理: $A^{n\times n}$ 的前 $n$ 个主子式非奇异, 则有 LU 分解 (那不就是可逆吗)
 
@@ -60,9 +60,9 @@ $$
 \frac{1}{\operatorname{cond}(A)}\frac{\|r\|_\infty}{\|b\|_\infty}\leq\frac{\|x_a-x\|_\infty}{\|x\|_\infty}\leq\operatorname{cond}(A)\frac{\|r\|_\infty}{\|b\|_\infty}
 $$
 
-![淹没现象](https://cdn.duanyll.com/img/20230617143744.png)
+![淹没现象](https://img.duanyll.com/img/20230617143744.png)
 
-![列主消元](https://cdn.duanyll.com/img/20230617143810.png)
+![列主消元](https://img.duanyll.com/img/20230617143810.png)
 
 ### 联系
 
@@ -121,11 +121,11 @@ $$
 
 不同的迭代方法的区别为构造了不同的 $Q$ 和 $G$. $Q^{-1}$ 和 $G$ 应当容易计算.
 
-![](https://cdn.duanyll.com/img/20230617161344.png)
+![](https://img.duanyll.com/img/20230617161344.png)
 
-![](https://cdn.duanyll.com/img/20230617161803.png)
+![](https://img.duanyll.com/img/20230617161803.png)
 
-![](https://cdn.duanyll.com/img/20230617161857.png)
+![](https://img.duanyll.com/img/20230617161857.png)
 
 ### Richardson 迭代
 
@@ -149,7 +149,7 @@ $$
 x_{k+1}=-D^{-1}(L+U)x_k+D^{-1}b
 $$
 
-![D, L, U 是 A 的部分](https://cdn.duanyll.com/img/20230617160122.png)
+![D, L, U 是 A 的部分](https://img.duanyll.com/img/20230617160122.png)
 
 $A$ 是严格行对角占优矩阵时收敛
 
@@ -215,11 +215,11 @@ $$
 
 实对称正定矩阵可以分解为 $A=LL^\top$, $L$ 是下三角阵
 
-![](https://cdn.duanyll.com/img/20230617162838.png)
+![](https://img.duanyll.com/img/20230617162838.png)
 
-![](https://cdn.duanyll.com/img/20230617163042.png)
+![](https://img.duanyll.com/img/20230617163042.png)
 
-![伪代码](https://cdn.duanyll.com/img/20230617163412.png)
+![伪代码](https://img.duanyll.com/img/20230617163412.png)
 
 ### 梯度下降法
 
@@ -340,7 +340,7 @@ $$
 
 特征向量
 
-![](https://cdn.duanyll.com/img/20230617232749.png)
+![](https://img.duanyll.com/img/20230617232749.png)
 
 通过以上方法求出模长最大的特征向量. 求解其他特征向量
 
@@ -362,7 +362,7 @@ $$
 \lambda=\frac{x^\top Ax}{x^\top x}
 $$
 
-![](https://cdn.duanyll.com/img/20230617233820.png)
+![](https://img.duanyll.com/img/20230617233820.png)
 
 ### QR 分解
 
@@ -375,13 +375,13 @@ $$
 
 对 $A$ 的每个列向量, 依次减去与前面的向量平行的分量并归一化, 得到正交向量组作为 $Q$ 矩阵, 记录系数作为 $R$ 矩阵
 
-![Gram-Schmit 正交化实现消减 QR 分解](https://cdn.duanyll.com/img/20230618110346.png)
+![Gram-Schmit 正交化实现消减 QR 分解](https://img.duanyll.com/img/20230618110346.png)
 
-![要实现完全 QR 分解, 先任意补充线性无关组](https://cdn.duanyll.com/img/20230618110611.png)
+![要实现完全 QR 分解, 先任意补充线性无关组](https://img.duanyll.com/img/20230618110611.png)
 
-![R 矩阵下方补零](https://cdn.duanyll.com/img/20230618110711.png)
+![R 矩阵下方补零](https://img.duanyll.com/img/20230618110711.png)
 
-![](https://cdn.duanyll.com/img/20230618112219.png)
+![](https://img.duanyll.com/img/20230618112219.png)
 
 两种形式在数学上等价, 但如果因为数值计算的误差导致靠前的向量之间没有完全正交, 改进的方法仍然能尽量保持后面的向量之间的正交性.
 
@@ -389,7 +389,7 @@ $$
 
 #### Householder 变换
 
-![Householder 反射子定义](https://cdn.duanyll.com/img/20230618112711.png)
+![Householder 反射子定义](https://img.duanyll.com/img/20230618112711.png)
 
 $$
 H=I-2\frac{vv^\top}{v^\top v}
@@ -408,15 +408,15 @@ $$
 
 由 $R$ 矩阵的形式, 每增加 $A$ 中新的向量作为 $x$ 时, 可以容易得到对应的 $w$, 则可以求出 $H$.
 
-![构造第一列的 w 并得到 H1](https://cdn.duanyll.com/img/20230618114309.png)
+![构造第一列的 w 并得到 H1](https://img.duanyll.com/img/20230618114309.png)
 
-![后续只处理 Tilde A, 不需要处理 W, H 矩阵之前处理好的部分用 I 填充](https://cdn.duanyll.com/img/20230618115907.png)
+![后续只处理 Tilde A, 不需要处理 W, H 矩阵之前处理好的部分用 I 填充](https://img.duanyll.com/img/20230618115907.png)
 
 $$
 H_n\cdots H_1A=R\implies Q=H_1\cdots H_n
 $$
 
-![伪代码](https://cdn.duanyll.com/img/20230618120236.png)
+![伪代码](https://img.duanyll.com/img/20230618120236.png)
 
 Householder 变换直接得到的是完全 QR 分解, 数值稳定性比 GS 正交化好.
 
@@ -424,6 +424,6 @@ Householder 变换直接得到的是完全 QR 分解, 数值稳定性比 GS 正�
 
 求出矩阵的所有特征值. 选取一组正交向量同时进行幂迭代，每次迭代都对向量进行正交化，最终可得到所有的特征向量及对应的特征值.
 
-![](https://cdn.duanyll.com/img/20230618121857.png)
+![](https://img.duanyll.com/img/20230618121857.png)
 
-![伪代码](https://cdn.duanyll.com/img/20230618122001.png)
+![伪代码](https://img.duanyll.com/img/20230618122001.png)

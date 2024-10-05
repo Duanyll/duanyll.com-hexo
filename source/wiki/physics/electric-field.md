@@ -35,7 +35,7 @@ $$
 
 ---
 
-![Uniformly distributed charge along a line](https://cdn.duanyll.com/img/20230213221830.png)
+![Uniformly distributed charge along a line](https://img.duanyll.com/img/20230213221830.png)
 
 $\lambda$: Charge per unit length
 
@@ -53,7 +53,7 @@ $$
 E_x=0,E_y=\frac{\lambda}{2\pi\varepsilon_0a}
 $$
 
-![A plane of charge](https://cdn.duanyll.com/img/20230213222420.png)
+![A plane of charge](https://img.duanyll.com/img/20230213222420.png)
 
 $\sigma$: Charge per unit area
 
@@ -61,7 +61,7 @@ $$
 E=E_y=\frac{\sigma}{2\varepsilon_0}\label{einfplane}
 $$
 
-![For a uniformly charged ring](https://cdn.duanyll.com/img/20230213222932.png)
+![For a uniformly charged ring](https://img.duanyll.com/img/20230213222932.png)
 
 $Q$: Total charge
 
@@ -73,7 +73,7 @@ $$
 E={\frac{Q\cos\theta}{4\pi\varepsilon_{0}r^{2}}}={\frac{Q\cdot x}{4\pi\varepsilon_{0}(x^{2}+R^{2})^{3/2}}}
 $$
 
-![A semi-circle](https://cdn.duanyll.com/img/20230213223336.png)
+![A semi-circle](https://img.duanyll.com/img/20230213223336.png)
 
 $\lambda$: Charge per unit length
 
@@ -81,7 +81,7 @@ $$
 E_o=\frac{\lambda}{2\pi\varepsilon_0R}
 $$
 
-![A uniformly charged disk](https://cdn.duanyll.com/img/20230213223553.png)
+![A uniformly charged disk](https://img.duanyll.com/img/20230213223553.png)
 
 $\sigma$: Charge per unit area
 
@@ -99,7 +99,7 @@ $$
 
 $R\to\infty\implies E=\frac{\sigma}{2\varepsilon_0}$ The infinite plane $(\ref{einfplane})$
 
-![A parallel-plate capacitor](https://cdn.duanyll.com/img/20230213224052.png)
+![A parallel-plate capacitor](https://img.duanyll.com/img/20230213224052.png)
 
 $\sigma$: Charge per unit area
 
@@ -115,7 +115,7 @@ Combination of two equal charges of opposite charges is called an electric dipol
 
 **Dipole moment**: $\vec{p}=Q\vec{l}\;(-Q\to+Q)$
 
-![Dipole in external field](https://cdn.duanyll.com/img/20230213224447.png)
+![Dipole in external field](https://img.duanyll.com/img/20230213224447.png)
 
 1. Total force $\vec{F}=\vec{F_+}+\vec{F_-}=0$
 2. Torque on the dipole
@@ -130,7 +130,7 @@ $$
 
 ### Field Lines
 
-![Field lines](https://cdn.duanyll.com/img/20230213224812.png)
+![Field lines](https://img.duanyll.com/img/20230213224812.png)
 
 1. The field point is in the direction **tangent** to the field line.
 2. **Magnitude** of $E\propto$ numbers of lines crossing unit area $\perp$ the lines.
@@ -141,11 +141,11 @@ $$
 
 $\Phi_E$: Electirc flux through an area $\propto$ numbers of field lines passing that area.
 
-![Uniform field](https://cdn.duanyll.com/img/20230213225307.png)
+![Uniform field](https://img.duanyll.com/img/20230213225307.png)
 
 In uniform field: $\Phi_E=\vec{E}\cdot\vec{S}$
 
-![General cases](https://cdn.duanyll.com/img/20230213225422.png)
+![General cases](https://img.duanyll.com/img/20230213225422.png)
 
 General cases: $\Phi_E=\int\vec{E}\cdot\d\vec{S}$
 
@@ -175,7 +175,7 @@ $$
 
 ---
 
-![A spherical shell](https://cdn.duanyll.com/img/20230213230721.png)
+![A spherical shell](https://img.duanyll.com/img/20230213230721.png)
 
 Outside the shell: $E={\frac{Q}{4\pi\varepsilon_0r^{2}}}={\frac{\sigma}{\varepsilon_{0}}}$
 
@@ -183,21 +183,21 @@ Inside the shell: $E=0$
 
 > Same for a uniformly charged **conductor** sphere
 
-![A uniformly charged nonconducting sphere](https://cdn.duanyll.com/img/20230213231136.png)
+![A uniformly charged nonconducting sphere](https://img.duanyll.com/img/20230213231136.png)
 
 Outside the shell: $E={\frac{Q}{4\pi\varepsilon_0r^{2}}}$
 
 Inside the shell: $E=\frac{\rho r}{3\varepsilon_0},\rho=\frac{3Q}{4\pi R^3}$
 
-![In a hole in a uniformly charged sphere, the electric field is uniform](https://cdn.duanyll.com/img/20230213231339.png)
+![In a hole in a uniformly charged sphere, the electric field is uniform](https://img.duanyll.com/img/20230213231339.png)
 
-![Proper Gaussian surface for an infinitly long cylinder](https://cdn.duanyll.com/img/20230213231531.png)
+![Proper Gaussian surface for an infinitly long cylinder](https://img.duanyll.com/img/20230213231531.png)
 
 ---
 
 **Conductor in external field**
 
-![](https://cdn.duanyll.com/img/20230213231657.png)
+![](https://img.duanyll.com/img/20230213231657.png)
 
 When in electorstatic equilibrium:
 
@@ -228,24 +228,24 @@ Usually let $V=0$ at infinity: $V_a=\int_a^\infty\vec{E}\cdot\d\vec{l}$
 
 ---
 
-![Field created by a point charge](https://cdn.duanyll.com/img/20230214120900.png)
+![Field created by a point charge](https://img.duanyll.com/img/20230214120900.png)
 
 $$
 V_a=\int_a^\infty\frac{Q}{4\pi\varepsilon_0r^2}\d r=\frac{Q}{4\pi\varepsilon_0r_a}
 $$
 
-![Charged conductor sphere](https://cdn.duanyll.com/img/20230214121247.png)
+![Charged conductor sphere](https://img.duanyll.com/img/20230214121247.png)
 
 1. $r>R$: Same as point charge, $V_a=\frac{Q}{4\pi\varepsilon_0r_a}$
 2. $r\leq R$: Same potential at any point, $V=\frac{Q}{4\pi\varepsilon_0R}$
 
-![Uniformly charged rod](https://cdn.duanyll.com/img/20230214160240.png)
+![Uniformly charged rod](https://img.duanyll.com/img/20230214160240.png)
 
 $$
 V_a=\frac{\lambda}{4\pi\varepsilon_0}\ln\frac{d+L}{d}\\
 $$
 
-![Uniformly charged ring](https://cdn.duanyll.com/img/20230214160440.png)
+![Uniformly charged ring](https://img.duanyll.com/img/20230214160440.png)
 
 $$
 V_a=\frac{Q}{4\pi\varepsilon_0r}=\frac{Q}{4\pi\varepsilon_0\sqrt{x^2+R^2}}
@@ -269,7 +269,7 @@ $$
 
 ---
 
-![A parallel-plate capacitor](https://cdn.duanyll.com/img/20230213224052.png)
+![A parallel-plate capacitor](https://img.duanyll.com/img/20230213224052.png)
 
 $$
 E=\frac{\sigma}{\varepsilon_0}=\frac{Q}{\varepsilon_0S}
@@ -283,7 +283,7 @@ $$
 C=\frac{Q}{V}=\frac{\varepsilon_0S}{d}
 $$
 
-![Cylindrical capacitor](https://cdn.duanyll.com/img/20230214161321.png)
+![Cylindrical capacitor](https://img.duanyll.com/img/20230214161321.png)
 
 $$
 E=\frac{\lambda}{2\pi\varepsilon_0r}
@@ -299,13 +299,13 @@ $$
 
 ---
 
-![Capacitors in series](https://cdn.duanyll.com/img/20230214161913.png)
+![Capacitors in series](https://img.duanyll.com/img/20230214161913.png)
 
 $$
 \frac{1}{C}=\frac{1}{C_1}+\frac{1}{C_2}
 $$
 
-![Capacitors in parallel](https://cdn.duanyll.com/img/20230214162008.png)
+![Capacitors in parallel](https://img.duanyll.com/img/20230214162008.png)
 
 $$
 C=C_1+C_2
@@ -333,7 +333,7 @@ $$
 
 ### Dielectrics
 
-![Capacitor compeletely filled by a deilectric](https://cdn.duanyll.com/img/20230214170028.png)
+![Capacitor compeletely filled by a deilectric](https://img.duanyll.com/img/20230214170028.png)
 
 Dielectric: Insulating material in capacitors.
 

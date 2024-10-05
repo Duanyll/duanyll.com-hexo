@@ -7,7 +7,7 @@ order: 402
 
 简单闭曲线的方向: 正向对应内部在左侧 (外边界逆时针, 内边界顺时针). 复定积分的定义类似实数域上的 Riemann 定积分, 只是不在区间上, 而是在光滑的有向曲线上划分分点.
 
-![对积分路径的划分](https://cdn.duanyll.com/img/20230227170206.png)
+![对积分路径的划分](https://img.duanyll.com/img/20230227170206.png)
 
 **定理** 可积的条件: $f(z)$ 连续, $C$ 光滑 $\implies$ 可积
 
@@ -44,7 +44,7 @@ $$
 
 {% folding open:true 说明 %}
 
-![绕奇点的圆周上的积分](https://cdn.duanyll.com/img/20230227172458.png)
+![绕奇点的圆周上的积分](https://img.duanyll.com/img/20230227172458.png)
 
 $$
 \begin{aligned}
@@ -73,11 +73,11 @@ $$
 > 1. 若 $C$ 是 $B$ 的边界, 易得只需在闭区域 $\conj{B}=B+C$ 上解析就有结论成立
 > 2. 事实上, 只需要在 $B$ 内解析, 在 $\conj{B}=B+C$ 上连续就有结论成立
 
-![闭路变形原理](https://cdn.duanyll.com/img/20230227173909.png)
+![闭路变形原理](https://img.duanyll.com/img/20230227173909.png)
 
 **定理** 闭路变形原理: 解析函数沿闭曲线的解纷, 不因闭曲线在区域内连续变形 (不经过不解析点) 而改变.
 
-![复合闭路定理](https://cdn.duanyll.com/img/20230227174141.png)
+![复合闭路定理](https://img.duanyll.com/img/20230227174141.png)
 
 **定理** 复合闭路定理: $f(z)$ 在 $D$ 内解析, $C_1,\cdots,C_n$ 各自绕一个奇点
 

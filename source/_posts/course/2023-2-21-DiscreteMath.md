@@ -16,9 +16,9 @@ tags:
 - 子集总数, 幂集
 - 并集, 交集, 差集, 补集, 对称差
 
-![集合运算律 1](https://cdn.duanyll.com/img/20230221202928.png)
+![集合运算律 1](https://img.duanyll.com/img/20230221202928.png)
 
-![集合运算律 2](https://cdn.duanyll.com/img/20230221203858.png)
+![集合运算律 2](https://img.duanyll.com/img/20230221203858.png)
 
 ## 计数问题
 
@@ -40,18 +40,18 @@ tags:
   - 蕴含 $\rarr$
   - 双条件 / 等价 $\lrarr$
 
-![联结词真值表](https://cdn.duanyll.com/img/20230221210239.png)
+![联结词真值表](https://img.duanyll.com/img/20230221210239.png)
 
 - 命题公式, 命题变量
 - 解释, 真值表
 - 永真公式 / 重言式, 永假公式 / 矛盾式, 可满足公式
 - 公式等价 $\lrArr / =$: 任意解释下真值相同 $\iff G\lrarr$ 永真
 
-![基本等价公式 1](https://cdn.duanyll.com/img/20230221210925.png)
+![基本等价公式 1](https://img.duanyll.com/img/20230221210925.png)
 
-![基本等价公式 2](https://cdn.duanyll.com/img/20230221210952.png)
+![基本等价公式 2](https://img.duanyll.com/img/20230221210952.png)
 
-![基本等价公式 3](https://cdn.duanyll.com/img/20230221211039.png)
+![基本等价公式 3](https://img.duanyll.com/img/20230221211039.png)
 
 - 代入定理, 替换定理
 - 范式
@@ -72,9 +72,9 @@ tags:
     - CP 规则: 附加前提规则, 从前提集合 $\Gamma$ 和 $P$ 推出 $S$, 则从前提集合推出 $P\rarr S$
   - 间接证明 (反证)
 
-![推理定律 1](https://cdn.duanyll.com/img/20230221212235.png)
+![推理定律 1](https://img.duanyll.com/img/20230221212235.png)
 
-![推理定律 2](https://cdn.duanyll.com/img/20230221212255.png)
+![推理定律 2](https://img.duanyll.com/img/20230221212255.png)
 
 ## 谓词逻辑
 
@@ -92,21 +92,21 @@ tags:
     - 有效公式是可满足公式
   - 代入示例: 谓词公式代入命题公式
 
-![谓词演算的有效公式 1](https://cdn.duanyll.com/img/20230221214309.png)
+![谓词演算的有效公式 1](https://img.duanyll.com/img/20230221214309.png)
 
-![谓词演算的有效公式 2](https://cdn.duanyll.com/img/20230221214345.png)
+![谓词演算的有效公式 2](https://img.duanyll.com/img/20230221214345.png)
 
-![谓词演算的有效公式 3](https://cdn.duanyll.com/img/20230221214356.png)
+![谓词演算的有效公式 3](https://img.duanyll.com/img/20230221214356.png)
 
 - 范式
   - 前束范式: 所有量词都在最前端
   - Skolem 标准型: 消去前束范式的量词
 
-![谓词推理规律 1](https://cdn.duanyll.com/img/20230221215447.png)
+![谓词推理规律 1](https://img.duanyll.com/img/20230221215447.png)
 
-![谓词推理规律 2](https://cdn.duanyll.com/img/20230221215511.png)
+![谓词推理规律 2](https://img.duanyll.com/img/20230221215511.png)
 
-![谓词推理规律 3](https://cdn.duanyll.com/img/20230221215924.png)
+![谓词推理规律 3](https://img.duanyll.com/img/20230221215924.png)
 
 - 谓词推理规则
   - US: $(\forall x)G(x)\implies G(y)$, $(\forall x)G(x)\implies G(c)$ 所选用取代 $x$ 的变元 $y$ 在公式中必须是自由的
@@ -143,7 +143,7 @@ tags:
 - 二元关系, 空关系, 全关系
   - 集合表示法, 关系图法, 关系矩阵
 - 关系的复合运算, 逆运算
-  - ![关系运算律](https://cdn.duanyll.com/img/20230221222350.png)
+  - ![关系运算律](https://img.duanyll.com/img/20230221222350.png)
 - 关系的幂运算
 - 关系的性质
   - 自反性: $\forall x,\left<x,x\right>\in R$
@@ -152,9 +152,9 @@ tags:
   - 反对称性: $\left<x,y\right>\in R\land\left<y,x\right>\in R\implies x=y$
   - 传递性: $\left<x,y\right>\in R\land\left<y,z\right>\in R\implies\left<x,z\right>\in R$
 
-![我直接粘 PPT](https://cdn.duanyll.com/img/20230221223003.png)
+![我直接粘 PPT](https://img.duanyll.com/img/20230221223003.png)
 
-![我直接粘 PPT](https://cdn.duanyll.com/img/20230221223121.png)
+![我直接粘 PPT](https://img.duanyll.com/img/20230221223121.png)
 
 - 闭包: 增加最少元素，使其具备所需性质的扩充.
   - 自反闭包, 对称闭包, 传递闭包

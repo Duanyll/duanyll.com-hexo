@@ -251,7 +251,7 @@ $$
 >
 > $\int_a^{+\infty}f(x)\d x$ 收敛 $\not\rArr$ $f(x)\to0$, 甚至不能保证 $\lim_{x\to+\infty}f(x)$ 存在
 >
-> ![一种函数极限不存在的构造](https://cdn.duanyll.com/img/20230210225714.png)
+> ![一种函数极限不存在的构造](https://img.duanyll.com/img/20230210225714.png)
 
 **定理** 无界区间反常积分的 Cauchy 收敛原理: $\int_a^{+\infty}f(x)\d$ 收敛 $\iff\forall\epsilon>0,\exist A_0>a,\forall A',A''>A_0$ 有
 

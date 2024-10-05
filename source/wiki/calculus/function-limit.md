@@ -62,7 +62,7 @@ $$
 \end{aligned}
 $$
 
-![下凸函数在任意闭区间上 Lipschitz 连续.](https://cdn.duanyll.com/img/20230208175334.png)
+![下凸函数在任意闭区间上 Lipschitz 连续.](https://img.duanyll.com/img/20230208175334.png)
 
 证明函数在区间上不一致连续, 利用否定
 

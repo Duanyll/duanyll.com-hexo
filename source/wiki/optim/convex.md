@@ -30,7 +30,7 @@ order: 102
 
 ### 多面体
 
-![](https://cdn.duanyll.com/img/2022-12-03-19-57-30.png)
+![](https://img.duanyll.com/img/2022-12-03-19-57-30.png)
 
 - 支撑超平面: 经过凸集的边界点, 使凸集完全位于一个半空间内
 - 多面体: 可表示为有限个半空间的交集
@@ -77,11 +77,11 @@ $$
 
 Hessian 矩阵: 梯度的 Jacobi 矩阵, 二阶导
 
-![](https://cdn.duanyll.com/img/2022-12-03-20-28-07.png)
+![](https://img.duanyll.com/img/2022-12-03-20-28-07.png)
 
 链式法则: $h(t)=g(f(t))$
 
-![](https://cdn.duanyll.com/img/2022-12-03-20-35-13.png)
+![](https://img.duanyll.com/img/2022-12-03-20-35-13.png)
 
 注意把向量的形状凑对, 求复合函数的 Jacobi, 只需外层 Jacobi 乘内层 Jacobi
 
@@ -97,7 +97,7 @@ $f: m \rarr n, g:n\rarr p, f(g): m \rarr p, (p \times n) (n\times m) \rarr (p\ti
   - **等值线与梯度垂直**
   - 等值线在极值点附近近似为**椭圆**
 
-![](https://cdn.duanyll.com/img/2022-12-03-20-49-57.png)
+![](https://img.duanyll.com/img/2022-12-03-20-49-57.png)
 
 ## Taylor 展开
 
@@ -120,9 +120,9 @@ $$
 
 中值定理 (类似 Lagrange 中值)
 
-![](https://cdn.duanyll.com/img/2022-12-03-21-04-26.png)
+![](https://img.duanyll.com/img/2022-12-03-21-04-26.png)
 
-![](https://cdn.duanyll.com/img/2022-12-03-21-05-57.png)
+![](https://img.duanyll.com/img/2022-12-03-21-05-57.png)
 
 ## 极小点
 

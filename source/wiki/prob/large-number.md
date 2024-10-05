@@ -7,7 +7,7 @@ order: 702
 
 ## 随机变量序列的收敛性
 
-![几种收敛性的关系](https://cdn.duanyll.com/img/20230623113959.png)
+![几种收敛性的关系](https://img.duanyll.com/img/20230623113959.png)
 
 ### 分布函数弱收敛
 
@@ -130,7 +130,7 @@ $$
 
 ## 大数定律
 
-![弱大数定律的关系](https://cdn.duanyll.com/img/20230623114314.png)
+![弱大数定律的关系](https://img.duanyll.com/img/20230623114314.png)
 
 **定义** 弱大数定律: 设随机变量序列 $\xi_k$ 中每一项的期望 $E(\xi_k)$ 都存在, 若 $\forall\epsilon>0$
 
@@ -272,7 +272,7 @@ $$
 >
 > 中心极限定理解释了哪些随机变量可认为是服从正态分布的
 
-![](https://cdn.duanyll.com/img/20230623155750.png)
+![](https://img.duanyll.com/img/20230623155750.png)
 
 **定理** 林德伯格—列维定理 (独立同分布中心极限定理): **独立同分布**随机变量序列 $E(\xi_k)=\mu$, $D(\xi_k)=\sigma^2\neq0$ 服从中心极限定理
 

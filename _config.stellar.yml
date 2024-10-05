@@ -241,7 +241,7 @@ tag_plugins:
     blobcat: https://gcore.jsdelivr.net/gh/norevi/waline-blobcatemojis@1.0/blobs/${name}.png
   # {% image %}
   image:
-    fancybox: false # true, false
+    fancybox: true # true, false
     parse_markdown: false # 把 markdown 格式的图片解析成图片标签
 
   # {% timeline %}
@@ -306,7 +306,7 @@ plugins:
     # 可以处理评论区的图片（不支持 iframe 类评论系统）例如：
     # 使用twikoo评论可以写: .tk-content img:not([class*="emo"])
     # 使用waline评论可以写: #waline_container .vcontent img
-    selector: .swiper-slide img # 多个选择器用英文逗号隔开
+    selector: .swiper-slide:not(.swiper-slide-duplicate) img # 多个选择器用英文逗号隔开
 
   # swiper
   swiper:

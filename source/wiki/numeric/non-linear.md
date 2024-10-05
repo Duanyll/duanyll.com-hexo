@@ -15,7 +15,7 @@ $$
 
 求 $g(x)\in\Phi$ 满足 $g(x_i)=f(x_i)$, $\phi_0(x),\phi_1(x),\cdots,\phi(x)$ 称为基函数. 不同插值方法的区别在于基函数的选取方式和插值结点的选取方式.
 
-![给定基函数和插值结点, 可解线性方程组得到系数](https://cdn.duanyll.com/img/20230618160637.png)
+![给定基函数和插值结点, 可解线性方程组得到系数](https://img.duanyll.com/img/20230618160637.png)
 
 ### 基本多项式插值
 
@@ -27,7 +27,7 @@ $$
 \Phi=P_n(x)=\operatorname{span}\{1,x,\cdots,x^n\}
 $$
 
-![系数矩阵](https://cdn.duanyll.com/img/20230618161024.png)
+![系数矩阵](https://img.duanyll.com/img/20230618161024.png)
 
 形式简单, 但是系数矩阵条件数大
 
@@ -64,7 +64,7 @@ $$
 N_i(x)=(x-x_0)(x-x_1)\cdots(x-x_{i-1})
 $$
 
-![系数矩阵是下三角阵, 可直接回代求解](https://cdn.duanyll.com/img/20230618162709.png)
+![系数矩阵是下三角阵, 可直接回代求解](https://img.duanyll.com/img/20230618162709.png)
 
 规定记号
 
@@ -78,9 +78,9 @@ $$
 f[x_0,x_1,\cdots,x_{n-1},x_n]=\frac{f[x_0,\cdots,x_{n-1}]-f[x_1,\cdots,x_n]}{x_n-x_0}
 $$
 
-![差商计算过程](https://cdn.duanyll.com/img/20230618163630.png)
+![差商计算过程](https://img.duanyll.com/img/20230618163630.png)
 
-![可以滚动数组优化内存](https://cdn.duanyll.com/img/20230618163815.png)
+![可以滚动数组优化内存](https://img.duanyll.com/img/20230618163815.png)
 
 得到系数 $a_i$ 后, $g(x)$ 的计算可以使用秦九韶算法节约复杂度.
 
@@ -102,7 +102,7 @@ $$
 
 > 这个形式显然是 Taylor 展开的 Lagrange 余项
 
-![Runge 现象, 在区间的两端剧烈震荡](https://cdn.duanyll.com/img/20230618165919.png)
+![Runge 现象, 在区间的两端剧烈震荡](https://img.duanyll.com/img/20230618165919.png)
 
 进行高次多项式插值的弊端, 高阶导数 $f^{(n+1)}(c)$ 可能巨大. 为了避免区间端点处的震荡, 可以向外拓展插值结点; 也可以通过合理选取插值结点, 尽量减小 $\prod_{i=0}^n(x-x_i)$ 项. Chebyshev 多项式给出的插值结点能最小化这一部分的误差.
 
@@ -114,11 +114,11 @@ $$
 T_n(x)=\cos(n\arccos(x))
 $$
 
-![Chebyshev 多项式的性质](https://cdn.duanyll.com/img/20230618170438.png)
+![Chebyshev 多项式的性质](https://img.duanyll.com/img/20230618170438.png)
 
-![Chebyshev 多项式的图像](https://cdn.duanyll.com/img/20230618170511.png)
+![Chebyshev 多项式的图像](https://img.duanyll.com/img/20230618170511.png)
 
-![Chebyshev 多项式的零点均匀地分布在圆周上](https://cdn.duanyll.com/img/20230618170553.png)
+![Chebyshev 多项式的零点均匀地分布在圆周上](https://img.duanyll.com/img/20230618170553.png)
 
 $$
 x_k=\cos\frac{(2k+1)\pi}{2n},k=0,1,\cdots n-1
@@ -126,11 +126,11 @@ $$
 
 #### 证明
 
-![Chebyshev 多项式是区间上值域最小的首一多项式](https://cdn.duanyll.com/img/20230618171446.png)
+![Chebyshev 多项式是区间上值域最小的首一多项式](https://img.duanyll.com/img/20230618171446.png)
 
 {% folding open:true 说明 %}
 
-![](https://cdn.duanyll.com/img/20230618171659.png)
+![](https://img.duanyll.com/img/20230618171659.png)
 
 反证: 设首一多项式 $\tilde{P}(x)$ 比 $2^{1-n}T_n(x)$ 小, 则
 
@@ -172,17 +172,17 @@ Hermite 插值定理：存在唯一的次数至多是 $m$ 的多项式 $P_m (x)$
 
 只有一个插值结点, 条件是 0 至 $m$ 阶导数值的 Hermite 插值就是 Taylor 展开.
 
-![](https://cdn.duanyll.com/img/20230618174244.png)
+![](https://img.duanyll.com/img/20230618174244.png)
 
-![](https://cdn.duanyll.com/img/20230618174347.png)
+![](https://img.duanyll.com/img/20230618174347.png)
 
-![](https://cdn.duanyll.com/img/20230618174401.png)
+![](https://img.duanyll.com/img/20230618174401.png)
 
-![Hermite 插值的 Newton 差商型构造](https://cdn.duanyll.com/img/20230618174651.png)
+![Hermite 插值的 Newton 差商型构造](https://img.duanyll.com/img/20230618174651.png)
 
 直接把已知的 $n$ 次导数值替换掉多出的 $n$ 次差商(红色部分). 亦可以处理对不同插值节点指定了不同阶数的导数的情况, 见[作业题](/source/_posts/course/2023-4-28-Numeric-7.md#problem-3)
 
-![形式上容易理解](https://cdn.duanyll.com/img/20230618175112.png)
+![形式上容易理解](https://img.duanyll.com/img/20230618175112.png)
 
 ### 样条插值
 
@@ -195,27 +195,27 @@ Hermite 插值定理：存在唯一的次数至多是 $m$ 的多项式 $P_m (x)$
 
 零次样条插值即为分段常数函数, 一次样条为分段线性函数, 常用三次样条
 
-![](https://cdn.duanyll.com/img/20230618180940.png)
+![](https://img.duanyll.com/img/20230618180940.png)
 
-![也可以用其他方式指定左右边界的二阶导数或一阶导数](https://cdn.duanyll.com/img/20230618180959.png)
+![也可以用其他方式指定左右边界的二阶导数或一阶导数](https://img.duanyll.com/img/20230618180959.png)
 
-![](https://cdn.duanyll.com/img/20230618181110.png)
+![](https://img.duanyll.com/img/20230618181110.png)
 
 ## 数据拟合与最小二乘
 
 数据拟合也是用基函数线性组合, 但不要求精确过每个点, 要求曲线到给定数据点的距离最小
 
-![](https://cdn.duanyll.com/img/20230618201621.png)
+![](https://img.duanyll.com/img/20230618201621.png)
 
-![](https://cdn.duanyll.com/img/20230618201921.png)
+![](https://img.duanyll.com/img/20230618201921.png)
 
 求解最后的矩阵就能得到最小二乘拟合系数. 最后的矩阵可以写作
 
-![超定线性方程组最小二乘法](https://cdn.duanyll.com/img/20230618202110.png)
+![超定线性方程组最小二乘法](https://img.duanyll.com/img/20230618202110.png)
 
 ### 法线方程
 
-![最小二乘的几何解释](https://cdn.duanyll.com/img/20230618202341.png)
+![最小二乘的几何解释](https://img.duanyll.com/img/20230618202341.png)
 
 $$
 A^\top Ax=A^\top b
@@ -229,7 +229,7 @@ $$
 
 直接使用法线方程计算最小二乘解数值不稳定. 可利用 QR 分解来求解.
 
-![d 的下面部分与 x 无关, 则上面为 0 时模长最小](https://cdn.duanyll.com/img/20230618203106.png)
+![d 的下面部分与 x 无关, 则上面为 0 时模长最小](https://img.duanyll.com/img/20230618203106.png)
 
 只需进行完全 QR 分解, 然后求解
 
@@ -271,11 +271,11 @@ $$
 
 通过 Taylor 展开的 Lagrange 余项控制误差的范围. 正确的差商公式都是 Taylor 展开式的变形 (确定插值点, 可以通过 Taylor 展开得到唯一正确的差商公式, 以及余项).
 
-![](https://cdn.duanyll.com/img/20230618210556.png)
+![](https://img.duanyll.com/img/20230618210556.png)
 
 由于数值计算误差的存在, $h$ 的选取不是越小越好
 
-![](https://cdn.duanyll.com/img/20230618210655.png)
+![](https://img.duanyll.com/img/20230618210655.png)
 
 ### Richardson 外推
 
@@ -295,7 +295,7 @@ $$
 
 ### 待定系数法
 
-![](https://cdn.duanyll.com/img/20230618211735.png)
+![](https://img.duanyll.com/img/20230618211735.png)
 
 给定插值点, 可以通过 Taylor 展开得到唯一正确的差商公式, 以及余项. 插值点数量已知时, 为了让这个方程有唯一解, Taylor 公式展开的阶数是确定的, 余项的阶数也能确定了. 解线性方程组求出系数后再带回展开式, 可能余项的系数为 0, 这时差商公式会具有更高的阶数.
 
@@ -307,7 +307,7 @@ $$
 
 数值积分的代数精度, 指可以准确积分的多项式的最高阶数. 给定积分的插值结点, 可以根据插值结点数量确定至少具有的代数精度, 并列线性方程组解出唯一正确的积分系数.
 
-![求至少具有 n 数值精度的系数](https://cdn.duanyll.com/img/20230618223958.png)
+![求至少具有 n 数值精度的系数](https://img.duanyll.com/img/20230618223958.png)
 
 从插值误差 $(\ref{interplError})$ 推导积分误差, 使用积分均值定理, $f(x)$ 不变号时存在 $[a,b]$ 中一点 $c$
 
@@ -381,35 +381,35 @@ $n$ 为奇数时, Newton-Cotes 具有 $n$ 阶代数精度. $n$ 为偶数时, New
 
 用 Richardson 外推法提高复合梯形法则的精度.
 
-![](https://cdn.duanyll.com/img/20230618223417.png)
+![](https://img.duanyll.com/img/20230618223417.png)
 
 $R_{j1}$ 是 $m=2^{j-1}$ 的复合梯形法则, 可递推计算, 补充新增的插值点.
 
-![](https://cdn.duanyll.com/img/20230618223647.png)
+![](https://img.duanyll.com/img/20230618223647.png)
 
 $R_{j2}$ 实际上是复合 Simpson 法则.
 
-![伪代码](https://cdn.duanyll.com/img/20230618223746.png)
+![伪代码](https://img.duanyll.com/img/20230618223746.png)
 
 ### Gauss 积分
 
 非均匀地选取插值结点, 使积分值具有尽可能高的数值精度. 可通过正交基构造.
 
-![](https://cdn.duanyll.com/img/20230618224440.png)
+![](https://img.duanyll.com/img/20230618224440.png)
 
-![](https://cdn.duanyll.com/img/20230618224530.png)
+![](https://img.duanyll.com/img/20230618224530.png)
 
-![](https://cdn.duanyll.com/img/20230618224632.png)
+![](https://img.duanyll.com/img/20230618224632.png)
 
 找到 $n+1$ 次多项式与 $n$ 次多项式正交, 用他的根做插值结点就能达到 $2n+1$ 阶代数精度.
 
-![](https://cdn.duanyll.com/img/20230618224558.png)
+![](https://img.duanyll.com/img/20230618224558.png)
 
-![](https://cdn.duanyll.com/img/20230618224709.png)
+![](https://img.duanyll.com/img/20230618224709.png)
 
 Legendre 多项式是合适的构造.
 
-![标准区间上的 Gauss 插值节点](https://cdn.duanyll.com/img/20230618224854.png)
+![标准区间上的 Gauss 插值节点](https://img.duanyll.com/img/20230618224854.png)
 
 定义映射
 

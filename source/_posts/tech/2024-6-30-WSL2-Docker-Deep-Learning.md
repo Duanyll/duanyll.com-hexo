@@ -12,27 +12,27 @@ tags:
 
 实际上，得益于 WSL2 的设计，本文所述的 WSL2 部分的方法也适用于典型的 Ubuntu 主机。Windows 部分的教程需要 Windows 11 或 Windows 10 22H2 (19045) 以上的版本。推荐安装 [Windows Terminal](https://aka.ms/terminal) 来让命令行体验更美好。
 
-![安装 Windows Terminal 并取代 conhost](https://cdn.duanyll.com/img/20240630232131.png)
+![安装 Windows Terminal 并取代 conhost](https://img.duanyll.com/img/20240630232131.png)
 
 ## Step 1 - 访问互联网
 
 本教程假定必须使用 HTTP 代理才能访问任何互联网上的网站（实际上相当契合中国大陆的情况了），并且这个代理服务器位于 Windows 宿主机的 7890 端口上。
 
-![一个典型的 HTTP 代理软件](https://cdn.duanyll.com/img/20240630224805.png)
+![一个典型的 HTTP 代理软件](https://img.duanyll.com/img/20240630224805.png)
 
 我们首先让 Windows 上的程序能使用这个代理服务器。通常来说只需要**打开 System Proxy 选项**，这会修改 Windows 的 IE 代理设置，适用于多数的图形化程序。**不建议打开 TUN 模式**，这会让情况变得复杂棘手，建议把 TUN 代理留给 “访问内部资产” 的需求，如 EasyConnect 和 WireGuard，而不是 “访问互联网” 的需求。
 
 仅仅这样设置是不够的。许多从 Linux 世界移植的命令行程序从环境变量读取代理设置，而不是从 Windows 的 IE 代理设置读取。可添加 Windows 环境变量 `http_proxy` 和 `https_proxy`，值均为 `http://127.0.0.1:7890`.
 
-![添加 Windows 环境变量](https://cdn.duanyll.com/img/20240630225813.png)
+![添加 Windows 环境变量](https://img.duanyll.com/img/20240630225813.png)
 
 添加完记得重启打开的 Shell，或者直接重启电脑。
 
-![如果以上步骤是正确的，你应该能直接在 PowerShell 中直接 curl google.com](https://cdn.duanyll.com/img/20240630230038.png)
+![如果以上步骤是正确的，你应该能直接在 PowerShell 中直接 curl google.com](https://img.duanyll.com/img/20240630230038.png)
 
 之后还要用到 Windows 的主机名，最好顺手改成好看的名字，不要用默认的乱码。
 
-![最好把主机名从默认的乱码改成好打的名字](https://cdn.duanyll.com/img/20240630234302.png)
+![最好把主机名从默认的乱码改成好打的名字](https://img.duanyll.com/img/20240630234302.png)
 
 ## Step 2 - 安装 Visual Studio 和 CUDA
 
@@ -42,7 +42,7 @@ tags:
 
 下载 Visual Studio Community 2022，安装时选择 C++ 工作负载。安装过程略，只需要一直点下一步。
 
-![至少选择 C++ 工作负载，别的看喜好选择。](https://cdn.duanyll.com/img/20240630230645.png)
+![至少选择 C++ 工作负载，别的看喜好选择。](https://img.duanyll.com/img/20240630230645.png)
 
 > 如果想要减少麻烦，就不要修改任何东西的默认安装路径。
 >
@@ -52,19 +52,19 @@ tags:
 
 {% link https://developer.nvidia.com/cuda-downloads?target_os=Windows&target_arch=x86_64&target_version=10&target_type=exe_local %}
 
-![直接安装你看到的最新版本，无论你想用的深度学习库要求使用哪个版本的 CUDA](https://cdn.duanyll.com/img/20240630231108.png)
+![直接安装你看到的最新版本，无论你想用的深度学习库要求使用哪个版本的 CUDA](https://img.duanyll.com/img/20240630231108.png)
 
 只需要一直点下一步。会覆盖显卡驱动，所以屏幕会闪几下。
 
 正确完成本节后，应该能在 Windows 上运行 `nvidia-smi` 命令，显示显卡的状态。
 
-![能在 Windows 上运行 nvidia-smi](https://cdn.duanyll.com/img/20240630231738.png)
+![能在 Windows 上运行 nvidia-smi](https://img.duanyll.com/img/20240630231738.png)
 
 ## Step 3 - 安装 WSL2
 
 确保是 Windows 11 或 Windows 10 22H2 (19045) 以上的版本。最新版本的 Windows 应当无需额外设置即可使用 `wsl` 命令，无论是否安装了 WSL。
 
-![可以直接运行 WSL 命令](https://cdn.duanyll.com/img/20240630232545.png)
+![可以直接运行 WSL 命令](https://img.duanyll.com/img/20240630232545.png)
 
 如果找不到 `wsl` 命令说明需要手动安装 WSL2。参考官方教程：
 
@@ -72,19 +72,19 @@ tags:
 
 对于有 `wsl` 命令的用户，直接运行 `wsl --install` 即可。安装中会多次请求 UAC 权限，确保有 [好的网络连接](#step-1---访问互联网)。
 
-![按照提示重启电脑](https://cdn.duanyll.com/img/20240630233136.png)
+![按照提示重启电脑](https://img.duanyll.com/img/20240630233136.png)
 
 重启电脑后自动继续安装，或者手动运行 `wsl` 命令。
 
-![设置用户名和密码，按照惯例，输入密码时不会回显](https://cdn.duanyll.com/img/20240630233542.png)
+![设置用户名和密码，按照惯例，输入密码时不会回显](https://img.duanyll.com/img/20240630233542.png)
 
-![默认为安装了 Ubuntu 22.04，这是我们需要的](https://cdn.duanyll.com/img/20240630233710.png)
+![默认为安装了 Ubuntu 22.04，这是我们需要的](https://img.duanyll.com/img/20240630233710.png)
 
 ## Step 4 - 在 WSL 中访问互联网
 
 一种方法是让 WSL 使用 Windows 上的代理服务器联网。由于 Hyper-V 的默认网络设置，WSL2 中 Windows 宿主机的 IP 地址会在每次重启时改变（几乎必然改变）。不过在 WSL2 中能解析 Windows 宿主机的主机名，通过主机名访问 Windows 宿主机，在主机名后加 `.local`：
 
-![确保能从 WSL 内 ping 通主机](https://cdn.duanyll.com/img/20240630234523.png)
+![确保能从 WSL 内 ping 通主机](https://img.duanyll.com/img/20240630234523.png)
 
 就可以直接在 `.bashrc` 中设置代理（通常 WSL 的主机名和 Windows 是相同的），直接运行命令追加 `.bashrc` 文件：
 
@@ -95,7 +95,7 @@ echo 'export https_proxy=http://$(hostname).local:7890' >> ~/.bashrc
 
 重启 shell 或者直接运行 `source ~/.bashrc`，应该能直接访问互联网。
 
-![确保能直接访问互联网](https://cdn.duanyll.com/img/20240630235033.png)
+![确保能直接访问互联网](https://img.duanyll.com/img/20240630235033.png)
 
 apt 不会使用这个代理。我的经验是使用国内镜像站会比使用代理更快，所以修改 `/etc/apt/sources.list` 文件，将默认的源替换为国内源。
 
@@ -119,15 +119,15 @@ sudo apt update
 
 {% link https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=WSL-Ubuntu&target_version=2.0&target_type=deb_local %}
 
-![从这里获得最新版的安装指令，一条一条地粘到 WSL 里运行](https://cdn.duanyll.com/img/20240701000415.png)
+![从这里获得最新版的安装指令，一条一条地粘到 WSL 里运行](https://img.duanyll.com/img/20240701000415.png)
 
-![](https://cdn.duanyll.com/img/20240701000749.png)
+![](https://img.duanyll.com/img/20240701000749.png)
 
-![](https://cdn.duanyll.com/img/20240701001112.png)
+![](https://img.duanyll.com/img/20240701001112.png)
 
 安装完成后应当能在 WSL 中运行 `nvidia-smi` 命令，显示显卡的状态。
 
-![](https://cdn.duanyll.com/img/20240701001148.png)
+![](https://img.duanyll.com/img/20240701001148.png)
 
 ## Step 6 - 在 WSL 中安装 Docker
 
@@ -186,11 +186,11 @@ echo "{\"proxies\":{\"default\":{\"httpProxy\":\"http://$(hostname):7890\",\"htt
 
 正确完成本节后，应当能在 WSL 中运行 `docker run hello-world` 命令，显示 Docker 正常工作。
 
-![](https://cdn.duanyll.com/img/20240701093208.png)
+![](https://img.duanyll.com/img/20240701093208.png)
 
 配置好 Docker Client 的代理设置后，可以直接在容器中运行 `curl` 命令，访问互联网。
 
-![](https://cdn.duanyll.com/img/20240701095622.png)
+![](https://img.duanyll.com/img/20240701095622.png)
 
 ## Step 7 - 安装 NVIDIA Container Toolkit
 
@@ -217,7 +217,7 @@ docker pull pytorch/pytorch:2.3.1-cuda12.1-cudnn8-devel
 
 > 注: 使用 Docker 时，可以使用任意的比系统 CUDA 版本低的 CUDA 镜像。开发时请使用 devel 版本的 PyTorch 镜像，只有 devel 版本才包含编译器，可以编译 C++ 扩展。
 
-![PyTorch devel 镜像现在已有 8 个多 G](https://cdn.duanyll.com/img/20240701094634.png)
+![PyTorch devel 镜像现在已有 8 个多 G](https://img.duanyll.com/img/20240701094634.png)
 
 > `docker pull` 并不能断点续传，最好用一个好的代理。
 
@@ -227,7 +227,7 @@ docker pull pytorch/pytorch:2.3.1-cuda12.1-cudnn8-devel
 docker run --rm -it --gpus all pytorch/pytorch:2.3.1-cuda12.1-cudnn8-devel nvidia-smi
 ```
 
-![](https://cdn.duanyll.com/img/20240701094957.png)
+![](https://img.duanyll.com/img/20240701094957.png)
 
 ## Docker 快速入门
 

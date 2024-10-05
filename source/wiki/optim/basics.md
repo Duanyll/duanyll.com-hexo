@@ -66,9 +66,9 @@ order: 101
 
 ### 向量范数
 
-![](https://cdn.duanyll.com/img/2022-12-03-17-11-03.png)
+![](https://img.duanyll.com/img/2022-12-03-17-11-03.png)
 
-![](https://cdn.duanyll.com/img/2022-12-03-17-12-24.png)
+![](https://img.duanyll.com/img/2022-12-03-17-12-24.png)
 
 ### 矩阵范数
 
@@ -89,7 +89,7 @@ $$
 \|A\|_{2}=\left(\lambda_{\mathrm{max} }(A^{T}A)\right)^{1/2}
 $$
 
-![](https://cdn.duanyll.com/img/2022-12-03-17-17-33.png)
+![](https://img.duanyll.com/img/2022-12-03-17-17-33.png)
 
 #### F-范数
 
@@ -103,7 +103,7 @@ F-范数等价于向量空间上的欧式范数
 
 用行空间和列空间的向量范数导出矩阵范数
 
-![](https://cdn.duanyll.com/img/2022-12-03-17-32-24.png)
+![](https://img.duanyll.com/img/2022-12-03-17-32-24.png)
 
 $$
 \|A\|=\operatorname*{max}_{\|x\|_{(n)}=1}\|A x\|_{(m)}
@@ -124,7 +124,7 @@ $$
 
 ### 正交投影算子
 
-![](https://cdn.duanyll.com/img/2022-12-03-17-27-04.png)
+![](https://img.duanyll.com/img/2022-12-03-17-27-04.png)
 
 性质: 对称, 幂等
 

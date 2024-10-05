@@ -11,7 +11,7 @@ repo: Duanyll/duanyll.com-hexo
 
 ## 放弃 Jekyll 的原因
 
-![烂掉的公式](https://cdn.duanyll.com/img/20230210162817.png)
+![烂掉的公式](https://img.duanyll.com/img/20230210162817.png)
 
 1. 公式渲染问题: 最近上传了几篇课程速通类型的笔记, 内含大量的复杂数学公式. Jekyll 生成器不具备识别 `$` 和 `$$` 定界符的能力, 对于包含 `*` 和 `|` 等特殊 Markdown 字符的公式, 会被优先识别成斜体和表格, 使得前端 MathJax 无法渲染. 另外, 使用 `pix2tex` 等程序生成的公式可能含有嵌套的大括号 `{{}}`, 会被 Liquid 模版转义.
 2. Ruby 环境问题: 我不熟悉 Ruby 语言, 安装 Jekyll 的 Gem 包出了很多锅.

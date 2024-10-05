@@ -4,7 +4,7 @@ tags:
   - 电子设计
   - py32
   - 嘉立创eda
-cover: https://cdn.duanyll.com/img/20240829160316.png
+cover: https://img.duanyll.com/img/20240829160316.png
 description: 基于 PY32F002A 和 INA219 的 USB3.0 电流表，成本不到 10 元，提供 Type-A 和 Type-C 版本
 repo: Duanyll/py32-ina219-usb-meter
 ---
@@ -34,8 +34,11 @@ PY32F002A 是一款极具性价比的 32 位 MCU, 部分封装仅售 0.3 元起,
 - Type-C 接口使用 0.8mm 板厚的夹板封装
 
 {% swiper width:max effect:cards/coverflow %}
-![Type-A 版本原理图](https://cdn.duanyll.com/img/dd87637249734f70830abc0f47738be7.webp)
-![Type-C 版本原理图](https://cdn.duanyll.com/img/5e91cd42e5514ca3b46c4b7bc7e314bf.webp)
+
+![> Type-A 版本原理图](https://img.duanyll.com/img/dd87637249734f70830abc0f47738be7.webp)
+
+![> Type-C 版本原理图](https://img.duanyll.com/img/5e91cd42e5514ca3b46c4b7bc7e314bf.webp)
+
 {% endswiper %}
 
 ## 4. 注意事项
@@ -52,10 +55,15 @@ PY32F002A 是一款极具性价比的 32 位 MCU, 部分封装仅售 0.3 元起,
 ## 5. 实物图片
 
 {% swiper width:max effect:cards/coverflow %}
-![](https://cdn.duanyll.com/img/awYfqH1dpJ643vbNNRvqTferAtY7e9I48dW5dbw6.jpeg)
-![Type-A 版本实测，可达到 340MB/s 速度](https://cdn.duanyll.com/img/cuxbVfwYRXHUKGTbSKphGzy4ZpL5yusviPWQd6RW.png)
-![背面电路](https://cdn.duanyll.com/img/SyLlkOayCz4kegrm1zdWc3purpefwUJec9W1kxKV.png)
-![Type-C 版本实测，可到到 340MB/s 数据传输速度并驱动 4k 60Hz 显示器](https://cdn.duanyll.com/img/BtGcKHHeAabptwQRh9o13LbfsDKzcUuZhogENd3M.png)
+
+![> ](https://img.duanyll.com/img/awYfqH1dpJ643vbNNRvqTferAtY7e9I48dW5dbw6.jpeg)
+
+![> Type-A 版本实测，可达到 340MB/s 速度](https://img.duanyll.com/img/cuxbVfwYRXHUKGTbSKphGzy4ZpL5yusviPWQd6RW.png)
+
+![> 背面电路](https://img.duanyll.com/img/SyLlkOayCz4kegrm1zdWc3purpefwUJec9W1kxKV.png)
+
+![> Type-C 版本实测，可到到 340MB/s 数据传输速度并驱动 4k 60Hz 显示器](https://img.duanyll.com/img/BtGcKHHeAabptwQRh9o13LbfsDKzcUuZhogENd3M.png)
+
 {% endswiper %}
 
 ## 6. 相关链接

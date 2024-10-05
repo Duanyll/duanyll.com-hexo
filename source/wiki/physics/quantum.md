@@ -13,7 +13,7 @@ The light ought to be emitted, transported, and absorbed as tiny particles, or *
 
 All object emit thermal radiation. The total intensity of radiation $\propto T^4$.
 
-![Differnent theories on the spectrum of blackbody radiation](https://cdn.duanyll.com/img/20230215221748.png)
+![Differnent theories on the spectrum of blackbody radiation](https://img.duanyll.com/img/20230215221748.png)
 
 Wien's law predicts the peak wavelength as
 
@@ -43,11 +43,11 @@ $$
 
 ### Photoelectric Effect
 
-![Circuit of photoelectic effect](https://cdn.duanyll.com/img/20230216110827.png)
+![Circuit of photoelectic effect](https://img.duanyll.com/img/20230216110827.png)
 
 Photoelectric effect: electron emitted under light.
 
-![Relationships in photoelectic effect](https://cdn.duanyll.com/img/20230216110958.png)
+![Relationships in photoelectic effect](https://img.duanyll.com/img/20230216110958.png)
 
 The photocurrent $I$ changes with voltage $V$
 
@@ -72,11 +72,11 @@ From the equation we know:
 
 ### Compton Effect
 
-![Compton's X-ray scattering experiment](https://cdn.duanyll.com/img/20230216112426.png)
+![Compton's X-ray scattering experiment](https://img.duanyll.com/img/20230216112426.png)
 
 Scattering means light propagate in different directions when passing through material. In classical theory, EM waves are forced vibration, so their frequency (wavelength) should remain the same after being scattered. However, contradictionary experimental results have been observed:
 
-![Wavelength changed after scattering](https://cdn.duanyll.com/img/20230216113232.png)
+![Wavelength changed after scattering](https://img.duanyll.com/img/20230216113232.png)
 
 $\Delta\lambda=\lambda-\lambda_0$ depends on the **scattering angle** $\phi$. In the view of photon theory, in Compton scattering, a _single_ photon hits an electroin and knocks it out of the atom, which is an elastic collision procedure. Energy is conserved during the procedure:
 
@@ -84,7 +84,7 @@ $$
 \frac{hc}{\lambda_0}+m_0c^2=\frac{hc}{\lambda}+mc^2
 $$
 
-![Compton scattering](https://cdn.duanyll.com/img/20230216113708.png)
+![Compton scattering](https://img.duanyll.com/img/20230216113708.png)
 
 The photon loses energy, causing $\lambda>\lambda_0$. With the conservation of momentum:
 
@@ -129,7 +129,7 @@ $$
 
 ### The Spectrum of Hydrogen
 
-![The spectrum of hydrogen](https://cdn.duanyll.com/img/20230216115308.png)
+![The spectrum of hydrogen](https://img.duanyll.com/img/20230216115308.png)
 
 Balmer's formula for visible lines:
 
@@ -171,7 +171,7 @@ $$
 
 ### Orbital Properties
 
-![Rutherford's model](https://cdn.duanyll.com/img/20230216150758.png)
+![Rutherford's model](https://img.duanyll.com/img/20230216150758.png)
 
 $$
 \frac{e^2}{4\pi\varepsilon_0r^2}=m\frac{v^2}{r},L=mvr=\frac{nh}{2\pi}
@@ -233,7 +233,7 @@ $$
 R=\frac{me^4}{8\varepsilon_0^2h^3c}=1.097\times10^7\un{m^{-1}}
 $$
 
-![Energy level digram](https://cdn.duanyll.com/img/20230216152420.png)
+![Energy level digram](https://img.duanyll.com/img/20230216152420.png)
 
 > From de Borglie's hypothesis, we may consider the stable orbit for electron as a standing wave. For de Broglie wave:
 >
@@ -265,7 +265,7 @@ $$
 
 Therefore we can treat the de Broglie wave as a probability wave. $|\Psi|^2\d V$ at a certain point represents the probability of finding the particle within volume $\d V$ aboud the given position and time.
 
-![Conherent wave functions](https://cdn.duanyll.com/img/20230216155126.png)
+![Conherent wave functions](https://img.duanyll.com/img/20230216155126.png)
 
 There is interference between **coherent** wave functions.
 
@@ -274,7 +274,7 @@ P_1=|\Psi_1|^2,P_2=|\Psi_2|^2\\
 P_{12}=|\Psi_1+\Psi_2|^2\neq P_1+P_2
 $$
 
-![De-conherence of wave functions](https://cdn.duanyll.com/img/20230216155332.png)
+![De-conherence of wave functions](https://img.duanyll.com/img/20230216155332.png)
 
 When **de-conherence** occurs,
 
@@ -308,7 +308,7 @@ The principle indicates that
 
 > Microscopic particles will not stay at rest.
 
-![Diffraction of electron](https://cdn.duanyll.com/img/20230216160329.png)
+![Diffraction of electron](https://img.duanyll.com/img/20230216160329.png)
 
 The central bright fringe satisfies the uncertainty relation
 
@@ -368,7 +368,7 @@ Solve the equation
 
 ---
 
-![An infinitely deep well potential](https://cdn.duanyll.com/img/20230216162310.png)
+![An infinitely deep well potential](https://img.duanyll.com/img/20230216162310.png)
 
 $$
 U(x)=\begin{cases}
@@ -413,7 +413,7 @@ $$
 \psi_n(x)=\sqrt{\frac{2}{L}}\sin(\frac{n\pi}{L}x)
 $$
 
-![Figure of wave function](https://cdn.duanyll.com/img/20230216163156.png)
+![Figure of wave function](https://img.duanyll.com/img/20230216163156.png)
 
 de Broglie wavelength:
 
@@ -421,7 +421,7 @@ $$
 p_n=\sqrt{2mE_n}=\frac{nh}{2L}\implies\lambda_n=\frac{h}{p_n}=\frac{2L}{n}
 $$
 
-> ![A finite potential well](https://cdn.duanyll.com/img/20230216163446.png)
+> ![A finite potential well](https://img.duanyll.com/img/20230216163446.png)
 >
 > The paritcle can get out even if $E<U_0$ (Quantum tunneling)
 >
@@ -470,7 +470,7 @@ $$
 
 Each electron occupies a state $(n,l,m_l,m_s)$
 
-![Different possile states for an electron with n=2](https://cdn.duanyll.com/img/20230222225555.png)
+![Different possile states for an electron with n=2](https://img.duanyll.com/img/20230222225555.png)
 
 In a hydrogen atom, the wave function for ground state
 
@@ -480,7 +480,7 @@ $$
 
 which produces a radial probability distribution $|\psi_{100}|^2$
 
-![Radial probability distribution](https://cdn.duanyll.com/img/20230222225950.png)
+![Radial probability distribution](https://img.duanyll.com/img/20230222225950.png)
 
 This tells that there is no orbit for the electron in atom. It's a probabality distribution related to different wave functions, like an **electron cloud**.
 
@@ -492,4 +492,4 @@ The energy of an electron in an atom depends on $n$ and $l$. In complex atoms wh
    $$
 2. Pauli exclusion principle: No two electrons in an atom can occupy the same quantum state.
 
-![Shell structure of electrons](https://cdn.duanyll.com/img/20230222230611.png)
+![Shell structure of electrons](https://img.duanyll.com/img/20230222230611.png)

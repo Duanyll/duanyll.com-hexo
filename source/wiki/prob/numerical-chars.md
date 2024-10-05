@@ -417,7 +417,7 @@ $$
 
 **定理** 反演公式 (要求落在矩形边界上的概率为 0)
 
-![](https://cdn.duanyll.com/img/20230622235024.png)
+![](https://img.duanyll.com/img/20230622235024.png)
 
 **定理** $n$ 维随机变量相互独立 $\iff$
 

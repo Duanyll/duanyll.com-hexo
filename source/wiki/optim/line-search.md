@@ -13,7 +13,7 @@ order: 103
 
 要求目标函数是单峰的.
 
-![](https://cdn.duanyll.com/img/2022-12-06-20-09-33.png)
+![](https://img.duanyll.com/img/2022-12-06-20-09-33.png)
 
 确定合适的参数 $\rho$ 使得每次迭代只需计算一次函数 $f$ 的值. 每一步只需要确定一个新点并计算一次目标函数的值(第1 步除外)。
 
@@ -62,7 +62,7 @@ goldenSearch[fun_, var_, l0_, r0_, delta_] :=
 
 仍然要求每次压缩区间能利用之前的取值, 希望允许每次迭代的压缩比改变, 使得固定步数的总压缩比最小, 则应使用 Fibonacci 数列的形式设置每步的压缩比.
 
-![](https://cdn.duanyll.com/img/2022-12-06-20-23-04.png)
+![](https://img.duanyll.com/img/2022-12-06-20-23-04.png)
 
 满足下式时能利用之前的取值:
 
@@ -195,9 +195,9 @@ $$
 寻找目标函数极小点所在的初始区间. 只需要找出3 个点 $a<c<b$ ， 使得
 函数值满足 $f(c)<f(a)$ 和 $f(c)<f(b)$
 
-![](https://cdn.duanyll.com/img/2022-12-06-20-51-13.png)
+![](https://img.duanyll.com/img/2022-12-06-20-51-13.png)
 
-![](https://cdn.duanyll.com/img/2022-12-06-20-51-52.png)
+![](https://img.duanyll.com/img/2022-12-06-20-51-52.png)
 
 选择 $x_3$ 时可以如图不断向后倍增搜索.
 
@@ -221,7 +221,7 @@ $$
 
 下降方向: $p_{k}^{\top}\nabla f(x_{k}) \iff$ $p_k$ 与梯度夹角大于 $\pi/2$
 
-![](https://cdn.duanyll.com/img/2022-12-06-22-07-11.png)
+![](https://img.duanyll.com/img/2022-12-06-22-07-11.png)
 
 ### 步长选取
 
@@ -241,7 +241,7 @@ $$
 
 使用一些不等式来保证步长的选取比较优秀.
 
-![](https://cdn.duanyll.com/img/2022-12-06-22-12-20.png)
+![](https://img.duanyll.com/img/2022-12-06-22-12-20.png)
 
 Armijo 准则: 给定参数 $c\in(0,1)$, 通过起点处斜率的倍率划线, 保证下降的程度足够大, 只要 $\alpha$ 足够小总能满足, 公式
 
@@ -249,7 +249,7 @@ $$
 f(x_{k}+\alpha p_{k})\leq f(x_{k})+c\alpha p_{k}^{\top}\nabla f(x_{k}), c\in(0,1)
 $$
 
-![](https://cdn.duanyll.com/img/2022-12-06-22-20-33.png)
+![](https://img.duanyll.com/img/2022-12-06-22-20-33.png)
 
 Goldstein 准则: 在 Armijo 的基础上还希望一步能走的尽量远, 再添加限制条件
 
@@ -257,7 +257,7 @@ $$
 f(x_k+\alpha p_k)\geq f(x_k)+(1-c)\alpha p_k^\top\nabla f(x_k),c\in(0,0.5)
 $$
 
-![](https://cdn.duanyll.com/img/2022-12-06-22-25-14.png)
+![](https://img.duanyll.com/img/2022-12-06-22-25-14.png)
 
 Wolfe 准则: 在 Armijo 的基础上, 希望下一次的迭代点处的斜率不要太大, 在这个方向上一步到位, 不要再有微调的机会
 
@@ -265,4 +265,4 @@ $$
 p_k^\top\nabla f(x_{k+1})\geq c_2p_k^\top\nabla f(x_k), 0<c_1<c_2<1
 $$
 
-![](https://cdn.duanyll.com/img/2022-12-06-22-31-12.png)
+![](https://img.duanyll.com/img/2022-12-06-22-31-12.png)

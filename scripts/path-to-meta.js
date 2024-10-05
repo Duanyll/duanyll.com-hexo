@@ -27,7 +27,7 @@ function getGitUpdatedTime(filepath) {
 /**
  * 从文件名中读取文章发表日期，从所在文件夹中读取文章所属分类
  * 
- * source/_posts/course/2020-5-5-Derivative.md
+ * _posts/course/2020-5-5-Derivative.md
  * 
  * 设置日期为 2020-5-5，分类为课程
  */

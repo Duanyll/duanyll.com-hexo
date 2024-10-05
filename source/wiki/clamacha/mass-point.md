@@ -19,7 +19,7 @@ $$
 
 ### 自然坐标
 
-![](https://cdn.duanyll.com/img/2022-12-13-10-19-43.png)
+![](https://img.duanyll.com/img/2022-12-13-10-19-43.png)
 
 $$
 \begin{cases}
@@ -52,7 +52,7 @@ $$
 
 ### 极坐标
 
-![](https://cdn.duanyll.com/img/2022-12-13-10-28-31.png)
+![](https://img.duanyll.com/img/2022-12-13-10-28-31.png)
 
 $$
 \begin{cases}
@@ -81,7 +81,7 @@ $$
 
 ### 柱坐标系
 
-![](https://cdn.duanyll.com/img/2022-12-13-11-18-38.png)
+![](https://img.duanyll.com/img/2022-12-13-11-18-38.png)
 
 在极坐标的基础上加了一维直角的 z 轴
 
@@ -109,7 +109,7 @@ $$
 
 复杂, 很少使用
 
-![](https://cdn.duanyll.com/img/2022-12-13-11-26-08.png)
+![](https://img.duanyll.com/img/2022-12-13-11-26-08.png)
 
 $$
 \begin{cases}
@@ -131,7 +131,7 @@ $$
 
 少见
 
-![](https://cdn.duanyll.com/img/20230218220023.png)
+![](https://img.duanyll.com/img/20230218220023.png)
 
 ## 功和能
 

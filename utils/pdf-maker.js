@@ -76,6 +76,14 @@ function preprocessMarkdown(inFile, hexoConfigFile = '_config.yml') {
     // {% endfolding %}
     mdText = mdText.replace(/{%\s*endfolding\s*%}/g, "```{=latex}\n\\end{tcolorbox}\n```");
 
+    // Handle the ![> ]() syntax
+    mdText = mdText.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (match, alt, url) => {
+        if (alt.startsWith("> ")) {
+            alt = alt.slice(2);
+        }
+        return `![${alt}](${url})`;
+    });
+
     // Strip all other {% ... %} tags
     mdText = mdText.replace(/{%\s*.*\s*%}/g, "");
 

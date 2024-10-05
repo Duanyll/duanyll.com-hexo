@@ -15,7 +15,7 @@ $Q$ 对称正定
 
 ## 收敛阶
 
-![](https://cdn.duanyll.com/img/2022-12-06-23-05-51.png)
+![](https://img.duanyll.com/img/2022-12-06-23-05-51.png)
 
 收敛阶越高, 收敛率越高, 收敛速度越快.
 
@@ -24,9 +24,9 @@ $Q$ 对称正定
 - 超线性收敛: $p>1$
 - 二次收敛: $p=2$
 
-![](https://cdn.duanyll.com/img/2022-12-06-23-09-19.png)
+![](https://img.duanyll.com/img/2022-12-06-23-09-19.png)
 
-![](https://cdn.duanyll.com/img/2022-12-06-23-09-37.png)
+![](https://img.duanyll.com/img/2022-12-06-23-09-37.png)
 
 任意收敛序列的收敛阶大于等于 1.
 
@@ -50,7 +50,7 @@ $$
 \alpha_k=\frac{g^{(k)\top}g^{(k)} }{g^{(k)\top}Qg^{(k)} }
 $$
 
-![](https://cdn.duanyll.com/img/2022-12-06-22-57-58.png)
+![](https://img.duanyll.com/img/2022-12-06-22-57-58.png)
 
 - 精确步长线搜索, 搜索方向与梯度正交
 - 能保证单调下降
@@ -87,7 +87,7 @@ $$
 - 若二次型非正定, 则牛顿法搜索方向不一定是下降方向
 - 目标函数是二次型时, 收敛阶为 $\infty$
 
-![](https://cdn.duanyll.com/img/2022-12-06-23-28-18.png)
+![](https://img.duanyll.com/img/2022-12-06-23-28-18.png)
 
 需要初始点靠近极小点才有非常好的收敛性.
 
@@ -129,7 +129,7 @@ $$
 
 扩张子空间定理:
 
-![](https://cdn.duanyll.com/img/2022-12-07-11-31-23.png)
+![](https://img.duanyll.com/img/2022-12-07-11-31-23.png)
 
 每迭代一次, 都能在到目前为止的共轭方向张成的子空间中取到最优解.
 

@@ -22,8 +22,8 @@ async function listReferencedImages() {
     const images = new Set();
     await Promise.all(markdownFiles.map(async file => {
         const content = await fs.readFile(file, 'utf-8');
-        // Match links like https://cdn.duanyll.com/img/20230405135624.png, and extract the image name
-        const regex = /https:\/\/cdn.duanyll.com\/img\/([a-zA-Z0-9.-]+)/g;
+        // Match links like https://img.duanyll.com/img/20230405135624.png, and extract the image name
+        const regex = /https:\/\/img.duanyll.com\/img\/([a-zA-Z0-9.-]+)/g;
         let match;
         while (match = regex.exec(content)) {
             images.add(match[1]);

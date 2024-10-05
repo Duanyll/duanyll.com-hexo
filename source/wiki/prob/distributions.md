@@ -146,7 +146,7 @@ $$
 
 ## 指数分布
 
-![概率密度](https://cdn.duanyll.com/img/20230624152742.png)
+![概率密度](https://img.duanyll.com/img/20230624152742.png)
 
 $$
 \xi\sim E(\lambda)
@@ -230,7 +230,7 @@ $$
   $$
   \Phi(u_\alpha)=1-\alpha
   $$
-  ![](https://cdn.duanyll.com/img/20230624175944.png)
+  ![](https://img.duanyll.com/img/20230624175944.png)
 
 ### 二维正态分布
 
@@ -239,7 +239,7 @@ $$
 $$
 
 - **联合概率密度**
-  ![](https://cdn.duanyll.com/img/20230624162055.png)
+  ![](https://img.duanyll.com/img/20230624162055.png)
   - 边缘概率密度服从一维正态分布
   - $\xi$ 和 $\eta$ 相互独立 $\iff$ 不相关 $\iff r=0$
     $$
@@ -270,7 +270,7 @@ $$
 
 ## Gamma 分布
 
-![概率密度](https://cdn.duanyll.com/img/20230624152946.png)
+![概率密度](https://img.duanyll.com/img/20230624152946.png)
 
 $$
 \xi\sim\Gamma(\alpha,\beta)
@@ -318,7 +318,7 @@ $$
 
 ## Chi-Square 分布
 
-![概率密度](https://cdn.duanyll.com/img/20230624175527.png)
+![概率密度](https://img.duanyll.com/img/20230624175527.png)
 
 $$
 \chi^2\sim\chi^2(n)
@@ -355,11 +355,11 @@ $$
   $$
   \chi_\alpha^2(n)\approx n+u_\alpha(\sqrt{2n})
   $$
-  ![](https://cdn.duanyll.com/img/20230624180021.png)
+  ![](https://img.duanyll.com/img/20230624180021.png)
 
 ## Student-T 分布
 
-![概率密度](https://cdn.duanyll.com/img/20230624180519.png)
+![概率密度](https://img.duanyll.com/img/20230624180519.png)
 
 $$
 T\sim t(n)
@@ -381,11 +381,11 @@ $$
   $$
   t_\alpha(n)\approx u_\alpha
   $$
-  ![](https://cdn.duanyll.com/img/20230624180742.png)
+  ![](https://img.duanyll.com/img/20230624180742.png)
 
 ## F 分布
 
-![概率密度](https://cdn.duanyll.com/img/20230624181727.png)
+![概率密度](https://img.duanyll.com/img/20230624181727.png)
 
 $$
 F\sim F(n_1,n_2)
@@ -396,7 +396,7 @@ $$
   F=\frac{\xi/n_1}{\eta/n_2}\sim F(n_1,n_2)
   $$
 - **概率密度函数**
-  ![](https://cdn.duanyll.com/img/20230624181803.png)
+  ![](https://img.duanyll.com/img/20230624181803.png)
 
 {% folding open:true 说明 %}
 

@@ -79,7 +79,7 @@ $$
 
 ### 转轴元素
 
-![](https://cdn.duanyll.com/img/2022-12-06-09-34-14.png)
+![](https://img.duanyll.com/img/2022-12-06-09-34-14.png)
 
 行的选择: 希望能保证变换后 $b'_k>0$, 保证基本解的可行性. 于是在第 $l$ 列中选择满足以下条件的元素:
 
@@ -108,7 +108,7 @@ $$
 
 ### 单纯形表的矩阵表示
 
-![](https://cdn.duanyll.com/img/2022-12-06-09-51-44.png)
+![](https://img.duanyll.com/img/2022-12-06-09-51-44.png)
 
 线性规划的基、基变量、基本可行解、判别式、函数值都在最后一个矩阵中.
 
@@ -119,9 +119,9 @@ $$
 
 例子:
 
-![](https://cdn.duanyll.com/img/2022-12-06-09-56-16.png)
+![](https://img.duanyll.com/img/2022-12-06-09-56-16.png)
 
-![](https://cdn.duanyll.com/img/2022-12-06-09-56-28.png)
+![](https://img.duanyll.com/img/2022-12-06-09-56-28.png)
 
 ### 确定初始可行基
 
@@ -129,7 +129,7 @@ $$
 
 #### 两阶段法
 
-![](https://cdn.duanyll.com/img/2022-12-06-17-00-34.png)
+![](https://img.duanyll.com/img/2022-12-06-17-00-34.png)
 
 P0 有基本可行解 $\iff$ P1 有最优解且最有函数值为 0
 
@@ -143,19 +143,19 @@ P0 有基本可行解 $\iff$ P1 有最优解且最有函数值为 0
 4. 删除人工变量的列
 5. (第二阶段) 根据最小判别数不断做转轴运算求最优解.
 
-![](https://cdn.duanyll.com/img/2022-12-06-17-06-34.png)
+![](https://img.duanyll.com/img/2022-12-06-17-06-34.png)
 
 若 $f^*>0$, 则 P0 无解.
 
-![](https://cdn.duanyll.com/img/2022-12-06-17-07-40.png)
+![](https://img.duanyll.com/img/2022-12-06-17-07-40.png)
 
-![](https://cdn.duanyll.com/img/2022-12-06-17-08-20.png)
+![](https://img.duanyll.com/img/2022-12-06-17-08-20.png)
 
 #### 大 M 方法
 
-![](https://cdn.duanyll.com/img/2022-12-06-17-16-18.png)
+![](https://img.duanyll.com/img/2022-12-06-17-16-18.png)
 
-![](https://cdn.duanyll.com/img/2022-12-06-17-20-08.png)
+![](https://img.duanyll.com/img/2022-12-06-17-20-08.png)
 
 加入至多 $m$ 个人工变量 $y_i$ 使得能找出一组基, 求解含参 $M$ 线性规划问题, 使用判别数时认为 $M$ 时无穷大, 得到的解就是原问题的解.
 
@@ -177,7 +177,7 @@ $$
 - 若 $c^\top x_0=\lambda_0^\top b$, 则 $x_0$ 和 $\lambda_0$ 是各自问题的最优解
 - 如果 (P) 问题有最优解，那么 (D) 问题也有最优解，并且它们的最优函数值相同
 
-![](https://cdn.duanyll.com/img/2022-12-06-17-44-35.png)
+![](https://img.duanyll.com/img/2022-12-06-17-44-35.png)
 
 互补松弛定理: 可行解 $x$ 和 $\lambda$ 是最优解 $\iff$
 

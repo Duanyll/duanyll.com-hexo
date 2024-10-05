@@ -93,11 +93,11 @@ references:
 1. 全对称群, 置换群
 2. 轮换与轮换表示
 3. 置换的乘法, 从右到左结合
-4. ![](https://cdn.duanyll.com/img/20231020201557.png)
+4. ![](https://img.duanyll.com/img/20231020201557.png)
 5. **定理** 不相交轮换的乘积可交换
 6. **定理** 任意置换可表示成不相交轮换的乘积
 7. **定理** 任意置换可表示成对换的乘积 (不唯一)
-   ![](https://cdn.duanyll.com/img/20231020201906.png)
+   ![](https://img.duanyll.com/img/20231020201906.png)
 8. **定理** 任意置换写成对换的乘积时, 对换个数的奇偶性是一定的
 9. **定理** $n>1$ 阶全对称群 $S_n$ 中, 奇偶置换各占一半
 
@@ -190,7 +190,7 @@ references:
    4. 证明 $\tilde{\phi}$ 保持乘法运算
 7. 推论 **第一同构定理** 设 $\tau:G\to G'$ 是群同态, 则 $\tilde{\tau}:G\to\tau(G)$ 满同态, $G/\ker\tilde{\tau}\cong\tau(G)$
 
-![群同态基本定理](https://cdn.duanyll.com/img/20231221214204.png)
+![群同态基本定理](https://img.duanyll.com/img/20231221214204.png)
 
 > 用群同态基本定理证明同构
 >

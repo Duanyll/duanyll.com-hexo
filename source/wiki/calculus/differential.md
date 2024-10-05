@@ -128,7 +128,7 @@ $$
 
 > 若 $F(\mathbf{x},y)$ 具有高阶连续偏导数, 则隐函数也具有相应的高阶连续偏导数
 
-![多元向量值隐函数定理](https://cdn.duanyll.com/img/20230209164424.png)
+![多元向量值隐函数定理](https://img.duanyll.com/img/20230209164424.png)
 
 > 二阶, 三阶的情况, 常用算法是 $F=0,G=0$ 对 $x$ 求导得 $F_x=0,G_x=0$, 解得 $u_x,v_x$, 再对 $y$ 求导解 $u_y,v_y$
 
@@ -154,4 +154,4 @@ $$
 \frac{\partial\mathbf{y}}{\partial\mathbf{x}}=-\left(\frac{\partial\mathbf{F}}{\partial\mathbf{y}}\right)^{-1}\frac{\partial\mathbf{F}}{\partial\mathbf{x}}
 $$
 
-![逆映射定理](https://cdn.duanyll.com/img/20230209170544.png)
+![逆映射定理](https://img.duanyll.com/img/20230209170544.png)

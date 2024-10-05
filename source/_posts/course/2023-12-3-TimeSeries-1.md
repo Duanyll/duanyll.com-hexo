@@ -7,7 +7,7 @@ author: duanyll
 
 ## Problem 1
 
-![](https://cdn.duanyll.com/img/20231203201133.png)
+![](https://img.duanyll.com/img/20231203201133.png)
 
 $$
 (1 - \frac{1}{2}B+\frac{1}{25}B^2)X_t=(1+\frac{1}{4}B)\varepsilon_t
@@ -114,7 +114,7 @@ $$
 
 ## Problem 2
 
-![](https://cdn.duanyll.com/img/20231203223824.png)
+![](https://img.duanyll.com/img/20231203223824.png)
 
 ```mathematica
 model = ARMAProcess[{0.1, 0.12}, {-0.6, 0.7}, 1];
@@ -123,7 +123,7 @@ data = RandomFunction[model, {1001, 2000}]
 ListPlot[data, Filling -> Axis]
 ```
 
-![动态数据散布图](https://cdn.duanyll.com/img/20231203224235.png)
+![动态数据散布图](https://img.duanyll.com/img/20231203224235.png)
 
 计算自协方差值
 
@@ -140,7 +140,7 @@ ListPlot[{gamma, CovarianceFunction[model, {10}]}, Filling -> Axis,
   0.0575548}, {9, -0.129289}, {10, 0.0371609}}
 ```
 
-![自相关图](https://cdn.duanyll.com/img/20231203225119.png)
+![自相关图](https://img.duanyll.com/img/20231203225119.png)
 
 计算偏相关系数
 
@@ -157,11 +157,11 @@ ListPlot[{phi, PartialCorrelationFunction[model, {10}]},
   0.095243}, {9, 0.0337099}, {10, -0.0334262}}
 ```
 
-![偏相关图](https://cdn.duanyll.com/img/20231203225512.png)
+![偏相关图](https://img.duanyll.com/img/20231203225512.png)
 
 ## Problem 3
 
-![](https://cdn.duanyll.com/img/20231203225645.png)
+![](https://img.duanyll.com/img/20231203225645.png)
 
 ```mathematica
 model = ARProcess[{1.4833, -0.8483, 0.2350, -0.0317, 0.0017}, 1];
@@ -170,7 +170,7 @@ data = RandomFunction[model, {501, 1000}];
 ListPlot[data, Filling -> Axis]
 ```
 
-![数据散布图](https://cdn.duanyll.com/img/20231203230556.png)
+![数据散布图](https://img.duanyll.com/img/20231203230556.png)
 
 估计自回归系数
 
@@ -211,7 +211,7 @@ $$
 
 ## Problem 4
 
-![](https://cdn.duanyll.com/img/20231203231430.png)
+![](https://img.duanyll.com/img/20231203231430.png)
 
 ```mathematica
 model = MAProcess[{-0.6, 0.7}, 1];
@@ -220,7 +220,7 @@ data = RandomFunction[model, {1001, 2000}];
 ListPlot[data, Filling -> Axis]
 ```
 
-![数据散布图](https://cdn.duanyll.com/img/20231204132432.png)
+![数据散布图](https://img.duanyll.com/img/20231204132432.png)
 
 ### 矩估计
 

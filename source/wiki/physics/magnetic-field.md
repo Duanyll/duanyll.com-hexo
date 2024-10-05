@@ -5,7 +5,7 @@ wiki: notes-physics
 order: 302
 ---
 
-![Magnetic Field](https://cdn.duanyll.com/img/20230214174320.png)
+![Magnetic Field](https://img.duanyll.com/img/20230214174320.png)
 
 Magnetism is the interaction of clectric currents or moving charges. Magnetic field is
 
@@ -16,7 +16,7 @@ Magnetism is the interaction of clectric currents or moving charges. Magnetic fi
 
 Magnetic field exerts a force on a current, called Ampere forece. In uniform field:
 
-![Ampere force in uniform field](https://cdn.duanyll.com/img/20230214174809.png)
+![Ampere force in uniform field](https://img.duanyll.com/img/20230214174809.png)
 
 $$
 \vec{F}=I\vec{l}\times\vec{B}\label{label1}
@@ -34,13 +34,13 @@ $$
 \d\vec{F}=I\d\vec{l}\times\vec{B}\implies\vec{F}=\int I\d\vec{l}\times\vec{B}
 $$
 
-![Curved wire in uniform field](https://cdn.duanyll.com/img/20230214180736.png)
+![Curved wire in uniform field](https://img.duanyll.com/img/20230214180736.png)
 
 In uniform field, it is equivalant to a stright wire from A to B.
 
 ---
 
-![Interaction of currents](https://cdn.duanyll.com/img/20230214181142.png)
+![Interaction of currents](https://img.duanyll.com/img/20230214181142.png)
 
 Magnetic field freated by current
 
@@ -52,7 +52,7 @@ $$
 
 ### Magnetic Dipole
 
-![A rectangular current loop in a uniform field](https://cdn.duanyll.com/img/20230214181352.png)
+![A rectangular current loop in a uniform field](https://img.duanyll.com/img/20230214181352.png)
 
 Total force is zero, but torque on the loop:
 
@@ -80,7 +80,7 @@ For a $N$ loops coil / solenoid: $\vec{\mu}=NI\vec{S}$
 
 ---
 
-![An electron in an atom](https://cdn.duanyll.com/img/20230214181912.png)
+![An electron in an atom](https://img.duanyll.com/img/20230214181912.png)
 
 Orbital angular momentum: $L=mvr$
 
@@ -88,7 +88,7 @@ $$
 \mu=\frac{eL}{2m}
 $$
 
-![A rotating uniformly charged disk](https://cdn.duanyll.com/img/20230214182210.png)
+![A rotating uniformly charged disk](https://img.duanyll.com/img/20230214182210.png)
 
 $$
 \mu=\int_0^R\frac{\omega}{2\pi}\sigma\cdot2\pi r\d r\cdot\pi r^2=\frac{1}{4}\pi\omega\sigma R^4
@@ -108,7 +108,7 @@ Lorentz force does not do work on the charge.
 
 When $\vec{v}\parallel\vec{B}$, $\vec{F}=0$, free motion.
 
-![Uniform circular motion](https://cdn.duanyll.com/img/20230214182813.png)
+![Uniform circular motion](https://img.duanyll.com/img/20230214182813.png)
 
 When $\vec{v}\perp\vec{B}$, the point charge do a uniform circular motion.
 
@@ -120,7 +120,7 @@ $$
 \end{aligned}
 $$
 
-![General case](https://cdn.duanyll.com/img/20230214183326.png)
+![General case](https://img.duanyll.com/img/20230214183326.png)
 
 The charge moves in a helix.
 
@@ -138,7 +138,7 @@ $$
 \vec{F}=q(\vec{E}+\vec{v}\times\vec{B})
 $$
 
-![The Hall effect](https://cdn.duanyll.com/img/20230214204122.png)
+![The Hall effect](https://img.duanyll.com/img/20230214204122.png)
 
 $$
 V_H=KI_HB
@@ -148,7 +148,7 @@ $$
 
 ### Biot-Savart Law
 
-![Infinitesimal current](https://cdn.duanyll.com/img/20230214204624.png)
+![Infinitesimal current](https://img.duanyll.com/img/20230214204624.png)
 
 Magnetic equivalant to Coulumb's law. Magnetic field due to an infinitesimal current:
 
@@ -168,7 +168,7 @@ $$
 
 ---
 
-![A straight current](https://cdn.duanyll.com/img/20230214205438.png)
+![A straight current](https://img.duanyll.com/img/20230214205438.png)
 
 $$
 B=\frac{\mu_0I}{4\pi a}|\cos\theta_1-\cos\theta_2|
@@ -180,9 +180,9 @@ $$
 B=\frac{\mu_0I}{2\pi a}
 $$
 
-![No magnetic field at A or B. Also no field inside the cylinder when all the current is on the surface.](https://cdn.duanyll.com/img/20230214205800.png)
+![No magnetic field at A or B. Also no field inside the cylinder when all the current is on the surface.](https://img.duanyll.com/img/20230214205800.png)
 
-![Force between parallel wires](https://cdn.duanyll.com/img/20230214210034.png)
+![Force between parallel wires](https://img.duanyll.com/img/20230214210034.png)
 
 $F$ per unit length:
 
@@ -190,7 +190,7 @@ $$
 \frac{F}{L}=\frac{\mu_0I_1I_2}{2\pi d}
 $$
 
-![Circular current on the axis](https://cdn.duanyll.com/img/20230214210217.png)
+![Circular current on the axis](https://img.duanyll.com/img/20230214210217.png)
 
 $$
 B=\frac{\mu_0IR^2}{2(R^2+x^2)^{3/2}}
@@ -202,7 +202,7 @@ $$
 \mu=I\cdot\pi R^2
 $$
 
-![At the center of circular / arc current](https://cdn.duanyll.com/img/20230214210354.png)
+![At the center of circular / arc current](https://img.duanyll.com/img/20230214210354.png)
 
 $$
 B=\frac{\mu_0I}{2R}\frac{l}{2\pi R}
@@ -228,7 +228,7 @@ $$
 \nabla\cdot\vec{B}=0
 $$
 
-![Magnetic field lines](https://cdn.duanyll.com/img/20230214211227.png)
+![Magnetic field lines](https://img.duanyll.com/img/20230214211227.png)
 
 Magnetic field lines are closed lines without beginning or end.
 
@@ -240,7 +240,7 @@ $$
 \oint\vec{B}\d\vec{l}=\mu_0I_{in}
 $$
 
-![The sign of enclosed current: right-hand rule](https://cdn.duanyll.com/img/20230214211543.png)
+![The sign of enclosed current: right-hand rule](https://img.duanyll.com/img/20230214211543.png)
 
 Magnetic field is not a conservative field:
 
@@ -261,7 +261,7 @@ $$
 
 ---
 
-![Proper integral path for calculating magnetic field of a cylinderical current](https://cdn.duanyll.com/img/20230214212233.png)
+![Proper integral path for calculating magnetic field of a cylinderical current](https://img.duanyll.com/img/20230214212233.png)
 
 $$
 B=\begin{cases}
@@ -270,11 +270,11 @@ B=\begin{cases}
 \end{cases}
 $$
 
-![Coaxial cable](https://cdn.duanyll.com/img/20230214212515.png)
+![Coaxial cable](https://img.duanyll.com/img/20230214212515.png)
 
 No magnetic field when $r>R_3$.
 
-![Central part of solenoid](https://cdn.duanyll.com/img/20230214212655.png)
+![Central part of solenoid](https://img.duanyll.com/img/20230214212655.png)
 
 Uniform magnetic field inside: Follow the intergration path.
 
@@ -282,7 +282,7 @@ $$
 BL=\mu_0NI\implies B=\mu_0\frac{N}{L}I=\mu_0nI
 $$
 
-![Toroid](https://cdn.duanyll.com/img/20230214212905.png)
+![Toroid](https://img.duanyll.com/img/20230214212905.png)
 
 Nonuniform field inside:
 

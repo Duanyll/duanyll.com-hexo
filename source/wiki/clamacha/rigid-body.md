@@ -39,7 +39,7 @@ order: 503
   - $\mathrm{d}{\vec{\theta}}=\mathrm{d}\theta{\hat{n}}$
   - $\mathrm{d}{\vec{r}}=\mathrm{d}{\vec{\theta}}\times{\vec{r}}$ 原点在轴上
   - 不满足平行四边形法则, 不是矢量
-  - ![无限小角位移是矢量](https://cdn.duanyll.com/img/20230218220512.png)
+  - ![无限小角位移是矢量](https://img.duanyll.com/img/20230218220512.png)
 - 角速度矢量 ${\vec{\omega}}={\frac{\mathrm{d}\vec{\theta}}{\mathrm{d}t}}$
   - $\vec{v}=\vec{\omega}\times\vec{r}$ 原点在轴上
   - 对所有参考点, 角速度都是相同的
@@ -48,7 +48,7 @@ order: 503
 
 ### 欧拉角
 
-![](https://cdn.duanyll.com/img/2022-12-13-21-46-30.png)
+![](https://img.duanyll.com/img/2022-12-13-21-46-30.png)
 
 按顺序, 依次旋转:
 
@@ -90,7 +90,7 @@ $$
 I=\sum m_{i}r_{i}^{2}\sin\theta_{i}^{2}=\sum m_{i}\rho_{i}^{2}
 $$
 
-![欧拉角](https://cdn.duanyll.com/img/20230223214652.png)
+![欧拉角](https://img.duanyll.com/img/20230223214652.png)
 
 希望能计算绕任意固定轴 (方向角 $(\alpha,\beta,\gamma )$) 的转动惯量
 

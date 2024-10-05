@@ -27,11 +27,11 @@ order: 703
 
 **定义** 从总体 $\xi$ 中抽取 $n$ 个样本, 顺序统计量 $\xi_{(1)},\cdots,\xi_{(n)}$ 的值 $x_{(1)},\cdots,x_{(n)}$ 定义总体的经验分布函数 $F_n^*(x)$
 
-![](https://cdn.duanyll.com/img/20230623173400.png)
+![](https://img.duanyll.com/img/20230623173400.png)
 
 是具有分布函数性质的实函数
 
-![阶跃值为 1 / n](https://cdn.duanyll.com/img/20230623173436.png)
+![阶跃值为 1 / n](https://img.duanyll.com/img/20230623173436.png)
 
 > 对于固定的 $x\in\R$, $F_n^*(x)$ 是样本的函数, 是一个统计量
 
@@ -73,17 +73,17 @@ $$
 
 **定理** 顺序统计量 $\xi_{(i)}$ 的概率密度
 
-![](https://cdn.duanyll.com/img/20230623174512.png)
+![](https://img.duanyll.com/img/20230623174512.png)
 
 所有顺序统计量 $(\xi_{(1)},\cdots,\xi_{(n)})$ 的联合概率密度
 
-![](https://cdn.duanyll.com/img/20230623174637.png)
+![](https://img.duanyll.com/img/20230623174637.png)
 
 > 排序破坏了样本的独立性
 
 **定理** 极差 $D_n^*=\xi_{(n)}-\xi_{(1)}$ 的概率密度
 
-![](https://cdn.duanyll.com/img/20230623174806.png)
+![](https://img.duanyll.com/img/20230623174806.png)
 
 ## 参数估计
 
@@ -203,11 +203,11 @@ $$
 
 > 参数估计量的方差的下界
 
-![](https://cdn.duanyll.com/img/20230623223406.png)
+![](https://img.duanyll.com/img/20230623223406.png)
 
-![](https://cdn.duanyll.com/img/20230623223417.png)
+![](https://img.duanyll.com/img/20230623223417.png)
 
-![](https://cdn.duanyll.com/img/20230623223438.png)
+![](https://img.duanyll.com/img/20230623223438.png)
 
 > 正态总体样本均值是总体均值的优效估计量, 修正样本方差是总体方差的渐进优效估计量
 
@@ -278,9 +278,9 @@ $$
 
 假设检验基本思想: 提出统计假设, 根据小概率事件原理用类似反证法的思想对其进行检验.
 
-![假设检验的基本思路](https://cdn.duanyll.com/img/20230623233255.png)
+![假设检验的基本思路](https://img.duanyll.com/img/20230623233255.png)
 
-![](https://cdn.duanyll.com/img/20230623233324.png)
+![](https://img.duanyll.com/img/20230623233324.png)
 
 参数假设检验
 

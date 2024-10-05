@@ -88,7 +88,7 @@ $$
 
 二次规划标准型
 
-![](https://cdn.duanyll.com/img/2022-12-07-16-05-32.png)
+![](https://img.duanyll.com/img/2022-12-07-16-05-32.png)
 
 Lagrange 函数
 
@@ -317,14 +317,14 @@ $P$ 是罚函数, 需满足
 
 罚参数 $\gamma$ 越大, 则逼近程度越好.
 
-![](https://cdn.duanyll.com/img/2022-12-07-17-57-23.png)
+![](https://img.duanyll.com/img/2022-12-07-17-57-23.png)
 
-![](https://cdn.duanyll.com/img/2022-12-07-17-59-27.png)
+![](https://img.duanyll.com/img/2022-12-07-17-59-27.png)
 
-![](https://cdn.duanyll.com/img/2022-12-07-18-00-05.png)
+![](https://img.duanyll.com/img/2022-12-07-18-00-05.png)
 
 ### 增广 Lagrange 函数
 
 把 Lagrange 函数与罚函数结合，解决罚参数过大问题
 
-![](https://cdn.duanyll.com/img/2022-12-07-18-02-36.png)
+![](https://img.duanyll.com/img/2022-12-07-18-02-36.png)

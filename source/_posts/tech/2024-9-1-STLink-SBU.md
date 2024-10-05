@@ -4,7 +4,7 @@ tags:
   - 电子设计
   - stm32
   - 嘉立创eda
-cover: https://cdn.duanyll.com/img/20240901205441.png
+cover: https://img.duanyll.com/img/20240901205441.png
 description: >-
   可能是使用最方便的 ST-LINK/V2-1 一线通方案：无需对线，一个 Type-C 接口搞定 SWD
   调试，VCP 虚拟串口和下行 USB，支持正反插，同时引出 ST-LINK/V3 Minie 的 STDC-14
@@ -13,7 +13,7 @@ description: >-
 
 {% link https://oshwhub.com/duanyll/stlink-sbu %}
 
-![省流](https://cdn.duanyll.com/img/20240902140957.png)
+![省流](https://img.duanyll.com/img/20240902140957.png)
 
 ## 摘要
 
@@ -63,7 +63,7 @@ STM32F103CBT6 和 CH334F 方案设计设计了一款 PCB，验证了方案的可
 价格低廉，能直接通过 7Pin 2.54 排针连接到该店设计的开发板，但是双层排针的设计也
 存在反接的可能，且开发板上也要为调试接口付出不小的额外面积。
 
-![minoseigenheer 的调试脚位设计](https://cdn.duanyll.com/img/20240902141043.png)
+![minoseigenheer 的调试脚位设计](https://img.duanyll.com/img/20240902141043.png)
 
 [minoseigenheer](https://github.com/minoseigenheer) 基于 Type-C 接口的调试配件模
 式设计了一种 [SWD over USB-C](https://github.com/minoseigenheer/SWD-over-USB-C)
@@ -79,7 +79,7 @@ STM32F103CBT6 和 CH334F 方案设计设计了一款 PCB，验证了方案的可
 
 ## 方法
 
-![Rp，Rd 和 Ra](https://cdn.duanyll.com/img/20240902141448.png)
+![Rp，Rd 和 Ra](https://img.duanyll.com/img/20240902141448.png)
 
 Type-C 规范要求受电端（Sink）在 CC1 和 CC2 上各接入 5.1kR 的下拉电阻，称为 Rd；
 供电端在 CC1 和 CC2 接入一定阻值的上拉电阻或电流源 Rp，以将 CC 线上的电压上拉到
@@ -155,22 +155,22 @@ USB 部分内置了小封装 CH334 Hub 实现上位机一线同时连接调试�
    1. 接线需要先接通地线，再使用万用表电压档测量测试板上 A5，A8，B5，B8 四个引脚
       的电压，具有 3.3V 电压的引脚是 SWDIO，SWDIO 对角的引脚是 SWCLK。测试板另一
       头可直接连接电脑 USB 接口。接线如下图所示:
-      ![使用 Type-C 测试板烧录固件](https://cdn.duanyll.com/img/1725195123571.jpg)
+      ![使用 Type-C 测试板烧录固件](https://img.duanyll.com/img/1725195123571.jpg)
    2. 下载安装打开
       [STM32CubeProgrammer](https://www.st.com/zh/development-tools/stm32cubeprog.html)。
       点击右上角 Connect 连接调试器，成功连接后左下角显示目标芯片信息。
-      ![点击连接](https://cdn.duanyll.com/img/20240902114419.png)
-      ![连接成功](https://cdn.duanyll.com/img/20240902114450.png)
+      ![点击连接](https://img.duanyll.com/img/20240902114419.png)
+      ![连接成功](https://img.duanyll.com/img/20240902114450.png)
    3. 烧录广为流传的 `STLinkV2.J28.M18.bin` 版本固件。
-      ![](https://cdn.duanyll.com/img/20240902114810.png)
+      ![](https://img.duanyll.com/img/20240902114810.png)
    4. 注意这个版本的固件不能正常使用，还需进行一次固件升级。点击 Disconnect 断开
       连接，移除测试板和另一个调试器，只连接本调试器。
    5. 调试器插上电脑后，不点击其他按钮，直接点击 Firmware Upgrade 按钮
-      ![](https://cdn.duanyll.com/img/20240902115307.png)
+      ![](https://img.duanyll.com/img/20240902115307.png)
    6. 点击按钮升级固件后即可正常使用。
-      ![](https://cdn.duanyll.com/img/20240301121055.png)
+      ![](https://img.duanyll.com/img/20240301121055.png)
    7. 成功烧录一个调试器后，可以使用这个调试器的公口对插下一个调试器进行烧录，无
-      需再次使用测试板。 ![](https://cdn.duanyll.com/img/1725195123578.jpg)
+      需再次使用测试板。 ![](https://img.duanyll.com/img/1725195123578.jpg)
 4. **DAPLink** 这块板有 USB 重枚举电路，需要使用兼容 ST-LINK/V2-1 的 DAPLink 固
    件，如 [DAP103](https://github.com/devanlai/dap42/releases/tag/v1.31)
 5. **板厚和叠层** 0.8 板厚 4 层板，JLC04161H-3313 叠层（可使用 1-4 层沉金免费
@@ -236,8 +236,10 @@ Type-C 公口旁边的 LED 灯的含义如下：
 
 {% swiper width:max effect:cards/coverflow %}
 
-![](https://cdn.duanyll.com/img/1725195123586.jpg)
-![](https://cdn.duanyll.com/img/1725195123565.jpg)
-![](https://cdn.duanyll.com/img/1725195123582.jpg)
+![> ](https://img.duanyll.com/img/1725195123586.jpg)
+
+![> ](https://img.duanyll.com/img/1725195123565.jpg)
+
+![> ](https://img.duanyll.com/img/1725195123582.jpg)
 
 {% endswiper %}

@@ -7,7 +7,7 @@ order: 303
 
 ## Faraday's Law of Induction
 
-![An induced EMF is produced by a changing magnetic field](https://cdn.duanyll.com/img/20230215102325.png)
+![An induced EMF is produced by a changing magnetic field](https://img.duanyll.com/img/20230215102325.png)
 
 The electromotive force (EMF) induced in a circuit is equal to the changing rate of magnetic flux throught the circuit.
 
@@ -39,7 +39,7 @@ An induced EMF is always in a direction that opposes the original change in flux
 
 ### Motional EMF
 
-![Conductor moves in magentic field](https://cdn.duanyll.com/img/20230215103413.png)
+![Conductor moves in magentic field](https://img.duanyll.com/img/20230215103413.png)
 
 By Lorentz force:
 
@@ -59,7 +59,7 @@ The result can also be derived by Firaday's law.
 
 ---
 
-![A straight wire moving perpandicular to a uniform magnetic field](https://cdn.duanyll.com/img/20230215103813.png)
+![A straight wire moving perpandicular to a uniform magnetic field](https://img.duanyll.com/img/20230215103813.png)
 
 $$
 \begin{aligned}
@@ -69,7 +69,7 @@ $$
 \end{aligned}
 $$
 
-![Motion on rails](https://cdn.duanyll.com/img/20230215104121.png)
+![Motion on rails](https://img.duanyll.com/img/20230215104121.png)
 
 Constant $I$:
 
@@ -95,7 +95,7 @@ $$
 
 ### Vortex Electric Field
 
-![Vortex electric field](https://cdn.duanyll.com/img/20230215105025.png)
+![Vortex electric field](https://img.duanyll.com/img/20230215105025.png)
 
 In changing magnetic field, forces on static charges is created by vortex electric field. Generalize the definition of $V$:
 
@@ -117,7 +117,7 @@ $$
 
 ---
 
-![Induced EMF around uniformly changing cylindrical magnetic field](https://cdn.duanyll.com/img/20230215105758.png)
+![Induced EMF around uniformly changing cylindrical magnetic field](https://img.duanyll.com/img/20230215105758.png)
 
 ---
 
@@ -125,7 +125,7 @@ $$
 
 ### Self Inductance
 
-![Self inductance](https://cdn.duanyll.com/img/20230215112920.png)
+![Self inductance](https://img.duanyll.com/img/20230215112920.png)
 
 Magnetic flux $\Phi_B\propto$ current $I$
 
@@ -143,7 +143,7 @@ $$
 
 ---
 
-![Inductance of a long solenoid](https://cdn.duanyll.com/img/20230215120151.png)
+![Inductance of a long solenoid](https://img.duanyll.com/img/20230215120151.png)
 
 $$
 B=\mu_0nI
@@ -159,7 +159,7 @@ $$
 
 where $V$ denotes the volume.
 
-![Inductance of coaxial cable](https://cdn.duanyll.com/img/20230215120444.png)
+![Inductance of coaxial cable](https://img.duanyll.com/img/20230215120444.png)
 
 $$
 B=\frac{\mu_0I}{2\pi r}\
@@ -173,7 +173,7 @@ $$
 L=\frac{\Phi_B}{I}=\frac{\mu_0}{2\pi}\ln\frac{R_2}{R_1}
 $$
 
-![Inductance of a rectangular toroid](https://cdn.duanyll.com/img/20230215120757.png)
+![Inductance of a rectangular toroid](https://img.duanyll.com/img/20230215120757.png)
 
 $$
 L=\frac{\mu_0N^2h}{2\pi}\ln\frac{r_2}{r_1}
@@ -181,7 +181,7 @@ $$
 
 ### Mutual Inductance
 
-![Two coils near each other](https://cdn.duanyll.com/img/20230215120948.png)
+![Two coils near each other](https://img.duanyll.com/img/20230215120948.png)
 
 The change of current in coil 1 causes EMF in coil 2. Total flux in coil 2 created by current $I_1$:
 
@@ -209,9 +209,9 @@ Mutual inductance $M$, unit: Henry $\un{H}$
 
 ---
 
-![To minimize mutal inductance](https://cdn.duanyll.com/img/20230215122618.png)
+![To minimize mutal inductance](https://img.duanyll.com/img/20230215122618.png)
 
-![Two ideal coupling coils](https://cdn.duanyll.com/img/20230215123002.png)
+![Two ideal coupling coils](https://img.duanyll.com/img/20230215123002.png)
 
 $$
 M=\sqrt{L_1L_2}
@@ -244,7 +244,7 @@ $$
 U=\frac{1}{2}LI^2
 $$
 
-![A long solenoid](https://cdn.duanyll.com/img/20230215120151.png)
+![A long solenoid](https://img.duanyll.com/img/20230215120151.png)
 
 $$
 U=\frac{1}{2}\mu_0n^2V\cdot I^2=\frac{1}{2}\frac{B^2}{\mu_0}V
@@ -258,7 +258,7 @@ $$
 
 ### LC Circuit
 
-![A simple LC circuit](https://cdn.duanyll.com/img/20230215165053.png)
+![A simple LC circuit](https://img.duanyll.com/img/20230215165053.png)
 
 $$
 -L\frac{\d I}{\d t}+\frac{Q}{C}=0\implies\frac{\d^2Q}{\d t^2}+\frac{Q}{LC}=0
@@ -280,7 +280,7 @@ $$
 
 ## Displacement Current
 
-![the discontinuity of current in a charging capacitor](https://cdn.duanyll.com/img/20230215165752.png)
+![the discontinuity of current in a charging capacitor](https://img.duanyll.com/img/20230215165752.png)
 
 Follow the path $S_1$, the Ampere's law shows that the magnet field produced by $I$ should satisfy
 
@@ -396,7 +396,7 @@ $$
 
 ## Electromagnetic Waves
 
-![Antenna](https://cdn.duanyll.com/img/20230215175953.png)
+![Antenna](https://img.duanyll.com/img/20230215175953.png)
 
 Maxwell's equations in free space without charges or conduction currents:
 
@@ -449,7 +449,7 @@ $$
 c=\frac{1}{\sqrt{\mu_0\varepsilon_0}}=3.0\times10^8\un{m/s}
 $$
 
-![EM ware is transverse wave in phase](https://cdn.duanyll.com/img/20230215181042.png)
+![EM ware is transverse wave in phase](https://img.duanyll.com/img/20230215181042.png)
 
 Particular solution of wave equation:
 
@@ -477,7 +477,7 @@ $$
 u=\varepsilon_0E^2=\frac{B^2}{\mu_0}
 $$
 
-![Energy transport through EM wave](https://cdn.duanyll.com/img/20230215181654.png)
+![Energy transport through EM wave](https://img.duanyll.com/img/20230215181654.png)
 
 Energy transports per unit time per unit area:
 
@@ -501,4 +501,4 @@ $$
 \bar{S}=\frac{1}{2}\frac{E_0B_0}{\mu_0}
 $$
 
-![Energy transporting by EM wave inside the battery and resistor](https://cdn.duanyll.com/img/20230215182113.png)
+![Energy transporting by EM wave inside the battery and resistor](https://img.duanyll.com/img/20230215182113.png)

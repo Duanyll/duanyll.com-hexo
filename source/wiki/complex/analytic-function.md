@@ -98,7 +98,7 @@ $$
 
 ## 复平面上的点集
 
-![关于复平面点集的基本概念](https://cdn.duanyll.com/img/20230225172957.png)
+![关于复平面点集的基本概念](https://img.duanyll.com/img/20230225172957.png)
 
 - 邻域: $|z-z_0|<\delta$ 内部的点的集合称为 $z_0$ 的邻域
   - 无穷远点的邻域: $|z|>M>0$
@@ -318,7 +318,7 @@ $$
 w_k=(\sqrt[n]{z})_k=\sqrt[n]{|z|}e^{i\frac{\theta+2k\pi}{n}},k=0,1,\cdots n-1,\theta=\arg z\label{sqrtfunc}
 $$
 
-![多值性的成因](https://cdn.duanyll.com/img/20230226160406.png)
+![多值性的成因](https://img.duanyll.com/img/20230226160406.png)
 
 终边 $z$ 相同时, $w$ 的旋转角度可以多 $2k\pi$
 
@@ -336,7 +336,7 @@ $$
 T_k:(\frac{2k\pi}{n}-\frac{\pi}{n})<\psi<(\frac{2k\pi}{n}+\frac{\pi}{n})
 $$
 
-![n=3的情形](https://cdn.duanyll.com/img/20230226215837.png)
+![n=3的情形](https://img.duanyll.com/img/20230226215837.png)
 
 这样 $w$ 平面上每个角形区域能恰好映射到整个 $z$ 平面上. 区域 $T$ 是单叶性区域 $\iff$ $\forall w_1\in T$, 满足下列条件的 $w_2\notin T$ 对应的角形互不相交且填满 $w$:
 
@@ -352,7 +352,7 @@ $$
 
 考虑变点 $z$ 从 $z_0$ 出发, 沿 $G$ 内任一条过 $z_0$ 的简单闭曲线前进一周, 在 $w$ 平面上的像点也画出一条闭曲线, 则 $\arg z$ 能回到起始值 $\arg z_0$, 式 $\ref{sqrtfunc}$ 给出 $\sqrt[n]{z}$ 的 $n$ 个**单值连续分支函数**.
 
-![z 平面上和 w 平面上闭曲线](https://cdn.duanyll.com/img/20230226222148.png)
+![z 平面上和 w 平面上闭曲线](https://img.duanyll.com/img/20230226222148.png)
 
 **定义** 多值函数的支点: 变点 $z$ 绕这点一整周时, 多值函数从一支变换到另一支. 即变点转回原来的位置时, 函数值和原来的值相异.
 
@@ -362,7 +362,7 @@ $$
 
 **定义** 支割线: 用来割破 $z$ 平面从而得到单值解析分支的割线.
 
-> ![支割线具有两岸, 上岸, 下岸, 左岸, 右岸](https://cdn.duanyll.com/img/20230226223531.png)
+> ![支割线具有两岸, 上岸, 下岸, 左岸, 右岸](https://img.duanyll.com/img/20230226223531.png)
 >
 > 对于支割线的不同做法, 得到的分支不同, 各分支的定义域随支割线变化. 每个单值分支在支割线上是不连续的, 在两岸取到不同的值, 可以扩充到单边连续到一岸.
 
@@ -405,7 +405,7 @@ $$
 \Ln\frac{z_1}{z_2}=\Ln z_1-\Ln z_2
 $$
 
-![对数函数的单叶性区域是带状](https://cdn.duanyll.com/img/20230226225120.png)
+![对数函数的单叶性区域是带状](https://img.duanyll.com/img/20230226225120.png)
 
 $$
 B_k:2k\pi-\pi<\theta<2k\pi+\pi
@@ -458,7 +458,7 @@ $$
 f(z_2)=|f(z_2)|e^{i\Delta_C\arg f(z)}\cdot e^{i\arg f(z_1)}
 $$
 
-![还是要看例题才明白](https://cdn.duanyll.com/img/20230226232820.png)
+![还是要看例题才明白](https://img.duanyll.com/img/20230226232820.png)
 
 {% endfolding %}
 
