@@ -8,40 +8,21 @@ wiki: docs-uestc-internet
 
 This guide provides instructions on how to connect to the internet at the Qingshuihe Campus of the University of Electronic Science and Technology of China (UESTC). It covers different connection methods, common issues, and their solutions. The method of connection varies depending on the dormitory building.
 
-## Academic Buildings
-
-You can access the campus network via wireless or wired connections.
-
-### Wireless Network
-
-1. Open your wireless network settings and connect to the `UESTC-WiFi` network.
-2. For first-time connections, open a browser and visit any website. This will automatically redirect you to the login page. Alternatively, you can manually visit [http://wifi.uestc.edu.cn](http://wifi.uestc.edu.cn).
-3. Enter your student ID and unified identity authentication password, then click **“校园网登录”** (Campus Network Login).
-
-### Wired Network
-
-1. Connect your computer to the wall network port using an Ethernet cable.
-2. Open a browser and visit any website to be automatically redirected to the login page. Alternatively, you can manually visit [http://aaa.uestc.edu.cn](http://aaa.uestc.edu.cn) or [http://10.253.0.237](http://10.253.0.237).
-3. Enter your student ID and unified identity authentication password, then click **“校园网登录”** (Campus Network Login).
-   ![](https://img.duanyll.com/img/20240909194745.png)
-4. When you see your IP address on the login page, you have successfully connected to the internet.
-   ![](https://img.duanyll.com/img/20240909194920.png)
-
 ## Dormitory Area
 
 The network in the dormitory area is provided by telecom operators, and the connection methods differ.
 
 ### Phase 1-4 Dormitories - China Mobile Fiber Broadband
 
-> For International Students: Refer to the next section please.
+> For International Students: Refer to the next section (Phase 5-6) please.
 
 The mobile fiber broadband in Phase 1-4 dormitories is provided by China Mobile and uses the PPPoE dial-up method for connection. In simple terms, you need to connect your router's WAN port to the optical modem, set it to PPPoE dial-up mode, and enter your mobile broadband account and password. You can contact China Mobile staff for on-site network configuration.
 
 > Frequently switching devices to access the network may result in your account being frozen. It is recommended to use a router for dialing rather than dialing directly on your computer. If your account is frozen, please contact China Mobile customer service to unfreeze it.
 
-### Phase 5-6 Dormitories - China Mobile Broadband, All China Telecom Broadband
+### Phase 5-6 Dormitories - China Mobile and China Telecom
 
-The mobile broadband in Phase 5-6 dormitories and all China Telecom broadband connections use a web-based authentication method. The steps are as follows:
+The China Mobile and China Telecom broadband in Phase 5-6 dormitories use a web-based authentication method. The steps are as follows:
 
 #### Connecting the Router
 
@@ -88,6 +69,25 @@ Once binding is complete, you can use your unified identity authentication accou
 
 Even with proper setup, you may need to log in again approximately once a week.
 
+## Academic Buildings
+
+You can access the campus network via wireless or wired connections.
+
+### Wireless Network
+
+1. Open your wireless network settings and connect to the `UESTC-WiFi` network.
+2. For first-time connections, open a browser and visit any website. This will automatically redirect you to the login page. Alternatively, you can manually visit [http://wifi.uestc.edu.cn](http://wifi.uestc.edu.cn).
+3. Enter your student ID and unified identity authentication password, then click **“校园网登录”** (Campus Network Login).
+
+### Wired Network
+
+1. Connect your computer to the wall network port using an Ethernet cable.
+2. Open a browser and visit any website to be automatically redirected to the login page. Alternatively, you can manually visit [http://aaa.uestc.edu.cn](http://aaa.uestc.edu.cn) or [http://10.253.0.237](http://10.253.0.237).
+3. Enter your student ID and unified identity authentication password, then click **“校园网登录”** (Campus Network Login).
+   ![](https://img.duanyll.com/img/20240909194745.png)
+4. When you see your IP address on the login page, you have successfully connected to the internet.
+   ![](https://img.duanyll.com/img/20240909194920.png)
+
 ## Frequently Asked Questions
 
 - **I can't open the login page, it says "Unable to connect to the website."**
@@ -120,7 +120,7 @@ Even with proper setup, you may need to log in again approximately once a week.
 - **I don't know my broadband account or password.**
 
   - **Update: The password for China Telecom broadband accounts activated in September 2024 is 12345678.**
-  - The broadband account for China Mobile is usually `SCXY` followed by your mobile number, and the password is the last 6 digits of your mobile number or a password you set yourself. The broadband account for China Telecom is usually your mobile number, and the password is the last 6 digits, the last 8 digits of your mobile number, or `12345678`.
+  - The broadband account for China Mobile is usually `SCXY` followed by your mobile number, and the password is the last 6 digits of your mobile number or a password you set yourself. The broadband account for China Telecom is usually your mobile number, and the password is the last 8 digits of your mobile number or `12345678`.
   - If you don't know your broadband account and password, please call the ISP's customer service. The number `61831192` cannot help you retrieve your broadband account and password.
   - If you bind an incorrect account and password, there will be no prompt on the binding page. You will only see a login failure message after clicking the “电信登录” (Telecom Login) or “移动登录” (Mobile Login) button.
 
@@ -130,7 +130,6 @@ Even with proper setup, you may need to log in again approximately once a week.
 
 - **I entered my account and password on the campus network login page and clicked “电信登录” (Telecom Login) or “移动登录” (Mobile Login), but a window popped up saying login failed, with an error code in English.**
 
-  - **Update: For broadband services activated on the same day, the system information might not sync immediately. Please wait a day before attempting to log in.**
   - Please ensure that you entered your unified identity authentication account and password, not the broadband account and password.
   - Make sure you have bound the correct broadband account. After successful binding, you can check the bound account on the “自服务” (Self-service) -> “多运营商绑定” (Carriers Bound) page.
   - If you can't open the “自服务” (Self-service) page, it means the unified identity authentication account and password you entered are incorrect.
