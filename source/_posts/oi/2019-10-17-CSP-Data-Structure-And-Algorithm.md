@@ -15,13 +15,13 @@ K进制转10进制: 按权展开, 小数点左边第$i$位的权为$K^{i-1}$, �
 
 先进后出.
 
-![image.png](https://i.loli.net/2019/10/17/3wSb6nHsyplL4Nx.png)
+![image.png](https://img.duanyll.com/img/3wSb6nHsyplL4Nx.png)
 
 进栈序列$1, 2, \cdots, n$对应的出栈序列总数: Catalan 数
 
 ## 二叉树
 
-![image.png](https://i.loli.net/2019/10/17/rUxm2CfvQbnpWXE.png)
+![image.png](https://img.duanyll.com/img/rUxm2CfvQbnpWXE.png)
 
 |          |     |     |     |                     |
 | -------- | --- | --- | --- | ------------------- |
@@ -51,7 +51,7 @@ n个点可以构造的不同二叉树种类数: Catalan 数
 
 ### 完全二叉树和满二叉树
 
-![image.png](https://i.loli.net/2019/10/17/nWFtpfbZ9cEg7od.png)
+![image.png](https://img.duanyll.com/img/nWFtpfbZ9cEg7od.png)
 
 满二叉树: 深度为$k$, 有$2^k-1$个节点, 每一层都爆满.
 
@@ -72,7 +72,7 @@ n个点可以构造的不同二叉树种类数: Catalan 数
 
 ### 堆
 
-![image.png](https://i.loli.net/2019/10/17/SYB8KCxlT3Mtdhz.png)
+![image.png](https://img.duanyll.com/img/SYB8KCxlT3Mtdhz.png)
 
 - 堆总是一棵完全二叉树.
 - 堆中某个节点的值总是不大于或不小于其父节点的值.
@@ -106,7 +106,7 @@ sort_heap(first, last, cmp);
 
 希尔排序图解:
 
-![image.png](https://i.loli.net/2019/10/17/SeWxPtplqY75uNw.png)
+![image.png](https://img.duanyll.com/img/SeWxPtplqY75uNw.png)
 
 ## 图论算法
 
@@ -123,11 +123,11 @@ sort_heap(first, last, cmp);
 
 原码: 首位为符号位, 其余为真值.
 
-![image.png](https://i.loli.net/2019/10/17/g7HqQAjrJhSNT4F.png)
+![image.png](https://img.duanyll.com/img/g7HqQAjrJhSNT4F.png)
 
 反码: 首位为符号位, 正数所有位和原码一样, 负数除了符号位和原码一样, 其他位相反.
 
-![image.png](https://i.loli.net/2019/10/17/S7XysWaHNOk4BUE.png)
+![image.png](https://img.duanyll.com/img/S7XysWaHNOk4BUE.png)
 
 补码: 相反数等于取反加1, 0的表示只有一种, 加法自然溢出就能处理正负数.
 

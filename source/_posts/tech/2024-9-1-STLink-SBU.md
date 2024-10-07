@@ -152,25 +152,40 @@ USB 部分内置了小封装 CH334 Hub 实现上位机一线同时连接调试�
 3. **固件刷入方式：** 本调试器自身的 SWD 调试接口也使用一线通方案引出到上位机
    Type-C 母座上。制作第一个调试器时，可以购买一个 Type-C 公母头测试板，在调试器
    母座侧使用测试板连接电脑，再使用一个普通 ST-LINK 刷入固件。
+
    1. 接线需要先接通地线，再使用万用表电压档测量测试板上 A5，A8，B5，B8 四个引脚
       的电压，具有 3.3V 电压的引脚是 SWDIO，SWDIO 对角的引脚是 SWCLK。测试板另一
       头可直接连接电脑 USB 接口。接线如下图所示:
+
       ![使用 Type-C 测试板烧录固件](https://img.duanyll.com/img/1725195123571.jpg)
+
    2. 下载安装打开
       [STM32CubeProgrammer](https://www.st.com/zh/development-tools/stm32cubeprog.html)。
       点击右上角 Connect 连接调试器，成功连接后左下角显示目标芯片信息。
+
       ![点击连接](https://img.duanyll.com/img/20240902114419.png)
+
       ![连接成功](https://img.duanyll.com/img/20240902114450.png)
+
    3. 烧录广为流传的 `STLinkV2.J28.M18.bin` 版本固件。
+
       ![](https://img.duanyll.com/img/20240902114810.png)
+
    4. 注意这个版本的固件不能正常使用，还需进行一次固件升级。点击 Disconnect 断开
       连接，移除测试板和另一个调试器，只连接本调试器。
    5. 调试器插上电脑后，不点击其他按钮，直接点击 Firmware Upgrade 按钮
+
       ![](https://img.duanyll.com/img/20240902115307.png)
+
    6. 点击按钮升级固件后即可正常使用。
+
       ![](https://img.duanyll.com/img/20240301121055.png)
+
    7. 成功烧录一个调试器后，可以使用这个调试器的公口对插下一个调试器进行烧录，无
-      需再次使用测试板。 ![](https://img.duanyll.com/img/1725195123578.jpg)
+      需再次使用测试板。
+
+      ![](https://img.duanyll.com/img/1725195123578.jpg)
+
 4. **DAPLink** 这块板有 USB 重枚举电路，需要使用兼容 ST-LINK/V2-1 的 DAPLink 固
    件，如 [DAP103](https://github.com/devanlai/dap42/releases/tag/v1.31)
 5. **板厚和叠层** 0.8 板厚 4 层板，JLC04161H-3313 叠层（可使用 1-4 层沉金免费

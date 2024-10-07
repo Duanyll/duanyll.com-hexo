@@ -14,11 +14,11 @@ source: https://www.luogu.org/problemnew/show/CF852C
 
 有一个正$2n$边形，在每条边上有$n$等分点. 现在已经选定了$n$个点, $n$个点分别位于第$2k+1$条边上, 且这$n$个点的序号构成了一个排列; 你需要再选出$n$个点位于第$2k$条边上, 并且这$n$个点的序号也构成一个排列, 使得这些点构成的多边形面积最大. 输出选择方案.
 
-![图片2.png](https://i.loli.net/2019/07/23/5d36ec7a80c2052041.png)
+![图片2.png](https://img.duanyll.com/img/5d36ec7a80c2052041.png)
 
 $n=3$的一种选法, 蓝色是给定点, 红色是自选点.
 
-![图片1.png](https://i.loli.net/2019/07/23/5d36ec7a80c7165340.png)
+![图片1.png](https://img.duanyll.com/img/5d36ec7a80c7165340.png)
 
 以上情况的最优解.
 
@@ -26,7 +26,7 @@ $n=3$的一种选法, 蓝色是给定点, 红色是自选点.
 
 要让保留的面积最大, 就要让删去的面积最小. 考虑计算每一个选择点对删去面积的贡献.
 
-![图片3.png](https://i.loli.net/2019/07/23/5d36ec7a80e4a98760.png)
+![图片3.png](https://img.duanyll.com/img/5d36ec7a80e4a98760.png)
 
 $B_{2k}$和$B_{2k+2}$是给定点, $X$是动点. $P_1, P_2$是删去区域的面积.
 

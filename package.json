@@ -37,6 +37,7 @@
     "husky": "^9.1.6",
     "lint-staged": "^15.2.10",
     "lodash": "^4.17.21",
+    "node-fetch": "2",
     "patch-package": "^7.0.0",
     "postinstall-postinstall": "^2.1.0",
     "prettier": "^3.3.3",
@@ -47,8 +48,5 @@
       "yarn prettier --write --prose-wrap preserve",
       "git add"
     ]
-  },
-  "devDependencies": {
-    "wrangler": "^3.80.0"
   }
 }

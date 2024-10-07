@@ -224,12 +224,15 @@ $$
   \end{cases}
   $$
 - **上侧分位数**
+
   $$
   P\{\xi>u_\alpha(\alpha)\}=\int_{u_\alpha}^{+\infty}f(x)\d x=\alpha,0<\alpha<1
   $$
+
   $$
   \Phi(u_\alpha)=1-\alpha
   $$
+
   ![](https://img.duanyll.com/img/20230624175944.png)
 
 ### 二维正态分布
@@ -239,7 +242,9 @@ $$
 $$
 
 - **联合概率密度**
+
   ![](https://img.duanyll.com/img/20230624162055.png)
+
   - 边缘概率密度服从一维正态分布
   - $\xi$ 和 $\eta$ 相互独立 $\iff$ 不相关 $\iff r=0$
     $$
@@ -348,13 +353,17 @@ $$
   \eta_1+\eta_2\sim\chi^2(n_1+n_2)
   $$
 - **上侧分位数**
+
   $$
   P\{\chi^2>\chi_\alpha^2(n)\}=\int_{\chi^2_\alpha(n)}^{+\infty}f_{\chi^2}(x)\d x=\alpha,0<\alpha<1
   $$
+
   $n>45$ 时近似认为
+
   $$
   \chi_\alpha^2(n)\approx n+u_\alpha(\sqrt{2n})
   $$
+
   ![](https://img.duanyll.com/img/20230624180021.png)
 
 ## Student-T 分布
@@ -374,13 +383,17 @@ $$
   f(x)=\frac{\Gamma(\frac{n+1}{2})}{\sqrt{n\pi}\Gamma(\frac{n}{2})}(1+\frac{x^2}{n})^{-\frac{n+1}{2}},x\in\R
   $$
 - **上侧分位数**
+
   $$
   P\{T>t_\alpha(n)\}=\int_{t_\alpha(n)}^{+\infty}f_T(x)\d x=\alpha,0<\alpha<1
   $$
+
   $n>30$ 时, 近似认为
+
   $$
   t_\alpha(n)\approx u_\alpha
   $$
+
   ![](https://img.duanyll.com/img/20230624180742.png)
 
 ## F 分布
@@ -396,6 +409,7 @@ $$
   F=\frac{\xi/n_1}{\eta/n_2}\sim F(n_1,n_2)
   $$
 - **概率密度函数**
+
   ![](https://img.duanyll.com/img/20230624181803.png)
 
 {% folding open:true 说明 %}

@@ -13,7 +13,7 @@ tags:
 
 C++ 运算符优先级:
 
-![](https://i.loli.net/2019/10/17/3vmH6A8RirQD1ch.png)
+![](https://img.duanyll.com/img/3vmH6A8RirQD1ch.png)
 
 ## 排列组合
 
@@ -155,13 +155,13 @@ $$
 - n个节点的二叉树种类数: 考虑中序遍历的序列, 树根为i, 则左子树的方案数为$C(i-1)$, 右子树的方案数为$C(n-i)$, 又得到了上面的递推式
 - 凸多边形的三角形划分: 一个凸的n边形, 用直线连接他的两个顶点使之分成多个三角形, 每条直线不能相交, 问一共有多少种划分方案. 解法见图:
 
-  ![image.png](https://i.loli.net/2019/10/17/vo1cxqn49SLHate.png)
+  ![image.png](https://img.duanyll.com/img/vo1cxqn49SLHate.png)
 
 - $n\times n$的方格图中, 只能向右或向上, 从$(1,1)\rightarrow(n,n)$不跨越对角线的方法数. [HDU 3398](/source/_posts/oi/2019-5-11-HDU-3398.md). 其他的一些也可以抽象为这个走格子的模型.
 - 由n对括号形成的合法括号表达式数: 类比出栈序列.
 - 用n个长方形去填充一个高度为n的阶梯图形的方法数:
 
-  ![image.png](https://i.loli.net/2019/10/17/FlLCmYMrIat1Z8j.png)
+  ![image.png](https://img.duanyll.com/img/FlLCmYMrIat1Z8j.png)
 
   考虑包含最左上角的方块的矩形对应的是哪一个阶梯, 然后分为下边和右边两部分, 得到卡特兰数的递推公式.
 
@@ -266,7 +266,7 @@ $$
 
 我们感兴趣NP问题是否都是P问题(`P == NP`?)(如果是的, 那么所有NP问题都可以用计算机来解决了), 在研究这一点的过程中, 我们发现了一类特殊的NP问题, 解决它就可以解决所有的NP问题, 称之为NPC问题. 解决NP-Hard问题也可以解决NP问题, 但是NP-Hard问题不一定是NP问题.
 
-![image.png](https://i.loli.net/2019/10/17/uXSOsl29UIwmnFQ.png)
+![image.png](https://img.duanyll.com/img/uXSOsl29UIwmnFQ.png)
 
 `P=NP`至今仍未被证明或推翻, NPC问题的发现使得情况更加微妙了.
 

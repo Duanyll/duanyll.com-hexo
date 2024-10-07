@@ -60,7 +60,7 @@ function preprocessMarkdown(inFile, hexoConfigFile = '_config.yml') {
     const data = frontMatter ? yaml.load(frontMatter[1]) : {};
     _.defaults(data, { author: hexoConfig.author, date: retriveDateFromFilename(inFile).format('YYYY-MM-DD') });
     if (data.nopdf) {
-        console.log(`Skip PDF generation for ${inFile}`);
+        console.log(`Skip ${inFile} due to nopdf flag`);
         return '';
     }
     mdText = mdText.replace(/^---\r?\n([\s\S]*?)\r?\n---\r?\n/, "");
@@ -136,6 +136,7 @@ function makePdf(inputMdFile, outputPdfFile, tempDir = 'temp') {
     // child_process.execSync(command);
     try {
         child_process.execSync(command);
+        console.log(`PDF generated: ${outputPdfFile}`);
     } catch (e) {
         console.error(e.toString());
     }

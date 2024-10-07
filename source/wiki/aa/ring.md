@@ -104,10 +104,13 @@ references:
    即 $a,b$ 做所有 $R$ - 线性组合
 4. **主理想** 由单个元素生成的理想
 5. **主理想整环** Principle Ideal Domain 任意理想都是主理想的整环
+
    1. $\Z$ 是 PID
    2. $m\in\N^*\implies m\Z$ 是 PID
    3. $F$ 是域 $\implies$ $F[x]$ 是 PID
+
       ![](https://img.duanyll.com/img/20231222171355.png)
+
 6. **商环** $R$ 是环, $I$ 是 $R$ 的主理想, 则对于加法 $I\lhd R$, 在加法商群 $R/I=\{a+I|a\in R\}$ 有加法运算
    $$
    (a+I)+(b+I)\triangleq ab+I
@@ -163,12 +166,18 @@ references:
    在交换环 $R$ 中, 理想 $I$ 满足什么条件使得 $R/I$ 是整环或域
 2. **素理想** 设 $P$ 是交换环的真理想, 满足 $ab\in P\iff a\in P$ 或 $b\in P$
 3. **定理** 设 $R$ 是交换幺环 ($1_R\neq 0$), $I$ 是 $R$ 的理想, 则 $I$ 是 $R$ 的素理想 $\iff$ $R/I=\{a+I|a\in R\}$ 是整环
+
    ![](https://img.duanyll.com/img/20231222220312.png)
+
 4. **推论** $\Z_n=\Z/\langle n\rangle$ 是整环 $\iff$ $n$ 是素数或零
 5. **极大理想** 设 $M$ 是交换环 $R$ 的一个真理想, 若 $R$ 中不存在真包含于 $M$ 的真理想 $\iff$ $M\subseteq I\subseteq R \impliedby I=M$ 或 $I=R$ 则称 $M$ 是环 $R$ 的一个极大理想
+
    ![](https://img.duanyll.com/img/20231222221213.png)
+
 6. **定理** 构成有限域的基本方法. 设 $I$ 是交换幺环的一个理想, 则 $I$ 是 $R$ 的极大理想 $\iff$ $R/I$ 是域.
+
    ![](https://img.duanyll.com/img/20231222222438.png)
+
 7. **推论** 交换幺环的极大理想是素理想
 
 > 证明极大理想的常见套路
@@ -337,7 +346,9 @@ references:
    3. 若 $D$ 中任意非零非单位元均有唯一的不可约分解式
       则称 $D$ 是一个惟一分解整环 UFD
 10. **定理** $D$ 是 UFD, 则 $p$ 不可约 $\implies$ $p$ 是素元
+
     ![](https://img.duanyll.com/img/20231224202557.png)
+
 11. **整环中的真因子链** $a_1,a_2,\cdots,a_n,\cdots$, $a_{i-1}$ 是 $a_i$ 的真因子
 12. **定理** 在 UFD 中, 任意元的真因子链一定有限终止
 

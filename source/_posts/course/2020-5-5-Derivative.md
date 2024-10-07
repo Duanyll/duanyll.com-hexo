@@ -52,7 +52,7 @@ $$
 
 ### 切线条数问题
 
-![image.png](https://i.loli.net/2020/05/05/SR7hEMBZaKsfJlV.png)
+![image.png](https://img.duanyll.com/img/SR7hEMBZaKsfJlV.png)
 
 B 点是对称中心.
 
@@ -68,7 +68,7 @@ $\exist x_1,x_2\in D, f(x_1)>g(x_2)$ 类型的表述, 可转化为与区间内�
 
 ### 拉格朗日中值定理
 
-![image.png](https://i.loli.net/2020/05/05/zcjyXLPEwelpFDR.png)
+![image.png](https://img.duanyll.com/img/zcjyXLPEwelpFDR.png)
 
 一定存在切线斜率等于割线斜率.
 
