@@ -51,7 +51,7 @@ You can connect to the network using a wireless router or by directly connecting
 
 #### Binding the Operator Account
 
-The first time you connect to the dormitory network, you need to bind your operator account. Visit the China Telecom or China Mobile service office on campus, _ensure your phone card has broadband service, and ask the operator for your broadband account and password._ After obtaining your broadband account and password, you need to bind the broadband account to your unified identity authentication account as follows:
+The first time you connect to the dormitory network, you need to bind your operator account to your unified identity authentication account as follows:
 
 1. In the dormitory area, connect your computer to the configured router or directly to the wall network port.
 2. The network login page may open automatically; if not, manually visit [http://10.253.0.235](http://10.0.253.235).
@@ -69,9 +69,19 @@ The first time you connect to the dormitory network, you need to bind your opera
 
 6. Enter your broadband account and password, then click **“绑定”** (Bind).
 
-   ![](https://img.duanyll.com/img/20240909194346.png)
+   ![](https://img.duanyll.com/img/20241119002324.png)
+
+   ![](https://img.duanyll.com/img/20241119002541.png)
 
 7. After successful binding, you can view the bound account on the "Carriers Bound" page.
+
+#### Obtaining the Broadband Account
+
+For China Mobile users: If you need to reset your broadband account password, send a SMS message with content `czkdmm` to 10086, and you'll receive you broadband account and its password. **You need to add _@cmccgx_ after the account name** when binding the broadband account.
+
+For instance, if your China Mobile phone number is 13812345678, text `czkdmm` to 10086, and you'll receive your broadband account like `SCXY13812345678`, and a six-digit password. In the binding process, you should enter `SCXY13812345678@cmccgx` as the broadband account, and the six-digit password.
+
+For China Telecom users: The account is your phone number. Try the password `12345678` first. If it doesn't work, please contact China Telecom customer service to reset your password.
 
 #### Logging into the Campus Network
 
@@ -140,9 +150,7 @@ You can access the campus network via wireless or wired connections.
 
 - **I don't know my broadband account or password.**
 
-  - **Update: The password for China Telecom broadband accounts activated in September 2024 is 12345678.**
-  - The broadband account for China Mobile is usually `SCXY` followed by your mobile number, and the password is the last 6 digits of your mobile number or a password you set yourself. The broadband account for China Telecom is usually your mobile number, and the password is the last 8 digits of your mobile number or `12345678`.
-  - If you don't know your broadband account and password, please call the ISP's customer service. The number `61831192` cannot help you retrieve your broadband account and password.
+  - See [Obtaining the Broadband Account](#obtaining-the-broadband-account).
   - If you bind an incorrect account and password, there will be no prompt on the binding page. You will only see a login failure message after clicking the “电信登录” (Telecom Login) or “移动登录” (Mobile Login) button.
 
 - **Can I bind someone else's broadband account?**
