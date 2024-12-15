@@ -54,7 +54,7 @@ You can connect to the network using a wireless router or by directly connecting
 The first time you connect to the dormitory network, you need to bind your operator account to your unified identity authentication account as follows:
 
 1. In the dormitory area, connect your computer to the configured router or directly to the wall network port.
-2. The network login page may open automatically; if not, manually visit [http://10.253.0.235](http://10.0.253.235).
+2. The network login page may open automatically; if not, manually visit `http://10.253.0.235`.
 
    ![](https://img.duanyll.com/img/20240909193323.png)
 

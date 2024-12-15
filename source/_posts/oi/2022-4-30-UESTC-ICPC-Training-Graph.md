@@ -12,7 +12,7 @@ source: http://acm-uestc-edu-cn-s.vpn.uestc.edu.cn:8118/contest/170/summary
 
 ## A
 
-[POJ2914 Lutece 2710 Minimum Cut](/2022/04/13/POJ-2914.html)
+[POJ2914 Lutece 2710 Minimum Cut](./2022-4-13-POJ-2914.md)
 
 ## C
 
@@ -42,7 +42,7 @@ LCA 模版, 可以写倍增, 可以写 Tarjan 离线, 甚至可以写树剖, 也
 
 ## J
 
-[洛谷 P4208 Lutece 2726 最小生成树计数模版](/2022/04/22/Luogu-P4208.html)
+[洛谷 P4208 Lutece 2726 最小生成树计数模版](./2022-4-22-Luogu-P4208.md)
 
 ## K
 
@@ -54,7 +54,7 @@ Dijkstra 模版. 记得开 `int64`, 记得优先队列用 `greater`, 没了.
 
 ## R
 
-[洛谷 P4716 Lutece 2733 POJ3164 最小树形图模板](/2022/04/19/Luogu-P4716.html)
+[洛谷 P4716 Lutece 2733 POJ3164 最小树形图模板](./2022-4-19-Luogu-P4716.md)
 
 ## S
 
