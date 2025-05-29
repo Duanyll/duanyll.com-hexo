@@ -12,6 +12,9 @@
   "hexo": {
     "version": "7.3.0"
   },
+  "engines": {
+    "node": ">=22.0.0"
+  },
   "dependencies": {
     "@types/glob": "^8.1.0",
     "@types/hexo": "^7.0.0",

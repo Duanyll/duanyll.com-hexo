@@ -16,12 +16,19 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "22"
-      - uses: awalsh128/cache-apt-pkgs-action@latest
+      - name: Cache pandoc deb package
+        id: cache-pandoc
+        uses: actions/cache@v4
         with:
-          packages: pandoc
-          version: 1.0
-      - name: Setup Yarn
-        uses: threeal/setup-yarn-action@v2.0.0
+          path: /tmp/pandoc-3.7.0.2-1-amd64.deb
+          key: pandoc-3.7.0.2
+      - name: Download pandoc
+        if: steps.cache-pandoc.outputs.cache-hit != 'true'
+        run: wget https://github.com/jgm/pandoc/releases/download/3.7.0.2/pandoc-3.7.0.2-1-amd64.deb -O /tmp/pandoc-3.7.0.2-1-amd64.deb
+      - name: Install pandoc
+        run: sudo dpkg -i /tmp/pandoc-3.7.0.2-1-amd64.deb
+      - name: Install dependencies
+        run: corepack prepare && yarn install --immutable
       - name: Run build
         run: yarn build
       - name: Deploy
