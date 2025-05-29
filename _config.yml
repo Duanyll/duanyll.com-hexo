@@ -92,8 +92,8 @@ pagination_dir: page
 
 # Include / Exclude file(s)
 ## include:/exclude: options only apply to the 'source/' folder
-include:
-exclude:
+include: []
+exclude: []
 ignore:
 
 # Extensions
@@ -152,11 +152,9 @@ mathjax:
     # see http://docs.mathjax.org/en/latest/options/input/tex.html#tex-extension-options for more detail
 
 pandoc:
-  filters:
-  extra:
-  template:
-  meta:
-  mathEngine:
+  timeout: 5000
+  args: 
+    - --mathjax
 
 search:
   path: search.xml
