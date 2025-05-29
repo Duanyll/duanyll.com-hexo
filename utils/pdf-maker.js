@@ -99,14 +99,14 @@ function preprocessMarkdown(inFile, hexoConfigFile = '_config.yml') {
     return mdText;
 }
 
-function makePdf(inputMdFile, outputPdfFile, tempDir = 'temp') {
+function makePdf(inputMdFile, outputPdfFile, tempDir = '.cache/pdf') {
     // If the output directory does not exist, create it
     if (!fs.existsSync(path.dirname(outputPdfFile))) {
         fs.mkdirSync(path.dirname(outputPdfFile), { recursive: true });
     }
     // Create temporary directory if not exists
     if (!fs.existsSync(tempDir)) {
-        fs.mkdirSync(tempDir);
+        fs.mkdirSync(tempDir, { recursive: true });
     }
     makePreamble(tempDir);
     // Create the preamble file if not exists

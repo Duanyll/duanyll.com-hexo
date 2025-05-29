@@ -7,7 +7,6 @@
     "clean": "hexo clean",
     "deploy": "hexo deploy",
     "server": "hexo server",
-    "postinstall": "patch-package",
     "prepare": "husky"
   },
   "hexo": {
@@ -20,7 +19,8 @@
     "hexo": "^7.2.0",
     "hexo-filter-mathjax": "^0.9.0",
     "hexo-filter-mermaid-diagrams": "^1.0.5",
-    "hexo-filter-tikzjax": "^1.0.2",
+    "hexo-filter-tikzjax": "patch:hexo-filter-tikzjax@npm%3A1.0.2#~/.yarn/patches/hexo-filter-tikzjax-npm-1.0.2-573d6d43b5.patch",
+    "hexo-fs": "^5.0.0",
     "hexo-generator-archive": "^2.0.0",
     "hexo-generator-category": "^2.0.0",
     "hexo-generator-feed": "^3.0.0",
@@ -34,11 +34,12 @@
     "hexo-renderer-pandoc": "^0.4.0",
     "hexo-renderer-stylus": "^3.0.0",
     "hexo-server": "^3.0.0",
+    "hexo-util": "^3.3.0",
     "husky": "^9.1.6",
     "lint-staged": "^15.2.10",
     "lodash": "^4.17.21",
+    "moment": "^2.30.1",
     "node-fetch": "2",
-    "patch-package": "^7.0.0",
     "postinstall-postinstall": "^2.1.0",
     "prettier": "^3.3.3",
     "prompt-sync": "^4.2.0"
@@ -48,5 +49,6 @@
       "yarn prettier --write --prose-wrap preserve",
       "git add"
     ]
-  }
+  },
+  "packageManager": "yarn@4.9.1"
 }

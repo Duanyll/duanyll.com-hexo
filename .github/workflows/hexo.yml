@@ -9,27 +9,24 @@ jobs:
   pages:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           submodules: recursive
-      - name: Use Node.js 20.x
-        uses: actions/setup-node@v2
+      - name: Use Node.js 22.x
+        uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
       - uses: awalsh128/cache-apt-pkgs-action@latest
         with:
           packages: pandoc
           version: 1.0
-      - name: Run install
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: install # will run `yarn install` command
+      - name: Setup Yarn
+        uses: threeal/setup-yarn-action@v2.0.0
       - name: Run build
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: build
+        run: yarn build
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
+        if: github.ref == 'refs/heads/master'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public

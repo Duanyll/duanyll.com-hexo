@@ -15,9 +15,14 @@
     "\\Cov": "\\operatorname{Cov}",
     "\\suchthat": "\\;\\mathrm{s.t.}\\;",
     "\\ord": "\\operatorname{ord}",
-    "\\rank": "\\operatorname{rank}",
+    "\\rank": "\\operatorname{rank}"
   },
   "markdown.styles": [
     ".vscode/cobalt.css"
-  ]
+  ],
+  "search.exclude": {
+    "**/.yarn": true,
+    "**/.pnp.*": true
+  },
+  "prettier.prettierPath": ".yarn/sdks/prettier/index.cjs"
 }
