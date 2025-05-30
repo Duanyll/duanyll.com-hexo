@@ -11,7 +11,7 @@ description: "Hi, I'm duanyll. Nice to meet you."
 keywords:
 author: duanyll
 language: zh-CN
-timezone: ''
+timezone: 'Asia/Chongqing'
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
@@ -155,6 +155,9 @@ pandoc:
   timeout: 5000
   args: 
     - --mathjax
+    - --wrap=none
+    # --wrap=none is a workaround for getting broken `<spanclass="math">` tags in the input of mathjax 
+    # filter. It is unknown why this happens with the default `--wrap=auto` option.
 
 search:
   path: search.xml

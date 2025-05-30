@@ -16,17 +16,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "22"
-      - name: Cache pandoc deb package
-        id: cache-pandoc
-        uses: actions/cache@v4
-        with:
-          path: /tmp/pandoc-3.7.0.2-1-amd64.deb
-          key: pandoc-3.7.0.2
       - name: Download pandoc
-        if: steps.cache-pandoc.outputs.cache-hit != 'true'
-        run: wget https://github.com/jgm/pandoc/releases/download/3.7.0.2/pandoc-3.7.0.2-1-amd64.deb -O /tmp/pandoc-3.7.0.2-1-amd64.deb
+        run: wget https://github.com/jgm/pandoc/releases/download/3.7.0.2/pandoc-3.7.0.2-1-amd64.deb -O /tmp/pandoc.deb
       - name: Install pandoc
-        run: sudo dpkg -i /tmp/pandoc-3.7.0.2-1-amd64.deb
+        run: sudo apt install -y /tmp/pandoc.deb
       - name: Install dependencies
         run: corepack prepare && yarn install --immutable
       - name: Run build
