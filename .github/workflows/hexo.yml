@@ -27,6 +27,8 @@ jobs:
         run: corepack prepare && yarn install --immutable
       - name: Run build
         run: yarn build
+      - name: Normalize URLs
+        run: yarn normalize-slash
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
         if: github.ref == 'refs/heads/master' && github.event_name == 'push'

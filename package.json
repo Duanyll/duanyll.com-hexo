@@ -7,7 +7,12 @@
     "clean": "hexo clean",
     "deploy": "hexo deploy",
     "server": "hexo server",
-    "prepare": "husky"
+    "prepare": "husky",
+
+    "clean-ali-oss": "node utils/clean-ali-oss.js",
+    "make-pdf": "node utils/make-pdf.js",
+    "migrate-image": "node utils/migrate-image.js",
+    "normalize-slash": "node utils/normalize-slash.js"
   },
   "hexo": {
     "version": "7.3.0"
@@ -19,6 +24,7 @@
     "@types/glob": "^8.1.0",
     "@types/hexo": "^7.0.0",
     "ali-oss": "^6.23.0",
+    "commander": "^14.0.0",
     "hexo": "^7.3.0",
     "hexo-filter-mathjax": "^0.9.0",
     "hexo-filter-mermaid-diagrams": "^1.0.5",
@@ -39,6 +45,7 @@
     "hexo-server": "^3.0.0",
     "hexo-util": "^3.3.0",
     "husky": "^9.1.7",
+    "js-yaml": "^4.1.0",
     "lint-staged": "^16.1.0",
     "lodash": "^4.17.21",
     "moment": "^2.30.1",
