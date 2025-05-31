@@ -11,7 +11,7 @@ description: "Hi, I'm duanyll. Nice to meet you."
 keywords:
 author: duanyll
 language: zh-CN
-timezone: 'Asia/Chongqing'
+# timezone: 'Asia/Chongqing'
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'

@@ -8,7 +8,6 @@
     "deploy": "hexo deploy",
     "server": "hexo server",
     "prepare": "husky",
-
     "clean-ali-oss": "node utils/clean-ali-oss.js",
     "make-pdf": "node utils/make-pdf.js",
     "migrate-image": "node utils/migrate-image.js",
