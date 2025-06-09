@@ -2449,12 +2449,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hexo-filter-mathjax@npm:^0.9.0":
-  version: 0.9.0
-  resolution: "hexo-filter-mathjax@npm:0.9.0"
+"hexo-filter-mathjax@npm:^0.9.1":
+  version: 0.9.1
+  resolution: "hexo-filter-mathjax@npm:0.9.1"
   dependencies:
     mathjax-full: "npm:3.2.2"
-  checksum: 10c0/a790f2d4ffd3e840aa980ac8b8888ce78f224c59a215a47cb271a8d47206999d399a23f72b56fb0eb24e4a149a0af2549eeb4e4c2635ff7c8c2260c46f27fe00
+  checksum: 10c0/62e9672d4a38fbdc5638884be43390b340aab19dc9e3baefce69ca0ff032169d32ffa0569c6057880f4864d6ae57b6af9ce356abd0cb71c44fe70d054e805edd
   languageName: node
   linkType: hard
 
@@ -2701,7 +2701,7 @@ __metadata:
     ali-oss: "npm:^6.23.0"
     commander: "npm:^14.0.0"
     hexo: "npm:^7.3.0"
-    hexo-filter-mathjax: "npm:^0.9.0"
+    hexo-filter-mathjax: "npm:^0.9.1"
     hexo-filter-mermaid-diagrams: "npm:^1.0.5"
     hexo-filter-tikzjax: "patch:hexo-filter-tikzjax@npm%3A1.0.2#~/.yarn/patches/hexo-filter-tikzjax-npm-1.0.2-573d6d43b5.patch"
     hexo-fs: "npm:^5.0.0"
