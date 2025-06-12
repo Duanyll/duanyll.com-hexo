@@ -67,6 +67,7 @@ article:
   related_posts:
     enable: true
     max_count: 5
+  star: https://github.com/duanyll/duanyll.com-hexo
 
 search:
   service: local_search # local_search, todo...

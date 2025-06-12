@@ -5,6 +5,7 @@
     "yzhang.markdown-all-in-one",
     "arcanis.vscode-zipfs",
     "esbenp.prettier-vscode",
-    "duanyll.paste-and-upload"
+    "duanyll.paste-and-upload",
+    "digitalbrainstem.javascript-ejs-support"
   ]
 }
