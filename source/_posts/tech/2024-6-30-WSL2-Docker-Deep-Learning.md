@@ -20,7 +20,7 @@ tags:
 
 ![一个典型的 HTTP 代理软件](https://img.duanyll.com/img/20240630224805.png)
 
-我们首先让 Windows 上的程序能使用这个代理服务器。通常来说只需要**打开 System Proxy 选项**，这会修改 Windows 的 IE 代理设置，适用于多数的图形化程序。**不建议打开 TUN 模式**，这会让情况变得复杂棘手，建议把 TUN 代理留给 “访问内部资产” 的需求，如 EasyConnect 和 WireGuard，而不是 “访问互联网” 的需求。
+我们首先让 Windows 上的程序能使用这个代理服务器。通常来说只需要**打开 System Proxy 选项**，这会修改 Windows 的 IE 代理设置，适用于多数的图形化程序。**不建议打开 TUN 模式**，这会让情况变得复杂棘手，建议把 TUN 代理留给 “访问内部资产” 的需求，如 EasyConnect 和 WireGuard，而不是 “访问互联网” 的需求。[这里](./2025-5-31-Windows-TUN-Router.md) 有关于 TUN 代理的更多讨论和高级用法。
 
 仅仅这样设置是不够的。许多从 Linux 世界移植的命令行程序从环境变量读取代理设置，而不是从 Windows 的 IE 代理设置读取。可添加 Windows 环境变量 `http_proxy` 和 `https_proxy`，值均为 `http://127.0.0.1:7890`.
 

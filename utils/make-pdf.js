@@ -92,7 +92,7 @@ function preprocessMarkdown(inFile, hexoConfigFile = "_config.yml") {
     /{%\s*link\s*(.*?)\s.*%}/g,
     (__, url) => `[${url}](${url})`
   );
-  // {% folding [options] %}
+  // {% folding title [options] %}
   mdText = mdText.replace(/{%\s*folding\s*(.*?)\s.*%}/g, (__, options) => {
     const title = _.filter(
       _.split(options, " "),
@@ -111,6 +111,24 @@ function preprocessMarkdown(inFile, hexoConfigFile = "_config.yml") {
     /{%\s*endfolding\s*%}/g,
     "```{=latex}\n\\end{tcolorbox}\n```"
   );
+  // {% box title [color:color] %}
+  mdText = mdText.replace(/{%\s*box\s*(.*?)\s.*%}/g, (__, options) => {
+    const parts = _.split(options, " ");
+    const title = parts[0];
+    const color = _.find(parts, (p) => p.startsWith("color:"));
+    const colorOption = color ? `colback=${color.split(":")[1]}` : "";
+    return (
+      "```{=latex}\n" +
+      `\\begin{tcolorbox}[breakable, title=${title}, ${colorOption}]\n` +
+      "```"
+    );
+  });
+  // {% endbox %}
+  mdText = mdText.replace(/{%\s*endbox\s*%}/g, () => {
+    return (
+      "```{=latex}\n\\end{tcolorbox}\n```"
+    );
+  });
 
   // Handle the ![> ]() syntax
   mdText = mdText.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (match, alt, url) => {
