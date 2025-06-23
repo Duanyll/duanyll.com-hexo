@@ -15,7 +15,8 @@
     "\\Cov": "\\operatorname{Cov}",
     "\\suchthat": "\\;\\mathrm{s.t.}\\;",
     "\\ord": "\\operatorname{ord}",
-    "\\rank": "\\operatorname{rank}"
+    "\\rank": "\\operatorname{rank}",
+    "\\b": "\\mathbf{#1}",
   },
   "markdown.styles": [
     ".vscode/cobalt.css"

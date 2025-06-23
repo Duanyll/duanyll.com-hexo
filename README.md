@@ -2,7 +2,7 @@
 
 [![Hexo build](https://github.com/Duanyll/duanyll.com-hexo/actions/workflows/hexo.yml/badge.svg)](https://github.com/Duanyll/duanyll.com-hexo/actions/workflows/hexo.yml) [![pages-build-deployment](https://github.com/Duanyll/duanyll.com-hexo/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/Duanyll/duanyll.com-hexo/actions/workflows/pages/pages-build-deployment)
 
-Duanyll's new blog, can be visited at [duanyll.com](https://duanyll.com). Also refer to [the post](https://duanyll.com/2023/2/10/Migrate-To-Hexo/) about implementation of this site.
+Duanyll's new blog, can be visited at [duanyll.com](https://duanyll.com).
 
 To build this site, you have to
 
@@ -11,7 +11,7 @@ To build this site, you have to
 3. Run `yarn`
 4. Run `yarn build`
 
-And the static site will be inside the `public` folder.
+And the static site will be inside the `public` folder. Refer to [.github\workflows\hexo.yml](.github/workflows/hexo.yml) for CI build process.
 
 ## Markdown Writing Extensions
 
@@ -60,3 +60,7 @@ This site supports exporting posts to PDF files via Pandoc and LaTeX. All above 
 ```bash
 yarn make-pdf source/_posts/your-post.md
 ```
+
+## Known Issues
+
+Due to the limitations of `hexo-related-popular-posts` and other plugins, live updates in `yarn server` will always fail. Always restart the server after making changes to the posts.
