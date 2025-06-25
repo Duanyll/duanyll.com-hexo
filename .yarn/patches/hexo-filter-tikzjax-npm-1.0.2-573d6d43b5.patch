@@ -12,11 +12,17 @@ index 7c3c4b7abd752caab80d5eb9fa05874b98c180a5..8208e2a922d8a45cf4f797d8220b4c6a
   * Calculate the MD5 hash of a string. Used for cache key.
   */
 diff --git a/dist/render-tikzjax.js b/dist/render-tikzjax.js
-index a466a7185a1a9f4e096112fa887226e1cbced59f..5ebebd2599c2db271eb5059f5af23e4e1dc25da3 100644
+index a466a7185a1a9f4e096112fa887226e1cbced59f..acb3d737fc1b2140f9e5beb71c48fe769e1d52e2 100644
 --- a/dist/render-tikzjax.js
 +++ b/dist/render-tikzjax.js
-@@ -22,17 +22,18 @@ async function renderTikzjax(data) {
+@@ -20,19 +20,24 @@ async function renderTikzjax(data) {
+     const logPrefix = '[hexo-filter-tikzjax]';
+     const debug = (...args) => this.log.debug.apply(this.log, [logPrefix, ...args]);
      const error = (...args) => this.log.error.apply(this.log, [logPrefix, ...args]);
++    let preamble = "";
++    if (data["header-includes"]) {
++        preamble = data["header-includes"];
++    }
      queue_1.default.setLogger({ debug, error });
      // Find all TikZ code blocks in Markdown source.
 -    const regex = /```tikz([\s\S]+?)```/g;
@@ -33,7 +39,7 @@ index a466a7185a1a9f4e096112fa887226e1cbced59f..5ebebd2599c2db271eb5059f5af23e4e
 +            if (!input || !input.includes('tikz')) {
                  continue;
              }
-+            input = `\\begin{document}\n${input}\n\\end{document}`;
++            input = `${preamble}\n\\begin{document}\n${input}\n\\end{document}`;
              // Since `node-tikzjax` does not allow concurrent calls,
              // we have to use a task queue to make sure that only one call is running at a time.
              // This could be a bottleneck when generating a large number of posts.
