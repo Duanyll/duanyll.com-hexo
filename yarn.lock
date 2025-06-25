@@ -2479,11 +2479,11 @@ __metadata:
 
 "hexo-filter-tikzjax@patch:hexo-filter-tikzjax@npm%3A1.0.2#~/.yarn/patches/hexo-filter-tikzjax-npm-1.0.2-573d6d43b5.patch":
   version: 1.0.2
-  resolution: "hexo-filter-tikzjax@patch:hexo-filter-tikzjax@npm%3A1.0.2#~/.yarn/patches/hexo-filter-tikzjax-npm-1.0.2-573d6d43b5.patch::version=1.0.2&hash=c55ddc"
+  resolution: "hexo-filter-tikzjax@patch:hexo-filter-tikzjax@npm%3A1.0.2#~/.yarn/patches/hexo-filter-tikzjax-npm-1.0.2-573d6d43b5.patch::version=1.0.2&hash=e4c692"
   dependencies:
     node-localstorage: "npm:^3.0.5"
     node-tikzjax: "npm:^1.0.3"
-  checksum: 10c0/129eff6ffdb5e6a6fc24d9bb2fa9bf912818b7f5ff76904a97b74c9617b21b94a099bc057bc2aa7c3a5174e6751bc4cbca7223d290e8f46b95e1b02e580d3793
+  checksum: 10c0/d9b97df1ebeb0c470c867b1eb3b079bdcbbbc755dd84ff168b5d6608ce8ca492e04bd666761ae034f0c3a30c9cab2e37a0eb42709c59d9737ae257679f45d0da
   languageName: node
   linkType: hard
 
