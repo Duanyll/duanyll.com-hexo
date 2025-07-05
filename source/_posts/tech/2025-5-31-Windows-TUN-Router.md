@@ -314,3 +314,39 @@ Start-Service -Name wslkeepalive
 ```
 
 现在在其他连接到 WireGuard VPN 的设备上就可以通过 WSL2 的 Wireguard IP 地址访问 WSL2 上的 SSH 服务了。
+
+## 代理 Steam 的正确方式
+
+为了正确地让 Steam 通过国内 CDN 高速下载，不浪费流量，同时确保社区等功能正常访问，在启用 TUN 时要尤其注意关于 Steam 的规则配置。手动设置 Steam 设置 > 下载 > 下载地区选项到国内通常是不起作用的，需要单独指定 `steamserver.net` 使用国内 IP 出口。
+
+```yaml
+rules:
+  - ...
+  # Steam 登录地区检测，应当直连（使用国内 IP 出口）
+  - DOMAIN-SUFFIX,steamserver.net,SteamLogin
+  # Steam 社区和商店，需要代理 (来自 ACL4SSR)
+  - DOMAIN-SUFFIX,fanatical.com,Proxy
+  - DOMAIN-SUFFIX,humblebundle.com,Proxy
+  - DOMAIN-SUFFIX,underlords.com,Proxy
+  - DOMAIN-SUFFIX,valvesoftware.com,Proxy
+  - DOMAIN-SUFFIX,playartifact.com,Proxy
+  - DOMAIN-SUFFIX,steam-chat.com,Proxy
+  - DOMAIN-SUFFIX,steamcommunity.com,Proxy
+  - DOMAIN-SUFFIX,steamgames.com,Proxy
+  - DOMAIN-SUFFIX,steampowered.com,Proxy
+  - DOMAIN-SUFFIX,steamstatic.com,Proxy
+  - DOMAIN-SUFFIX,steamstat.us,Proxy
+  - DOMAIN,steambroadcast.akamaized.net,Proxy
+  - DOMAIN,steamcommunity-a.akamaihd.net,Proxy
+  - DOMAIN,steamstore-a.akamaihd.net,Proxy
+  - DOMAIN,steamusercontent-a.akamaihd.net,Proxy
+  - DOMAIN,steamuserimages-a.akamaihd.net,Proxy
+  - DOMAIN,steampipe.akamaized.net,Proxy
+  - ...
+```
+
+一般的规则集中都将 Steam 相关域名加入了代理名单，但需要手动前置 `steamserver.net` 的规则将它加入直连列表，而 Steam 的国内 CDN 通常已经在直连白名单或 GeoIP 白名单中，不需要再配置。遗憾的是，在移动等运营商网络下，`steamserver.net` 的访问通常也很不通畅，导致 Steam 客户端登录很慢或失败，此时可能需要考虑用教育网等优质国内节点来中转此域名。
+
+![Steam 下载地区选项](https://img.duanyll.com/img/c91a77eb.png)
+
+正确完成配置后需要在 Steam 客户端中退出并重新登录，重新登录后 Steam 设置 > 下载 > 下载地区选项应当已经自动切换到国内地区。具体是哪个地区不重要（例如教育网出口一般都会识别到北京），在国内 Steam 几乎都使用同一组 CDN。此配置下 Steam 下载速度应该能拉满宽带并且不消耗代理流量。
