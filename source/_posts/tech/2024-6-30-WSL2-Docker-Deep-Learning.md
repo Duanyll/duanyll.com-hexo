@@ -105,7 +105,9 @@ sudo sed -i 's/security.ubuntu.com/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
 sudo apt update
 ```
 
-为了使用 Docker 的 apt 源，还需要设置 apt 代理：
+{% box 注意 %}
+
+为了使用 Docker 的 apt 源，还需要设置 apt 代理, 或者也可以按下文的方式使用 apt 国内镜像：
 
 ```bash
 echo "Acquire::http::Proxy \"http://$(hostname).local:7890\";" | sudo tee /etc/apt/apt.conf.d/99proxy
@@ -113,15 +115,50 @@ echo "Acquire::https::Proxy \"http://$(hostname).local:7890\";" | sudo tee -a /e
 sudo apt update
 ```
 
+{% endbox %}
+
 ## Step 5 - 在 WSL 中安装 CUDA
 
 无论最后需要用什么版本的 CUDA，都在 WSL 中安装最新版的 CUDA Toolkit。
 
-{% link https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=WSL-Ubuntu&target_version=2.0&target_type=deb_local %}
+{% link https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=WSL-Ubuntu&target_version=2.0&target_type=deb_network %}
 
-![从这里获得最新版的安装指令，一条一条地粘到 WSL 里运行](https://img.duanyll.com/img/20240701000415.png)
+{% box 注意 color:yellow %}
 
-![](https://img.duanyll.com/img/20240701000749.png)
+在官网给出的三种安装方式中, 最推荐使用 `deb (network)` 的方式安装 CUDA Toolkit, 这样符合一般使用 APT 的操作习惯, 在需要升级 CUDA 版本时最为方便, 其他两种方式都非常容易把 APT 搞爆炸. 目前英伟达的国内 CDN 已经正常使用, 使用官网的下载源会自动重定向到 `nvidia.cn` 域名, 速度很快.
+
+{% endbox %}
+
+```bash
+wget https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/cuda-keyring_1.1-1_all.deb
+sudo dpkg -i cuda-keyring_1.1-1_all.deb
+sudo apt-get update
+sudo apt-get -y install cuda-toolkit
+```
+
+使用 APT 在线安装 `cuda-toolkit` 包会自动安装最新版本的 CUDA Toolkit, 并且在未来可以使用 `apt upgrade` 命令升级到最新版本. 也可以使用
+
+```bash
+sudo apt-get -y install cuda-toolkit-12-9
+```
+
+来安装指定版本的 CUDA Toolkit, 例如 `cuda-toolkit-12-9`。这样安装不会通过 `apt upgrade` 自动升级. 在手动升级 CUDA 版本, 或者清除以其他方式安装的 CUDA 版本时, 建议先移除所有 CUDA 相关的包
+
+```bash
+sudo apt-get remove --purge '^cuda.*' 'nvidia-.*' 'libnvidia-.*'
+```
+
+{% box 注意 %}
+
+在 WSL 中只需安装 CUDA Toolkit, 不需要安装 NVIDIA 驱动. 在一般 Debian 上还需安装 NVIDIA 驱动.
+
+```bash
+sudo apt-get install -y cuda-drivers
+```
+
+安装最新稳定版本的 NVIDIA 驱动. 目前看来高版本的驱动没那么可怕, 建议不要守着 535 版本不放. 毕竟 LLM 横行的时代, 高版本的 CUDA Toolkit 和 PyTorch 都有很多重要的新特性.
+
+{% endbox %}
 
 ![](https://img.duanyll.com/img/20240701001112.png)
 
@@ -154,6 +191,19 @@ sudo apt-get update
 
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
+
+{% box 说明 %}
+
+也可以考虑使用国内 Docker APT 镜像源, 例如北外镜像. 仍然需要按照上面五行命令从 Docker 官网获得 GPG 密钥。
+
+```bash
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://mirrors.bfsu.edu.cn/docker-ce/linux/debian \
+  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+  tee /etc/apt/sources.list.d/docker.list > /dev/null
+```
+
+{% endbox %}
 
 随后在 Docker Daemon 的 Systemd 单元文件中配置代理环境变量
 
