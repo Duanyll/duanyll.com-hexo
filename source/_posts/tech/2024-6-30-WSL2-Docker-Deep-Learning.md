@@ -129,6 +129,14 @@ sudo apt update
 
 {% endbox %}
 
+{% box 警告：为什么你的显卡驱动在 apt upgrade 之后就挂了？ color:red %}
+
+因为你使用了 **runfile (local)** 的方式安装了 nvidia 驱动，这是 **完全不推荐** 的做法。runfile **不会** 向 APT 注册它添加的内核模块和库文件，当 apt 尝试升级内核或其他依赖库时，就不会自动重新编译和安装这些模块和库文件，导致重启后系统无法正常工作。请务必使用 APT 安装 NVIDIA 驱动。至少也要使用 `deb (local)` 的方式安装 CUDA Toolkit，这样才能确保 APT 能正确管理 NVIDIA 驱动和 CUDA 相关的库文件。**当然，最好的方法是使用 `deb (network)`。**
+
+`apt upgrade` 和高版本的 CUDA Toolkit 和 nvidia 驱动没那么多毛病，升级后出现错误多半因为之前安装的驱动的方法不对。
+
+{% endbox %}
+
 ```bash
 wget https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/cuda-keyring_1.1-1_all.deb
 sudo dpkg -i cuda-keyring_1.1-1_all.deb
@@ -150,13 +158,21 @@ sudo apt-get remove --purge '^cuda.*' 'nvidia-.*' 'libnvidia-.*'
 
 {% box 注意 %}
 
-在 WSL 中只需安装 CUDA Toolkit, 不需要安装 NVIDIA 驱动. 在一般 Debian 上还需安装 NVIDIA 驱动.
+在 WSL 中只需安装 CUDA Toolkit, 不需要安装 NVIDIA 驱动. 在一般 Debian 裸机上还需安装 NVIDIA 驱动.
 
 ```bash
-sudo apt-get install -y cuda-drivers
+sudo apt-get install -y nvidia-open
 ```
 
 安装最新稳定版本的 NVIDIA 驱动. 目前看来高版本的驱动没那么可怕, 建议不要守着 535 版本不放. 毕竟 LLM 横行的时代, 高版本的 CUDA Toolkit 和 PyTorch 都有很多重要的新特性.
+
+另外，如果使用数据中心级的 GPU (A100, H100, ...)，还要安装
+
+```bash
+sudo apt-get install -y datacenter-gpu-manager nvidia-fabricmanager
+```
+
+否则可能出现 nvidia-smi 正常但 PyTorch 报错 `system not yet initialized` 的问题。
 
 {% endbox %}
 
