@@ -20,7 +20,7 @@
     "node": ">=22.0.0"
   },
   "dependencies": {
-    "@types/glob": "^8.1.0",
+    "@types/glob": "^9.0.0",
     "@types/hexo": "^7.0.0",
     "ali-oss": "^6.23.0",
     "commander": "^14.0.0",
