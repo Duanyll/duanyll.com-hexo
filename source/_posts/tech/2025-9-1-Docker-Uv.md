@@ -4,6 +4,7 @@ tags:
   - 炼丹
   - docker
   - 指北
+repo: Duanyll/torch-devcontainer
 ---
 
 ## Abstract
@@ -58,7 +59,7 @@ ARG UBUNTU_MIRROR=https://mirrors.bfsu.edu.cn/ubuntu/
 RUN sed -i "s|http://archive.ubuntu.com/ubuntu/|$UBUNTU_MIRROR|g" /etc/apt/sources.list && \
     sed -i "s|http://security.ubuntu.com/ubuntu/|$UBUNTU_MIRROR|g" /etc/apt/sources.list
 RUN apt-get update -y && \
-    apt-get -y install --no-install-recommends curl tree wget ca-certificates unzip bzip2 xz-utils zip nano vim-tiny less jq lsb-release apt-transport-https sudo tmux ffmpeg libsm6 libxext6 libxrender-dev libssl3 git gdb rsync aria2 && \
+    apt-get -y install --no-install-recommends curl tree wget ca-certificates unzip bzip2 xz-utils zip nano vim-tiny less jq lsb-release apt-transport-https sudo tmux ffmpeg libsm6 libxext6 libxrender-dev libssl3 git git-lfs gdb rsync aria2 && \
     apt-get -y clean && \
     rm -rf /var/lib/apt/lists/*
 
