@@ -37,10 +37,6 @@ hexo.extend.filter.register('before_post_render', async data => {
         if (dirname in categoryMap) {
             await data.setCategories([categoryMap[dirname]]);
         }
-
-        for (const tag of data.tags.data) {
-            data.content = `{% hashtag ${tag.name} ${tag.permalink} %}\n` + data.content;
-        }
     }
     return data;
 });
