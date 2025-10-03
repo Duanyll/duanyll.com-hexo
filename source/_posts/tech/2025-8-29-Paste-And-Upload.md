@@ -2,6 +2,7 @@
 title: 更好的 VSCode 粘贴上传图床插件
 tags:
   - vscode
+  - 指北
 repo: Duanyll/paste-and-upload
 ---
 

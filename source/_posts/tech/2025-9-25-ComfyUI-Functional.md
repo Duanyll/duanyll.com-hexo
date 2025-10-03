@@ -3,6 +3,7 @@ title: 在 ComfyUI 中优雅地函数式编程
 tags:
   - comfyui
   - 图论
+  - 指北
 repo: Duanyll/comfyui_functional
 cover: https://img.duanyll.com/img/f60c2562.png
 ---

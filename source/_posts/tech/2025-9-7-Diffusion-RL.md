@@ -3,7 +3,7 @@ title: RL in Diffusion Models
 tags:
   - 炼丹
   - 强化学习
-# hidden: true
+hidden: true
 ---
 
 ## Flow-GRPO
