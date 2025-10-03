@@ -16,7 +16,7 @@
     "\\suchthat": "\\;\\mathrm{s.t.}\\;",
     "\\ord": "\\operatorname{ord}",
     "\\rank": "\\operatorname{rank}",
-    "\\b": "\\mathbf{#1}",
+    "\\b": "\\mathbf{#1}"
   },
   "markdown.styles": [
     ".vscode/cobalt.css"
@@ -25,5 +25,7 @@
     "**/.yarn": true,
     "**/.pnp.*": true
   },
-  "prettier.prettierPath": ".yarn/sdks/prettier/index.cjs"
+  "prettier.prettierPath": ".yarn/sdks/prettier/index.cjs",
+  "typescript.tsdk": ".yarn/sdks/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true
 }
