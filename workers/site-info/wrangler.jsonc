@@ -3,13 +3,16 @@
  * https://developers.cloudflare.com/workers/wrangler/configuration/
  */
 {
-	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "site-info",
 	"main": "src/index.ts",
 	"compatibility_date": "2025-10-03",
 	"observability": {
 		"enabled": true
-	}
+	},
+	"workers_dev": false,
+	"routes": [
+		{ "pattern": "api.duanyll.com/v1/site-info*", "zone_name": "duanyll.com" }
+	]
 	/**
 	 * Smart Placement
 	 * Docs: https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement
