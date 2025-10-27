@@ -27,7 +27,7 @@
     "@types/hexo": "^7.0.0",
     "ali-oss": "^6.23.0",
     "commander": "^14.0.1",
-    "hexo": "^8.0.0",
+    "hexo": "^8.1.0",
     "hexo-filter-mathjax": "^0.9.1",
     "hexo-filter-mermaid-diagrams": "^1.0.5",
     "hexo-filter-tikzjax": "patch:hexo-filter-tikzjax@npm%3A1.0.2#~/.yarn/patches/hexo-filter-tikzjax-npm-1.0.2-573d6d43b5.patch",
