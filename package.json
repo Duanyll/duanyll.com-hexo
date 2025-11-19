@@ -17,7 +17,7 @@
     "normalize-slash": "node utils/normalize-slash.js"
   },
   "hexo": {
-    "version": "8.0.0"
+    "version": "8.1.1"
   },
   "engines": {
     "node": ">=22.0.0"
@@ -26,12 +26,12 @@
     "@types/glob": "^9.0.0",
     "@types/hexo": "^7.0.0",
     "ali-oss": "^6.23.0",
-    "commander": "^14.0.1",
+    "commander": "^14.0.2",
     "hexo": "^8.1.1",
     "hexo-filter-mathjax": "^0.9.1",
     "hexo-filter-mermaid-diagrams": "^1.0.5",
     "hexo-filter-tikzjax": "patch:hexo-filter-tikzjax@npm%3A1.0.2#~/.yarn/patches/hexo-filter-tikzjax-npm-1.0.2-573d6d43b5.patch",
-    "hexo-fs": "^5.0.0",
+    "hexo-fs": "^5.0.1",
     "hexo-generator-archive": "^2.0.0",
     "hexo-generator-category": "^2.0.0",
     "hexo-generator-feed": "^3.0.0",
@@ -45,10 +45,10 @@
     "hexo-renderer-pandoc": "^0.5.0",
     "hexo-renderer-stylus": "^3.0.1",
     "hexo-server": "^3.0.0",
-    "hexo-util": "^3.3.0",
+    "hexo-util": "^4.0.0",
     "husky": "^9.1.7",
     "js-yaml": "^4.1.1",
-    "lint-staged": "^16.2.3",
+    "lint-staged": "^16.2.6",
     "lodash": "^4.17.21",
     "moment": "^2.30.1",
     "node-fetch": "^3.3.2",
