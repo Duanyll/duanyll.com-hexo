@@ -2153,6 +2153,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"commander@npm:^14.0.2":
+  version: 14.0.2
+  resolution: "commander@npm:14.0.2"
+  checksum: 10c0/245abd1349dbad5414cb6517b7b5c584895c02c4f7836ff5395f301192b8566f9796c82d7bd6c92d07eba8775fe4df86602fca5d86d8d10bcc2aded1e21c2aeb
+  languageName: node
+  linkType: hard
+
 "commander@npm:^2.5.0":
   version: 2.20.3
   resolution: "commander@npm:2.20.3"
@@ -4032,7 +4039,7 @@ __metadata:
     "@types/glob": "npm:^9.0.0"
     "@types/hexo": "npm:^7.0.0"
     ali-oss: "npm:^6.23.0"
-    commander: "npm:^14.0.1"
+    commander: "npm:^14.0.2"
     hexo: "npm:^8.1.1"
     hexo-filter-mathjax: "npm:^0.9.1"
     hexo-filter-mermaid-diagrams: "npm:^1.0.5"

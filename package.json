@@ -26,7 +26,7 @@
     "@types/glob": "^9.0.0",
     "@types/hexo": "^7.0.0",
     "ali-oss": "^6.23.0",
-    "commander": "^14.0.1",
+    "commander": "^14.0.2",
     "hexo": "^8.1.1",
     "hexo-filter-mathjax": "^0.9.1",
     "hexo-filter-mermaid-diagrams": "^1.0.5",
