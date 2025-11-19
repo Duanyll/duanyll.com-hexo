@@ -4051,7 +4051,7 @@ __metadata:
     hexo-renderer-pandoc: "npm:^0.5.0"
     hexo-renderer-stylus: "npm:^3.0.1"
     hexo-server: "npm:^3.0.0"
-    hexo-util: "npm:^3.3.0"
+    hexo-util: "npm:^4.0.0"
     husky: "npm:^9.1.7"
     js-yaml: "npm:^4.1.1"
     lint-staged: "npm:^16.2.3"
