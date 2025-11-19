@@ -3865,6 +3865,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"hexo-fs@npm:^5.0.1":
+  version: 5.0.1
+  resolution: "hexo-fs@npm:5.0.1"
+  dependencies:
+    bluebird: "npm:^3.7.2"
+    chokidar: "npm:^4.0.3"
+    graceful-fs: "npm:^4.2.10"
+    hexo-util: "npm:^3.3.0"
+  checksum: 10c0/c00b21f446367d3c80f5d5028405a40c2957d1f70fb87ede42cb312c1b85c1a426ffa96e1e47a16ee77da997335bc9df1259af3964ca5c22b15eba0baa2407bb
+  languageName: node
+  linkType: hard
+
 "hexo-generator-archive@npm:^2.0.0":
   version: 2.0.0
   resolution: "hexo-generator-archive@npm:2.0.0"
@@ -4037,7 +4049,7 @@ __metadata:
     hexo-filter-mathjax: "npm:^0.9.1"
     hexo-filter-mermaid-diagrams: "npm:^1.0.5"
     hexo-filter-tikzjax: "patch:hexo-filter-tikzjax@npm%3A1.0.2#~/.yarn/patches/hexo-filter-tikzjax-npm-1.0.2-573d6d43b5.patch"
-    hexo-fs: "npm:^5.0.0"
+    hexo-fs: "npm:^5.0.1"
     hexo-generator-archive: "npm:^2.0.0"
     hexo-generator-category: "npm:^2.0.0"
     hexo-generator-feed: "npm:^3.0.0"
