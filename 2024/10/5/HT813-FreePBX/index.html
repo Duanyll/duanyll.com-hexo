@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 8.1.1">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.21.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+
+  
+  
+  <title>Grandstream HT813 双模语音网关 FreePBX 配置指北 - duanyll</title>
+
+  
+    <meta name="description" content="概述 Grandstream HT813 是一款双模语音网关，支持 FXS 和 FXO 两种接口，可以连接传统的电话机和 PSTN 线路，也可以连接 VoIP 服务器。HT813 最重要的特点是便宜，咸鱼二手价格在 130 元左右，同价位其他语音网关往往只有 FXS 或者 FXO 一种接口。FreePBX 是一款开源的 IP 电话系统，支持 SIP 协议，可以用来搭建企业电话系统。尽管 FreeP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Grandstream HT813 双模语音网关 FreePBX 配置指北">
+<meta property="og:url" content="https://duanyll.com/2024/10/5/HT813-FreePBX/">
+<meta property="og:site_name" content="duanyll">
+<meta property="og:description" content="概述 Grandstream HT813 是一款双模语音网关，支持 FXS 和 FXO 两种接口，可以连接传统的电话机和 PSTN 线路，也可以连接 VoIP 服务器。HT813 最重要的特点是便宜，咸鱼二手价格在 130 元左右，同价位其他语音网关往往只有 FXS 或者 FXO 一种接口。FreePBX 是一款开源的 IP 电话系统，支持 SIP 协议，可以用来搭建企业电话系统。尽管 FreeP">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.duanyll.com/img/20241005113810.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20241005114024.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20241005114611.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20241005114730.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20241005114830.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20241005115014.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20241005115736.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20241005115546.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20241005120607.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20241005120736.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20241005121013.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20241005121550.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20241005121636.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20241005122441.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20241005121858.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20241005122002.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20241005122739.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20241005122945.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20241005123050.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20241005123752.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20241005123907.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20241005132544.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20241005124039.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20241005124100.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20241005124123.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20250103221623.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20241005123439.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20241005123520.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20241005132249.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20241005132318.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20241005132456.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20241005132716.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20241005134214.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20241005115014.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20241005133050.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20250103222539.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20241005133505.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20241005133629.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20241005133702.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20241005134124.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20241005134438.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20241005134514.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20241005134543.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20241005134717.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20241005135158.png">
+<meta property="article:published_time" content="2024-10-05T00:00:00.000Z">
+<meta property="article:modified_time" content="2024-10-05T00:00:00.000Z">
+<meta property="article:author" content="duanyll">
+<meta property="article:tag" content="freepbx">
+<meta property="article:tag" content="voip">
+<meta property="article:tag" content="指北">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.duanyll.com/img/20241005113810.png">
+  
+  
+  
+  <meta name="keywords" content="指北,freepbx,voip">
+
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="duanyll" type="application/atom+xml">
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+    <link rel="shortcut icon" href="https://cdn.duanyll.com/favicon.ico">
+  
+
+  
+
+  
+
+
+  
+
+  
+    <script>
+      var darkmodeSettings = localStorage.getItem('darkmode') || 'auto';
+      var enableDarkmode = darkmodeSettings == 'true' 
+        || (darkmodeSettings == 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (enableDarkmode) {
+        document.documentElement.classList.add('global-darkmode');
+      }
+      window.currentTheme = enableDarkmode ? 'dark' : 'light';
+    </script>
+  
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://cdn.duanyll.com/android-chrome-192x192.png" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">duanyll</div><div class="sub normal cap">qwq</div><div class="sub hover cap" style="opacity:0"> QWQ</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Wiki</a><a class="nav-item" href="/about/">关于</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Grandstream HT813 双模语音网关 FreePBX 配置指北</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A1%AC%E4%BB%B6%E5%87%86%E5%A4%87"><span class="toc-text">硬件准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ht813-%E9%85%8D%E7%BD%AE"><span class="toc-text">HT813 配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E9%A1%B5"><span class="toc-text">信息页</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE%E9%A1%B5"><span class="toc-text">基本设置页</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E7%BA%A7%E8%AE%BE%E7%BD%AE%E9%A1%B5"><span class="toc-text">高级设置页</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#extension-%E5%92%8C-fxs-%E9%85%8D%E7%BD%AE"><span class="toc-text">Extension 和 FXS 配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0-sip-%E7%94%A8%E6%88%B7"><span class="toc-text">添加 SIP 用户</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#trunk-%E5%92%8C-fxo-%E9%85%8D%E7%BD%AE"><span class="toc-text">Trunk 和 FXO 配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%96%E7%BA%BF%E5%91%BC%E5%85%A5"><span class="toc-text">外线呼入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%96%E7%BA%BF%E5%91%BC%E5%87%BA"><span class="toc-text">外线呼出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%9A%E8%AF%9D%E8%AE%B0%E5%BD%95%E5%92%8C%E5%BD%95%E9%9F%B3"><span class="toc-text">通话记录和录音</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E5%8C%96%E5%A4%84%E7%90%86%E9%80%9A%E8%AF%9D%E8%AE%B0%E5%BD%95"><span class="toc-text">自动化处理通话记录</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/duanyll" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/08a41b181ce68.svg"/></a><a class="social" href="/about/#comments" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/942ebbf1a4b91.svg"/></a><a class="social" href="https://www.travellings.cn/go.html" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://www.travellings.cn/assets/favicon-fluent-emoji.svg"/></a><a class="social" href="javascript:darkmode.next()" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/img/half-moon.svg"/></a></div></footer>
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+        
+
+
+
+<div class="bread-nav fs12"><div class="left"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></div><div id="post-meta">
+    <span>发布于&nbsp;<time datetime="2024-10-05T00:00:00.000Z">2024-10-05</time></span>
+    
+    <span>更新于&nbsp;<time datetime="2024-10-05T00:00:00.000Z">2024-10-05</time></span>
+    </div></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Grandstream HT813 双模语音网关 FreePBX 配置指北</span></h1>
+
+<div class="article-tags"><a class="tag-plugin colorful hashtag" color="green" href="/tags/%E6%8C%87%E5%8C%97/" >  <svg t="1701408144765" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4228" width="200" height="200"><path d="M426.6 64.8c34.8 5.8 58.4 38.8 52.6 73.6l-19.6 117.6h190.2l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6s58.4 38.8 52.6 73.6l-19.4 117.6H896c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-42.6 256H832c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.6-117.4h-190.4l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.4-117.8H128c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l42.6-256H192c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6z m11.6 319.2l-42.6 256h190.2l42.6-256h-190.2z" p-id="4229"></path></svg>  <span>指北</span></a><a class="tag-plugin colorful hashtag" color="orange" href="/tags/freepbx/" >  <svg t="1701408144765" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4228" width="200" height="200"><path d="M426.6 64.8c34.8 5.8 58.4 38.8 52.6 73.6l-19.6 117.6h190.2l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6s58.4 38.8 52.6 73.6l-19.4 117.6H896c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-42.6 256H832c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.6-117.4h-190.4l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.4-117.8H128c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l42.6-256H192c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6z m11.6 319.2l-42.6 256h190.2l42.6-256h-190.2z" p-id="4229"></path></svg>  <span>freepbx</span></a><a class="tag-plugin colorful hashtag" color="purple" href="/tags/voip/" >  <svg t="1701408144765" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4228" width="200" height="200"><path d="M426.6 64.8c34.8 5.8 58.4 38.8 52.6 73.6l-19.6 117.6h190.2l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6s58.4 38.8 52.6 73.6l-19.4 117.6H896c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-42.6 256H832c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.6-117.4h-190.4l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.4-117.8H128c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l42.6-256H192c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6z m11.6 319.2l-42.6 256h190.2l42.6-256h-190.2z" p-id="4229"></path></svg>  <span>voip</span></a></div>
+<h2 id="概述">概述</h2>
+<p>Grandstream HT813 是一款双模语音网关，支持 FXS 和 FXO 两种接口，可以连接传统的电话机和 PSTN 线路，也可以连接 VoIP 服务器。HT813 最重要的特点是便宜，咸鱼二手价格在 130 元左右，同价位其他语音网关往往只有 FXS 或者 FXO 一种接口。FreePBX 是一款开源的 IP 电话系统，支持 SIP 协议，可以用来搭建企业电话系统。尽管 FreePBX 并不好用（前端卡的离谱），但是免费，而且有大量的社区支持。本文介绍一种使用 HT813 和 FreePBX 搭建简易电话系统的方法，主要列出配置步骤，不涉及具体的技术原理。</p>
+<p>我们准备搭建的系统包含以下元素：</p>
+<ul>
+<li>有一条<em>中国电信</em>的 PSTN 线路，用于接收来电和拨打外线</li>
+<li>有一部传统的电话机，用于拨打和接听电话</li>
+<li>有一台运行 FreePBX 的服务器，用于管理电话系统和接收来电</li>
+<li>局域网内有若干手机和电脑上的 SIP 软电话，用于拨打和接听电话</li>
+</ul>
+<p>希望实现以下功能：</p>
+<ul>
+<li>电话机和软电话有独立的分机号，可以互相拨打</li>
+<li>电话机和软电话可以通过 PSTN 线路拨打外线</li>
+<li>PSTN 线路接收到来电时，所有电话机和软电话同时响铃，任意一台设备可以接听</li>
+<li>PSTN 线路支持来电显示和通话录音</li>
+</ul>
+<h2 id="硬件准备">硬件准备</h2>
+<p>HT813 上共有 5 个接口，分别为：</p>
+<ul>
+<li>12V 电源接口</li>
+<li>WAN 网络接口</li>
+<li>LAN 网络接口</li>
+<li>FXS 接口：连接传统电话机</li>
+<li>FXO 接口：连接 PSTN 线路</li>
+</ul>
+<p>HT813 具有 WAN 和 LAN 两个 RJ45 网络接口，自身可作为一台带有 NAT 功能的路由器。在本文中，我们不使用 HT813 的路由功能，将 HT813 的 WAN 接口和 LAN 接口配置成交换机模式，即 HT813 仅作为语音网关使用。HT813、FreePBX 服务器和所有 SIP 设备都连接到同一个局域网中。此模式下，HT813 的任何一个网络接口都可以用来连接局域网，另一个网口可再连接一个局域网内交换机或者其他设备。</p>
+<h2 id="ht813-配置">HT813 配置</h2>
+<p>HT813 的 WAN 接口默认通过 DHCP 获取 IP 地址，LAN 接口作为一个 DHCP 服务器，分配 IP 地址给连接到 LAN 接口的设备。WAN 侧可通过路由器管理面板查看 HT813 的 IP 地址，如果二手 HT813 找不到 IP 地址，可以长按 HT813 的 RESET 按钮恢复出厂设置。局域网内浏览器访问 HT813 的 IP 地址，输入默认用户名和密码 <code>admin</code> 和 <code>admin</code> 登录。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20241005113810.png" alt="HT813 登陆界面" fancybox="true"></div><div class="image-meta"><span class="image-caption center">HT813 登陆界面</span></div></div>
+<h3 id="信息页">信息页</h3>
+<p>下图是 HT813 的信息页。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20241005114024.png" alt="HT813 信息页" fancybox="true"></div><div class="image-meta"><span class="image-caption center">HT813 信息页</span></div></div>
+<p>红框内显示 HT813 的接口状态，图中是所有配置完成正常工作的状态。只有 HT813 的 FXS FXO 物理接口已连接，且 VOIP 服务器已注册，前面板的灯才会亮起。FXS 和 FXO 接口的状态可以通过前面板的灯和网页上的状态显示来判断。</p>
+<h3 id="基本设置页">基本设置页</h3>
+<p>主要是网络配置和无条件呼叫转移设置。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20241005114611.png" alt="上网设置" fancybox="true"></div><div class="image-meta"><span class="image-caption center">上网设置</span></div></div>
+<p>按照需要配置成 DHCP 客户端或静态 IP 地址。由于后续需要在 FreePBX 中配置 HT813 的 IP 地址，建议设置成静态 IP 地址，或在路由器中配置 DHCP 绑定。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20241005114730.png" alt="语言和时区" fancybox="true"></div><div class="image-meta"><span class="image-caption center">语言和时区</span></div></div>
+<p>建议设成英文，网上的教程大多是英文的。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20241005114830.png" alt="NAT 模式" fancybox="true"></div><div class="image-meta"><span class="image-caption center">NAT 模式</span></div></div>
+<p>不需要 NAT 功能，设成桥接模式。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20241005115014.png" alt="无条件呼叫转移" fancybox="true"></div><div class="image-meta"><span class="image-caption center">无条件呼叫转移</span></div></div>
+<p>为了把外线呼入转移到 FreePBX，需要设置无条件呼叫转移。User ID 编一个特殊的号码，如 <code>0123456789</code>，SIP Server 设置成 FreePBX 的 IP 地址。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20241005115736.png" fancybox="true"></div></div>
+<p>改完配置后，点 <code>Update</code> 保存，点 <code>Apply</code> 生效, 部分配置按照提示需要重启 HT813 才能生效。</p>
+<h3 id="高级设置页">高级设置页</h3>
+<p>没有需要特别设置的选项。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20241005115546.png" alt="备份和恢复" fancybox="true"></div><div class="image-meta"><span class="image-caption center">备份和恢复</span></div></div>
+<p>最下面的备份和恢复功能可以备份 HT813 的配置，以防止配置丢失。注意只能导入 XML 格式的配置文件，如果要导入来自其他 HT813 的配置，需要把 XML 文件中的 MAC 地址改成当前 HT813 的 MAC 地址或者删掉 MAC 地址那一行。</p>
+<h2 id="extension-和-fxs-配置">Extension 和 FXS 配置</h2>
+<p>本例中 HT813 的 FXS 接口连接到传统电话机，在 FreePBX 侧看起来和一个 SIP 软电话一样是一个 Extension。</p>
+<p>FreePBX 安装后似乎会创建一个默认的 Extension，没有截图。总之最后的结果是，我们需要在 FreePBX 中创建一个分机号为 <code>1000</code>, 用户名是 <code>landline</code>，类型为 <code>PJSIP</code> 的 Extension。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20241005120607.png" alt="Extension 管理面板" fancybox="true"></div><div class="image-meta"><span class="image-caption center">Extension 管理面板</span></div></div>
+<p>注意要创建一个 <code>Extension</code>，不是 <code>User Manager</code>。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20241005120736.png" alt="不管 User，没用" fancybox="true"></div><div class="image-meta"><span class="image-caption center">不管 User，没用</span></div></div>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20241005121013.png" alt="1000 分机详情页面" fancybox="true"></div><div class="image-meta"><span class="image-caption center">1000 分机详情页面</span></div></div>
+<p>分机设置都是默认的，Secret 是 FreePBX 自动生成的密码，后续需要在 HT813 中配置这个密码。创建完分机后，左下角 Submit 保存，再点右上角红色 Apply Config 生效。</p>
+<p>HT813 的 FXS 接口配置页面：</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20241005121550.png" fancybox="true"></div></div>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20241005121636.png" fancybox="true"></div></div>
+<p>重试超时可以改小一点，方便调试。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20241005122441.png" fancybox="true"></div></div>
+<p>端口号要改一下，防止和 FXO 的端口号冲突。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20241005121858.png" fancybox="true"></div></div>
+<p>只留 PCMU 和 PCMA，其他的编码格式不需要，多了似乎会导致不出声音。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20241005122002.png" fancybox="true"></div></div>
+<p>这两个地区选项可以改一下，这一页改完后点 Update 保存，再点 Apply 生效。</p>
+<p>以上配置完成后，HT813 的 FXS 指示灯应该亮起，状态页面上显示 FXS 接口已注册。</p>
+<h2 id="添加-sip-用户">添加 SIP 用户</h2>
+<p>再添加其他 SIP 用户，如手机上的软电话，步骤和添加 FXS Extension 类似，类型，默认 <code>PJSIP</code>，分机号和用户名可以随便编（最好有规律，比如 10 开头，后面会用到）。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20241005122739.png" fancybox="true"></div></div>
+<p>SIP 客户端以 Linphone 为例，配置如下：</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20241005122945.png" fancybox="true"></div></div>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20241005123050.png" fancybox="true"></div></div>
+<p>这样 SIP 客户端之间，以及 SIP 客户端和 HT813 的 FXS 接口上的固定电话之间就可以互相拨打电话了。</p>
+<h2 id="trunk-和-fxo-配置">Trunk 和 FXO 配置</h2>
+<p>FXO 接口在 FreePBX 中作为一个 Trunk。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20241005123752.png" fancybox="true"></div></div>
+<p>编个密码，后面 FreePBX 配置时会用到。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20241005123907.png" fancybox="true"></div></div>
+<p>重试超时改小一点。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20241005132544.png" fancybox="true"></div></div>
+<p>注意 FXO 默认端口号是 5062.</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20241005124039.png" fancybox="true"></div></div>
+<p>不知道为啥要改这个，反正改了。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20241005124100.png" fancybox="true"></div></div>
+<p>只留 PCMU 和 PCMA。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20241005124123.png" fancybox="true"></div></div>
+<p>不知道为啥要改增益，反正改了。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20250103221623.png" alt="PSTN 挂断检测" fancybox="true"></div><div class="image-meta"><span class="image-caption center">PSTN 挂断检测</span></div></div>
+<blockquote>
+<p><strong>注意:</strong> 中国大陆的用户需要修改 FXO 挂断检测选项，否则不能检测到外线挂断，导致外线挂断后 FreePBX 持续响铃。此处不使用基于电流的挂断检测，而是使用基于忙音的挂断检测。按照上图的配置，中国大陆标准的忙音频率是 450Hz 单音，半周期为 350ms.</p>
+</blockquote>
+<p>在 FreePBX 中添加一个 Trunk：</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20241005123439.png" alt="Trunk 配置页面" fancybox="true"></div><div class="image-meta"><span class="image-caption center">Trunk 配置页面</span></div></div>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20241005123520.png" fancybox="true"></div></div>
+<p>创建一个 pjsip 类型的 Trunk。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20241005132249.png" fancybox="true"></div></div>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20241005132318.png" fancybox="true"></div></div>
+<p>这里呼出号码前加 0，这是 HT813 的配置要求，拨打外线时要加 0。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20241005132456.png" fancybox="true"></div></div>
+<p>这里填 HT813 的 IP 地址，端口号是 HT813 的 FXO 端口号，用户名和密码是 HT813 的 FXO 配置页面里设置的用户名和密码。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20241005132716.png" fancybox="true"></div></div>
+<p>Codec 只留下 ulaw 和 alaw 就够了。</p>
+<p>为了消除 Console 里的一个警告，需要在 Admin -&gt; Config Edit 里面给 <code>pjsip.aor_custom_post.conf</code> 文件添加一行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">max_contacts=1</span><br></pre></td></tr></table></figure>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20241005134214.png" fancybox="true"></div></div>
+<p>配到这里两边都应用设置之后，HT813 的 FXO 灯应该亮起，状态页面上显示 FXO 接口已注册。</p>
+<h2 id="外线呼入">外线呼入</h2>
+<p>记得在 HT813 的 Basic Settings 里设置了无条件呼叫转移：</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20241005115014.png" alt="无条件呼叫转移" fancybox="true"></div><div class="image-meta"><span class="image-caption center">无条件呼叫转移</span></div></div>
+<p>为了能让所有电话都响铃，需要在 FreePBX 的 Ring Groups 里创建一个 Ring Group：</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20241005133050.png" fancybox="true"></div></div>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20250103222539.png" fancybox="true"></div></div>
+<p>把所有电话都加进去，这样外线呼入时所有电话都会响铃。</p>
+<p>然后转到 Inbound Routes，添加一个 Inbound Route：</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20241005133505.png" fancybox="true"></div></div>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20241005133629.png" fancybox="true"></div></div>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20241005133702.png" fancybox="true"></div></div>
+<p>在 Settings -&gt; On Hold Music 里可以上传等待音乐，这样外线呼入时等待接听时会播放音乐。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20241005134124.png" fancybox="true"></div></div>
+<h2 id="外线呼出">外线呼出</h2>
+<p>在 FreePBX 的 Outbound Routes 里添加一个 Outbound Route：</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20241005134438.png" fancybox="true"></div></div>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20241005134514.png" fancybox="true"></div></div>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20241005134543.png" fancybox="true"></div></div>
+<p>这里把 <code>10XX</code> 的内线号码排除掉，这样 SIP 客户端可以直接拨打外线号码，不用加 0。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20241005134717.png" fancybox="true"></div></div>
+<h2 id="通话记录和录音">通话记录和录音</h2>
+<p>点击 Reports -&gt; CDR Reports，可以看到通话记录和录音。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20241005135158.png" fancybox="true"></div></div>
+<h2 id="自动化处理通话记录">自动化处理通话记录</h2>
+<p>可以配置自定义的 Dial Plan，在外线呼入、通话结束等事件发生时，调用任意的程序处理通话记录，比如将通话记录推送到外部的数据库或者 API。下面是一个简单的例子。</p>
+<p>在 Admin -&gt; Config Edit 里面找到 <code>extensions_custom.conf</code> 文件，添加以下内容：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[macro-dial-ringall-predial-hook]</span></span><br><span class="line"><span class="attr">exten</span> =&gt; s,<span class="number">1</span>,Noop(Entering user defined context macro-dialout-<span class="literal">on</span>e-predial-hook in extensions_custom.conf)</span><br><span class="line"><span class="attr">exten</span> =&gt; s,n,TrySystem(echo <span class="string">"Dialing from ${CALLERID(num)}"</span> &gt;&gt; /tmp/dialout.log)</span><br><span class="line"><span class="attr">exten</span> =&gt; s,n,Set(CHANNEL(hangup_handler_push)=do-this-<span class="literal">on</span>-hangup,s,<span class="number">1</span>)</span><br><span class="line"><span class="attr">exten</span> =&gt; s,n,MacroExit</span><br><span class="line"></span><br><span class="line"><span class="section">[do-this-on-hangup]</span></span><br><span class="line"><span class="attr">exten</span> =&gt; s,<span class="number">1</span>,Noop(Entering user defined context do-this-<span class="literal">on</span>-hangup in extensions_custom.conf)</span><br><span class="line"><span class="attr">exten</span> =&gt; s,n,TrySystem(echo <span class="string">"Call from ${CALLERID(num)} ended"</span> &gt;&gt; /tmp/dialout.log)</span><br><span class="line"><span class="attr">exten</span> =&gt; s,n,ExecIf($[<span class="string">"${DIALSTATUS}"</span> = <span class="string">"CANCEL"</span>]?TrySystem(echo <span class="string">"Call from ${CALLERID(num)} cancelled"</span> &gt;&gt; /tmp/dialout.log))</span><br><span class="line"><span class="attr">exten</span> =&gt; s,n,ExecIf($[<span class="string">"${DIALSTATUS}"</span> = <span class="string">"NOANSWER"</span>]?TrySystem(echo <span class="string">"Call from ${CALLERID(num)} missed"</span> &gt;&gt; /tmp/dialout.log))</span><br><span class="line"><span class="attr">exten</span> =&gt; s,n,ExecIf($[<span class="string">"${DIALSTATUS}"</span> = <span class="string">"BUSY"</span>]?TrySystem(echo <span class="string">"Call from ${CALLERID(num)} busy"</span> &gt;&gt; /tmp/dialout.log))</span><br><span class="line"><span class="attr">exten</span> =&gt; s,n,ExecIf($[<span class="string">"${DIALSTATUS}"</span> = <span class="string">"ANSWER"</span>]?TrySystem(echo <span class="string">"Call from ${CALLERID(num)} answered"</span> &gt;&gt; /tmp/dialout.log))</span><br><span class="line"><span class="attr">exten</span> =&gt; s,n,Return</span><br></pre></td></tr></table></figure>
+<p>这个 Dial Plan 会在外线呼入、通话结束等事件发生时，将通话记录写入 <code>/tmp/dialout.log</code> 文件。按照需要编写脚本并在 <code>TrySystem</code> 里调用，就能实现自定义的通话记录处理。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/var/spool/asterisk/monitor/</span><br><span class="line">├── 2023</span><br><span class="line">│   ├── 03</span><br><span class="line">│   │   ├── 27</span><br><span class="line">│   │   │   ├── in-0123456789-180xxxxxxxx-20230327-160626-1679904386.9.wav</span><br><span class="line">│   │   │   └── out-180xxxxxxxx-1000-20230327-160920-1679904560.17.wav</span><br></pre></td></tr></table></figure>
+<p>录音文件存放在 <code>/var/spool/asterisk/monitor/</code> 目录下，按照通话日期整理目录，文件名包含通话的方向、被叫号码、主叫号码、通话日期（年月日）、通话时间（时分秒）、通话起始的 UNIX 时间戳。</p>
+<p>下面的例子进一步演示了如何在通话结束时自动处理录音文件。首先是 <code>extensions_custom.conf</code> 文件的配置：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[macro-dial-ringall-predial-hook]</span></span><br><span class="line"><span class="attr">exten</span> =&gt; s,<span class="number">1</span>,Noop(Entering user defined context macro-dialout-<span class="literal">on</span>e-predial-hook in extensions_custom.conf)</span><br><span class="line"><span class="attr">exten</span> =&gt; s,n,TrySystem(echo <span class="string">"Called from ${CALLERID(num)}"</span> &gt;&gt; /tmp/dialout.log)</span><br><span class="line"><span class="attr">exten</span> =&gt; s,n,Set(CHANNEL(hangup_handler_push)=macro-hangup-dial-in,s,<span class="number">1</span>)</span><br><span class="line"><span class="attr">exten</span> =&gt; s,n,Return</span><br><span class="line"></span><br><span class="line"><span class="section">[macro-hangup-dial-in]</span></span><br><span class="line"><span class="attr">exten</span> =&gt; s,<span class="number">1</span>,Noop(Entering user defined context macro-hangup-dial-in in extensions_custom.conf)</span><br><span class="line"><span class="attr">exten</span> =&gt; s,n,TrySystem(echo <span class="string">"Call from ${CALLERID(num)} ended, status ${DIALSTATUS}"</span> &gt;&gt; /tmp/dialout.log)</span><br><span class="line"><span class="attr">exten</span> =&gt; s,n,TrySystem(process-call-log.sh <span class="variable">${DIALSTATUS}</span> in <span class="variable">${CALLERID(num)}</span>)</span><br><span class="line"><span class="attr">exten</span> =&gt; s,n,Return</span><br><span class="line"></span><br><span class="line"><span class="section">[macro-dialout-trunk-predial-hook]</span></span><br><span class="line"><span class="attr">exten</span> =&gt; s,<span class="number">1</span>,Noop(Entering user defined context macro-dialout-<span class="literal">on</span>e-predial-hook in extensions_custom.conf)</span><br><span class="line"><span class="attr">exten</span> =&gt; s,n,Set(CHANNEL(hangup_handler_push)=macro-hangup-dial-out,s,<span class="number">1</span>)</span><br><span class="line"><span class="attr">exten</span> =&gt; s,n,Return</span><br><span class="line"></span><br><span class="line"><span class="section">[macro-hangup-dial-out]</span></span><br><span class="line"><span class="attr">exten</span> =&gt; s,<span class="number">1</span>,Noop(Entering user defined context macro-hangup-dial-out in extensions_custom.conf)</span><br><span class="line"><span class="attr">exten</span> =&gt; s,n,TrySystem(echo <span class="string">"Call to ${DIALEDPEERNUMBER} ended, status ${DIALSTATUS}"</span> &gt;&gt; /tmp/dialout.log)</span><br><span class="line"><span class="attr">exten</span> =&gt; s,n,TrySystem(process-call-log.sh <span class="variable">${DIALSTATUS}</span> out <span class="variable">${DIALEDPEERNUMBER}</span>)</span><br><span class="line"><span class="attr">exten</span> =&gt; s,n,Return</span><br></pre></td></tr></table></figure>
+<p>在 <code>/usr/local/bin/</code> 目录下创建一个名为 <code>process-call-log.sh</code> 的脚本文件并添加执行权限，脚本内容如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Usage: process-call-log &lt;dialstatus&gt; &lt;direction&gt; &lt;callerid&gt;</span></span><br><span class="line"><span class="comment"># Example: process-call-log ANSWER in 12345678</span></span><br><span class="line"><span class="comment"># phonenumber: CID of the caller</span></span><br><span class="line"><span class="comment"># direction: in or out</span></span><br><span class="line"><span class="comment"># status: asterisk dialstatus (ANSWER, NOANSWER, CANCEL, ...)</span></span><br><span class="line"><span class="comment"># This script is intended to be called by Asterisk dialplan to process call logs</span></span><br><span class="line"><span class="comment"># It is designed to be non-blocking, so that the call can be processed without waiting for the response</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> push_call_log {</span><br><span class="line">    DIALSTATUS=<span class="variable">$1</span></span><br><span class="line">    DIRECTION=<span class="variable">$2</span></span><br><span class="line">    CALLERID=<span class="variable">$3</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># If $CALLERID has '@', for example "135792468@trunk", remove the suffix</span></span><br><span class="line">    CALLERID=$(<span class="built_in">echo</span> <span class="variable">$CALLERID</span> | <span class="built_in">cut</span> -d<span class="string">'@'</span> -f1)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Delay 3 seconds to ensure the recording file is ready</span></span><br><span class="line">    <span class="built_in">sleep</span> 3</span><br><span class="line"></span><br><span class="line">    TODAY=$(<span class="built_in">date</span> +%Y/%m/%d)</span><br><span class="line">    RECORDING_FOLDER=<span class="string">"/var/spool/asterisk/monitor/<span class="variable">$TODAY</span>"</span></span><br><span class="line">    <span class="keyword">if</span> [ -d <span class="variable">$RECORDING_FOLDER</span> ]; <span class="keyword">then</span></span><br><span class="line">        RECORDING_FILE=$(<span class="built_in">ls</span> -t <span class="variable">$RECORDING_FOLDER</span> | grep <span class="variable">$CALLERID</span> | <span class="built_in">head</span> -n 1)</span><br><span class="line">        <span class="keyword">if</span> [ -n <span class="string">"<span class="variable">$RECORDING_FILE</span>"</span> ]; <span class="keyword">then</span></span><br><span class="line">            IFS=<span class="string">'-'</span> <span class="built_in">read</span> -r -a RECORDING_INFO &lt;&lt;&lt; <span class="string">"<span class="variable">$RECORDING_FILE</span>"</span></span><br><span class="line">            DIRECTION=<span class="variable">${RECORDING_INFO[0]}</span></span><br><span class="line">            CALLEE=<span class="variable">${RECORDING_INFO[1]}</span></span><br><span class="line">            CALLER=<span class="variable">${RECORDING_INFO[2]}</span></span><br><span class="line">            DATESTR=<span class="variable">${RECORDING_INFO[3]}</span></span><br><span class="line">            TIMESTR=<span class="variable">${RECORDING_INFO[4]}</span></span><br><span class="line">            UNIXTIME=$(<span class="built_in">echo</span> <span class="variable">${RECORDING_INFO[5]}</span> | sed <span class="string">'s/\.[^.]*$//'</span>)</span><br><span class="line">            DURATION=$(ffprobe -i <span class="string">"<span class="variable">$RECORDING_FOLDER</span>/<span class="variable">$RECORDING_FILE</span>"</span> -show_entries format=duration -v quiet -of csv=<span class="string">"p=0"</span>)</span><br><span class="line">            <span class="keyword">if</span> ! [[ <span class="variable">$DURATION</span> =~ ^[0-9]+([.][0-9]+)?$ ]]; <span class="keyword">then</span></span><br><span class="line">                DURATION=0</span><br><span class="line">            <span class="keyword">fi</span></span><br><span class="line">            <span class="comment"># if $DIRECTION is "in", then $PHONE is $CALLEE, otherwise $PHONE is $CALLER</span></span><br><span class="line">            <span class="keyword">if</span> [ <span class="string">"<span class="variable">$DIRECTION</span>"</span> == <span class="string">"in"</span> ]; <span class="keyword">then</span></span><br><span class="line">                PHONE=<span class="variable">$CALLER</span></span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                PHONE=<span class="variable">$CALLEE</span></span><br><span class="line">            <span class="keyword">fi</span></span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> [ -z <span class="string">"<span class="variable">$RECORDING_FILE</span>"</span> ]; <span class="keyword">then</span></span><br><span class="line">        PHONE=<span class="variable">$CALLERID</span></span><br><span class="line">        DATESTR=$(<span class="built_in">date</span> +%Y%m%d)</span><br><span class="line">        TIMESTR=$(<span class="built_in">date</span> +%H%M%S)</span><br><span class="line">        UNIXTIME=$(<span class="built_in">date</span> +%s)</span><br><span class="line">        DURATION=0</span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># If $PHONE has 12 digits, and starts with "0", remove the prefix</span></span><br><span class="line">    <span class="keyword">if</span> [[ <span class="variable">$PHONE</span> =~ ^0[0-9]{11}$ ]]; <span class="keyword">then</span></span><br><span class="line">        PHONE=<span class="variable">${PHONE:1}</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># &gt;&gt;&gt; Add your code to push the call log to your server or database here &lt;&lt;&lt;</span></span><br><span class="line">    <span class="comment"># You can use curl or any other method to send the data</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Write log to /tmp/push-call-log.log</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"[<span class="subst">$(date)</span>] <span class="variable">$CALLERID</span> <span class="variable">$DIALSTATUS</span> <span class="variable">$RECORDING_FILE</span> <span class="variable">$DURATION</span> <span class="variable">$ATTACHMENT_ID</span>"</span> &gt;&gt; /tmp/push-call-log.log</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">push_call_log <span class="string">"<span class="variable">$1</span>"</span> <span class="string">"<span class="variable">$2</span>"</span> <span class="string">"<span class="variable">$3</span>"</span> &amp;</span><br><span class="line"><span class="built_in">disown</span></span><br><span class="line"><span class="built_in">exit</span> 0</span><br></pre></td></tr></table></figure>
+<p>这个脚本会在通话结束时被调用，处理通话记录和录音文件。它会将通话状态、方向、主叫号码等信息写入日志文件，并可以进一步处理录音文件，比如上传到服务器或数据库。这样就可以避免使用 FreePBX 卡的要死的前端界面来查看通话记录了。</p>
+
+
+
+<div class="article-footer reveal fs14">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-sa/4.0/">署名-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section>
+    
+    <section id="share">
+      <div class="header"><span>分享文章</span></div>
+      <div class="body">
+        <div class="link"><input class="copy-area" readonly="true" id="copy-link" value="https://duanyll.com/2024/10/5/HT813-FreePBX/" /></div>
+        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot)"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/b32ef3da1162a.svg"/></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=https://duanyll.com/2024/10/5/HT813-FreePBX/&title=Grandstream HT813 双模语音网关 FreePBX 配置指北 - duanyll&summary=概述
+Grandstream HT813 是一款双模语音网关，支持 FXS 和 FXO 两种接口，可以连接传统的电话机和 PSTN 线路，也可以连接 VoIP 服务器。HT813 最重要的特点是便宜，咸鱼二手价格在 130 元左右，同..."><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/80c07e4dbb303.svg"/></a><a class="social share-item email" href="mailto:?subject=Grandstream HT813 双模语音网关 FreePBX 配置指北 - duanyll&amp;body=https://duanyll.com/2024/10/5/HT813-FreePBX/"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/a1b00e20f425d.svg"/></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/8411ed322ced6.svg"/></a><a class="social share-item print" onclick="window.print()"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/img/print.svg" /></a><a class="social share-item source" target="_blank" rel="noopener" href="https://github.com/duanyll/duanyll.com-hexo/blob/master/source/_posts/tech/2024-10-5-HT813-FreePBX.md"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/08a41b181ce68.svg"/></a></div>
+        
+        <div class="qrcode" id="qrcode-wechat" style="visibility:hidden;height:0">
+          <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=https://duanyll.com/2024/10/5/HT813-FreePBX/"/>
+        </div>
+        
+      </div>
+    </section>
+    
+      <section id="star">
+        <div class="body">
+          <span class="github-button-wrap">
+            <a class="github-button" 
+               target="_blank" rel="noopener" href="https://github.com/duanyll/duanyll.com-hexo" 
+               data-color-scheme="no-preference: light; light: light; dark: dark;" 
+               data-size="large" 
+               data-show-count="true" 
+               aria-label="Star this site on GitHub">Star</a>
+            <span>喜欢这个网站？在 GitHub 上给它一个 Star 吧！</span>
+          </span>
+        </div>
+      </section>
+    </div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2024/11/6/PY32-Palit-4090/">非常便宜的同德 4090 手办风扇灯光驱动板</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2024/10/1/PN532-CH582/">彩色丝印 PN532 + CH582 读卡器</a></div></section></div>
+
+
+<div class="related-wrap reveal" id="related-posts">
+    <section class='header'>
+      <div class='title cap theme'>您可能感兴趣的文章</div>
+    </section>
+    <section class='body'>
+    <div class="related-posts"><a class="item" href="/2023/7/12/Python-CMake/" title="使用 CMake 构建 PyTorch 和 Numpy C++ 拓展"><span class="title">使用 CMake 构建 PyTorch 和 Numpy C++ 拓展</span><span class="excerpt">使用 CMake 构建 PyTorch 和 Numpy C++ 拓展能适应更复杂的项目并使用灵活的编译选项. 然而, 许多互联网上的教程中的方法已经不能在较新版本的 PyTorch 和 CMake 使用. 本文介绍了几种作者在近期测试...</span></a><a class="item" href="/2024/3/1/STM32-CMake/" title="在 VSCode 上使用 CMake 开发 STM32CubeMX 项目"><span class="title">在 VSCode 上使用 CMake 开发 STM32CubeMX 项目</span></a><a class="item" href="/2024/6/30/WSL2-Docker-Deep-Learning/" title="基于 WSL2 和 Docker 的深度学习环境指北"><span class="title">基于 WSL2 和 Docker 的深度学习环境指北</span></a><a class="item" href="/2025/11/26/HPE-cx555a/" title="HPE cx555a 100G 网卡刷入以太网固件指北"><span class="title">HPE cx555a 100G 网卡刷入以太网固件指北</span></a><a class="item" href="/2018/11/28/Jekyll-Search/" title="为你的Jekyll博客添加搜索文章功能"><span class="title">为你的Jekyll博客添加搜索文章功能</span><span class="excerpt">众所周知，Github上的Jekyll上实现自定义插件很困难，因此即使有Jekyll的搜索插件，也只能手写js代码。静态网站实现搜索原理是这样的，通过HTTP请求获取posts.json，然后本地解析里面内容实现搜索。</span></a></div></section></div>
+
+
+
+  <div class='related-wrap md-text reveal' id="comments">
+    <section class='header cmt-title cap theme'>
+      快来参与讨论吧
+    </section>
+    <section class='body cmt-body utterances'>
+      
+
+<!-- <svg class="loading" style="vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2709"><path d="M832 512c0-176-144-320-320-320V128c211.2 0 384 172.8 384 384h-64zM192 512c0 176 144 320 320 320v64C300.8 896 128 723.2 128 512h64z" p-id="2710"></path></svg> -->
+
+<div id="utterances" repo="duanyll/duanyll.com-comment" issue-term="pathname" theme="switch" label="Comment" enabled="true" issue_term="pathname"></div>
+
+    </section>
+  </div>
+
+
+
+      
+      
+<footer class="page-footer reveal fs12"><hr><div class="sitemap"><div class="sitemap-group"><span class="fs14">博客</span><a href="/">近期</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></div><div class="sitemap-group"><span class="fs14">项目</span><a target="_blank" rel="noopener" href="https://github.com/duanyll">开源库</a><a href="/wiki/">文档</a><a target="_blank" rel="noopener" href="https://github.com/duanyll/scoop-bucket">Scoop Bucket</a></div><div class="sitemap-group"><span class="fs14">社交</span><a href="/about/#comments">留言板</a><a target="_blank" rel="noopener" href="https://netunion.org">NetUnion</a><a target="_blank" rel="noopener" href="https://www.travellings.cn/go.html">开往</a></div><div class="sitemap-group"><span class="fs14">更多</span><a href="/about">关于本站</a><a target="_blank" rel="noopener" href="https://github.com/duanyll/duanyll.com-hexo">GitHub 源码</a><a target="_blank" rel="noopener" href="https://duanyll.cloudflareaccess.com">Dashboard</a></div></div><div class="text"><p>本站由 <a target="_blank" rel="noopener" href="https://github.com/duanyll">duanyll</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。 本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = stellar.config.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.21.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.21.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+    root : '/',
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js","memos":"/js/plugins/memos.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide:not(.swiper-slide-duplicate) img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.copycode = Object.assign({"enable":true,"js":"/js/plugins/copycode.js","default_text":"Copy","success_text":"Copied"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+  <script>
+  function loadUtterances() {
+    const els = document.querySelectorAll("#comments #utterances");
+    if (els.length === 0) return;
+    els.forEach((el, i) => {
+      try {
+        el.innerHTML = '';
+      } catch (error) {
+        console.error(error);
+      }
+      var script = document.createElement('script');
+      script.src = 'https://utteranc.es/client.js';
+      script.async = true;
+      for (let key of Object.keys(el.attributes)) {
+        let attr = el.attributes[key];
+        if (['class', 'id'].includes(attr.name) === false) {
+          var name = attr.name;
+          var value = attr.value;
+          if (name == 'theme' && value == 'switch') {
+            value = window.currentTheme == 'dark' ? 'github-dark' : 'github-light';
+          }
+          script.setAttribute(name, value);
+        }
+      }
+      el.appendChild(script);
+    });
+  }
+  window.addEventListener('DOMContentLoaded', (event) => {
+      loadUtterances();
+  });
+</script>
+
+
+
+
+
+  
+<script src="https://buttons.github.io/buttons.js" async></script>
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

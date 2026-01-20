@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 8.1.1">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.21.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+
+  
+  
+  <title>论亚当斯密悖论——“经济人”和“道德人”的统一 - duanyll</title><meta name="robots" content="noindex">
+
+  
+    <meta name="description" content="摘要 亚当·斯密是18世纪著名的苏格兰哲学家和经济学家，著有《国富论》等经济学巨著和《道德情操论》等道德哲学作品。在对亚当·斯密的伦理思想体系的研究中，时常认为亚当·斯密的经济学理论鼓励人无限的追求自利，而道德哲学理论却强调人应当通过“合宜感”来约束自身的自利冲动，二者的矛盾即为“亚当·斯密悖论”，后世多有讨论研究。本文通过探讨亚当·斯密两部著作中“经济人”和“道德人”的行为的内在逻辑联系，尝试通">
+<meta property="og:type" content="article">
+<meta property="og:title" content="论亚当斯密悖论——“经济人”和“道德人”的统一">
+<meta property="og:url" content="https://duanyll.com/2022/6/15/WaterClass-2/">
+<meta property="og:site_name" content="duanyll">
+<meta property="og:description" content="摘要 亚当·斯密是18世纪著名的苏格兰哲学家和经济学家，著有《国富论》等经济学巨著和《道德情操论》等道德哲学作品。在对亚当·斯密的伦理思想体系的研究中，时常认为亚当·斯密的经济学理论鼓励人无限的追求自利，而道德哲学理论却强调人应当通过“合宜感”来约束自身的自利冲动，二者的矛盾即为“亚当·斯密悖论”，后世多有讨论研究。本文通过探讨亚当·斯密两部著作中“经济人”和“道德人”的行为的内在逻辑联系，尝试通">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-06-15T00:00:00.000Z">
+<meta property="article:modified_time" content="2022-06-15T00:00:00.000Z">
+<meta property="article:author" content="duanyll">
+<meta property="article:tag" content="通识教育">
+<meta name="twitter:card" content="summary">
+  
+  
+  
+  <meta name="keywords" content="通识教育">
+
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="duanyll" type="application/atom+xml">
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+    <link rel="shortcut icon" href="https://cdn.duanyll.com/favicon.ico">
+  
+
+  
+
+  
+
+
+  
+
+  
+    <script>
+      var darkmodeSettings = localStorage.getItem('darkmode') || 'auto';
+      var enableDarkmode = darkmodeSettings == 'true' 
+        || (darkmodeSettings == 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (enableDarkmode) {
+        document.documentElement.classList.add('global-darkmode');
+      }
+      window.currentTheme = enableDarkmode ? 'dark' : 'light';
+    </script>
+  
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://cdn.duanyll.com/android-chrome-192x192.png" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">duanyll</div><div class="sub normal cap">qwq</div><div class="sub hover cap" style="opacity:0"> QWQ</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Wiki</a><a class="nav-item" href="/about/">关于</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">论亚当斯密悖论——“经济人”和“道德人”的统一</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-text">摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%AA%E8%AE%BA"><span class="toc-text">绪论</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%8F%E6%B5%8E%E5%AD%A6%E5%92%8C%E4%BC%A6%E7%90%86%E5%AD%A6%E7%9A%84%E5%8F%AF%E6%AF%94%E6%80%A7"><span class="toc-text">经济学和伦理学的可比性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%8F%E7%BA%AA%E4%BA%BA%E5%81%87%E8%AE%BE%E4%B8%AD%E5%AF%B9%E5%88%A9%E5%B7%B1%E7%9A%84%E8%87%AA%E5%8F%91%E7%BA%A6%E6%9D%9F"><span class="toc-text">经纪人假设中对利己的自发约束</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%82%E5%9C%BA%E7%BB%8F%E6%B5%8E%E5%88%B6%E5%BA%A6%E7%9A%84%E4%B8%A4%E4%B8%AA%E6%96%B9%E9%9D%A2"><span class="toc-text">市场经济制度的两个方面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%88%E5%A4%9C%E4%BA%BA%E6%94%BF%E5%BA%9C%E7%9A%84%E7%BA%A6%E6%9D%9F"><span class="toc-text">守夜人政府的约束</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%95%E5%BE%8B%E4%B8%8D%E6%98%AF%E7%BA%A6%E6%9D%9F%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="toc-text">法律不是约束的原因</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%88%E5%AE%9C%E6%98%AF%E5%88%A9%E5%B7%B1%E4%B8%BB%E4%B9%89%E7%9A%84%E9%81%93%E5%BE%B7"><span class="toc-text">合宜是利己主义的道德</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A9%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BD%93%E9%9C%80%E8%A6%81%E9%81%93%E5%BE%B7"><span class="toc-text">利己的个体需要道德</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%88%E5%AE%9C%E6%84%9F%E8%83%BD%E8%A7%A3%E9%87%8A%E5%88%A9%E5%B7%B1%E7%9A%84%E8%B5%B7%E6%BA%90"><span class="toc-text">合宜感能解释利己的起源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AC%E6%AD%A3%E7%9A%84%E6%97%81%E8%A7%82%E8%80%85%E7%BA%A6%E6%9D%9F%E4%B8%AA%E4%BA%BA%E7%9A%84%E5%88%A9%E5%B7%B1"><span class="toc-text">公正的旁观者约束个人的利己</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-text">结语</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/duanyll" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/08a41b181ce68.svg"/></a><a class="social" href="/about/#comments" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/942ebbf1a4b91.svg"/></a><a class="social" href="https://www.travellings.cn/go.html" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://www.travellings.cn/assets/favicon-fluent-emoji.svg"/></a><a class="social" href="javascript:darkmode.next()" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/img/half-moon.svg"/></a></div></footer>
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+        
+
+
+
+<div class="bread-nav fs12"><div class="left"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E6%96%87%E5%AD%97/">文字</a></div><div id="post-meta">
+    <span>隐藏文章&nbsp;发布于&nbsp;<time datetime="2022-06-15T00:00:00.000Z">2022-06-15</time></span>
+    
+    <span>更新于&nbsp;<time datetime="2022-06-15T00:00:00.000Z">2022-06-15</time></span>
+    </div></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>论亚当斯密悖论——“经济人”和“道德人”的统一</span></h1>
+
+<div class="article-tags"><a class="tag-plugin colorful hashtag" color="yellow" href="/tags/%E9%80%9A%E8%AF%86%E6%95%99%E8%82%B2/" >  <svg t="1701408144765" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4228" width="200" height="200"><path d="M426.6 64.8c34.8 5.8 58.4 38.8 52.6 73.6l-19.6 117.6h190.2l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6s58.4 38.8 52.6 73.6l-19.4 117.6H896c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-42.6 256H832c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.6-117.4h-190.4l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.4-117.8H128c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l42.6-256H192c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6z m11.6 319.2l-42.6 256h190.2l42.6-256h-190.2z" p-id="4229"></path></svg>  <span>通识教育</span></a></div>
+<h2 id="摘要">摘要</h2>
+<p>亚当·斯密是18世纪著名的苏格兰哲学家和经济学家，著有《国富论》等经济学巨著和《道德情操论》等道德哲学作品。在对亚当·斯密的伦理思想体系的研究中，时常认为亚当·斯密的经济学理论鼓励人无限的追求自利，而道德哲学理论却强调人应当通过“合宜感”来约束自身的自利冲动，二者的矛盾即为“亚当·斯密悖论”，后世多有讨论研究。本文通过探讨亚当·斯密两部著作中“经济人”和“道德人”的行为的内在逻辑联系，尝试通过斯密本身的逻辑对矛盾作出阐释，论证人的自利和同情冲动可以和谐统一。</p>
+<p>关键词：亚当斯密、伦理学</p>
+<h2 id="绪论">绪论</h2>
+<p>亚当·斯密作为18世纪著名的经济学家，一生著有《国富论》等等在现代经济学学科中具有奠基性作用的著作，为后世的自由贸易理论、资本主义理论和自由主义理论奠定了基础。作为伦理学教授，斯密还著有《道德情操论》等道德哲学作品，阐述了斯密基于“同情心”和“合宜感”的道德理论。斯密在《国富论》中描绘了一个坚持自由主义、任何行动以利己出发的“经济人”形象，但在《道德情操论》中，斯密却认为人应当在“合宜感”的约束下，做出利他的行为。在对斯密的研究中，人们时常把两种观点对立起来，认为斯密在伦理学中称颂的道德与经济学中提倡的行为是矛盾的，这样的矛盾被称作“亚当·斯密”悖论。</p>
+<p>实际上，通过对斯密的理论的深入解读，可以发现，斯密的“经济人”假设本身并不完全是无限制的自私自利者，而“道德人”所受到的“合宜感”约束也是通过类比“看不见的手”的机制运作的。因此，斯密的经济学理论体系和伦理学理论体系能够得到统一，二者并不存在尖锐的矛盾。</p>
+<h3 id="经济学和伦理学的可比性">经济学和伦理学的可比性</h3>
+<p>要想探讨斯密的“经济人”和“道德人”是否矛盾，必须回答一个问题：“经济人”是否可以具有道德？换句话说，一种经济学理论是否蕴含一种道德判断？</p>
+<p>回答这个问题是困难的 。一方面，为了做到“公正客观”的研究，研究者需要在一个客观的情景中隐藏自身的主观价值判断；但另一方面，经济学研究的对象即人类的行为，要求研究者最终对对象的行为是否符合其理论、是否道德做出实际的判断。诸多经济学家认为经济学应当是一门类似于数学和物理学的、有客观的演绎推理过程构成的纯粹科学，处于一种“道德中立”的状态。相比法学等社会科学，经济学在理论假设上往往采用“理想模型”的概念，如马克思·韦伯 所说，“经济理论所作的假定几乎没有同事实完全一致过，但与之有不同程度的近似。”纯粹的经济学理论总是假定经济利益具有支配左右，并且设法排除政治、文化、伦理等因素的影响，既不能完全描述现实，又不是一种道德命令。因此，存粹的经济学理论可以坚持“非道德“的评价。</p>
+<p>但同时，马克思·韦伯又指出，经济理论“最直接并且常常是唯一的目的，就是要对国家经济政治政策的有关措施做出价值判断”。于是在经济学的讨论中，不可能完全排除价值判断。除了亚当·斯密，后世的经济学大师多在道德哲学方面颇有见解。经济学家不会抛弃道德诉求和道德关怀。因此，对斯密的“经济人”假设做出道德上的分析和评价是有意义的，可以探讨这样的经济话题中隐含的道德诉求。</p>
+<h2 id="经纪人假设中对利己的自发约束">经纪人假设中对利己的自发约束</h2>
+<p>深入解读《国富论》中“看不见的手”的思想，我们可以从斯密自身的论述逻辑中发现，斯密的“经济人”不能做到无限制的利己，他的利己行为应当受到一定的约束。</p>
+<h3 id="市场经济制度的两个方面">市场经济制度的两个方面</h3>
+<p>斯密本人在《国富论》中，对“看不见的手”这样的市场调节的运作机制做出了很好的解释 ：“他偏好维持国内生产甚于国外生产，只因为他想确保自己的资本安全；他努力使它的产出尽可能有最大价值，为的只是想尽可能增加他自己的利益；结果，在这种场合，和其他许多场合一样，他宛如被一只看不见的手引导，增进了一个在其意图之外的目的……”也就是说，在充分自由的市场中，一个人利己的动机，可以达到利他的结果。</p>
+<p>斯密意识到了，只有在特定的制度环境中，在自由的市场中，“看不见的手”才能够发挥作用；这暗示着如果不具有合适的市场制度，利己的动机并不一定能达到利他的结果。斯密对市场经济制度的见解实际上应当分为两个方面，一是人利己的行为动机，二是容纳人的动机的制度框架。事实上，制度框架的约束给人的行为划定了边界，对利己的人的行为具有着决定性的影响 。于是，有必要提出问题：在怎样的制度中，“看不见的手”才能发挥作用，人的利己动机才能转化为利他的结果呢？</p>
+<h3 id="守夜人政府的约束">守夜人政府的约束</h3>
+<p>尽管斯密本人在《国富论》一书中并没有强调“制度”一词，但斯密已经对自由市场经济需要的制度体系做出了设想和倡议。斯密认为统治者不必时刻考虑如何为人民谋福祉，而他能实施的最能提升人民福祉的政策就是自由放任，让市场自由运作。然而，在自由放任市场运作的大背景下，仍有事务是统治者不得不承担的，即为斯密提出的“君主的三项职责”，包括：第一，保护社会免于其他独立社会的暴力入侵；第二，尽可能保护社会中的每一个成员不受其他成员的不义伤害和压迫，要建立一套严正的司法机关；第三，建设和维持某些公共设施，这些设施只有由大社会运营时才能有足够的效率来弥补支出。这样的统治者实际上就是西方古典自由主义学说的“守夜人政府”。</p>
+<p>斯密的对政府的要求重点在于要政治减少对经济的干预，而从斯密为政府保留的职能中可以解读出市场经济制度的前提。首先，市场经济体系需要得到政治的保障，需要军队来保护其不受外敌侵犯，需要法律来保障其公正性，需要政府来维护小团体不能做到的事业等等，“看不见的手”要受到“看得见的手”的保护，而这只“看得见的手”绝不能是利己的。也就是说，并不是市场中的每一个要素都要是利己的，尽管政府要尽量淡出市场，但市场离不开政府，而政府不能是利己的。其次，市场中要有严正的司法机关来防止每个人受到其他人的侵害和压迫，那么市场中的每个人都要受到司法机关的规制。这样，如果一个人不能约束自身的利己动机，导致他侵害和压迫了他人，直接违背了利他的最终目的，“严正的司法机关”将对这种行为严惩不贷，结果是这样的个体不得不退出市场。因此，市场中活动的人的利己心必然存在一个限度和共识。</p>
+<h3 id="法律不是约束的原因">法律不是约束的原因</h3>
+<p>由此，我们会自然地提出一个问题：这样对利己心的限度是怎样决定的呢？法律并不能是这个问题的答案，这样实际上是颠倒了因果。法律的本质是将已经被社会认可的行为准则明确化、规范化，使其可以被国家的暴力机器所执行。所以，要有法律来约束利己心，实际上是社会上对利己心的限度已经达成了共识。为达到有关“利己”的共识，需要一种能够兼容“利己”动机和行为的道德体系，才能在这样的道德的指导下建立法律，并遵照法律执行。</p>
+<p>由此可见，要使得经济上看不见的手能够发挥作用，实际上是要求着道德上能够存在一种理论能够对人的利己心加以限制，斯密的经济理论中的利己，在道德的方面来看绝不能是无限制的。从道德的角度看，怎样寻找这样的能容忍“利己”的道德体系呢？</p>
+<h2 id="合宜是利己主义的道德">合宜是利己主义的道德</h2>
+<p>在《道德情操论》中斯密提倡将“合宜感”作为美德的基础。“合宜感”既不是彻底利己的道德，也不是彻底利他的道德，“合宜感”能够解释利己动机的起源，还能通过“公正的旁观者”对利己行为做出约束，能成为自由市场经济所需求的道德根基。</p>
+<h3 id="利己的个体需要道德">利己的个体需要道德</h3>
+<p>关于如何从利己的根本衍生出利他的结果，从道德的层面上来看，可以做出一些粗略的解释。如果一个人是自利的，意味着他要被爱，否则他就难以从其他人处获取利益。要被爱，就要值得被爱。怎样的人值得被爱呢？是拥有金钱和权力的人吗？斯密认为大众的朴素价值观很容易否决这样的观点 ：“我们对智慧与美德感到的那种尊敬，和我们队财富与显贵怀有的那种尊敬，无疑有所不同；而且要区分这种不同，也不需要有很高明的识别能力。”因此，获取被爱的正当途径，应当是通过智慧和美德来使一个人值得被爱，所以，利己的个体需要有道德。</p>
+<p>怎样的道德适合利己的个体？斯密对前人的道德哲学理论做出了归纳，将其分为三类。第一类是审慎的道德，代表着几乎无限制的利己主义；第二类是慈善的道德，代表着几乎无条件的利他主义，第三类则是斯密拥护的合宜的道德，在利己和利他之间取得了某种平衡。审慎的道德不适合市场经济，因为他完全忽视了他人的利益，甚至有可能直接导致对他人的伤害，有违整体繁荣的宗旨。而慈善的道德也不适合市场经济，在斯密的理论体系中，出于利己动机的总体结果会比出于利他动机的更好，而且每个人都最了解自身的需求，不应将个体的利益最大化托付给别人。只有合宜的道德能够贴合市场经济的需求。</p>
+<h3 id="合宜感能解释利己的起源">合宜感能解释利己的起源</h3>
+<p>斯密认为同情感（Sympathy）是人的一种基本情感。斯密所说的同情不不仅仅指代对弱者、对悲观事物的同情、怜悯之感（Pity, Compassion），还泛指与任何一种情感共鸣，从而产生相同的情感的体验。人与人之间彼此同情能够产生快感。通过他人的情感与自身的情感是否相合，能否带来同情的快感，就可以评论某人的情感是否合宜。关于如何评判某种感情合宜与否，斯密举了一个例子：“因我们的身体处千某种状态或倾向而产生的情感，任何强烈的表达，都是不得体的。狼吞虎咽的吃相普遍被认为是一项不礼貌的行为。然而，我们对饥饿，还是多少有些同情感。看到我们的同伴吃得津津有味，让我们觉得愉快；而所有难以咽下的表情，都会惹我们不快。”这个例子说明，相比于其他外在的道德、法律和规范等等评价标准，合宜感基于人的内在性质，更加地具有客观性，更少的具有历时性，是一种本质上的评判标准。</p>
+<p>斯密发现了人们对悲伤和快乐的同情存在差别：“虽然我们对悲伤的同情感通常比对快乐的同情感更为强烈，但悲伤的同情感通常远远不如主要当事人自然感觉到的悲伤那般强烈。……对于悲伤的同情与悲伤本身从来不会全然相同。”人的感情上的自发的不对等，导致顺境中的人比逆境中的人更容易获得人们的赞许，赢得更多的同情的快感。于是，为了获得更多同情的快感，人们有了雄心壮志，具备了利己的动机：要让自己更成功，才能获得更多的同情。</p>
+<h3 id="公正的旁观者约束个人的利己">公正的旁观者约束个人的利己</h3>
+<p>在斯密的道德哲学体系中，个人期望自利的合宜是如何转化为能促进社会和谐与分工、促进整体繁荣的，具有社会意义的同情心呢？斯密假设存在“公正的旁观者”，或解释为“他人的客观公正的价值观”，或用斯密书中常用的表述“‘自然女神’在全社会中的普遍意志”，或类比利维坦的社会意志。社会意义的同情心对个人实施监督的过程，可以简要概括为，人类社会道德的具现化就是通过他人对自身行为的评价而展现。如果一种行为伤害了他人的利益，在他人的利己主义观念下，势必不会给出好的评价。斯密举出了一个例子：“对他人实际有什么感受，或应该有什么感受，或在某种情况下肯定会有什么感受的顾虑与尊重，是唯一能够在大多数场合，把所有那些叛乱暴动的激情威吓镇压成公正的旁观者能够体谅与赞许的那种色调与性质的道理。”这段用词繁复的阐述说明了在“公正的旁观者”的监督下，偏激的、有害的情感受到了压制。</p>
+<p>若要深究斯密的“公正的旁观者”概念，应该要意识到，斯密的旁观者不仅仅只是独立于行为人的其他人，不仅仅有其他人对行为人的行为做出赞同或反对的道德评价，行为人在内心中已经假设了一个“公正的旁观者”，这个内心的旁观者对自我行为做出道德评判。正是得益于这个内心的旁观者预先评估社会对自身行为做出的评价，才能阻止不合宜的行为的发生。也就是说，一个人对自己的行为做出道德评判时，会将自己分裂为两个角色，一是被评判的行为者，二是进行评价的旁观者。这个内心的旁观者将他人的道德评判规则设置为自身的道德标准，通过想象和推测对自己的行为做出赞同或者反对的道德评价。这个内心的旁观者的评判依据，需要建立在全社会对整体繁荣的一致共识上，才能有足够的力量做到“公正”，才能克服个人的利己主义的消极方面。</p>
+<p>由此可见，斯密所言的“公正”，与更为古老的道德，如古希腊道德提倡的绝对理性的“公正”，基督教解释的反映上帝的神圣意志的“公正”，都有所区别。斯密公正概念非常简单，只需要“不适用自己看待两种对立的利益时所天然具有的眼光，而是用他人天然具有的眼光来考虑”。不是要求用“己所不欲，勿施于人”那样对所有的当事人做全面的换位思考，而只需要站在非当事人的角度来选择态度和做出评价。这样的“公正”反而更能具备客观和理性，相较于单纯利他的动机，更能具有客观性和普遍性。向社会推行这样的道德观念，更能提升社会的整体道德水准。</p>
+<p>客观存在的和内心假设的“公正”的旁观者，通过合宜感的渠道，正如市场经济中看不见的手，对人的利己动机做出了规制，使其可以得到利他的结果。</p>
+<h2 id="结语">结语</h2>
+<p>古往今来，在几乎一切的人类社会中，利他的动机和行为都能被称为一种美德，受到褒扬。然而，在斯密之前的诸多道德理论的实践中，受制于有限的生产能力，以及人性中的种种天然因素，利他的道德的推行总是受到阻力。亚当·斯密在经济学领域和道德哲学领域的重大发现，阐明了利己的动机在一定的条件和环境下也能达到利他的结果，能比以单纯利他为基础的道德观念具备更强的可实施性。依托受合宜限制的利己心建立的自由市场经济，成为了资本主义的理论基础。斯密的“经济人”和“道德人”的运作方式是统一的，都是在有条件的利己驱动下实现利他的结果，这对所谓“亚当·斯密悖论”做出了一种回应。</p>
+<!-- flag of hidden posts -->
+
+
+<div class="article-footer reveal fs14">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-sa/4.0/">署名-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section>
+    
+    <section id="share">
+      <div class="header"><span>分享文章</span></div>
+      <div class="body">
+        <div class="link"><input class="copy-area" readonly="true" id="copy-link" value="https://duanyll.com/2022/6/15/WaterClass-2/" /></div>
+        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot)"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/b32ef3da1162a.svg"/></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=https://duanyll.com/2022/6/15/WaterClass-2/&title=论亚当斯密悖论——“经济人”和“道德人”的统一 - duanyll&summary=摘要
+亚当·斯密是18世纪著名的苏格兰哲学家和经济学家，著有《国富论》等经济学巨著和《道德情操论》等道德哲学作品。在对亚当·斯密的伦理思想体系的研究中，时常认为亚当·斯密的经济学理论鼓励人无限的追求自利，而道德哲学理论却强调人应当通过..."><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/80c07e4dbb303.svg"/></a><a class="social share-item email" href="mailto:?subject=论亚当斯密悖论——“经济人”和“道德人”的统一 - duanyll&amp;body=https://duanyll.com/2022/6/15/WaterClass-2/"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/a1b00e20f425d.svg"/></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/8411ed322ced6.svg"/></a><a class="social share-item print" onclick="window.print()"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/img/print.svg" /></a><a class="social share-item source" target="_blank" rel="noopener" href="https://github.com/duanyll/duanyll.com-hexo/blob/master/source/_posts/literature/2022-6-15-WaterClass-2.md"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/08a41b181ce68.svg"/></a></div>
+        
+        <div class="qrcode" id="qrcode-wechat" style="visibility:hidden;height:0">
+          <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=https://duanyll.com/2022/6/15/WaterClass-2/"/>
+        </div>
+        
+      </div>
+    </section>
+    
+      <section id="star">
+        <div class="body">
+          <span class="github-button-wrap">
+            <a class="github-button" 
+               target="_blank" rel="noopener" href="https://github.com/duanyll/duanyll.com-hexo" 
+               data-color-scheme="no-preference: light; light: light; dark: dark;" 
+               data-size="large" 
+               data-show-count="true" 
+               aria-label="Star this site on GitHub">Star</a>
+            <span>喜欢这个网站？在 GitHub 上给它一个 Star 吧！</span>
+          </span>
+        </div>
+      </section>
+    </div>
+
+</article>
+
+
+
+
+<div class="related-wrap reveal" id="related-posts">
+    <section class='header'>
+      <div class='title cap theme'>您可能感兴趣的文章</div>
+    </section>
+    <section class='body'>
+    <div class="related-posts"><a class="item" href="/2020/5/5/Derivative/" title="高中数学导数总结"><span class="title">高中数学导数总结</span></a></div></section></div>
+
+
+
+  <div class='related-wrap md-text reveal' id="comments">
+    <section class='header cmt-title cap theme'>
+      快来参与讨论吧
+    </section>
+    <section class='body cmt-body utterances'>
+      
+
+<!-- <svg class="loading" style="vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2709"><path d="M832 512c0-176-144-320-320-320V128c211.2 0 384 172.8 384 384h-64zM192 512c0 176 144 320 320 320v64C300.8 896 128 723.2 128 512h64z" p-id="2710"></path></svg> -->
+
+<div id="utterances" repo="duanyll/duanyll.com-comment" issue-term="pathname" theme="switch" label="Comment" enabled="true" issue_term="pathname"></div>
+
+    </section>
+  </div>
+
+
+
+      
+      
+<footer class="page-footer reveal fs12"><hr><div class="sitemap"><div class="sitemap-group"><span class="fs14">博客</span><a href="/">近期</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></div><div class="sitemap-group"><span class="fs14">项目</span><a target="_blank" rel="noopener" href="https://github.com/duanyll">开源库</a><a href="/wiki/">文档</a><a target="_blank" rel="noopener" href="https://github.com/duanyll/scoop-bucket">Scoop Bucket</a></div><div class="sitemap-group"><span class="fs14">社交</span><a href="/about/#comments">留言板</a><a target="_blank" rel="noopener" href="https://netunion.org">NetUnion</a><a target="_blank" rel="noopener" href="https://www.travellings.cn/go.html">开往</a></div><div class="sitemap-group"><span class="fs14">更多</span><a href="/about">关于本站</a><a target="_blank" rel="noopener" href="https://github.com/duanyll/duanyll.com-hexo">GitHub 源码</a><a target="_blank" rel="noopener" href="https://duanyll.cloudflareaccess.com">Dashboard</a></div></div><div class="text"><p>本站由 <a target="_blank" rel="noopener" href="https://github.com/duanyll">duanyll</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。 本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = stellar.config.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.21.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.21.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+    root : '/',
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js","memos":"/js/plugins/memos.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide:not(.swiper-slide-duplicate) img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.copycode = Object.assign({"enable":true,"js":"/js/plugins/copycode.js","default_text":"Copy","success_text":"Copied"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+  <script>
+  function loadUtterances() {
+    const els = document.querySelectorAll("#comments #utterances");
+    if (els.length === 0) return;
+    els.forEach((el, i) => {
+      try {
+        el.innerHTML = '';
+      } catch (error) {
+        console.error(error);
+      }
+      var script = document.createElement('script');
+      script.src = 'https://utteranc.es/client.js';
+      script.async = true;
+      for (let key of Object.keys(el.attributes)) {
+        let attr = el.attributes[key];
+        if (['class', 'id'].includes(attr.name) === false) {
+          var name = attr.name;
+          var value = attr.value;
+          if (name == 'theme' && value == 'switch') {
+            value = window.currentTheme == 'dark' ? 'github-dark' : 'github-light';
+          }
+          script.setAttribute(name, value);
+        }
+      }
+      el.appendChild(script);
+    });
+  }
+  window.addEventListener('DOMContentLoaded', (event) => {
+      loadUtterances();
+  });
+</script>
+
+
+
+
+
+  
+<script src="https://buttons.github.io/buttons.js" async></script>
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

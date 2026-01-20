@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 8.1.1">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.21.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+
+  
+  
+  <title>使用 CMake 构建 PyTorch 和 Numpy C++ 拓展 - duanyll</title>
+
+  
+    <meta name="description" content="使用 CMake 构建 PyTorch 和 Numpy C++ 拓展能适应更复杂的项目并使用灵活的编译选项. 然而, 许多互联网上的教程中的方法已经不能在较新版本的 PyTorch 和 CMake 使用. 本文介绍了几种作者在近期测试成功的使用 CMake 构建 PyTorch 和 Numpy 拓展的方案. 需要注意的是, 许多 CMake 配置文件都包含了对某个依赖历史版本的问题引入的 Work">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 CMake 构建 PyTorch 和 Numpy C++ 拓展">
+<meta property="og:url" content="https://duanyll.com/2023/7/12/Python-CMake/">
+<meta property="og:site_name" content="duanyll">
+<meta property="og:description" content="使用 CMake 构建 PyTorch 和 Numpy C++ 拓展能适应更复杂的项目并使用灵活的编译选项. 然而, 许多互联网上的教程中的方法已经不能在较新版本的 PyTorch 和 CMake 使用. 本文介绍了几种作者在近期测试成功的使用 CMake 构建 PyTorch 和 Numpy 拓展的方案. 需要注意的是, 许多 CMake 配置文件都包含了对某个依赖历史版本的问题引入的 Work">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-07-12T00:00:00.000Z">
+<meta property="article:modified_time" content="2023-07-12T00:00:00.000Z">
+<meta property="article:author" content="duanyll">
+<meta property="article:tag" content="cmake">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="pytorch">
+<meta property="article:tag" content="vscode">
+<meta property="article:tag" content="指北">
+<meta property="article:tag" content="炼丹">
+<meta name="twitter:card" content="summary">
+  
+  
+  
+  <meta name="keywords" content="vscode,炼丹,python,pytorch,cmake,指北">
+
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="duanyll" type="application/atom+xml">
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+    <link rel="shortcut icon" href="https://cdn.duanyll.com/favicon.ico">
+  
+
+  
+
+  
+
+
+  
+
+  
+    <script>
+      var darkmodeSettings = localStorage.getItem('darkmode') || 'auto';
+      var enableDarkmode = darkmodeSettings == 'true' 
+        || (darkmodeSettings == 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (enableDarkmode) {
+        document.documentElement.classList.add('global-darkmode');
+      }
+      window.currentTheme = enableDarkmode ? 'dark' : 'light';
+    </script>
+  
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://cdn.duanyll.com/android-chrome-192x192.png" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">duanyll</div><div class="sub normal cap">qwq</div><div class="sub hover cap" style="opacity:0"> QWQ</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Wiki</a><a class="nav-item" href="/about/">关于</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">使用 CMake 构建 PyTorch 和 Numpy C++ 拓展</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%8E%9F%E7%94%9F-python.h-%E4%B8%8E-numpy.h"><span class="toc-text">使用原生 Python.h 与 numpy.h</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%AD%A3%E7%A1%AE%E7%9A%84-conda-%E7%8E%AF%E5%A2%83"><span class="toc-text">使用正确的 Conda 环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87-python-%E8%A7%A3%E9%87%8A%E5%99%A8%E6%9F%A5%E6%89%BE-numpy-%E5%A4%B4%E6%96%87%E4%BB%B6"><span class="toc-text">通过 Python 解释器查找 Numpy 头文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-swig-%E5%92%8C-numpy.i"><span class="toc-text">使用 SWIG 和 Numpy.i</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E5%86%99-swig-%E6%8E%A5%E5%8F%A3"><span class="toc-text">编写 SWIG 接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA-swig-%E6%8E%A5%E5%8F%A3%E6%B7%BB%E5%8A%A0-numpy-%E6%94%AF%E6%8C%81"><span class="toc-text">为 SWIG 接口添加 Numpy 支持</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8-cmake-%E4%B8%AD%E4%BD%BF%E7%94%A8-swig"><span class="toc-text">在 CMake 中使用 SWIG</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87-python-%E8%A7%A3%E9%87%8A%E5%99%A8%E6%9F%A5%E6%89%BE-python-%E5%A4%B4%E6%96%87%E4%BB%B6"><span class="toc-text">通过 Python 解释器查找 Python 头文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-pytorch-%E5%92%8C-pybind11"><span class="toc-text">使用 PyTorch 和 pybind11</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8-c-%E4%B8%AD%E8%B0%83%E7%94%A8-pytorch"><span class="toc-text">在 C++ 中调用 PyTorch</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0-pybind11-%E5%AF%BC%E5%87%BA"><span class="toc-text">添加 pybind11 导出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E9%97%AE%E9%A2%98"><span class="toc-text">解决动态链接问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%83%E8%AF%95-c-%E4%BB%A3%E7%A0%81"><span class="toc-text">调试 C++ 代码</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/duanyll" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/08a41b181ce68.svg"/></a><a class="social" href="/about/#comments" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/942ebbf1a4b91.svg"/></a><a class="social" href="https://www.travellings.cn/go.html" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://www.travellings.cn/assets/favicon-fluent-emoji.svg"/></a><a class="social" href="javascript:darkmode.next()" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/img/half-moon.svg"/></a></div></footer>
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+        
+
+
+
+<div class="bread-nav fs12"><div class="left"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></div><div id="post-meta">
+    <span>发布于&nbsp;<time datetime="2023-07-12T00:00:00.000Z">2023-07-12</time></span>
+    
+    <span>更新于&nbsp;<time datetime="2023-07-12T00:00:00.000Z">2023-07-12</time></span>
+    </div></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>使用 CMake 构建 PyTorch 和 Numpy C++ 拓展</span></h1>
+
+<div class="article-tags"><a class="tag-plugin colorful hashtag" color="blue" href="/tags/vscode/" >  <svg t="1701408144765" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4228" width="200" height="200"><path d="M426.6 64.8c34.8 5.8 58.4 38.8 52.6 73.6l-19.6 117.6h190.2l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6s58.4 38.8 52.6 73.6l-19.4 117.6H896c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-42.6 256H832c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.6-117.4h-190.4l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.4-117.8H128c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l42.6-256H192c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6z m11.6 319.2l-42.6 256h190.2l42.6-256h-190.2z" p-id="4229"></path></svg>  <span>vscode</span></a><a class="tag-plugin colorful hashtag" color="yellow" href="/tags/%E7%82%BC%E4%B8%B9/" >  <svg t="1701408144765" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4228" width="200" height="200"><path d="M426.6 64.8c34.8 5.8 58.4 38.8 52.6 73.6l-19.6 117.6h190.2l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6s58.4 38.8 52.6 73.6l-19.4 117.6H896c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-42.6 256H832c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.6-117.4h-190.4l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.4-117.8H128c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l42.6-256H192c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6z m11.6 319.2l-42.6 256h190.2l42.6-256h-190.2z" p-id="4229"></path></svg>  <span>炼丹</span></a><a class="tag-plugin colorful hashtag" color="red" href="/tags/python/" >  <svg t="1701408144765" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4228" width="200" height="200"><path d="M426.6 64.8c34.8 5.8 58.4 38.8 52.6 73.6l-19.6 117.6h190.2l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6s58.4 38.8 52.6 73.6l-19.4 117.6H896c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-42.6 256H832c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.6-117.4h-190.4l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.4-117.8H128c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l42.6-256H192c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6z m11.6 319.2l-42.6 256h190.2l42.6-256h-190.2z" p-id="4229"></path></svg>  <span>python</span></a><a class="tag-plugin colorful hashtag" color="red" href="/tags/pytorch/" >  <svg t="1701408144765" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4228" width="200" height="200"><path d="M426.6 64.8c34.8 5.8 58.4 38.8 52.6 73.6l-19.6 117.6h190.2l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6s58.4 38.8 52.6 73.6l-19.4 117.6H896c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-42.6 256H832c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.6-117.4h-190.4l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.4-117.8H128c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l42.6-256H192c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6z m11.6 319.2l-42.6 256h190.2l42.6-256h-190.2z" p-id="4229"></path></svg>  <span>pytorch</span></a><a class="tag-plugin colorful hashtag" color="red" href="/tags/cmake/" >  <svg t="1701408144765" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4228" width="200" height="200"><path d="M426.6 64.8c34.8 5.8 58.4 38.8 52.6 73.6l-19.6 117.6h190.2l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6s58.4 38.8 52.6 73.6l-19.4 117.6H896c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-42.6 256H832c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.6-117.4h-190.4l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.4-117.8H128c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l42.6-256H192c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6z m11.6 319.2l-42.6 256h190.2l42.6-256h-190.2z" p-id="4229"></path></svg>  <span>cmake</span></a><a class="tag-plugin colorful hashtag" color="green" href="/tags/%E6%8C%87%E5%8C%97/" >  <svg t="1701408144765" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4228" width="200" height="200"><path d="M426.6 64.8c34.8 5.8 58.4 38.8 52.6 73.6l-19.6 117.6h190.2l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6s58.4 38.8 52.6 73.6l-19.4 117.6H896c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-42.6 256H832c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.6-117.4h-190.4l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.4-117.8H128c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l42.6-256H192c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6z m11.6 319.2l-42.6 256h190.2l42.6-256h-190.2z" p-id="4229"></path></svg>  <span>指北</span></a></div>
+<p>使用 CMake 构建 PyTorch 和 Numpy C++ 拓展能适应更复杂的项目并使用灵活的编译选项. 然而, 许多互联网上的教程中的方法已经不能在较新版本的 PyTorch 和 CMake 使用. 本文介绍了几种作者在近期测试成功的使用 CMake 构建 PyTorch 和 Numpy 拓展的方案. 需要注意的是, 许多 CMake 配置文件都包含了对某个依赖历史版本的问题引入的 Workaround, 不能在新版本正常工作, 本文所述的方法也有极大概率无法在将来工作.</p>
+<span id="more"></span>
+<p>下文给出三个 <code>CMakeLists.txt</code> 的例子, 其中问题的解决方案是通用的.</p>
+<h2 id="使用原生-python.h-与-numpy.h">使用原生 Python.h 与 numpy.h</h2>
+<div class="tag-plugin link dis-select"><a class="link-card plain" title="" href="https://github.com/src-d/kmcuda/blob/master/src/CMakeLists.txt" target="_blank" rel="external nofollow noopener noreferrer" cardlink="" autofill="title,icon"><div class="left"><span class="title">https://github.com/src-d/kmcuda/blob/master/src/CMakeLists.txt</span><span class="cap link fs12">https://github.com/src-d/kmcuda/blob/master/src/CMakeLists.txt</span></div><div class="right"><div class="lazy img" data-bg="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/link/8f277b4ee0ecd.svg"></div></div></a></div>
+<p><a target="_blank" rel="noopener" href="https://github.com/src-d/kmcuda">kmcuda</a> 项目通过原生的 Python 和 Numpy 头文件实现了从 Python 调用 C++ 库, 并通过 Numpy ndarray 传递数据, 通过手动在 CMake 文件中配置 CUDA 相关静态链接库来使用 CUDA 加速计算. 原仓库的 <code>CMakeLists.txt</code> 文件无法在 Windows 上正常使用, 其 CUDA 命令行参数和 macOS 上的 Workaround 也很可能过时.</p>
+<div class="tag-plugin link dis-select"><a class="link-card plain" title="" href="https://github.com/Duanyll/kmcuda/blob/windows-build/src/CMakeLists.txt" target="_blank" rel="external nofollow noopener noreferrer" cardlink="" autofill="title,icon"><div class="left"><span class="title">https://github.com/Duanyll/kmcuda/blob/windows-build/src/CMakeLists.txt</span><span class="cap link fs12">https://github.com/Duanyll/kmcuda/blob/windows-build/src/CMakeLists.txt</span></div><div class="right"><div class="lazy img" data-bg="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/link/8f277b4ee0ecd.svg"></div></div></a></div>
+<p>这个分支的 <code>CMakeLists.txt</code> 文件能在 Windows 上工作.</p>
+<details class="tag-plugin colorful folding"><summary><span>完整 CMakeLists.txt</span></summary><div class="body"><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.16</span> FATAL_ERROR)</span><br><span class="line"></span><br><span class="line"><span class="keyword">project</span>(KMCUDA CXX C CUDA)</span><br><span class="line"><span class="keyword">set</span>(CMAKE_MODULE_PATH <span class="variable">${CMAKE_HOME_DIRECTORY}</span>/cmake)</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span> (CMAKE_CXX_STANDARD <span class="number">11</span>)</span><br><span class="line"><span class="keyword">set</span> (CMAKE_CXX_STANDARD_REQUIRED <span class="keyword">ON</span>)</span><br><span class="line"><span class="keyword">set</span> (CMAKE_CUDA_STANDARD <span class="number">11</span>)</span><br><span class="line"><span class="keyword">set</span> (CMAKE_CUDA_STANDARD_REQUIRED <span class="keyword">ON</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">find_package</span>(OpenMP REQUIRED)</span><br><span class="line"><span class="keyword">if</span> (MSVC)</span><br><span class="line">  <span class="keyword">set</span> (OpenMP_CXX_FLAGS <span class="string">"${OpenMP_CXX_FLAGS} -openmp:experimental"</span>)</span><br><span class="line"><span class="keyword">endif</span>()</span><br><span class="line"><span class="keyword">set</span> (CMAKE_CXX_FLAGS <span class="string">"${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">find_package</span>(CUDAToolkit REQUIRED)</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">NOT</span> CUDA_ARCH)</span><br><span class="line">  <span class="keyword">set</span>(CUDA_ARCH <span class="number">86</span>)</span><br><span class="line"><span class="keyword">endif</span>()</span><br><span class="line"><span class="keyword">set</span>(CMAKE_CUDA_ARCHITECTURES <span class="variable">${CUDA_ARCH}</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">NOT</span> DISABLE_PYTHON)</span><br><span class="line">  <span class="keyword">find_package</span>(PythonInterp <span class="number">3</span> REQUIRED)</span><br><span class="line">  <span class="keyword">find_package</span>(PythonLibs <span class="number">3</span> REQUIRED)</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">NOT</span> NUMPY_INCLUDES)</span><br><span class="line">    <span class="keyword">execute_process</span>(<span class="keyword">COMMAND</span> <span class="variable">${PYTHON_EXECUTABLE}</span> -c <span class="string">"import numpy; print(numpy.get_include())"</span> OUTPUT_VARIABLE NUMPY_INCLUDES)</span><br><span class="line">  <span class="keyword">endif</span>()</span><br><span class="line"><span class="keyword">endif</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">NOT</span> DISABLE_R)</span><br><span class="line">  <span class="keyword">find_package</span>(R)</span><br><span class="line"><span class="keyword">endif</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(SOURCE_FILES kmcuda.cc kmcuda.h wrappers.h private.h fp_abstraction.h tricks.cuh</span><br><span class="line">                 metric_abstraction.h kmeans.cu knn.cu transpose.cu)</span><br><span class="line"><span class="keyword">if</span> (PYTHONLIBS_FOUND)</span><br><span class="line">  <span class="keyword">list</span>(APPEND SOURCE_FILES python.cc)</span><br><span class="line"><span class="keyword">endif</span>()</span><br><span class="line"><span class="keyword">if</span> (R_FOUND)</span><br><span class="line">  <span class="keyword">list</span>(APPEND SOURCE_FILES r.cc)</span><br><span class="line"><span class="keyword">endif</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_library</span>(KMCUDA SHARED <span class="variable">${SOURCE_FILES}</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_compile_definitions</span>(_MWAITXINTRIN_H_INCLUDED _FORCE_INLINES)</span><br><span class="line"><span class="keyword">add_compile_definitions</span>(CUDA_ARCH=<span class="variable">${CUDA_ARCH}</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">target_link_libraries</span>(KMCUDA CUDA::curand)</span><br><span class="line"><span class="keyword">target_link_libraries</span>(KMCUDA OpenMP::OpenMP_CXX)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (PYTHONLIBS_FOUND)</span><br><span class="line">  <span class="keyword">include_directories</span>(<span class="variable">${PYTHON_INCLUDE_DIRS}</span> <span class="variable">${NUMPY_INCLUDES}</span>)</span><br><span class="line">  <span class="keyword">target_link_libraries</span>(KMCUDA <span class="variable">${PYTHON_LIBRARIES}</span>)</span><br><span class="line"><span class="keyword">endif</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (R_FOUND)</span><br><span class="line">  <span class="keyword">include_directories</span>(<span class="variable">${R_INCLUDE_DIRS}</span>)</span><br><span class="line">  <span class="keyword">target_link_libraries</span>(KMCUDA <span class="variable">${R_LIBRARIES}</span>)</span><br><span class="line"><span class="keyword">endif</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (SUFFIX)</span><br><span class="line">  <span class="keyword">set_target_properties</span>(KMCUDA PROPERTIES SUFFIX <span class="variable">${SUFFIX}</span>)</span><br><span class="line"><span class="keyword">endif</span>()</span><br></pre></td></tr></table></figure></div></details>
+<h3 id="使用正确的-conda-环境">使用正确的 Conda 环境</h3>
+<p>由于 Conda 的实现方式, 不能通过在 <code>CMakeLists.txt</code> 中调用 <code>conda</code> 命令来设置 Python 环境 <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. 需要先在终端中激活 Conda 环境</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda activate my_env</span><br><span class="line">cmake ...</span><br></pre></td></tr></table></figure>
+<p>如果使用 Visual Studio Code 的 CMake Tools 插件, 似乎 <code>environmentSetupScript</code> 选项存在问题, 在 Windows 上指定该选项似乎会被 <code>visualStudio</code> 选项 (用与加载 Visual Studio 的 <code>vcvarsall.bat</code>) 覆盖, 从而无法加载 Conda 环境. 一种方法是<em>先关闭所有的 VSCoda 窗口</em>, 然后再在终端中使用</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda activate my_env</span><br><span class="line">code .</span><br></pre></td></tr></table></figure>
+<p>来打开已具有正确 Python 环境的 VSCode 窗口, 并使用此拓展进行 CMake Configure.</p>
+<h3 id="通过-python-解释器查找-numpy-头文件">通过 Python 解释器查找 Numpy 头文件</h3>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">find_package</span>(PythonInterp <span class="number">3</span> REQUIRED)</span><br><span class="line"><span class="keyword">find_package</span>(PythonLibs <span class="number">3</span> REQUIRED)</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">NOT</span> NUMPY_INCLUDES)</span><br><span class="line">  <span class="keyword">execute_process</span>(<span class="keyword">COMMAND</span> <span class="variable">${PYTHON_EXECUTABLE}</span> -c <span class="string">"import numpy; print(numpy.get_include())"</span> OUTPUT_VARIABLE NUMPY_INCLUDES)</span><br><span class="line"><span class="keyword">endif</span>()</span><br></pre></td></tr></table></figure>
+<p>无需手动设置 <code>NUMPY_INCLUDES</code> 变量. Numpy 的 C 接口只含有头文件, 此后只需要</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">include_directories</span>(<span class="variable">${PYTHON_INCLUDE_DIRS}</span> <span class="variable">${NUMPY_INCLUDES}</span>)</span><br></pre></td></tr></table></figure>
+<p>另外,</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">find_package</span>(PythonLibs <span class="number">3</span> REQUIRED)</span><br></pre></td></tr></table></figure>
+<p>通常能正确查找到 <code>PYTHON_INCLUDE_DIRS</code> 变量. 如果查找失败, 可以使用 <a href="#通过-python-解释器查找-python-头文件">下面的方法</a></p>
+<h2 id="使用-swig-和-numpy.i">使用 SWIG 和 Numpy.i</h2>
+<div class="tag-plugin link dis-select"><a class="link-card plain" title="" href="https://www.swig.org/" target="_blank" rel="external nofollow noopener noreferrer" cardlink="" autofill="title,icon"><div class="left"><span class="title">https://www.swig.org/</span><span class="cap link fs12">https://www.swig.org/</span></div><div class="right"><div class="lazy img" data-bg="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/link/8f277b4ee0ecd.svg"></div></div></a></div>
+<p>SWIG 用于生成 C++ 的 Python 接口, 能生成将 C++ 类和 STL 容器翻译为 Python 类和容器的胶水代码. <a target="_blank" rel="noopener" href="https://github.com/hijkzzz/alpha-zero-gomoku/blob/master/CMakeLists.txt">这个仓库</a> 实现了通过 SWIG, 在 Python 代码中操作 C++ 类并传递 Numpy 数组. 也实现了在 C++ 代码中链接并调用 PyTorch 实现 CUDA 加速. 然而, 这个配置文件没有实现直接向 C++ 代码传递 PyTorch Tensor.</p>
+<details class="tag-plugin colorful folding"><summary><span>完整 CMakeLists.txt</span></summary><div class="body"><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.14</span>.<span class="number">0</span>)</span><br><span class="line"><span class="keyword">project</span>(libzerogomoku)</span><br><span class="line"></span><br><span class="line"><span class="comment"># option</span></span><br><span class="line"><span class="keyword">option</span>(WRAP_LIB <span class="string">"wrap library"</span> <span class="keyword">ON</span>)</span><br><span class="line"><span class="keyword">option</span>(UNIT_TEST <span class="string">"unit test"</span> <span class="keyword">OFF</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(CMAKE_CXX_STANDARD <span class="number">14</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ----------------- pytorch -----------------</span></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">NOT</span> TORCH_CMAKE_PATH)</span><br><span class="line">    <span class="comment"># run python and read pytorch cmake path</span></span><br><span class="line">    <span class="keyword">execute_process</span>(<span class="keyword">COMMAND</span> python -c <span class="string">"import torch; print(torch.utils.cmake_prefix_path)"</span> OUTPUT_VARIABLE TORCH_CMAKE_PATH OUTPUT_STRIP_TRAILING_WHITESPACE)</span><br><span class="line">    <span class="comment"># cache TORCH_CMAKE_PATH</span></span><br><span class="line">    <span class="keyword">set</span>(TORCH_CMAKE_PATH <span class="variable">${TORCH_CMAKE_PATH}</span> CACHE PATH <span class="string">"TORCH_CMAKE_PATH"</span>)</span><br><span class="line"><span class="keyword">endif</span>()</span><br><span class="line"><span class="keyword">message</span>(STATUS <span class="string">"TORCH_CMAKE_PATH: ${TORCH_CMAKE_PATH}"</span>)</span><br><span class="line"><span class="keyword">set</span>(CMAKE_PREFIX_PATH <span class="variable">${TORCH_CMAKE_PATH}</span>)</span><br><span class="line"><span class="keyword">message</span>(STATUS <span class="string">"CMAKE_PREFIX_PATH: ${CMAKE_PREFIX_PATH}"</span>)</span><br><span class="line"><span class="comment"># suppress warning C4624 when using msvc</span></span><br><span class="line"><span class="keyword">if</span>(MSVC)</span><br><span class="line">    <span class="keyword">add_compile_options</span>(/wd4624)</span><br><span class="line"><span class="keyword">endif</span>()</span><br><span class="line"><span class="comment"># find torch</span></span><br><span class="line"><span class="keyword">find_package</span>(Torch REQUIRED)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ----------------- swig -----------------</span></span><br><span class="line"><span class="comment"># find swig</span></span><br><span class="line"><span class="keyword">find_package</span>(SWIG REQUIRED)</span><br><span class="line"><span class="keyword">include</span>(<span class="variable">${SWIG_USE_FILE}</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ----------------- python -----------------</span></span><br><span class="line"><span class="comment"># find python</span></span><br><span class="line"><span class="keyword">find_package</span>(Python <span class="number">3.6</span> REQUIRED)</span><br><span class="line"><span class="comment"># run python and read python include path</span></span><br><span class="line"><span class="keyword">execute_process</span>(<span class="keyword">COMMAND</span> python -c <span class="string">"from distutils.sysconfig import get_python_inc; print(get_python_inc())"</span> OUTPUT_VARIABLE Python_INCLUDE_DIRS OUTPUT_STRIP_TRAILING_WHITESPACE)</span><br><span class="line"><span class="keyword">message</span>(STATUS <span class="string">"Python_INCLUDE_DIRS: ${Python_INCLUDE_DIRS}"</span>)</span><br><span class="line"><span class="keyword">include_directories</span>(<span class="variable">${Python_INCLUDE_DIRS}</span>)</span><br><span class="line"><span class="comment"># if PYTHON_LIBRARIES is defined, use it</span></span><br><span class="line"><span class="keyword">if</span>(PYTHON_LIBRARIES)</span><br><span class="line">    <span class="keyword">set</span>(Python_LIBRARIES <span class="variable">${PYTHON_LIBRARIES}</span>)</span><br><span class="line"><span class="keyword">endif</span>()</span><br><span class="line"><span class="comment"># if Python_LIBRARIES is not found, warn user</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">NOT</span> Python_LIBRARIES)</span><br><span class="line">    <span class="keyword">message</span>(WARNING <span class="string">"Python_LIBRARIES not found, please set it manually"</span>)</span><br><span class="line"><span class="keyword">endif</span>()</span><br><span class="line"><span class="keyword">message</span>(STATUS <span class="string">"Python_LIBRARIES: ${Python_LIBRARIES}"</span>)</span><br><span class="line"><span class="keyword">add_compile_definitions</span>(SWIG_PYTHON_INTERPRETER_NO_DEBUG)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ----------------- numpy -----------------</span></span><br><span class="line"><span class="comment"># run python and get numpy include path</span></span><br><span class="line"><span class="keyword">execute_process</span>(<span class="keyword">COMMAND</span> python -c <span class="string">"import numpy; print(numpy.get_include())"</span> OUTPUT_VARIABLE NUMPY_INCLUDE_DIRS OUTPUT_STRIP_TRAILING_WHITESPACE)</span><br><span class="line"><span class="keyword">message</span>(STATUS <span class="string">"NUMPY_INCLUDE_DIRS: ${NUMPY_INCLUDE_DIRS}"</span>)</span><br><span class="line"><span class="keyword">include_directories</span>(<span class="variable">${NUMPY_INCLUDE_DIRS}</span>)</span><br><span class="line"><span class="comment"># download numpy.i if not found</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">EXISTS</span> <span class="string">"lib/numpy.i"</span>)</span><br><span class="line">    <span class="keyword">message</span>(STATUS <span class="string">"numpy.i found"</span>)</span><br><span class="line"><span class="keyword">else</span>()</span><br><span class="line">    <span class="keyword">message</span>(STATUS <span class="string">"numpy.i not found, downloading..."</span>)</span><br><span class="line">    <span class="keyword">file</span>(DOWNLOAD https://raw.githubusercontent.com/numpy/numpy/master/tools/swig/numpy.i lib/numpy.i)</span><br><span class="line"><span class="keyword">endif</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment"># add sources</span></span><br><span class="line"><span class="keyword">include_directories</span>(./src)</span><br><span class="line"><span class="keyword">include_directories</span>(<span class="string">"${CMAKE_CURRENT_BINARY_DIR}/lib"</span>)</span><br><span class="line"><span class="keyword">aux_source_directory</span>(./src SOURCES)</span><br><span class="line"></span><br><span class="line"><span class="comment"># swig</span></span><br><span class="line"><span class="keyword">if</span>(WRAP_LIB)</span><br><span class="line">    <span class="keyword">set_property</span>(SOURCE ./src/libzerogomoku.i PROPERTY CPLUSPLUS <span class="keyword">ON</span>)</span><br><span class="line">    swig_add_library(libzerogomoku TYPE SHARED LANGUAGE python SOURCES ./src/libzerogomoku.i <span class="variable">${SOURCES}</span>)</span><br><span class="line">    swig_link_libraries(libzerogomoku <span class="variable">${Python_LIBRARIES}</span> <span class="variable">${TORCH_LIBRARIES}</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># The following code block is suggested to be used on Windows.</span></span><br><span class="line">    <span class="comment"># According to https://github.com/pytorch/pytorch/issues/25457,</span></span><br><span class="line">    <span class="comment"># the DLLs need to be copied to avoid memory errors.</span></span><br><span class="line">    <span class="comment"># if (WIN32)</span></span><br><span class="line">    <span class="comment">#     file(GLOB TORCH_DLLS "${TORCH_INSTALL_PREFIX}/lib/*.dll")</span></span><br><span class="line">    <span class="comment">#     add_custom_command(TARGET _libzerogomoku</span></span><br><span class="line">    <span class="comment">#                        POST_BUILD</span></span><br><span class="line">    <span class="comment">#                        COMMAND ${CMAKE_COMMAND} -E copy_if_different</span></span><br><span class="line">    <span class="comment">#                        ${TORCH_DLLS}</span></span><br><span class="line">    <span class="comment">#                        $&lt;TARGET_FILE_DIR:_libzerogomoku&gt;)</span></span><br><span class="line">    <span class="comment"># endif (WIN32)</span></span><br><span class="line"><span class="keyword">endif</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment"># unit test</span></span><br><span class="line"><span class="keyword">if</span>(UNIT_TEST)</span><br><span class="line">    <span class="keyword">add_library</span>(test_lib <span class="variable">${SOURCES}</span>)</span><br><span class="line">    <span class="keyword">target_link_libraries</span>(test_lib <span class="variable">${TORCH_LIBRARIES}</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">add_executable</span>(thread_pool_test ./<span class="keyword">test</span>/thread_pool_test.cpp)</span><br><span class="line">    <span class="keyword">target_link_libraries</span>(thread_pool_test test_lib)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">add_executable</span>(gomoku_test ./<span class="keyword">test</span>/gomoku_test.cpp)</span><br><span class="line">    <span class="keyword">target_link_libraries</span>(gomoku_test test_lib)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">add_executable</span>(libtorch_test ./<span class="keyword">test</span>/neural_network_test.cpp)</span><br><span class="line">    <span class="keyword">target_link_libraries</span>(libtorch_test test_lib)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">add_executable</span>(mcts_test ./<span class="keyword">test</span>/mcts_test.cpp)</span><br><span class="line">    <span class="keyword">target_link_libraries</span>(mcts_test test_lib)</span><br><span class="line"><span class="keyword">endif</span>()</span><br></pre></td></tr></table></figure></div></details>
+<h3 id="编写-swig-接口">编写 SWIG 接口</h3>
+<p>可以通过 pip 安装 SWIG 到命令行</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install swig</span><br></pre></td></tr></table></figure>
+<p>SWIG 将 <code>.i</code> 文件展开成胶水 C++ 代码.</p>
+<div class="tag-plugin link dis-select"><a class="link-card plain" title="" href="https://github.com/Duanyll/alpha-zero-gomoku/blob/b05f3327f28e8e0b1a4088536aae23d5c66d54d4/src/libzerogomoku.i" target="_blank" rel="external nofollow noopener noreferrer" cardlink="" autofill="title,icon"><div class="left"><span class="title">https://github.com/Duanyll/alpha-zero-gomoku/blob/b05f3327f28e8e0b1a4088536aae23d5c66d54d4/src/libzerogomoku.i</span><span class="cap link fs12">https://github.com/Duanyll/alpha-zero-gomoku/blob/b05f3327f28e8e0b1a4088536aae23d5c66d54d4/src/libzerogomoku.i</span></div><div class="right"><div class="lazy img" data-bg="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/link/8f277b4ee0ecd.svg"></div></div></a></div>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">%module(threads="1") libzerogomoku</span><br><span class="line"></span><br><span class="line">%{</span><br><span class="line">#define SWIG_FILE_WITH_INIT</span><br><span class="line">#include "gomoku.h"</span><br><span class="line">#include "neural_network.h"</span><br><span class="line">#include "mcts.h"</span><br><span class="line">%}</span><br></pre></td></tr></table></figure>
+<p>被百分号大括号包围的 C++ 代码不会被 SWIG 解析. 这将在胶水代码中包含这些头文件.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">%include "gomoku.h"</span><br><span class="line">%include "mcts.h"</span><br></pre></td></tr></table></figure>
+<p><code>%include</code> 指令让 SWIG 解析头文件中的 C++ 函数与类等声明, 生成胶水代码. 需要注意, SWIG 只支持有限的 C++ 语法, 不要使用复杂的 C++ 语法. 如果 SWIG 无法解析某个头文件中的语法, 可以不引用头文件, 而是直接在 SWIG 文件中编写简化的 C++ 声明.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">%include "std_vector.i"</span><br><span class="line">namespace std {</span><br><span class="line">  %template(IntVector) vector&lt;int&gt;;</span><br><span class="line">  %template(IntVectorVector) vector&lt;vector&lt;int&gt;&gt;;</span><br><span class="line">  %template(DoubleVector) vector&lt;double&gt;;</span><br><span class="line">  %template(DoubleVectorVector) vector&lt;vector&lt;double&gt;&gt;;</span><br><span class="line">  %template(CharVector) vector&lt;char&gt;;</span><br><span class="line">}</span><br><span class="line">%include "std_string.i"</span><br></pre></td></tr></table></figure>
+<p>引入一些 STL 类型的支持. 需要为 STL 模版类型设置别名.</p>
+<h3 id="为-swig-接口添加-numpy-支持">为 SWIG 接口添加 Numpy 支持</h3>
+<div class="tag-plugin link dis-select"><a class="link-card plain" title="" href="https://numpy.org/doc/stable/reference/swig.interface-file.html" target="_blank" rel="external nofollow noopener noreferrer" cardlink="" autofill="title,icon"><div class="left"><span class="title">https://numpy.org/doc/stable/reference/swig.interface-file.html</span><span class="cap link fs12">https://numpy.org/doc/stable/reference/swig.interface-file.html</span></div><div class="right"><div class="lazy img" data-bg="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/link/8f277b4ee0ecd.svg"></div></div></a></div>
+<p>Numpy 提供对 SWIG 的支持, 可以不在 C 代码中引用 Numpy 的头文件, 而是让 SWIG 把 Numpy 数组对象转换成特定的 C 函数原型 (参数中包含指向数据的裸指针和数组长度). 需要在 SWIG 接口文件中引入 <code>numpy.i</code> 并选择需要转换的原型</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">%include "numpy.i"</span><br><span class="line">%apply (int DIM1, int DIM2, int* INPLACE_ARRAY2) {(int dim1, int dim2, int *data)};</span><br></pre></td></tr></table></figure>
+<p>之后具有 <code>(int dim1, int dim2, int *data)</code> 参数列表的函数就可以接受可就地修改的 numpy 二维数组. 更多的原型可在 <a target="_blank" rel="noopener" href="https://numpy.org/doc/stable/reference/swig.interface-file.html#available-typemaps">这里</a> 查找.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">%{</span><br><span class="line">  static struct InitNumpy {</span><br><span class="line">      InitNumpy() { _import_array(); }</span><br><span class="line">  } _init_numpy;</span><br><span class="line">%}</span><br></pre></td></tr></table></figure>
+<p>在接口胶水代码中插入这段代码, 并保证 <code>_import_array()</code> 函数只被调用一次 <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. 这个函数将会设置 Numpy 函数调用的基地址.</p>
+<h3 id="在-cmake-中使用-swig">在 CMake 中使用 SWIG</h3>
+<p>需要获得 Numpy 的包含文件目录</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># run python and get numpy include path</span></span><br><span class="line"><span class="keyword">execute_process</span>(<span class="keyword">COMMAND</span> python -c <span class="string">"import numpy; print(numpy.get_include())"</span> OUTPUT_VARIABLE NUMPY_INCLUDE_DIRS OUTPUT_STRIP_TRAILING_WHITESPACE)</span><br><span class="line"><span class="keyword">message</span>(STATUS <span class="string">"NUMPY_INCLUDE_DIRS: ${NUMPY_INCLUDE_DIRS}"</span>)</span><br><span class="line"><span class="keyword">include_directories</span>(<span class="variable">${NUMPY_INCLUDE_DIRS}</span>)</span><br></pre></td></tr></table></figure>
+<p>下面的代码自动下载 <code>numpy.i</code></p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># download numpy.i if not found</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">EXISTS</span> <span class="string">"lib/numpy.i"</span>)</span><br><span class="line">    <span class="keyword">message</span>(STATUS <span class="string">"numpy.i found"</span>)</span><br><span class="line"><span class="keyword">else</span>()</span><br><span class="line">    <span class="keyword">message</span>(STATUS <span class="string">"numpy.i not found, downloading..."</span>)</span><br><span class="line">    <span class="keyword">file</span>(DOWNLOAD https://raw.githubusercontent.com/numpy/numpy/master/tools/swig/numpy.i lib/numpy.i)</span><br><span class="line"><span class="keyword">endif</span>()</span><br></pre></td></tr></table></figure>
+<p>并需要把下载的 <code>numpy.i</code> 添加到包含目录</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">include_directories</span>(<span class="string">"${CMAKE_CURRENT_BINARY_DIR}/lib"</span>)</span><br></pre></td></tr></table></figure>
+<p>查找 SWIG. <code>FindSwig</code> 是 CMake 自带的.</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># find swig</span></span><br><span class="line"><span class="keyword">find_package</span>(SWIG REQUIRED)</span><br><span class="line"><span class="keyword">include</span>(<span class="variable">${SWIG_USE_FILE}</span>)</span><br></pre></td></tr></table></figure>
+<p>使用专门的函数声明 SWIG 库文件和静态链接</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set_property</span>(SOURCE ./src/libzerogomoku.i PROPERTY CPLUSPLUS <span class="keyword">ON</span>)</span><br><span class="line">swig_add_library(libzerogomoku TYPE SHARED LANGUAGE python SOURCES ./src/libzerogomoku.i <span class="variable">${SOURCES}</span>)</span><br><span class="line">swig_link_libraries(libzerogomoku <span class="variable">${Python_LIBRARIES}</span> <span class="variable">${TORCH_LIBRARIES}</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="通过-python-解释器查找-python-头文件">通过 Python 解释器查找 Python 头文件</h3>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># find python</span></span><br><span class="line"><span class="keyword">find_package</span>(Python <span class="number">3.6</span> REQUIRED)</span><br><span class="line"><span class="comment"># run python and read python include path</span></span><br><span class="line"><span class="keyword">execute_process</span>(<span class="keyword">COMMAND</span> python -c <span class="string">"from distutils.sysconfig import get_python_inc; print(get_python_inc())"</span> OUTPUT_VARIABLE Python_INCLUDE_DIRS OUTPUT_STRIP_TRAILING_WHITESPACE)</span><br><span class="line"><span class="keyword">message</span>(STATUS <span class="string">"Python_INCLUDE_DIRS: ${Python_INCLUDE_DIRS}"</span>)</span><br><span class="line"><span class="keyword">include_directories</span>(<span class="variable">${Python_INCLUDE_DIRS}</span>)</span><br><span class="line"><span class="comment"># if PYTHON_LIBRARIES is defined, use it</span></span><br><span class="line"><span class="keyword">if</span>(PYTHON_LIBRARIES)</span><br><span class="line">    <span class="keyword">set</span>(Python_LIBRARIES <span class="variable">${PYTHON_LIBRARIES}</span>)</span><br><span class="line"><span class="keyword">endif</span>()</span><br><span class="line"><span class="comment"># if Python_LIBRARIES is not found, warn user</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">NOT</span> Python_LIBRARIES)</span><br><span class="line">    <span class="keyword">message</span>(WARNING <span class="string">"Python_LIBRARIES not found, please set it manually"</span>)</span><br><span class="line"><span class="keyword">endif</span>()</span><br><span class="line"><span class="keyword">message</span>(STATUS <span class="string">"Python_LIBRARIES: ${Python_LIBRARIES}"</span>)</span><br></pre></td></tr></table></figure>
+<p><code>FindPython</code> 经常找不到 <code>Python_INCLUDE_DIRS</code>, 这时可以通过 Python 解释器查找.</p>
+<h2 id="使用-pytorch-和-pybind11">使用 PyTorch 和 pybind11</h2>
+<p>很遗憾, PyTorch 的 C++ 接口的 API 文档十分简略. 将就着猜猜怎么用吧!</p>
+<details class="tag-plugin colorful folding"><summary><span>完整 CMakeLists.txt</span></summary><div class="body"><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span> (VERSION <span class="number">3.21</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span> (CMAKE_CXX_STANDARD <span class="number">14</span>)</span><br><span class="line"><span class="keyword">set</span> (CMAKE_CXX_STANDARD_REQUIRED <span class="keyword">ON</span>)</span><br><span class="line"><span class="keyword">set</span> (CMAKE_CUDA_STANDARD <span class="number">14</span>)</span><br><span class="line"><span class="keyword">set</span> (CMAKE_CUDA_STANDARD_REQUIRED <span class="keyword">ON</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">project</span> (<span class="string">"ConvByCluster"</span> LANGUAGES CXX CUDA)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (MSVC)</span><br><span class="line">  <span class="comment"># suppress C4624</span></span><br><span class="line">  <span class="keyword">set</span> (CMAKE_CXX_FLAGS <span class="string">"${CMAKE_CXX_FLAGS} /wd4624"</span>)</span><br><span class="line"><span class="keyword">endif</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">find_package</span>(PythonInterp <span class="number">3</span> REQUIRED)</span><br><span class="line"><span class="keyword">find_package</span>(PythonLibs <span class="number">3</span> REQUIRED)</span><br><span class="line"></span><br><span class="line"><span class="keyword">execute_process</span>(<span class="keyword">COMMAND</span> <span class="variable">${PYTHON_EXECUTABLE}</span> -c <span class="string">"import torch; print(torch.utils.cmake_prefix_path)"</span> OUTPUT_VARIABLE PYTORCH_CMAKE_PREFIX_PATH OUTPUT_STRIP_TRAILING_WHITESPACE)</span><br><span class="line"><span class="keyword">list</span>(APPEND CMAKE_PREFIX_PATH <span class="string">"${PYTORCH_CMAKE_PREFIX_PATH}/Torch"</span>)</span><br><span class="line"><span class="keyword">message</span>(<span class="string">"PYTORCH_CMAKE_PREFIX_PATH ${PYTORCH_CMAKE_PREFIX_PATH}"</span>)</span><br><span class="line"><span class="keyword">message</span>(<span class="string">"CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH}"</span>)</span><br><span class="line"><span class="keyword">find_package</span>(Torch REQUIRED)</span><br><span class="line"><span class="keyword">find_library</span>(TORCH_PYTHON_LIBRARY torch_python PATHS <span class="string">"${TORCH_INSTALL_PREFIX}/lib"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">message</span>(<span class="string">"TORCH_LIBRARIES: ${TORCH_LIBRARIES}"</span>)</span><br><span class="line"><span class="keyword">message</span>(<span class="string">"TORCH_PYTHON_LIBRARY: ${TORCH_PYTHON_LIBRARY}"</span>)</span><br><span class="line"><span class="keyword">message</span>(<span class="string">"CMAKE_CUDA_FLAGS: ${CMAKE_CUDA_FLAGS}"</span>)</span><br><span class="line"><span class="keyword">message</span>(<span class="string">"CUDA_NVCC_FLAGS: ${CUDA_NVCC_FLAGS}"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">include_directories</span>(<span class="variable">${PYTHON_INCLUDE_DIRS}</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_library</span>(conv_by_cluster SHARED <span class="string">"kernel.cpp"</span>)</span><br><span class="line"><span class="keyword">target_link_libraries</span>(conv_by_cluster</span><br><span class="line">  <span class="variable">${PYTHON_LIBRARIES}</span></span><br><span class="line">  <span class="variable">${TORCH_LIBRARIES}</span></span><br><span class="line">  <span class="variable">${TORCH_PYTHON_LIBRARY}</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">target_compile_definitions</span>(conv_by_cluster PRIVATE TORCH_EXTENSION_NAME=conv_by_cluster)</span><br></pre></td></tr></table></figure></div></details>
+<h3 id="在-c-中调用-pytorch">在 C++ 中调用 PyTorch</h3>
+<p>确保已在 Python 环境中安装 <code>torch</code>, 即可通过 Python 解释器找到 PyTorch 库</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">execute_process</span>(<span class="keyword">COMMAND</span> <span class="variable">${PYTHON_EXECUTABLE}</span> -c <span class="string">"import torch; print(torch.utils.cmake_prefix_path)"</span> OUTPUT_VARIABLE PYTORCH_CMAKE_PREFIX_PATH OUTPUT_STRIP_TRAILING_WHITESPACE)</span><br><span class="line"><span class="keyword">list</span>(APPEND CMAKE_PREFIX_PATH <span class="string">"${PYTORCH_CMAKE_PREFIX_PATH}/Torch"</span>)</span><br><span class="line"><span class="keyword">message</span>(<span class="string">"PYTORCH_CMAKE_PREFIX_PATH ${PYTORCH_CMAKE_PREFIX_PATH}"</span>)</span><br><span class="line"><span class="keyword">message</span>(<span class="string">"CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH}"</span>)</span><br><span class="line"><span class="keyword">find_package</span>(Torch REQUIRED)</span><br></pre></td></tr></table></figure>
+<p><code>FindTorch</code> 已经把 <code>PyTorch</code> 的头文件添加到包含目录中, 还需要静态链接 <code>TORCH_LIBRARIES</code></p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">target_link_libraries</span>(conv_by_cluster</span><br><span class="line">  <span class="variable">${PYTHON_LIBRARIES}</span></span><br><span class="line">  <span class="variable">${TORCH_LIBRARIES}</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>这样, 在 C++ 代码中</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;torch/torch.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>{</span><br><span class="line">  torch::Tensor tensor = torch::<span class="built_in">rand</span>({<span class="number">2</span>, <span class="number">3</span>}).<span class="built_in">to</span>(torch::kCUDA);</span><br><span class="line">  std::cout &lt;&lt; tensor &lt;&lt; std::endl;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>即可使用 PyTorch.</p>
+<h3 id="添加-pybind11-导出">添加 pybind11 导出</h3>
+<p>PyTorch 的包含文件中已经引用了 pybind11. 还需要额外静态链接一个库</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">find_library</span>(TORCH_PYTHON_LIBRARY torch_python PATHS <span class="string">"${TORCH_INSTALL_PREFIX}/lib"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">target_link_libraries</span>(conv_by_cluster</span><br><span class="line">  <span class="variable">${PYTHON_LIBRARIES}</span></span><br><span class="line">  <span class="variable">${TORCH_LIBRARIES}</span></span><br><span class="line">  <span class="variable">${TORCH_PYTHON_LIBRARY}</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>在 C++ 代码中</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;torch/extension.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line"><span class="function">torch::Tensor <span class="title">Test_forward_cpu</span><span class="params">(<span class="type">const</span> torch::Tensor &amp;x, <span class="type">const</span> torch::Tensor &amp;y)</span> </span>{</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function">std::vector&lt;torch::Tensor&gt; <span class="title">Test_backward_cpu</span><span class="params">(<span class="type">const</span> torch::Tensor &amp;gradOutput)</span> </span>{</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="built_in">PYBIND11_MODULE</span>(TORCH_EXTENSION_NAME, m) {</span><br><span class="line">  m.<span class="built_in">def</span>(<span class="string">"forward"</span>, &amp;Test_forward_cpu, <span class="string">"Test forward"</span>);</span><br><span class="line">  m.<span class="built_in">def</span>(<span class="string">"backward"</span>, &amp;Test_backward_cpu, <span class="string">"Test backward"</span>);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>需要添加定义</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">target_compile_definitions</span>(conv_by_cluster PRIVATE TORCH_EXTENSION_NAME=conv_by_cluster)</span><br></pre></td></tr></table></figure>
+<p>使得 <code>PYBIND11_MODULE</code> 生成的 <code>PyInit_xxx</code> 函数调用名称和可执行文件名相同. 另外, 在 Windows 上, 需要把 <code>.dll</code> 后缀重命名为 <code>.pyd</code> 才能用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> conv_by_cluster <span class="keyword">import</span> forward, backward</span><br></pre></td></tr></table></figure>
+<p>引入.</p>
+<h3 id="解决动态链接问题">解决动态链接问题</h3>
+<p>在 Windows 上, 如果生成了调用 PyTorch 的可执行文件, 可能需要把 PyTorch 使用的各种动态链接库复制到可执行文件目录</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># The following code block is suggested to be used on Windows.</span></span><br><span class="line"><span class="comment"># According to https://github.com/pytorch/pytorch/issues/25457,</span></span><br><span class="line"><span class="comment"># the DLLs need to be copied to avoid memory errors.</span></span><br><span class="line"><span class="keyword">if</span> (WIN32)</span><br><span class="line">    <span class="keyword">file</span>(GLOB TORCH_DLLS <span class="string">"${TORCH_INSTALL_PREFIX}/lib/*.dll"</span>)</span><br><span class="line">    <span class="keyword">add_custom_command</span>(<span class="keyword">TARGET</span> _libzerogomoku</span><br><span class="line">                       POST_BUILD</span><br><span class="line">                       <span class="keyword">COMMAND</span> <span class="variable">${CMAKE_COMMAND}</span> -E copy_if_different</span><br><span class="line">                       <span class="variable">${TORCH_DLLS}</span></span><br><span class="line">                       $&lt;TARGET_FILE_DIR:_libzerogomoku&gt;)</span><br><span class="line"><span class="keyword">endif</span> (WIN32)</span><br></pre></td></tr></table></figure>
+<p>才能正常运行. 如果是生成了 pybind11 接口库, 则不需要这么做, 应当在 Python 代码中先引入 PyTorch 再引入拓展库.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> conv_by_cluster <span class="keyword">import</span> forward, backward</span><br></pre></td></tr></table></figure>
+<p>如果先引入了拓展库, 容易导致找不到 DLL 或者 DLL 冲突. 另外, 其他的一些 Python CUDA 包, 如 <code>bitsandbytes</code> 等在 Windows 上找不到 cudart, cudnn 等问题都可以尝试先 <code>import torch</code>. PyTorch 会加载这些动态链接库, 而且这些库是内置在 PyTorch 中的, 通常不会找不到.</p>
+<h2 id="调试-c-代码">调试 C++ 代码</h2>
+<p>使用 Conda 环境时通常不会安装 Python 解释器的调试库 <code>pythonx.xx_d.lib</code>, 通常调试代码时也不需要对 Python 解释器本身进行调试, 然而, 如果定义了 <code>_DEBUG</code> 符号, <code>Python.h</code> 会强制通过 <code>#pragma</code> 链接 Python 调试库, 导致链接出错. <a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifdef</span> _DEBUG</span></span><br><span class="line"><span class="meta">#<span class="keyword">undef</span> _DEBUG</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Python.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> _DEBUG 1</span></span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Python.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<p>在 C++ 代码对 <code>Python.h</code> 暂时取消 <code>_DEBUG</code> 宏. <code>torch/extension.h</code> 引用了 <code>Python.h</code>, 也取消 <code>_DEBUG</code></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifdef</span> _DEBUG</span></span><br><span class="line"><span class="meta">#<span class="keyword">undef</span> _DEBUG</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;torch/extension.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> _DEBUG 1</span></span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;torch/extension.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<p>SWIG 提供了一个宏定义可实现上面的效果</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_compile_definitions</span>(SWIG_PYTHON_INTERPRETER_NO_DEBUG)</span><br></pre></td></tr></table></figure>
+<p>使用 VSCode 调试从 Python 调用的 C++ 代码, 可以使用附加启动功能. 在 <code>launch.json</code> 中添加配置</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">{</span></span><br><span class="line">  <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"(Windows) 附加"</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">"type"</span><span class="punctuation">:</span> <span class="string">"cppvsdbg"</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">"request"</span><span class="punctuation">:</span> <span class="string">"attach"</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">"processId"</span><span class="punctuation">:</span> <span class="string">"${command:pickProcess}"</span></span><br><span class="line"><span class="punctuation">}</span></span><br></pre></td></tr></table></figure>
+<p>先启动 Python 解释器 (可以附加 Python 调试器). 使用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os; <span class="built_in">print</span>(os.getpid())</span><br></pre></td></tr></table></figure>
+<p>查看 PID, 不要结束 Python 调试, 启动 C++ 调试附加到该进程, 即可命中 C++ 代码中的断点.</p>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>https://discourse.cmake.org/t/create-and-activate-python-conda-environment-with-cmake/5777<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>通常也不会多次调用它, 其他部分的 C++ 代码都不需要引用 Numpy 的头文件<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>这个调试库通过 pragma 引入, 在 CMake 生成的项目文件中并没有引用, 很难排查<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+
+
+<div class="article-footer reveal fs14">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-sa/4.0/">署名-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section>
+    
+    <section id="share">
+      <div class="header"><span>分享文章</span></div>
+      <div class="body">
+        <div class="link"><input class="copy-area" readonly="true" id="copy-link" value="https://duanyll.com/2023/7/12/Python-CMake/" /></div>
+        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot)"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/b32ef3da1162a.svg"/></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=https://duanyll.com/2023/7/12/Python-CMake/&title=使用 CMake 构建 PyTorch 和 Numpy C++ 拓展 - duanyll&summary=使用 CMake 构建 PyTorch 和 Numpy C++ 拓展能适应更复杂的项目并使用灵活的编译选项. 然而, 许多互联网上的教程中的方法已经不能在较新版本的 PyTorch 和 CMake 使用. 本文介绍了几种作者在近期测试..."><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/80c07e4dbb303.svg"/></a><a class="social share-item email" href="mailto:?subject=使用 CMake 构建 PyTorch 和 Numpy C++ 拓展 - duanyll&amp;body=https://duanyll.com/2023/7/12/Python-CMake/"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/a1b00e20f425d.svg"/></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/8411ed322ced6.svg"/></a><a class="social share-item print" onclick="window.print()"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/img/print.svg" /></a><a class="social share-item source" target="_blank" rel="noopener" href="https://github.com/duanyll/duanyll.com-hexo/blob/master/source/_posts/tech/2023-7-12-Python-CMake.md"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/08a41b181ce68.svg"/></a></div>
+        
+        <div class="qrcode" id="qrcode-wechat" style="visibility:hidden;height:0">
+          <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=https://duanyll.com/2023/7/12/Python-CMake/"/>
+        </div>
+        
+      </div>
+    </section>
+    
+      <section id="star">
+        <div class="body">
+          <span class="github-button-wrap">
+            <a class="github-button" 
+               target="_blank" rel="noopener" href="https://github.com/duanyll/duanyll.com-hexo" 
+               data-color-scheme="no-preference: light; light: light; dark: dark;" 
+               data-size="large" 
+               data-show-count="true" 
+               aria-label="Star this site on GitHub">Star</a>
+            <span>喜欢这个网站？在 GitHub 上给它一个 Star 吧！</span>
+          </span>
+        </div>
+      </section>
+    </div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/12/3/TimeSeries-1/">时间序列分析作业 1</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/6/26/Information/">信息论速通</a></div></section></div>
+
+
+<div class="related-wrap reveal" id="related-posts">
+    <section class='header'>
+      <div class='title cap theme'>您可能感兴趣的文章</div>
+    </section>
+    <section class='body'>
+    <div class="related-posts"><a class="item" href="/2024/3/1/STM32-CMake/" title="在 VSCode 上使用 CMake 开发 STM32CubeMX 项目"><span class="title">在 VSCode 上使用 CMake 开发 STM32CubeMX 项目</span></a><a class="item" href="/2025/8/29/Paste-And-Upload/" title="更好的 VSCode 粘贴上传图床插件"><span class="title">更好的 VSCode 粘贴上传图床插件</span></a><a class="item" href="/2024/6/30/WSL2-Docker-Deep-Learning/" title="基于 WSL2 和 Docker 的深度学习环境指北"><span class="title">基于 WSL2 和 Docker 的深度学习环境指北</span></a><a class="item" href="/2025/9/1/Docker-Uv/" title="Docker 和 uv 炼丹实践指北"><span class="title">Docker 和 uv 炼丹实践指北</span></a><a class="item" href="/2018/11/28/Jekyll-Search/" title="为你的Jekyll博客添加搜索文章功能"><span class="title">为你的Jekyll博客添加搜索文章功能</span><span class="excerpt">众所周知，Github上的Jekyll上实现自定义插件很困难，因此即使有Jekyll的搜索插件，也只能手写js代码。静态网站实现搜索原理是这样的，通过HTTP请求获取posts.json，然后本地解析里面内容实现搜索。</span></a></div></section></div>
+
+
+
+  <div class='related-wrap md-text reveal' id="comments">
+    <section class='header cmt-title cap theme'>
+      快来参与讨论吧
+    </section>
+    <section class='body cmt-body utterances'>
+      
+
+<!-- <svg class="loading" style="vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2709"><path d="M832 512c0-176-144-320-320-320V128c211.2 0 384 172.8 384 384h-64zM192 512c0 176 144 320 320 320v64C300.8 896 128 723.2 128 512h64z" p-id="2710"></path></svg> -->
+
+<div id="utterances" repo="duanyll/duanyll.com-comment" issue-term="pathname" theme="switch" label="Comment" enabled="true" issue_term="pathname"></div>
+
+    </section>
+  </div>
+
+
+
+      
+      
+<footer class="page-footer reveal fs12"><hr><div class="sitemap"><div class="sitemap-group"><span class="fs14">博客</span><a href="/">近期</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></div><div class="sitemap-group"><span class="fs14">项目</span><a target="_blank" rel="noopener" href="https://github.com/duanyll">开源库</a><a href="/wiki/">文档</a><a target="_blank" rel="noopener" href="https://github.com/duanyll/scoop-bucket">Scoop Bucket</a></div><div class="sitemap-group"><span class="fs14">社交</span><a href="/about/#comments">留言板</a><a target="_blank" rel="noopener" href="https://netunion.org">NetUnion</a><a target="_blank" rel="noopener" href="https://www.travellings.cn/go.html">开往</a></div><div class="sitemap-group"><span class="fs14">更多</span><a href="/about">关于本站</a><a target="_blank" rel="noopener" href="https://github.com/duanyll/duanyll.com-hexo">GitHub 源码</a><a target="_blank" rel="noopener" href="https://duanyll.cloudflareaccess.com">Dashboard</a></div></div><div class="text"><p>本站由 <a target="_blank" rel="noopener" href="https://github.com/duanyll">duanyll</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。 本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = stellar.config.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.21.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.21.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+    root : '/',
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js","memos":"/js/plugins/memos.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide:not(.swiper-slide-duplicate) img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.copycode = Object.assign({"enable":true,"js":"/js/plugins/copycode.js","default_text":"Copy","success_text":"Copied"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+  <script>
+  function loadUtterances() {
+    const els = document.querySelectorAll("#comments #utterances");
+    if (els.length === 0) return;
+    els.forEach((el, i) => {
+      try {
+        el.innerHTML = '';
+      } catch (error) {
+        console.error(error);
+      }
+      var script = document.createElement('script');
+      script.src = 'https://utteranc.es/client.js';
+      script.async = true;
+      for (let key of Object.keys(el.attributes)) {
+        let attr = el.attributes[key];
+        if (['class', 'id'].includes(attr.name) === false) {
+          var name = attr.name;
+          var value = attr.value;
+          if (name == 'theme' && value == 'switch') {
+            value = window.currentTheme == 'dark' ? 'github-dark' : 'github-light';
+          }
+          script.setAttribute(name, value);
+        }
+      }
+      el.appendChild(script);
+    });
+  }
+  window.addEventListener('DOMContentLoaded', (event) => {
+      loadUtterances();
+  });
+</script>
+
+
+
+
+
+  
+<script src="https://buttons.github.io/buttons.js" async></script>
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>
