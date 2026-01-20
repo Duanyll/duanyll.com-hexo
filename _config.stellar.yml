@@ -37,6 +37,7 @@ sidebar:
 post-index: # 近期发布 分类 标签 归档 and ...
   # '朋友文章': /friends/rss/
   '笔记': /wiki/tags/课程笔记/
+  '开往 🚇': https://www.travellings.cn/go.html
 
 
 ######## Main ########
@@ -190,6 +191,9 @@ footer:
     comments:
       icon: '<img src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/942ebbf1a4b91.svg"/>'
       url: /about/#comments
+    travelling:
+      icon: '<img src="https://www.travellings.cn/assets/favicon-fluent-emoji.svg"/>'
+      url: https://www.travellings.cn/go.html
     darkmode-switch:
       icon: '<img src="/img/half-moon.svg"/>'
       url: javascript:darkmode.next()
@@ -206,6 +210,7 @@ footer:
     '社交':
       - '[留言板](/about/#comments)'
       - '[NetUnion](https://netunion.org)'
+      - '[开往](https://www.travellings.cn/go.html)'
     '更多':
       - '[关于本站](/about)'
       - '[GitHub 源码](https://github.com/duanyll/duanyll.com-hexo)'
