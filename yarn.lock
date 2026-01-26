@@ -1083,12 +1083,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^24.10.1":
-  version: 24.10.1
-  resolution: "@types/node@npm:24.10.1"
+"@types/node@npm:^25.0.10":
+  version: 25.0.10
+  resolution: "@types/node@npm:25.0.10"
   dependencies:
     undici-types: "npm:~7.16.0"
-  checksum: 10c0/d6bca7a78f550fbb376f236f92b405d676003a8a09a1b411f55920ef34286ee3ee51f566203920e835478784df52662b5b2af89159d9d319352e9ea21801c002
+  checksum: 10c0/9edc3c812b487c32c76eebac7c87acae1f69515a0bc3f6b545806d513eb9e918c3217bf751dc93da39f60e06bf1b0caa92258ef3a6dd6457124b2e761e54f61f
   languageName: node
   linkType: hard
 
@@ -4401,7 +4401,7 @@ __metadata:
   resolution: "image@workspace:workers/image"
   dependencies:
     "@cloudflare/vitest-pool-workers": "npm:^0.10.7"
-    "@types/node": "npm:^24.10.1"
+    "@types/node": "npm:^25.0.10"
     typescript: "npm:^5.9.3"
     vitest: "npm:^4.0.10"
     wrangler: "npm:^4.47.0"
