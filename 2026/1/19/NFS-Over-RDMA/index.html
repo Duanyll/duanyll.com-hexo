@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 8.1.1">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.21.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+
+  
+  
+  <title>Mellanox Connect-X 5 网卡 SN2700 交换机 NFS Over RDMA (RoCEv2) 配置指北 - duanyll</title>
+
+  
+    <meta name="description" content="目前 CX555 网卡和 SN2700 交换机的价格已经能让 100G 以太网走进寻常百姓家。配置 RoCEv2 和 NFS Over RDMA 其实并不复杂，但网上的资料比较零散，而且有些已经过时。本文记录一下我个人的配置经验，供大家参考。 环境  网卡：所有服务器使用 Mellanox ConnectX-5 EN 网卡（本例中使用 惠普版 cx555a） 交换机：Mellanox Spectr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mellanox Connect-X 5 网卡 SN2700 交换机 NFS Over RDMA (RoCEv2) 配置指北">
+<meta property="og:url" content="https://duanyll.com/2026/1/19/NFS-Over-RDMA/">
+<meta property="og:site_name" content="duanyll">
+<meta property="og:description" content="目前 CX555 网卡和 SN2700 交换机的价格已经能让 100G 以太网走进寻常百姓家。配置 RoCEv2 和 NFS Over RDMA 其实并不复杂，但网上的资料比较零散，而且有些已经过时。本文记录一下我个人的配置经验，供大家参考。 环境  网卡：所有服务器使用 Mellanox ConnectX-5 EN 网卡（本例中使用 惠普版 cx555a） 交换机：Mellanox Spectr">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-01-19T00:00:00.000Z">
+<meta property="article:modified_time" content="2026-01-19T00:00:00.000Z">
+<meta property="article:author" content="duanyll">
+<meta property="article:tag" content="infra">
+<meta property="article:tag" content="指北">
+<meta name="twitter:card" content="summary">
+  
+  
+  
+  <meta name="keywords" content="指北,infra">
+
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="duanyll" type="application/atom+xml">
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+    <link rel="shortcut icon" href="https://cdn.duanyll.com/favicon.ico">
+  
+
+  
+
+  
+
+
+  
+
+  
+    <script>
+      var darkmodeSettings = localStorage.getItem('darkmode') || 'auto';
+      var enableDarkmode = darkmodeSettings == 'true' 
+        || (darkmodeSettings == 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (enableDarkmode) {
+        document.documentElement.classList.add('global-darkmode');
+      }
+      window.currentTheme = enableDarkmode ? 'dark' : 'light';
+    </script>
+  
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://cdn.duanyll.com/android-chrome-192x192.png" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">duanyll</div><div class="sub normal cap">qwq</div><div class="sub hover cap" style="opacity:0"> QWQ</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Wiki</a><a class="nav-item" href="/about/">关于</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Mellanox Connect-X 5 网卡 SN2700 交换机 NFS Over RDMA (RoCEv2) 配置指北</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83"><span class="toc-text">环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%A4%E6%8D%A2%E6%9C%BA%E9%85%8D%E7%BD%AE"><span class="toc-text">交换机配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A9%B1%E5%8A%A8%E5%AE%89%E8%A3%85"><span class="toc-text">驱动安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#proxmox-ve"><span class="toc-text">Proxmox VE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ubuntu-22.04"><span class="toc-text">Ubuntu 22.04</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ip-%E5%92%8C-qos-%E9%85%8D%E7%BD%AE"><span class="toc-text">IP 和 QoS 配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#networkmanager-ubuntu-desktop"><span class="toc-text">NetworkManager (Ubuntu Desktop)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#systemd-networkd-ubuntu-server"><span class="toc-text">systemd-networkd (Ubuntu Server)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ifupdown-proxmox-ve"><span class="toc-text">ifupdown (Proxmox VE)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rocev2-%E6%B5%8B%E8%AF%95"><span class="toc-text">RoCEv2 测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nfs-over-rdma-%E9%85%8D%E7%BD%AE"><span class="toc-text">NFS Over RDMA 配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E7%AB%AF"><span class="toc-text">服务端</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="toc-text">客户端</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E9%87%8A"><span class="toc-text">注释</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/duanyll" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/08a41b181ce68.svg"/></a><a class="social" href="/about/#comments" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/942ebbf1a4b91.svg"/></a><a class="social" href="https://www.travellings.cn/go.html" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://www.travellings.cn/assets/favicon-fluent-emoji.svg"/></a><a class="social" href="javascript:darkmode.next()" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/img/half-moon.svg"/></a></div></footer>
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+        
+
+
+
+<div class="bread-nav fs12"><div class="left"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></div><div id="post-meta">
+    <span>发布于&nbsp;<time datetime="2026-01-19T00:00:00.000Z">2026-01-19</time></span>
+    
+    <span>更新于&nbsp;<time datetime="2026-01-19T00:00:00.000Z">2026-01-19</time></span>
+    </div></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Mellanox Connect-X 5 网卡 SN2700 交换机 NFS Over RDMA (RoCEv2) 配置指北</span></h1>
+
+<div class="article-tags"><a class="tag-plugin colorful hashtag" color="green" href="/tags/%E6%8C%87%E5%8C%97/" >  <svg t="1701408144765" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4228" width="200" height="200"><path d="M426.6 64.8c34.8 5.8 58.4 38.8 52.6 73.6l-19.6 117.6h190.2l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6s58.4 38.8 52.6 73.6l-19.4 117.6H896c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-42.6 256H832c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.6-117.4h-190.4l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.4-117.8H128c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l42.6-256H192c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6z m11.6 319.2l-42.6 256h190.2l42.6-256h-190.2z" p-id="4229"></path></svg>  <span>指北</span></a><a class="tag-plugin colorful hashtag" color="orange" href="/tags/infra/" >  <svg t="1701408144765" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4228" width="200" height="200"><path d="M426.6 64.8c34.8 5.8 58.4 38.8 52.6 73.6l-19.6 117.6h190.2l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6s58.4 38.8 52.6 73.6l-19.4 117.6H896c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-42.6 256H832c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.6-117.4h-190.4l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.4-117.8H128c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l42.6-256H192c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6z m11.6 319.2l-42.6 256h190.2l42.6-256h-190.2z" p-id="4229"></path></svg>  <span>infra</span></a></div>
+<p>目前 CX555 网卡和 SN2700 交换机的价格已经能让 100G 以太网走进寻常百姓家。配置 RoCEv2 和 NFS Over RDMA 其实并不复杂，但网上的资料比较零散，而且有些已经过时。本文记录一下我个人的配置经验，供大家参考。</p>
+<h2 id="环境">环境</h2>
+<ul>
+<li>网卡：所有服务器使用 Mellanox ConnectX-5 EN 网卡（本例中使用 <a href="/2025/11/26/HPE-cx555a/">惠普版 cx555a</a>）</li>
+<li>交换机：Mellanox Spectrum SN2700，运行 NVIDIA Onyx OS <code>3.10.4006</code></li>
+<li>存储服务器：Proxmox VE 9.1.4，内核 <code>6.17.4-1-pve</code>。别用 Truenas SCALE，Truenas SCALE 的 NFS Over RDMA 特性只在付费版本中支持</li>
+<li>客户端服务器：Ubuntu 22.04 LTS，使用 HWE 内核 <code>6.8.0-90-generic</code>。建议从 Ubuntu 22.04 的 GA 内核升级到 HWE 内核，从 5.15 升级到 6.8 补充了相当多的 NFS 相关特性和修复</li>
+</ul>
+<h2 id="交换机配置">交换机配置</h2>
+<p>需要在交换机上启用 RoCEv2 相关特性。请参阅官方文档</p>
+<div class="tag-plugin link dis-select"><a class="link-card plain" title="" href="https://enterprise-support.nvidia.com/s/article/recommended-network-configuration-examples-for-roce-deployment" target="_blank" rel="external nofollow noopener noreferrer" cardlink="" autofill="title,icon"><div class="left"><span class="title">https://enterprise-support.nvidia.com/s/article/recommended-network-configuration-examples-for-roce-deployment</span><span class="cap link fs12">https://enterprise-support.nvidia.com/s/article/recommended-network-configuration-examples-for-roce-deployment</span></div><div class="right"><div class="lazy img" data-bg="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/link/8f277b4ee0ecd.svg"></div></div></a></div>
+<p>自从 Onyx OS <code>3.8.2008</code> 版本起，交换机自带了 <code>roce</code> 命令，可以一键启用 RoCEv2 特性。使用 SSH 或 Console 登陆交换机命令行，执行以下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">enable</span><br><span class="line">configure terminal</span><br><span class="line">roce</span><br><span class="line">write memory</span><br></pre></td></tr></table></figure>
+<p>即可自动应用 PFC，ECN，DSCP，DCBX 等相关配置。在交换机和网卡侧都启用 DCBX 特性后，网卡会自动与交换机协商 PFC 和 ETS 配置，无需手动配置。在交换机上运行 <code>show roce</code> 命令可以查看自动应用的 RoCEv2 配置模版：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">RoCE mode      : lossless</span><br><span class="line">LLDP           : enabled</span><br><span class="line">Port trust mode: L3</span><br><span class="line"></span><br><span class="line">Application TLV:</span><br><span class="line">  Selector: udp</span><br><span class="line">  Protocol: 4791</span><br><span class="line">  Priority: 3</span><br><span class="line"></span><br><span class="line">Port congestion-control:</span><br><span class="line">  Mode    : ecn, absolute</span><br><span class="line">  Min (KB): 150</span><br><span class="line">  Max (KB): 1500</span><br><span class="line"></span><br><span class="line">PFC              : enabled</span><br><span class="line">switch-priority 3: enabled</span><br><span class="line"></span><br><span class="line">RoCE used TCs:</span><br><span class="line">  ----------------------------------------------</span><br><span class="line">  Switch-Priority   TC     Application   ETS    </span><br><span class="line">  ----------------------------------------------</span><br><span class="line">  3                 3      RoCE          WRR 50%</span><br><span class="line">  6                 6      CNP           Strict </span><br><span class="line"></span><br><span class="line">RoCE buffer pools:</span><br><span class="line">  ----------------------------------------------------------------------------------------------</span><br><span class="line">  Traffic                  Type      Memory   Switch        Memory actual   Usage    Max Usage </span><br><span class="line">  Pool                               [%]      Priorities                                       </span><br><span class="line">  ----------------------------------------------------------------------------------------------</span><br><span class="line">  lossy-default            lossy     auto     0, 1, 2, 4,   3.6M            0        47.1K     </span><br><span class="line">                                              5, 6, 7                                </span><br><span class="line">  roce-reserved            lossless  auto     3             3.6M            0        1.8M      </span><br><span class="line"></span><br><span class="line">Exception list:</span><br><span class="line">N/A</span><br></pre></td></tr></table></figure>
+<p>如果 Exception list 非空，说明当前交换机上有配置与 RoCEv2 冲突。重启交换机可能会清除这些冲突配置，或者直接恢复交换机出厂设置，然后重新应用 <code>roce</code> 命令。</p>
+<h2 id="驱动安装">驱动安装</h2>
+<blockquote>
+<p>总的来说，我充分地信任 apt 并倾向于使用发行版自带的内核和驱动，或者通过 apt 在线仓库来安装和更新驱动。我不建议使用各种 <code>install.sh</code> 和 <code>make install</code> 脚本，这些东西往往会导致系统变得不可维护，在某次 <code>apt upgrade</code> 之后爆炸。</p>
+</blockquote>
+<p>下面几乎所有命令都需要 root 权限，请根据需要加上 <code>sudo</code>，或直接 <code>sudo -i</code> 切换到 root 用户。</p>
+<h3 id="proxmox-ve">Proxmox VE</h3>
+<p>Proxmox VE 9.1.4 默认使用一个相当新版本的内核（来自 Ubuntu 25.04，<code>6.17.4-1-pve</code>），自带的 <code>mlx5_core</code> 和 <code>mlx5_ib</code> 已经对 RoCEv2 和 NFS Over RDMA 有很好的支持，安装 DOCA_OFED （原 MLNX_OFED，NVIDIA 收购后更名）反而会导致诡异的问题。如果需要使用 DOCA_OFED 内的 Infiniband 相关的用户态工具，可以先安装 DOCA_OFED 后再卸载 dkms 包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> DOCA_URL=<span class="string">"https://linux.mellanox.com/public/repo/doca/3.2.0/debian13/x86_64/"</span></span><br><span class="line">BASE_URL=$([ <span class="string">"<span class="variable">${DOCA_PREPUBLISH:-false}</span>"</span> = <span class="string">"true"</span> ] &amp;&amp; <span class="built_in">echo</span> https://doca-repo-prod.nvidia.com/public/repo/doca || <span class="built_in">echo</span> https://linux.mellanox.com/public/repo/doca)</span><br><span class="line">DOCA_SUFFIX=<span class="variable">${DOCA_URL#*public/repo/doca/}</span>; DOCA_URL=<span class="string">"<span class="variable">$BASE_URL</span>/<span class="variable">$DOCA_SUFFIX</span>"</span></span><br><span class="line">curl <span class="variable">$BASE_URL</span>/GPG-KEY-Mellanox.pub | gpg --dearmor &gt; /etc/apt/trusted.gpg.d/GPG-KEY-Mellanox.pub</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"deb [signed-by=/etc/apt/trusted.gpg.d/GPG-KEY-Mellanox.pub] <span class="variable">$DOCA_URL</span> ./"</span> &gt; /etc/apt/sources.list.d/doca.list</span><br><span class="line"><span class="built_in">sudo</span> apt-get update</span><br><span class="line"><span class="built_in">sudo</span> apt-get -y install doca-networking</span><br></pre></td></tr></table></figure>
+<p>卸载多余的 dkms 驱动包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get -y remove --purge isert-dkms  mlnx-ofed-kernel-dkms iser-dkms knem-dkms srp-dkms</span><br></pre></td></tr></table></figure>
+<p>其中 <code>kernel-mft-dkms</code> 包可以保留，它不与内核自带的驱动冲突，并且我们需要用到 MFT 功能。</p>
+<p>另外，在 PVE 上也 <strong>不要</strong> 安装 <code>mlnx-nfsrdma-dkms</code> 包，装了会出问题。</p>
+<blockquote>
+<p>关于我是怎么发现这个问题的：我配了两台 PVE 服务器做测试，一开始都安装了 <code>doca-networking</code>，结果先装的那台服务器装成了 Debian 的内核头文件 <code>linux-headers-amd64</code>，而不是 PVE 内核的头文件 <code>proxmox-default-headers</code>，导致 dkms 驱动实际上没装上，后面那台服务器装对了头文件。结果第一台服务器能用，第二台服务器有 dmesg 报错 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">infiniband mlx5_0: create_qp:3317:(pid 4751): Create QP type 2 failed</span><br></pre></td></tr></table></figure> 才发现在 PVE 上不需要 doca 的 dkms 驱动，卸载掉就好了。</p>
+</blockquote>
+<h3 id="ubuntu-22.04">Ubuntu 22.04</h3>
+<p>首先查看内核版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">uname</span> -r</span><br></pre></td></tr></table></figure>
+<p>如果还在 5.15 内核上，建议升级到 HWE 内核（6.8 版本），内核从 5.15 升级到 6.8 补充了相当多的 NFS 相关特性和修复</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt update</span><br><span class="line">apt install --install-recommends linux-generic-hwe-22.04</span><br></pre></td></tr></table></figure>
+<p>如果需要管理大量服务器，建议创建 udev 规则来统一所有机器上 Mellanox 网卡的设备命名：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/udev/rules.d/70-persistent-net.rules</span><br></pre></td></tr></table></figure>
+<p>根据网卡 mac 地址添加 udev 规则，例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SUBSYSTEM=="net", ACTION=="add", ATTRS{address}=="94:40:c9:xx:xx:xx", NAME="mce0"</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>mce0</code> 这个命名大概来自于某些 BSD 系统对 Mellanox 网卡的命名习惯，可以根据个人喜好修改</p>
+</blockquote>
+<p>与 Proxmox VE 不同，在 Ubuntu 22.04 上需要安装完整的 DOCA_OFED 套件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> DOCA_URL=<span class="string">"https://linux.mellanox.com/public/repo/doca/3.2.0/ubuntu22.04/x86_64/"</span></span><br><span class="line">BASE_URL=$([ <span class="string">"<span class="variable">${DOCA_PREPUBLISH:-false}</span>"</span> = <span class="string">"true"</span> ] &amp;&amp; <span class="built_in">echo</span> https://doca-repo-prod.nvidia.com/public/repo/doca || <span class="built_in">echo</span> https://linux.mellanox.com/public/repo/doca)</span><br><span class="line">DOCA_SUFFIX=<span class="variable">${DOCA_URL#*public/repo/doca/}</span>; DOCA_URL=<span class="string">"<span class="variable">$BASE_URL</span>/<span class="variable">$DOCA_SUFFIX</span>"</span></span><br><span class="line">curl <span class="variable">$BASE_URL</span>/GPG-KEY-Mellanox.pub | gpg --dearmor &gt; /etc/apt/trusted.gpg.d/GPG-KEY-Mellanox.pub</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"deb [signed-by=/etc/apt/trusted.gpg.d/GPG-KEY-Mellanox.pub] <span class="variable">$DOCA_URL</span> ./"</span> &gt; /etc/apt/sources.list.d/doca.list</span><br><span class="line"><span class="built_in">sudo</span> apt-get update</span><br><span class="line"><span class="built_in">sudo</span> apt-get -y install doca-networking</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>DOCA 3.2.1 在 Ubuntu 22.04 上有一些问题，需要同时安装 <code>gcc-12</code> 包才能成功编译内核模块。上面用的是 DOCA 3.2.0，暂时没有这个问题。</p>
+</blockquote>
+<p>安装完成后重启服务器，主要目的是应用 udev 规则来统一网卡命名。</p>
+<h2 id="ip-和-qos-配置">IP 和 QoS 配置</h2>
+<p>首先启用网卡的硬件 DCBX 特性：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mst start</span><br><span class="line">mlxconfig -d /dev/mst/mt4119_pciconf0 s LLDP_NB_DCBX_P1=TRUE LLDP_NB_TX_MODE_P1=2 LLDP_NB_RX_MODE_P1=2</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如果网卡设备不是 <code>/dev/mst/mt4119_pciconf0</code>，请使用 <code>mst status</code> 命令查看正确的设备路径</p>
+</blockquote>
+<p>配置后需要重启服务器才能生效，可以等到后续配完再重启。理论上用下面的命令能免重启重置网卡</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mlxfwreset -d /dev/mst/mt4119_pciconf0 r</span><br></pre></td></tr></table></figure>
+<p>接下来配置网卡的 IP 地址和 QoS。交换机自带的 RoCEv2 配置模版中不使用 VLAN，我们可以直接在网卡上配置普通的 IP 地址。不同的系统需要用不同的方法持久化配置并触发 QoS 设置脚本</p>
+<h3 id="networkmanager-ubuntu-desktop">NetworkManager (Ubuntu Desktop)</h3>
+<p>Ubuntu 22.04 自带 netplan 和 NetworkManager，建议使用 netplan 编写配置文件。编辑</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/netplan/01-network-manager-all.yaml</span><br></pre></td></tr></table></figure>
+<p>写入</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">network:</span></span><br><span class="line">  <span class="attr">version:</span> <span class="number">2</span></span><br><span class="line">  <span class="attr">renderer:</span> <span class="string">NetworkManager</span></span><br><span class="line">  <span class="attr">ethernets:</span></span><br><span class="line">    <span class="attr">mce0:</span></span><br><span class="line">      <span class="attr">addresses:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="number">192.168</span><span class="number">.6</span><span class="number">.101</span><span class="string">/24</span> <span class="comment"># 根据实际情况修改 IP 地址</span></span><br><span class="line">      <span class="attr">dhcp4:</span> <span class="literal">no</span></span><br><span class="line">      <span class="attr">mtu:</span> <span class="number">9000</span></span><br><span class="line">    <span class="comment"># 可以添加更多网卡的配置</span></span><br></pre></td></tr></table></figure>
+<p>并确保文件权限正确</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> 600 /etc/netplan/01-network-manager-all.yaml</span><br></pre></td></tr></table></figure>
+<p>写入 Post Up 脚本来补充 QoS 设置（Ubuntu 的 NetworkManager 自带一个 shim 脚本来兼容 ifupdown 的脚本）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/network/if-up.d/mlnx-roce-qos</span><br></pre></td></tr></table></figure>
+<p>写入以下内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> <span class="string">"<span class="variable">$IFACE</span>"</span> <span class="keyword">in</span></span><br><span class="line">    mce0)</span><br><span class="line">           <span class="built_in">echo</span> 106 &gt; /sys/class/infiniband/mlx5_0/tc/1/traffic_class</span><br><span class="line">           cma_roce_tos -d mlx5_0 -t 106</span><br><span class="line">           sysctl -w net.ipv4.tcp_ecn=1</span><br><span class="line">        ;;</span><br><span class="line"><span class="keyword">esac</span></span><br></pre></td></tr></table></figure>
+<p>保存后赋予可执行权限：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> +x /etc/network/if-up.d/mlnx-roce-qos</span><br></pre></td></tr></table></figure>
+<p>使用下面的命令应用 netplan 配置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netplan try</span><br></pre></td></tr></table></figure>
+<p>出现提示后按回车确认应用配置。</p>
+<h3 id="systemd-networkd-ubuntu-server">systemd-networkd (Ubuntu Server)</h3>
+<p>仍然是编辑 netplan 配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/netplan/99-static-mce0.yaml</span><br></pre></td></tr></table></figure>
+<p>写入</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">network:</span></span><br><span class="line">  <span class="attr">version:</span> <span class="number">2</span></span><br><span class="line">  <span class="attr">ethernets:</span></span><br><span class="line">    <span class="attr">mce0:</span></span><br><span class="line">      <span class="attr">addresses:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="number">192.168</span><span class="number">.6</span><span class="number">.102</span><span class="string">/24</span></span><br><span class="line">      <span class="attr">dhcp4:</span> <span class="literal">no</span></span><br><span class="line">      <span class="attr">mtu:</span> <span class="number">9000</span></span><br></pre></td></tr></table></figure>
+<p>保存后赋予正确权限</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> 600 /etc/netplan/99-static-mce0.yaml</span><br></pre></td></tr></table></figure>
+<p>写入 systemd-networkd dispather 脚本的 routable 事件来补充 QoS 设置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/networkd-dispatcher/routable.d/mlnx-roce-qos</span><br></pre></td></tr></table></figure>
+<p>写入以下内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> <span class="string">"<span class="variable">$IFACE</span>"</span> <span class="keyword">in</span></span><br><span class="line">    mce0)</span><br><span class="line">           <span class="built_in">echo</span> 106 &gt; /sys/class/infiniband/mlx5_0/tc/1/traffic_class</span><br><span class="line">           cma_roce_tos -d mlx5_0 -t 106</span><br><span class="line">           sysctl -w net.ipv4.tcp_ecn=1</span><br><span class="line">        ;;</span><br><span class="line"><span class="keyword">esac</span></span><br></pre></td></tr></table></figure>
+<p>保存后赋予可执行权限：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> +x /etc/networkd-dispatcher/routable.d/mlnx-roce-qos</span><br></pre></td></tr></table></figure>
+<p>使用下面的命令应用 netplan 配置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netplan try</span><br></pre></td></tr></table></figure>
+<p>出现提示后按回车确认应用配置。</p>
+<h3 id="ifupdown-proxmox-ve">ifupdown (Proxmox VE)</h3>
+<p>在 Proxmox VE 的 Web 面板中就可以配置静态 IP 地址并把 MTU 设置为 9000（在高级选项中）。不建议直接编辑 <code>/etc/network/interfaces</code> 文件，因为 PVE 会在 Web 面板中覆盖这个文件。</p>
+<p>写入 if-up 脚本来补充 QoS 设置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/network/if-up.d/mlnx-roce-qos</span><br></pre></td></tr></table></figure>
+<p>写入以下内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> <span class="string">"<span class="variable">$IFACE</span>"</span> <span class="keyword">in</span></span><br><span class="line">    mce0)  <span class="comment"># 根据实际情况修改网卡名称</span></span><br><span class="line">           <span class="built_in">echo</span> 106 &gt; /sys/class/infiniband/mlx5_0/tc/1/traffic_class</span><br><span class="line">           cma_roce_tos -d mlx5_0 -t 106</span><br><span class="line">           sysctl -w net.ipv4.tcp_ecn=1</span><br><span class="line">        ;;</span><br><span class="line"><span class="keyword">esac</span></span><br></pre></td></tr></table></figure>
+<p>保存后赋予可执行权限：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> +x /etc/network/if-up.d/mlnx-roce-qos</span><br></pre></td></tr></table></figure>
+<p>应用配置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ifdown mce0 &amp;&amp; ifup mce0</span><br></pre></td></tr></table></figure>
+<h2 id="rocev2-测试">RoCEv2 测试</h2>
+<p>到现在重启服务器，理论上 RoCEv2 就能通信了。做一些基本的检查：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mlnx_qos -i mce0</span><br></pre></td></tr></table></figure>
+<p>关键是确认 <code>DCBX Mode</code> 是 <code>Firmware Controlled</code>。刚刚开机后可能还没有接受到具体的 DCBX 配置，可以等几分钟再检查一次，正确的输出应该类似于：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">DCBX mode: Firmware controlled</span><br><span class="line">Priority trust state: dscp</span><br><span class="line">dscp2prio mapping:</span><br><span class="line">        prio:0 dscp:07,06,05,04,03,02,01,00,</span><br><span class="line">        prio:1 dscp:15,14,13,12,11,10,09,08,</span><br><span class="line">        prio:2 dscp:23,22,21,20,19,18,17,16,</span><br><span class="line">        prio:3 dscp:31,30,29,28,27,26,25,24,</span><br><span class="line">        prio:4 dscp:39,38,37,36,35,34,33,32,</span><br><span class="line">        prio:5 dscp:47,46,45,44,43,42,41,40,</span><br><span class="line">        prio:6 dscp:55,54,53,52,51,50,49,48,</span><br><span class="line">        prio:7 dscp:63,62,61,60,59,58,57,56,</span><br><span class="line">Receive buffer size (bytes): 130944,130944,0,0,0,0,0,0,max_buffer_size=262016</span><br><span class="line">Cable len: 7</span><br><span class="line">PFC configuration:</span><br><span class="line">        priority    0   1   2   3   4   5   6   7</span><br><span class="line">        enabled     0   0   0   1   0   0   0   0   </span><br><span class="line">        buffer      0   0   0   1   0   0   0   0   </span><br><span class="line">tc: 0 ratelimit: unlimited, tsa: ets, bw: 50%</span><br><span class="line">         priority:  0</span><br><span class="line">         priority:  1</span><br><span class="line">         priority:  2</span><br><span class="line">         priority:  4</span><br><span class="line">         priority:  5</span><br><span class="line">         priority:  7</span><br><span class="line">tc: 3 ratelimit: unlimited, tsa: ets, bw: 50%</span><br><span class="line">         priority:  3</span><br><span class="line">tc: 6 ratelimit: unlimited, tsa: vendor</span><br><span class="line">         priority:  6</span><br></pre></td></tr></table></figure>
+<p>可以看到已经自动设置了 PFC 和 ETS。</p>
+<p>下一步查看 <code>show_gids</code> 输出，确认 RoCEv2 GID 已经分配：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show_gids</span><br></pre></td></tr></table></figure>
+<p>正确的输出能够看到有 IPv4 地址的行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">DEV     PORT    INDEX   GID                                     IPv4            VER     DEV</span><br><span class="line">---     ----    -----   ---                                     ------------    ---     ---</span><br><span class="line">mlx5_0  1       0       fe80:0000:0000:0000:9640:c9ff:fe8c:a09c                 v1      mce0</span><br><span class="line">mlx5_0  1       1       fe80:0000:0000:0000:9640:c9ff:fe8c:a09c                 v2      mce0</span><br><span class="line">mlx5_0  1       2       0000:0000:0000:0000:0000:ffff:c0a8:0684 192.168.6.132   v1      mce0</span><br><span class="line">mlx5_0  1       3       0000:0000:0000:0000:0000:ffff:c0a8:0684 192.168.6.132   v2      mce0</span><br><span class="line">mlx5_1  1       0       fe80:0000:0000:0000:9440:c9ff:ff8c:a09d                 v1</span><br><span class="line">n_gids_found=5</span><br></pre></td></tr></table></figure>
+<p>如果没有看到 IPv4 地址的行，但 <code>ip a</code> 能看到网卡有正确的 IP 地址，可能网络管理器和 <code>rdma-ndd.service</code> 服务的启动顺序有问题。<strong><code>rdma-ndd.service</code> 应当在网卡 link up 之前启动。</strong>尽管一般情况下网络管理器声明为在 <code>rdma-ndd.service</code> 之后启动（<code>After=network-pre.target</code>），但 <code>rdma-ndd.service</code> 只有在网卡的 infiniband 驱动加载后才会被 udev 规则触发，这就可能导致 <code>rdma-ndd.service</code> 在网卡 link up 之后才启动，修起来感觉比较麻烦。如果确认是这个问题，重新 link up 可以解决：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ip <span class="built_in">link</span> <span class="built_in">set</span> dev mce0 down</span><br><span class="line">ip <span class="built_in">link</span> <span class="built_in">set</span> dev mce0 up</span><br></pre></td></tr></table></figure>
+<p>再次运行 <code>show_gids</code>，应该就能看到 IPv4 地址的行了。</p>
+<div class="tag-plugin colorful note"><div class="title"><strong>Systemd 服务依赖顺序问题的解决思路</strong></div><div class="body"><p>systemd 的服务依赖顺序有时会比较难以控制，尤其是当服务的启动时机依赖于硬件状态（如网卡 link up）时。解决这个问题的一种思路是创建一个自定义的 systemd 服务单元，专门在启动阶段的最后重新把网卡 <code>link down</code> 然后 <code>link up</code>. 创建 <code>/etc/systemd/system/fix-roce-networkmanager.service</code> 文件，写入以下内容：</p><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[Unit]</span></span><br><span class="line"><span class="attr">Description</span>=Fix RDMA mce0 link flapping after boot</span><br><span class="line"><span class="attr">After</span>=network-<span class="literal">on</span>line.target rdma-ndd.service NetworkManager.service multi-user.target</span><br><span class="line"><span class="attr">Wants</span>=network-<span class="literal">on</span>line.target</span><br><span class="line"></span><br><span class="line"><span class="section">[Service]</span></span><br><span class="line"><span class="attr">Type</span>=<span class="literal">on</span>eshot</span><br><span class="line"><span class="attr">ExecStart</span>=/usr/bin/sleep <span class="number">2</span></span><br><span class="line"><span class="attr">ExecStart</span>=/usr/sbin/ip link set mce0 down</span><br><span class="line"><span class="attr">ExecStart</span>=/usr/bin/sleep <span class="number">1</span></span><br><span class="line"><span class="attr">ExecStart</span>=/usr/sbin/ip link set mce0 up</span><br><span class="line"><span class="attr">RemainAfterExit</span>=<span class="literal">yes</span></span><br><span class="line"></span><br><span class="line"><span class="section">[Install]</span></span><br><span class="line"><span class="attr">WantedBy</span>=multi-user.target</span><br></pre></td></tr></table></figure><p>并启用该服务：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl <span class="built_in">enable</span> fix-roce-networkmanager.service</span><br></pre></td></tr></table></figure></div></div>
+<p>接下来可以运行 <code>ib_write_bw</code> 来测个速。在一边运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ib_write_bw --report_gbits</span><br></pre></td></tr></table></figure>
+<p>在另一边运行（双向传输，测试 5 秒钟，目标 IP 地址根据实际情况修改）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ib_write_bw -b -D 5 --report_gbits 192.168.6.106</span><br></pre></td></tr></table></figure>
+<p>看到这个结果就是接近跑满 100GbE 了（最下面一栏 BW average）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">WARNING: BW peak won't be measured in this run.</span><br><span class="line">---------------------------------------------------------------------------------------</span><br><span class="line">                    RDMA_Write Bidirectional BW Test</span><br><span class="line"> Dual-port       : OFF          Device         : mlx5_0</span><br><span class="line"> Number of qps   : 1            Transport type : IB</span><br><span class="line"> Connection type : RC           Using SRQ      : OFF</span><br><span class="line"> PCIe relax order: ON           Lock-free      : OFF</span><br><span class="line"> ibv_wr* API     : ON           Using Enhanced Reorder      : OFF</span><br><span class="line"> TX depth        : 128</span><br><span class="line"> CQ Moderation   : 1</span><br><span class="line"> CQE Poll Batch  : Dynamic</span><br><span class="line"> Mtu             : 4096[B]</span><br><span class="line"> Link type       : Ethernet</span><br><span class="line"> GID index       : 4</span><br><span class="line"> Max inline data : 0[B]</span><br><span class="line"> rdma_cm QPs     : OFF</span><br><span class="line"> Data ex. method : Ethernet</span><br><span class="line">---------------------------------------------------------------------------------------</span><br><span class="line"> local address: LID 0000 QPN 0x008a PSN 0xfffb6d RKey 0x238f86 VAddr 0x007dd5a3cfd000</span><br><span class="line"> GID: 00:00:00:00:00:00:00:00:00:00:255:255:192:168:06:116</span><br><span class="line"> remote address: LID 0000 QPN 0x008a PSN 0xaa095c RKey 0x202129 VAddr 0x0074c6b5900000</span><br><span class="line"> GID: 00:00:00:00:00:00:00:00:00:00:255:255:192:168:06:106</span><br><span class="line">---------------------------------------------------------------------------------------</span><br><span class="line"> #bytes     #iterations    BW peak[Gb/sec]    BW average[Gb/sec]   MsgRate[Mpps]</span><br><span class="line">Conflicting CPU frequency values detected: 1500.000000 != 3300.016000. CPU Frequency is not max.</span><br><span class="line"> 65536      560845           0.00               98.02                0.186950</span><br><span class="line">---------------------------------------------------------------------------------------</span><br></pre></td></tr></table></figure>
+<p>如果差的比较多，检查网卡是否降级到了 PCIE 3.0 x8 链接，这样带宽会被限制在 50Gbps 左右：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dmesg | grep -i mlx5</span><br></pre></td></tr></table></figure>
+<p>这个输出就是被 PCIE 卡脖子了：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[    8.387515] mlx5_core 0001:43:00.0: firmware version: 16.35.4030</span><br><span class="line">[    8.387840] mlx5_core 0001:43:00.0: 63.008 Gb/s available PCIe bandwidth, limited by 8.0 GT/s PCIe x8 link at 0001:42:01.0 (capable of 126.016 Gb/s with 8.0 GT/s PCIe x16 link)</span><br><span class="line">[    8.856776] mlx5_core 0001:43:00.0: E-Switch: Total vports 18, per vport: max uc(128) max mc(2048)</span><br><span class="line">[    8.866780] mlx5_core 0001:43:00.0: Flow counters bulk query buffer size increased, bulk_query_len(8)</span><br><span class="line">[    8.881967] mlx5_core 0001:43:00.0: Port module event: module 0, Cable plugged</span><br><span class="line">[    8.883192] mlx5_core 0001:43:00.0: mlx5_pcie_event:334:(pid 11): PCIe slot advertised sufficient power (27W).</span><br></pre></td></tr></table></figure>
+<h2 id="nfs-over-rdma-配置">NFS Over RDMA 配置</h2>
+<p>如果把以上的 RoCEv2 配置都做好了，NFS Over RDMA 的配置就非常简单了。首先，客户端和服务端都加大 rpc 条目表来提升性能：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"options sunrpc tcp_slot_table_entries=128"</span> &gt;&gt; /etc/modprobe.d/sunrpc.conf</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"options sunrpc tcp_max_slot_table_entries=128"</span> &gt;&gt; /etc/modprobe.d/sunrpc.conf</span><br><span class="line">sysctl -w sunrpc.tcp_slot_table_entries=128</span><br></pre></td></tr></table></figure>
+<h3 id="服务端">服务端</h3>
+<p>在 Proxmox VE 上安装 NFS 服务器组件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt update</span><br><span class="line">apt install nfs-kernel-server nfs-common</span><br></pre></td></tr></table></figure>
+<p>实测 Proxmox VE 自带的 NFS 服务器组件已经支持 NFS over RDMA，无需额外安装 <code>mlnx-nfsrdma-dkms</code> 包，装了会出问题。</p>
+<p>如果使用 ZFS，可直接通过 ZFS 生成 NFS 导出：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zfs <span class="built_in">set</span> sharenfs=<span class="string">'rw=@192.168.4.0/22,rw=@192.168.123.0/24,async,no_subtree_check,all_squash,anonuid=999,anongid=10000'</span> poolname/dataset</span><br></pre></td></tr></table></figure>
+<p>简要说明一下这一串参数：</p>
+<ul>
+<li><code>rw=@192.168.4.0/22</code> 允许读写访问的 IP 段，可以添加多个</li>
+<li><code>async</code> 启用异步写入以提升性能</li>
+<li><code>no_subtree_check</code> 禁用子树检查以提升性能</li>
+<li><code>all_squash,anonuid=999,anongid=10000</code> 将所有客户端的用户映射为 <code>999:10000</code> 用户，防止不同机器上 uid 和 gid 不一致导致权限问题。你可以根据需要修改为其他 uid 和 gid。简单起见，可以将挂载点给 chown 成这个用户，并 <code>chown 2755</code>. 在这个配置下，还可以在 NFS 服务器上用 root 用户创建所有者为 root 的文件，从而实现客户端只能读取但不能修改的效果。</li>
+</ul>
+<blockquote>
+<p>也许在 PVE 主机上使用 <code>100000:100000</code> 也是个好主意，这是非特权 PCT 容器和 virtiofs 的默认映射用户</p>
+</blockquote>
+<p>如果不使用 ZFS，可以手动编辑 <code>/etc/exports</code> 文件来添加 NFS 导出：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/mnt/data 192.168.4.0/22(rw,sync,no_subtree_check,all_squash,anonuid=999,anongid=10000) 192.168.123.0/24(rw,sync,no_subtree_check,all_squash,anonuid=999,anongid=10000)</span><br></pre></td></tr></table></figure>
+<p>修改 <code>nfs.conf</code> 来启用 RDMA 支持：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/nfs.conf</span><br></pre></td></tr></table></figure>
+<p>修改其中的 <code>[nfsd]</code> 段，启用 <code>rdma</code>：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[nfsd]</span></span><br><span class="line"><span class="comment"># debug=0</span></span><br><span class="line"><span class="comment"># threads=16</span></span><br><span class="line"><span class="comment"># host=</span></span><br><span class="line"><span class="comment"># port=0</span></span><br><span class="line"><span class="comment"># grace-time=90</span></span><br><span class="line"><span class="comment"># lease-time=90</span></span><br><span class="line"><span class="comment"># udp=n</span></span><br><span class="line"><span class="attr">tcp</span>=y</span><br><span class="line"><span class="comment"># vers3=y</span></span><br><span class="line"><span class="comment"># vers4=y</span></span><br><span class="line"><span class="comment"># vers4.0=y</span></span><br><span class="line"><span class="comment"># vers4.1=y</span></span><br><span class="line"><span class="comment"># vers4.2=y</span></span><br><span class="line"><span class="attr">rdma</span>=y</span><br><span class="line"><span class="attr">rdma-port</span>=<span class="number">20049</span></span><br></pre></td></tr></table></figure>
+<p>20049 是 NFS over RDMA 的默认端口，可以根据需要修改。</p>
+<p>重启 NFS 服务：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart nfs-server</span><br></pre></td></tr></table></figure>
+<p>理论上不需要手动加载任何内核模块，该加载的自己会加载。</p>
+<h3 id="客户端">客户端</h3>
+<p>需要额外安装 <code>mlnx-nfsrdma-dkms</code> 包来启用 NFS over RDMA 支持：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt update</span><br><span class="line">apt install mlnx-nfsrdma-dkms nfs-common</span><br></pre></td></tr></table></figure>
+<p>临时使用 <code>mount</code> 命令挂载 NFS over RDMA：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p /mnt/nfs_rdma</span><br><span class="line">mount -t nfs -o rdma,port=20049,vers=4.2,nconnect=16 &lt;server_ip&gt;:/poolname/dataset /mnt/nfs_rdma</span><br></pre></td></tr></table></figure>
+<p>将 <code>&lt;server_ip&gt;</code> 替换为 NFS 服务器的 IP 地址，<code>/poolname/dataset</code> 替换为实际的导出路径。执行命令行即可访问挂载点中的文件。</p>
+<p>通过 <code>/etc/fstab</code> 来持久化挂载配置，并添加更多优化性能的参数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/fstab</span><br></pre></td></tr></table></figure>
+<p>添加一行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;server_ip&gt;:/poolname/dataset /mnt/nfs_rdma noauto,rdma,port=20049,vers=4.2,nconnect=16,rsize=1048576,wsize=1048576,hard,proto=rdma,timeo=600,retrans=2,noatime,nodiratime,actimeo=60,x-systemd.automount,x-systemd.idle-timeout=600,x-systemd.mount-timeout=30,_netdev  0  0</span><br></pre></td></tr></table></figure>
+<p>这里还使用了 systemd 的自动挂载功能（<code>x-systemd.automount</code>），避免开机时因为网络未就绪而导致挂载失败的问题。</p>
+<h2 id="注释">注释</h2>
+<ol type="1">
+<li>从内核 5.15 起，nfs 客户端支持对同一服务器共享连接，创建 rdma 协议挂载点后，原有的 tcp 协议挂载点会自动升级为 rdma 协议</li>
+<li>从内核 5.18 起，内核支持跨挂载点创建 reflink 链接，也支持通过 nfs 创建底层 zfs 的 reflink 链接。但由于 linux 内核仍未解除对跨 superblock reflink 的限制，尽管 zfs 本身支持跨 dataset 的 block clone，linux 上无法跨越 zfs dataset 创建 reflink 链接。参见 <a target="_blank" rel="noopener" href="https://github.com/openzfs/zfs/issues/15345">OpenZFS 讨论</a></li>
+<li>RDMA 网络流量不经过 CPU 和内核处理，因此无法被常规的流量监控工具（如 iftop, nload）监控到。</li>
+<li>Docker 挂载点不能透传 systemd 的自动挂载功能，在上面的例子中，不能使用 <code>docker run -v /mnt:/data</code> 来在容器中访问 <code>/data/nfs_rdma</code>，但是使用 <code>docker run -v /mnt/nfs_rdma:/data</code> 是可以的。</li>
+</ol>
+
+
+
+<div class="article-footer reveal fs14">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-sa/4.0/">署名-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section>
+    
+    <section id="share">
+      <div class="header"><span>分享文章</span></div>
+      <div class="body">
+        <div class="link"><input class="copy-area" readonly="true" id="copy-link" value="https://duanyll.com/2026/1/19/NFS-Over-RDMA/" /></div>
+        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot)"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/b32ef3da1162a.svg"/></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=https://duanyll.com/2026/1/19/NFS-Over-RDMA/&title=Mellanox Connect-X 5 网卡 SN2700 交换机 NFS Over RDMA (RoCEv2) 配置指北 - duanyll&summary=目前 CX555 网卡和 SN2700 交换机的价格已经能让 100G 以太网走进寻常百姓家。配置 RoCEv2 和 NFS Over RDMA 其实并不复杂，但网上的资料比较零散，而且有些已经过时。本文记录一下我个人的配置经验，供大..."><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/80c07e4dbb303.svg"/></a><a class="social share-item email" href="mailto:?subject=Mellanox Connect-X 5 网卡 SN2700 交换机 NFS Over RDMA (RoCEv2) 配置指北 - duanyll&amp;body=https://duanyll.com/2026/1/19/NFS-Over-RDMA/"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/a1b00e20f425d.svg"/></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/8411ed322ced6.svg"/></a><a class="social share-item print" onclick="window.print()"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/img/print.svg" /></a><a class="social share-item source" target="_blank" rel="noopener" href="https://github.com/duanyll/duanyll.com-hexo/blob/master/source/_posts/tech/2026-1-19-NFS-Over-RDMA.md"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/08a41b181ce68.svg"/></a></div>
+        
+        <div class="qrcode" id="qrcode-wechat" style="visibility:hidden;height:0">
+          <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=https://duanyll.com/2026/1/19/NFS-Over-RDMA/"/>
+        </div>
+        
+      </div>
+    </section>
+    
+      <section id="star">
+        <div class="body">
+          <span class="github-button-wrap">
+            <a class="github-button" 
+               target="_blank" rel="noopener" href="https://github.com/duanyll/duanyll.com-hexo" 
+               data-color-scheme="no-preference: light; light: light; dark: dark;" 
+               data-size="large" 
+               data-show-count="true" 
+               aria-label="Star this site on GitHub">Star</a>
+            <span>喜欢这个网站？在 GitHub 上给它一个 Star 吧！</span>
+          </span>
+        </div>
+      </section>
+    </div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2025/11/26/HPE-cx555a/">HPE cx555a 100G 网卡刷入以太网固件指北</a></div></section></div>
+
+
+<div class="related-wrap reveal" id="related-posts">
+    <section class='header'>
+      <div class='title cap theme'>您可能感兴趣的文章</div>
+    </section>
+    <section class='body'>
+    <div class="related-posts"><a class="item" href="/2025/11/26/HPE-cx555a/" title="HPE cx555a 100G 网卡刷入以太网固件指北"><span class="title">HPE cx555a 100G 网卡刷入以太网固件指北</span></a><a class="item" href="/2023/7/12/Python-CMake/" title="使用 CMake 构建 PyTorch 和 Numpy C++ 拓展"><span class="title">使用 CMake 构建 PyTorch 和 Numpy C++ 拓展</span><span class="excerpt">使用 CMake 构建 PyTorch 和 Numpy C++ 拓展能适应更复杂的项目并使用灵活的编译选项. 然而, 许多互联网上的教程中的方法已经不能在较新版本的 PyTorch 和 CMake 使用. 本文介绍了几种作者在近期测试...</span></a><a class="item" href="/2024/10/5/HT813-FreePBX/" title="Grandstream HT813 双模语音网关 FreePBX 配置指北"><span class="title">Grandstream HT813 双模语音网关 FreePBX 配置指北</span></a><a class="item" href="/2024/3/1/STM32-CMake/" title="在 VSCode 上使用 CMake 开发 STM32CubeMX 项目"><span class="title">在 VSCode 上使用 CMake 开发 STM32CubeMX 项目</span></a><a class="item" href="/2018/11/28/Jekyll-Search/" title="为你的Jekyll博客添加搜索文章功能"><span class="title">为你的Jekyll博客添加搜索文章功能</span><span class="excerpt">众所周知，Github上的Jekyll上实现自定义插件很困难，因此即使有Jekyll的搜索插件，也只能手写js代码。静态网站实现搜索原理是这样的，通过HTTP请求获取posts.json，然后本地解析里面内容实现搜索。</span></a></div></section></div>
+
+
+
+  <div class='related-wrap md-text reveal' id="comments">
+    <section class='header cmt-title cap theme'>
+      快来参与讨论吧
+    </section>
+    <section class='body cmt-body utterances'>
+      
+
+<!-- <svg class="loading" style="vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2709"><path d="M832 512c0-176-144-320-320-320V128c211.2 0 384 172.8 384 384h-64zM192 512c0 176 144 320 320 320v64C300.8 896 128 723.2 128 512h64z" p-id="2710"></path></svg> -->
+
+<div id="utterances" repo="duanyll/duanyll.com-comment" issue-term="pathname" theme="switch" label="Comment" enabled="true" issue_term="pathname"></div>
+
+    </section>
+  </div>
+
+
+
+      
+      
+<footer class="page-footer reveal fs12"><hr><div class="sitemap"><div class="sitemap-group"><span class="fs14">博客</span><a href="/">近期</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></div><div class="sitemap-group"><span class="fs14">项目</span><a target="_blank" rel="noopener" href="https://github.com/duanyll">开源库</a><a href="/wiki/">文档</a><a target="_blank" rel="noopener" href="https://github.com/duanyll/scoop-bucket">Scoop Bucket</a></div><div class="sitemap-group"><span class="fs14">社交</span><a href="/about/#comments">留言板</a><a target="_blank" rel="noopener" href="https://netunion.org">NetUnion</a><a target="_blank" rel="noopener" href="https://www.travellings.cn/go.html">开往</a></div><div class="sitemap-group"><span class="fs14">更多</span><a href="/about">关于本站</a><a target="_blank" rel="noopener" href="https://github.com/duanyll/duanyll.com-hexo">GitHub 源码</a><a target="_blank" rel="noopener" href="https://duanyll.cloudflareaccess.com">Dashboard</a></div></div><div class="text"><p>本站由 <a target="_blank" rel="noopener" href="https://github.com/duanyll">duanyll</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。 本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = stellar.config.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.21.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.21.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+    root : '/',
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js","memos":"/js/plugins/memos.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide:not(.swiper-slide-duplicate) img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.copycode = Object.assign({"enable":true,"js":"/js/plugins/copycode.js","default_text":"Copy","success_text":"Copied"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+  <script>
+  function loadUtterances() {
+    const els = document.querySelectorAll("#comments #utterances");
+    if (els.length === 0) return;
+    els.forEach((el, i) => {
+      try {
+        el.innerHTML = '';
+      } catch (error) {
+        console.error(error);
+      }
+      var script = document.createElement('script');
+      script.src = 'https://utteranc.es/client.js';
+      script.async = true;
+      for (let key of Object.keys(el.attributes)) {
+        let attr = el.attributes[key];
+        if (['class', 'id'].includes(attr.name) === false) {
+          var name = attr.name;
+          var value = attr.value;
+          if (name == 'theme' && value == 'switch') {
+            value = window.currentTheme == 'dark' ? 'github-dark' : 'github-light';
+          }
+          script.setAttribute(name, value);
+        }
+      }
+      el.appendChild(script);
+    });
+  }
+  window.addEventListener('DOMContentLoaded', (event) => {
+      loadUtterances();
+  });
+</script>
+
+
+
+
+
+  
+<script src="https://buttons.github.io/buttons.js" async></script>
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

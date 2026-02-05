@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 8.1.1">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.21.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+
+  
+  
+  <title>Windows TUN 分流旁路由指北 - duanyll</title>
+
+  
+    <meta name="description" content="为什么要使用（不使用）TUN 一个典型的分流软件 TUN 配置页面 为什么在 这篇文章 里我不建议所有人都使用 TUN？  开启分流软件的 TUN 模式时，容易与其他 VPN 软件（校园 VPN、游戏加速器、Wireguard 等）内置的 TUN 冲突，不经复杂配置，可能会导致无法上网； 开启 TUN 模式后，用 Proxy SwitchyOmega 切换直连模式会失效； 为了达到与 HTTP P">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows TUN 分流旁路由指北">
+<meta property="og:url" content="https://duanyll.com/2025/5/31/Windows-TUN-Router/">
+<meta property="og:site_name" content="duanyll">
+<meta property="og:description" content="为什么要使用（不使用）TUN 一个典型的分流软件 TUN 配置页面 为什么在 这篇文章 里我不建议所有人都使用 TUN？  开启分流软件的 TUN 模式时，容易与其他 VPN 软件（校园 VPN、游戏加速器、Wireguard 等）内置的 TUN 冲突，不经复杂配置，可能会导致无法上网； 开启 TUN 模式后，用 Proxy SwitchyOmega 切换直连模式会失效； 为了达到与 HTTP P">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.duanyll.com/img/981d476d.png">
+<meta property="og:image" content="https://img.duanyll.com/img/0c946f37.png">
+<meta property="og:image" content="https://img.duanyll.com/img/ee86cdf6.png">
+<meta property="og:image" content="https://img.duanyll.com/img/d355ce1d.png">
+<meta property="og:image" content="https://img.duanyll.com/img/d5fe1703.png">
+<meta property="og:image" content="https://img.duanyll.com/img/c91a77eb.png">
+<meta property="article:published_time" content="2025-05-31T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-05-31T00:00:00.000Z">
+<meta property="article:author" content="duanyll">
+<meta property="article:tag" content="指北">
+<meta property="article:tag" content="网络">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.duanyll.com/img/981d476d.png">
+  
+  
+  
+  <meta name="keywords" content="指北,网络">
+
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="duanyll" type="application/atom+xml">
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+    <link rel="shortcut icon" href="https://cdn.duanyll.com/favicon.ico">
+  
+
+  
+
+  
+
+
+  
+
+  
+    <script>
+      var darkmodeSettings = localStorage.getItem('darkmode') || 'auto';
+      var enableDarkmode = darkmodeSettings == 'true' 
+        || (darkmodeSettings == 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (enableDarkmode) {
+        document.documentElement.classList.add('global-darkmode');
+      }
+      window.currentTheme = enableDarkmode ? 'dark' : 'light';
+    </script>
+  
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://cdn.duanyll.com/android-chrome-192x192.png" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">duanyll</div><div class="sub normal cap">qwq</div><div class="sub hover cap" style="opacity:0"> QWQ</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Wiki</a><a class="nav-item" href="/about/">关于</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Windows TUN 分流旁路由指北</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E7%94%A8%E4%B8%8D%E4%BD%BF%E7%94%A8tun"><span class="toc-text">为什么要使用（不使用）TUN</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E5%85%A8%E5%B1%8B%E8%AE%BE%E5%A4%87%E4%B8%8A%E7%BD%91"><span class="toc-text">实现全屋设备上网</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E7%90%86%E5%92%8C%E6%96%B9%E6%A1%88"><span class="toc-text">原理和方案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4"><span class="toc-text">操作步骤</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0-wireguard-%E5%88%86%E6%B5%81"><span class="toc-text">实现 Wireguard 分流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0-wsl-%E5%85%A5%E7%AB%99"><span class="toc-text">实现 WSL 入站</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%90%86-steam-%E7%9A%84%E6%AD%A3%E7%A1%AE%E6%96%B9%E5%BC%8F"><span class="toc-text">代理 Steam 的正确方式</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/duanyll" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/08a41b181ce68.svg"/></a><a class="social" href="/about/#comments" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/942ebbf1a4b91.svg"/></a><a class="social" href="https://www.travellings.cn/go.html" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://www.travellings.cn/assets/favicon-fluent-emoji.svg"/></a><a class="social" href="javascript:darkmode.next()" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/img/half-moon.svg"/></a></div></footer>
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+        
+
+
+
+<div class="bread-nav fs12"><div class="left"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></div><div id="post-meta">
+    <span>发布于&nbsp;<time datetime="2025-05-31T00:00:00.000Z">2025-05-31</time></span>
+    
+    <span>更新于&nbsp;<time datetime="2025-05-31T00:00:00.000Z">2025-05-31</time></span>
+    </div></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Windows TUN 分流旁路由指北</span></h1>
+
+<div class="article-tags"><a class="tag-plugin colorful hashtag" color="green" href="/tags/%E6%8C%87%E5%8C%97/" >  <svg t="1701408144765" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4228" width="200" height="200"><path d="M426.6 64.8c34.8 5.8 58.4 38.8 52.6 73.6l-19.6 117.6h190.2l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6s58.4 38.8 52.6 73.6l-19.4 117.6H896c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-42.6 256H832c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.6-117.4h-190.4l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.4-117.8H128c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l42.6-256H192c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6z m11.6 319.2l-42.6 256h190.2l42.6-256h-190.2z" p-id="4229"></path></svg>  <span>指北</span></a><a class="tag-plugin colorful hashtag" color="purple" href="/tags/%E7%BD%91%E7%BB%9C/" >  <svg t="1701408144765" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4228" width="200" height="200"><path d="M426.6 64.8c34.8 5.8 58.4 38.8 52.6 73.6l-19.6 117.6h190.2l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6s58.4 38.8 52.6 73.6l-19.4 117.6H896c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-42.6 256H832c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.6-117.4h-190.4l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.4-117.8H128c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l42.6-256H192c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6z m11.6 319.2l-42.6 256h190.2l42.6-256h-190.2z" p-id="4229"></path></svg>  <span>网络</span></a></div>
+<h2 id="为什么要使用不使用tun">为什么要使用（不使用）TUN</h2>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/981d476d.png" alt="一个典型的分流软件 TUN 配置页面" fancybox="true"></div><div class="image-meta"><span class="image-caption center">一个典型的分流软件 TUN 配置页面</span></div></div>
+<p>为什么在 <a href="/2024/6/30/WSL2-Docker-Deep-Learning/">这篇文章</a> 里我不建议所有人都使用 TUN？</p>
+<ol type="1">
+<li>开启分流软件的 TUN 模式时，容易与其他 VPN 软件（校园 VPN、游戏加速器、Wireguard 等）内置的 TUN 冲突，不经复杂配置，可能会导致无法上网；</li>
+<li>开启 TUN 模式后，用 Proxy SwitchyOmega 切换直连模式会失效；</li>
+<li>为了达到与 HTTP Proxy 近似的延迟体验，Fake IP、Sniffing 等机制太脏了，在一些 Corner Case 下会搞出难以排查的问题来；</li>
+<li>Meta 的 TUN 会吃掉 ICMP 包，导致无法通过 ping 和 traceroute 诊断网络问题。</li>
+</ol>
+<p>然而有的情况下，TUN 模式是必须的。</p>
+<ol type="1">
+<li>需要代理非 HTTP 的三层流量（SSH、RDP 等），又懒得配置 ProxyCommand、RDP Gateway 等选项；</li>
+<li>要用的应用刻意地不从 IE 代理或者环境变量中读取代理设置（如 Cloudflare WARP、某些游戏）。</li>
+</ol>
+<p>所以有了这篇文章，旨在帮助大家更好的去做 TUN 需要的 “复杂配置”，以实现一些炫酷的效果。</p>
+<h2 id="实现全屋设备上网">实现全屋设备上网</h2>
+<blockquote>
+<p>值得一提的是，网上许多在 Windows 上配置全屋上网的教程是<strong>错误的</strong>，所以很多人误以为 Windows 不能完美的实现全屋上网，以至于转向 Openwrt 等方案徒增成本。实际上 Windows 作为旁路由除了费电并不比其他方案差。</p>
+</blockquote>
+<h3 id="原理和方案">原理和方案</h3>
+<blockquote>
+<p>只想看操作步骤可以跳过本节。</p>
+</blockquote>
+<p>首先回忆一下分流软件如何通过 TUN 接管本机的流量：</p>
+<ol type="1">
+<li>分流软件读取系统路由表，获得原来的默认网关 IP 地址和出口网卡；</li>
+<li>分流软件创建虚拟网卡（TUN），IP 地址为 <code>198.18.0.1/24</code>；</li>
+<li>分流软件创建新的默认网关路由表条目 <code>default via 192.168.0.2</code> 并确保优先级比原来的默认路由高；</li>
+<li>之后非 LAN 的流量会通过 TUN 出口，分流软件可以在用户态获得进入 TUN 的 IP 数据包；</li>
+<li>对于出口数据包，分流软件在用户态通过指定出口网卡的形式将数据包发送到原来的默认网关所在的网卡，并应用各种代理协议规则。即使是 DIRECT 模式，对内核来说分流软件也总是会发起新的连接，使用不同的端口号，起到类似 SNAT 的效果。</li>
+</ol>
+<p>要想实现将 Windows 电脑作为三层透明代理路由，似乎只需要启用 Windows 内核的 IP 路由转发功能，并允许转发来自物理网卡的流量。对于其他设备，设置默认网关为 Windows 电脑物理网卡的 IP 地址（假设为 <code>192.168.0.2</code>，假设家用路由器的 IP 地址为 <code>192.168.0.1</code>）。然而，再仔细考虑一下这个过程：</p>
+<ol type="1">
+<li>另一个设备发送 IP 数据包 <code>192.168.0.3-&gt;1.2.3.4</code> 到 <code>192.168.0.2</code> 的 MAC 地址</li>
+<li>Windows 内核收到数据包，根据路由规则走默认网关 <code>198.18.0.2</code> 将其转发到 TUN 虚拟网卡</li>
+<li>分流软件收到数据包，假设根据规则应该使用 <code>5.6.7.8</code> 作为代理服务器</li>
+<li>分流软件试图创建连接 <code>192.168.0.2-&gt;5.6.7.8</code>，向物理网卡发送目的地为 <code>5.6.7.8</code> 的数据包</li>
+<li>然而因为对物理网卡启用了 IP 路由转发功能，对于目的地为 <code>5.6.7.8</code> 的数据包，Windows 内核又根据 TUN 的默认路由优先级比物理网卡的默认路由高，将数据包送回 TUN 的网关 <code>198.18.0.2</code></li>
+<li>于是分流软件发现接受到了回环数据包，丢弃回环数据包并记录日志。此时，无论是 Windows 电脑本机还是其他设备，都无法访问 LAN 以外的网络。</li>
+</ol>
+<p>网上一些错误的教程会建议在 Windows 电脑上针对所有用到的上游代理服务器 IP 地址加入路由表条目</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">5.6.7.8/32 via 192.168.0.1</span><br></pre></td></tr></table></figure>
+<p>这个做法能允许通过上游代理 <code>5.6.7.8</code> 访问外部网络。但是：</p>
+<ul>
+<li>每次上游代理 IP 地址变更都需要修改路由表条目。对于复杂的、动态更新的分流规则，需要把所有上游代理的 IP 地址都加入路由表条目，维护起来非常麻烦；</li>
+<li>致命错误：DIRECT 出口仍然不能工作。分流分了个寂寞。</li>
+</ul>
+<p>矛盾在于如果想让 TUN 的默认路由优先级高于物理网卡的默认路由，就不能对流量出口的物理网卡（IP Interface）开启 IP 路由转发功能。然而透明代理入口的 IP Interface 又必须开启 IP 路由转发功能才能让 Windows 内核处理来自其他设备的流量。于是一种思路是流量出口和入口不使用同一个 IP Interface。</p>
+<p>如果有两张物理网卡，将他们都分别连接到同一个 LAN 中，自然就有两个 IP Interface 了。要在普通家庭网络的硬件设施上配置 VLAN ID 需要支持 VLAN 的交换机和或者可管理的光猫，比较麻烦，对于只使用电脑上一个物理网口的情况可以考虑使用 macvlan 的方式来在一个物理网口上创建多个 IP Interface。在 Windows 上可借助 Hyper-V 的虚拟交换机功能来实现 macvlan。</p>
+<h3 id="操作步骤">操作步骤</h3>
+<p>以下命令在具有管理员权限的 PowerShell 中执行。</p>
+<div class="tag-plugin colorful note" color="yellow"><div class="title"><strong>注意</strong></div><div class="body"><p>按照上面分析的方案，我们不能在所有 IP Interface 上都开启 IP 路由转发功能。确保全局 IP 路由转发注册表项没有设置：</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Get-ItemProperty</span> <span class="literal">-Path</span> <span class="string">'HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters'</span> <span class="literal">-Name</span> <span class="string">'IPEnableRouter'</span></span><br></pre></td></tr></table></figure><p>如果已经设置为 <code>1</code>，请执行以下命令将其删除：</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Set-ItemProperty</span> <span class="literal">-Path</span> <span class="string">'HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters'</span> <span class="literal">-Name</span> <span class="string">'IPEnableRouter'</span> <span class="literal">-Value</span> <span class="number">0</span></span><br></pre></td></tr></table></figure><p>还需要确保 Routing and Remote Access (RRAS) 服务没有启用。这项服务用于在 Windows Server 上应用由图形界面配置的路由选项，但在 Windows 10/11 上并不需要，启用它会错误地开启所有 IP Interface 的路由转发功能。查看 RRAS 服务状态：</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Get-Service</span> RemoteAccess | <span class="built_in">Select-Object</span> <span class="literal">-Property</span> Name, StartType, Status</span><br></pre></td></tr></table></figure><p>如果服务状态为 <code>Running</code>，请执行以下命令停止并禁用该服务：</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Stop-Service</span> RemoteAccess</span><br><span class="line"><span class="built_in">Set-Service</span> RemoteAccess <span class="literal">-StartupType</span> Manual</span><br></pre></td></tr></table></figure><p>另外，本文所有配置均是在关闭 Windows Defender 防火墙的情况下进行的。已知火绒默认的防火墙配置不会带来麻烦。我个人建议使用火绒安全软件，并使用专门的防火墙硬件（运营商提供的光猫和家用路由器通常自带了防火墙功能，进阶用户可以考虑使用 pfSense、OPNSense 等开源防火墙）来保护 Windows 电脑的网络安全。</p></div></div>
+<p>首先配置 Hyper-V 虚拟交换机和 macvlan。确保启用了 Hyper-V 功能：</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/0c946f37.png" alt="Windows 可选功能" fancybox="true"></div><div class="image-meta"><span class="image-caption center">Windows 可选功能</span></div></div>
+<blockquote>
+<p>如果你使用 Windows 家庭版，不妨在淘宝上花<em>两块钱</em>购买一个激活码，永久激活 Windows 专业版以使用 Hyper-V。</p>
+</blockquote>
+<p>查看当前的物理网卡：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Get-NetAdapter</span> | <span class="built_in">Select-Object</span> Name, ifIndex, MacAddress</span><br></pre></td></tr></table></figure>
+<p>输出可能是</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Name                       ifIndex MacAddress</span><br><span class="line">----                       ------- ----------</span><br><span class="line">以太网 4                        29 D8-XX-XX-XX-XX-32</span><br><span class="line">vEthernet (Default Switch)      32 00-XX-XX-XX-XX-F9</span><br><span class="line">Mihomo                          19</span><br><span class="line">WLAN                            14 38-XX-XX-XX-XX-4D</span><br><span class="line">vEthernet (WSL)                 66 00-XX-XX-XX-XX-51</span><br><span class="line">蓝牙网络连接                     8 38-XX-XX-XX-XX-4E</span><br></pre></td></tr></table></figure>
+<p>假设我们要使用 <code>以太网 4</code> 作为出口网卡，创建一个虚拟交换机。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">New-VMSwitch</span> <span class="literal">-Name</span> <span class="string">"vmbr0"</span> <span class="literal">-NetAdapterName</span> <span class="string">"以太网 4"</span> <span class="literal">-AllowManagementOS</span> <span class="variable">$true</span></span><br></pre></td></tr></table></figure>
+<p>其中 <code>-AllowManagementOS $true</code> 选项在宿主机上自动创建一个虚拟网卡 <code>vEthernet (vmbr0)</code> 连接到虚拟交换机，并保持原来物理网卡的 IP 和 mac 地址等属性。接下来再创建一个虚拟网卡 <code>vEthernet (vmbr0.1)</code>，连接宿主机和 vmbr0 虚拟交换机作为旁路由的入口网卡。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Add-VMNetworkAdapter</span> <span class="literal">-SwitchName</span> <span class="string">"vmbr0"</span> <span class="literal">-Name</span> <span class="string">"vmbr0.1"</span> <span class="literal">-ManagementOS</span></span><br></pre></td></tr></table></figure>
+<p>查看现在的网卡列表：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Get-NetAdapter</span> | <span class="built_in">Select-Object</span> Name, ifIndex, MacAddress</span><br></pre></td></tr></table></figure>
+<p>输出应该是</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Name                       ifIndex MacAddress</span><br><span class="line">----                       ------- ----------</span><br><span class="line">以太网 4                        29 D8-XX-XX-XX-XX-32</span><br><span class="line">vEthernet (Default Switch)      32 00-XX-XX-XX-XX-E1</span><br><span class="line">vEthernet (vmbr0.1)             23 00-XX-XX-XX-XX-00</span><br><span class="line">Mihomo                          19</span><br><span class="line">WLAN                            14 38-XX-XX-XX-XX-4D</span><br><span class="line">vEthernet (WSL)                 66 00-XX-XX-XX-XX-49</span><br><span class="line">vEthernet (vmbr0)               10 D8-XX-XX-XX-XX-33</span><br><span class="line">蓝牙网络连接                     8 38-XX-XX-XX-XX-4E</span><br></pre></td></tr></table></figure>
+<p>此时 vmbr0.1 虚拟网卡直接桥接到外部网络，并应该已经通过家用路由器的 DHCP 获得了 IP 地址。但为了配置正确的路由规则，需要将其改为静态 IP 地址并且比 vmbr0 虚拟网卡（LAN 出口）具有更长的子网前缀。假设家用路由器的 LAN 网段为 <code>192.168.1.0/24</code>，路由器 IP 地址为 <code>192.168.1.1</code>，采用以下的 IP 地址分配方案：</p>
+<ul>
+<li><code>192.168.1.1/24</code> 家用路由器 LAN 口</li>
+<li><code>192.168.1.2/25</code> Windows 电脑 vmbr0 虚拟网卡</li>
+<li><code>192.168.1.3-192.168.1.126</code> 家用路由器 DHCP 地址池。需要登录路由器管理界面进行查看和配置。DHCP 下发的子网前缀长度仍为 <code>/24</code>，但实际分配的 IP 地址保持在前 <code>/25</code> 的范围内。</li>
+<li><code>192.168.1.129/25</code> Windows 电脑 vmbr0.1 虚拟网卡</li>
+<li><code>192.168.1.128/25</code> 需要科学上网的设备在此网段内手动配置静态 IP 地址并将网关设为 <code>192.168.1.129</code>。</li>
+</ul>
+<details class="tag-plugin colorful folding" open=""><summary><span>说明</span></summary><div class="body"><p>对于支持忽略 DHCP 并手动配置 IP 的设备（Android、iOS、PlayStation 等），以上方案无需 VLAN 可共享同一个二层广播域。如果有不支持手动配置 IP 的设备（如某些智能家居设备），则可能需要配置 VLAN（本文略），或者使用支持 DHCP Snooping 的交换机来隔离设备（很多家用路由器的 DHCP 不能关闭），手动搭建 DHCP 服务器。Windows 爱好者可以使用 <a target="_blank" rel="noopener" href="https://technitium.com/dns/">Technitium DNS Server</a> 搭建 DNS 和 DHCP 服务器，本文不详述。</p></div></details>
+<p>接下来将 vmbr0 和 vmbr0.1 都配置为静态 IP 地址，使用之前查看的 <code>ifIndex</code>：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Set-NetIPInterface</span> <span class="literal">-InterfaceIndex</span> <span class="number">10</span> <span class="literal">-Dhcp</span> Disabled</span><br><span class="line"><span class="built_in">Set-NetIPInterface</span> <span class="literal">-InterfaceIndex</span> <span class="number">23</span> <span class="literal">-Dhcp</span> Disabled</span><br><span class="line"><span class="built_in">New-NetIPAddress</span> <span class="literal">-InterfaceIndex</span> <span class="number">10</span> <span class="literal">-IPAddress</span> <span class="number">192.168</span>.<span class="number">1.2</span> <span class="literal">-PrefixLength</span> <span class="number">25</span> <span class="literal">-DefaultGateway</span> <span class="number">192.168</span>.<span class="number">1.1</span></span><br><span class="line"><span class="built_in">New-NetIPAddress</span> <span class="literal">-InterfaceIndex</span> <span class="number">23</span> <span class="literal">-IPAddress</span> <span class="number">192.168</span>.<span class="number">1.129</span> <span class="literal">-PrefixLength</span> <span class="number">25</span></span><br></pre></td></tr></table></figure>
+<p>配置系统 DNS 服务器：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Set-DnsClientServerAddress</span> <span class="literal">-InterfaceIndex</span> <span class="number">10</span> <span class="literal">-ServerAddresses</span> <span class="number">223.5</span>.<span class="number">5.5</span>, <span class="number">192.168</span>.<span class="number">1.1</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>此处选择的 DNS 服务器地址没有太大作用，一般分流软件都会劫持 DNS 请求并应用复杂的 DNS 分流规则。</p>
+</blockquote>
+<p>最后，单独启用 vmbr0.1 的 IP 路由转发功能：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Set-NetIPInterface</span> <span class="literal">-InterfaceIndex</span> <span class="number">23</span> <span class="literal">-Forwarding</span> Enabled</span><br></pre></td></tr></table></figure>
+<p>重启分流软件来使其重新读取路由表，并开启 TUN 模式，勾选允许外部访问。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/ee86cdf6.png" alt="TUN 选项" fancybox="true"></div><div class="image-meta"><span class="image-caption center">TUN 选项</span></div></div>
+<p>在需要科学上网的设备上，连接同一个 LAN，设置静态 IP 地址为 <code>192.168.1.130</code>，子网掩码为 <code>255.255.255.128</code>，网关为 <code>192.168.1.129</code>，即可实现全局上网。同时 WSL 也能通过此 TUN 模式访问互联网。</p>
+<div class="tag-plugin img-wrap"><div class="frame-wrap" id="iphone11"><img class="img lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/d355ce1d.png"><div class="frame"></div></div></div>
+<h2 id="实现-wireguard-分流">实现 Wireguard 分流</h2>
+<p>现在 Meta 有了正确的 Wireguard 实现，可以添加 <code>wireguard</code> 类型的出站代理并编写分流规则，然而 Meta 的 Wireguard 实现不支持入站连接（如 3389 远程桌面、SSH 等），因此仍然需要使用 <a target="_blank" rel="noopener" href="https://download.wireguard.com/windows-client/">WireGuard for Windows</a> 来实现入站 Wireguard 连接。一般来说，只要 Peer 的 AllowedIPs 不为 <code>0.0.0.0/0</code>，无需任何额外设置即可同时启用 Meta 的 TUN 和 Wireguard 的 TUN，因为 Wireguard 的路由表项子网前缀更长。然而如果需要通过 WireGuard Peer 访问简单 AllowedIPs 不能描述的对端（例如想分流整个校园内网、教育网、通过校内跳板机访问图书馆等基于复杂 IP、域名的分流规则），则可以考虑用 Meta 的 TUN 模式给 WireGuard TUN 分流出站流量，WireGuard TUN 直接处理入站流量。</p>
+<p>首先需要配置 Wireguard Peer，手动创建优先级低的路由表条目。在 Wireguard 的 GUI 中编辑 Peer 的配置文件，设置以下内容：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[Interface]</span></span><br><span class="line"><span class="attr">PostUp</span> = netsh int ipv4 add route <span class="number">0.0</span>.<span class="number">0.0</span>/<span class="number">0</span> interface=<span class="string">"wgvpn"</span> metric=<span class="number">10000</span> store=active</span><br><span class="line"><span class="attr">PreDown</span> = netsh int ipv4 del route <span class="number">0.0</span>.<span class="number">0.0</span>/<span class="number">0</span> interface=<span class="string">"wgvpn"</span></span><br><span class="line"><span class="attr">Table</span> = <span class="literal">off</span></span><br><span class="line"></span><br><span class="line"><span class="section">[Peer]</span></span><br><span class="line"><span class="attr">AllowedIPs</span> = <span class="number">0.0</span>.<span class="number">0.0</span>/<span class="number">0</span></span><br></pre></td></tr></table></figure>
+<p>Wireguard 创建的虚拟网卡名称就是配置文件的名称（此为 <code>wgvpn</code>），请相应地修改。在 Meta 的配置文件中创建指定网卡的 <code>direct</code> 出站代理：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">proxies:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Wireguard-TUN</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">direct</span></span><br><span class="line">    <span class="attr">ip-version:</span> <span class="string">ipv4</span></span><br><span class="line">    <span class="attr">udp:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">interface-name:</span> <span class="string">wgvpn</span></span><br></pre></td></tr></table></figure>
+<p>则可以按需求编写分流规则，使用 <code>Wireguard-TUN</code> 作为出站代理。</p>
+<div class="tag-plugin colorful note" color="yellow"><div class="title"><strong>注意</strong></div><div class="body"><p>如果 WireGuard Peer 的外网 IP 地址位于需要通过 Peer 访问的范围内（如都在校园网、教育网网段），则需要在 Meta 中针对该 Peer 的 IP 地址添加更高优先级的 DIRECT 规则，否则就会形成循环路由，导致无法访问。</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">rules:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">...</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN,peer.example.com,DIRECT</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,example.com,Wireguard-TUN</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">...</span></span><br></pre></td></tr></table></figure></div></div>
+<h2 id="实现-wsl-入站">实现 WSL 入站</h2>
+<p>在 Windows 10 的 WSL2 中，很难给 WSL2 配置静态的 IP 地址并允许外部访问 WSL2 上的服务，自动端口转发只绑定 Windows 上的 <code>127.0.0.1</code> 地址不允许外部访问。手动配置 WSL2 的网络接口（并允许外部路由）总是会被重置。实现从其他机器上访问 WSL2 的服务最简单的方法恐怕是在 WSL2 中配置 WireGuard 连接到自己的 VPN 对端服务器。</p>
+<details class="tag-plugin colorful folding" open=""><summary><span>说明</span></summary><div class="body"><p>如果专门上网搜索 <code>wsl wireguard</code> 关键词，有不少文章说 WSL2 的内核不支持 WireGuard，需要手动编译内核。实际上最新的 WSL2 内核已经支持 WireGuard 了。只需要确保在使用最新版本的 WSL2。</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl <span class="literal">--update</span></span><br></pre></td></tr></table></figure></div></details>
+<p>只需要使用 apt 安装 WireGuard 前端</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt install wireguard</span><br></pre></td></tr></table></figure>
+<p>然后在 WSL2 中创建 WireGuard 配置文件 <code>/etc/wireguard/wg0.conf</code>，内容与一般 Linux 上的 WireGuard 配置文件相同。然后在 WSL2 中运行以下命令启动 WireGuard：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> wg-quick up wg0</span><br></pre></td></tr></table></figure>
+<p>再安装和启用 OpenSSH Server：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt install openssh-server</span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> --now ssh</span><br></pre></td></tr></table></figure>
+<p>然而，WSL2 的虚拟机会在任何 <code>wsl.exe</code> 会话结束后短暂时间内自动休眠，导致无法处理入站连接。修改 <code>~/.wslconfig</code> 文件只能有限地延长 WSL2 的自动休眠超时。为了让 WSL2 能像真正的 Linux 服务器一样随时接受 SSH 连接，（首先要防止 Windows 进入睡眠状态），一个优雅的解决方案是用 WinSW 把 <code>wsl.exe</code> 包装成一个 Windows 服务，确保 WSL2 开机启动并在后台持续运行。</p>
+<p>下载 <a target="_blank" rel="noopener" href="https://github.com/winsw/winsw/releases/tag/v2.12.0">WinSW 2</a> 并将下载的 exe 文件重命名为 <code>wsl-keepalive.exe</code>（重要），放在你喜欢的工作目录下。然后在同一目录下创建 <code>wsl-keepalive.xml</code> 文件，内容如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">service</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>wslkeepalive<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>WSL Keep Alive<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>This service prevents WSL from automatically shutting down.<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">executable</span>&gt;</span>wsl<span class="tag">&lt;/<span class="name">executable</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">log</span> <span class="attr">mode</span>=<span class="string">"roll"</span>&gt;</span><span class="tag">&lt;/<span class="name">log</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">service</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>然后在 PowerShell 中执行以下命令安装服务：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.\wsl<span class="literal">-keepalive</span>.exe install</span><br></pre></td></tr></table></figure>
+<p>此时启动服务会失败，需要手动设置此服务以用户权限运行。为了方便输入用户凭据，使用图形界面设置服务：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">services.msc</span><br></pre></td></tr></table></figure>
+<p>在服务列表中找到 <code>WSL Keep Alive</code> 服务，右键点击选择“属性”，在“登录”选项卡中选择“此账户”，输入当前用户的用户名（微软账户邮箱）和密码。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/d5fe1703.png" alt="Windows 服务属性" fancybox="true"></div><div class="image-meta"><span class="image-caption center">Windows 服务属性</span></div></div>
+<p>将服务设置为自动启动并启动服务（通过图形界面或者 PowerShell）。还可以在图形界面中配置自动恢复选项，以便在 WSL2 崩溃时自动重启服务。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Set-Service</span> <span class="literal">-Name</span> wslkeepalive <span class="literal">-StartupType</span> Automatic</span><br><span class="line"><span class="built_in">Start-Service</span> <span class="literal">-Name</span> wslkeepalive</span><br></pre></td></tr></table></figure>
+<p>现在在其他连接到 WireGuard VPN 的设备上就可以通过 WSL2 的 Wireguard IP 地址访问 WSL2 上的 SSH 服务了。</p>
+<h2 id="代理-steam-的正确方式">代理 Steam 的正确方式</h2>
+<p>为了正确地让 Steam 通过国内 CDN 高速下载，不浪费流量，同时确保社区等功能正常访问，在启用 TUN 时要尤其注意关于 Steam 的规则配置。手动设置 Steam 设置 &gt; 下载 &gt; 下载地区选项到国内通常是不起作用的，需要单独指定 <code>steamserver.net</code> 使用国内 IP 出口。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">rules:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">...</span></span><br><span class="line">  <span class="comment"># Steam 登录地区检测，应当直连（使用国内 IP 出口）</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,steamserver.net,SteamLogin</span></span><br><span class="line">  <span class="comment"># Steam 社区和商店，需要代理 (来自 ACL4SSR)</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,fanatical.com,Proxy</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,humblebundle.com,Proxy</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,underlords.com,Proxy</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,valvesoftware.com,Proxy</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,playartifact.com,Proxy</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,steam-chat.com,Proxy</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,steamcommunity.com,Proxy</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,steamgames.com,Proxy</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,steampowered.com,Proxy</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,steamstatic.com,Proxy</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,steamstat.us,Proxy</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN,steambroadcast.akamaized.net,Proxy</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN,steamcommunity-a.akamaihd.net,Proxy</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN,steamstore-a.akamaihd.net,Proxy</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN,steamusercontent-a.akamaihd.net,Proxy</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN,steamuserimages-a.akamaihd.net,Proxy</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN,steampipe.akamaized.net,Proxy</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">...</span></span><br></pre></td></tr></table></figure>
+<p>一般的规则集中都将 Steam 相关域名加入了代理名单，但需要手动前置 <code>steamserver.net</code> 的规则将它加入直连列表，而 Steam 的国内 CDN 通常已经在直连白名单或 GeoIP 白名单中，不需要再配置。遗憾的是，在移动等运营商网络下，<code>steamserver.net</code> 的访问通常也很不通畅，导致 Steam 客户端登录很慢或失败，此时可能需要考虑用教育网等优质国内节点来中转此域名。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/c91a77eb.png" alt="Steam 下载地区选项" fancybox="true"></div><div class="image-meta"><span class="image-caption center">Steam 下载地区选项</span></div></div>
+<p>正确完成配置后需要在 Steam 客户端中退出并重新登录，重新登录后 Steam 设置 &gt; 下载 &gt; 下载地区选项应当已经自动切换到国内地区。具体是哪个地区不重要（例如教育网出口一般都会识别到北京），在国内 Steam 几乎都使用同一组 CDN。此配置下 Steam 下载速度应该能拉满宽带并且不消耗代理流量。</p>
+
+
+
+<div class="article-footer reveal fs14">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-sa/4.0/">署名-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section>
+    
+    <section id="share">
+      <div class="header"><span>分享文章</span></div>
+      <div class="body">
+        <div class="link"><input class="copy-area" readonly="true" id="copy-link" value="https://duanyll.com/2025/5/31/Windows-TUN-Router/" /></div>
+        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot)"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/b32ef3da1162a.svg"/></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=https://duanyll.com/2025/5/31/Windows-TUN-Router/&title=Windows TUN 分流旁路由指北 - duanyll&summary=为什么要使用（不使用）TUN
+一个典型的分流软件 TUN 配置页面
+为什么在 这篇文章 里我不建议所有人都使用 TUN？
+
+开启分流软件的 TUN 模式时，容易与其他 VPN 软件（校园 VPN、游戏加速器、Wireguard 等）内..."><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/80c07e4dbb303.svg"/></a><a class="social share-item email" href="mailto:?subject=Windows TUN 分流旁路由指北 - duanyll&amp;body=https://duanyll.com/2025/5/31/Windows-TUN-Router/"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/a1b00e20f425d.svg"/></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/8411ed322ced6.svg"/></a><a class="social share-item print" onclick="window.print()"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/img/print.svg" /></a><a class="social share-item source" target="_blank" rel="noopener" href="https://github.com/duanyll/duanyll.com-hexo/blob/master/source/_posts/tech/2025-5-31-Windows-TUN-Router.md"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/08a41b181ce68.svg"/></a></div>
+        
+        <div class="qrcode" id="qrcode-wechat" style="visibility:hidden;height:0">
+          <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=https://duanyll.com/2025/5/31/Windows-TUN-Router/"/>
+        </div>
+        
+      </div>
+    </section>
+    
+      <section id="star">
+        <div class="body">
+          <span class="github-button-wrap">
+            <a class="github-button" 
+               target="_blank" rel="noopener" href="https://github.com/duanyll/duanyll.com-hexo" 
+               data-color-scheme="no-preference: light; light: light; dark: dark;" 
+               data-size="large" 
+               data-show-count="true" 
+               aria-label="Star this site on GitHub">Star</a>
+            <span>喜欢这个网站？在 GitHub 上给它一个 Star 吧！</span>
+          </span>
+        </div>
+      </section>
+    </div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2025/6/21/Flow/">Flow Matching 与 DDIM 小记</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2024/11/6/PY32-Palit-4090/">非常便宜的同德 4090 手办风扇灯光驱动板</a></div></section></div>
+
+
+<div class="related-wrap reveal" id="related-posts">
+    <section class='header'>
+      <div class='title cap theme'>您可能感兴趣的文章</div>
+    </section>
+    <section class='body'>
+    <div class="related-posts"><a class="item" href="/2024/6/30/WSL2-Docker-Deep-Learning/" title="基于 WSL2 和 Docker 的深度学习环境指北"><span class="title">基于 WSL2 和 Docker 的深度学习环境指北</span></a><a class="item" href="/2023/7/12/Python-CMake/" title="使用 CMake 构建 PyTorch 和 Numpy C++ 拓展"><span class="title">使用 CMake 构建 PyTorch 和 Numpy C++ 拓展</span><span class="excerpt">使用 CMake 构建 PyTorch 和 Numpy C++ 拓展能适应更复杂的项目并使用灵活的编译选项. 然而, 许多互联网上的教程中的方法已经不能在较新版本的 PyTorch 和 CMake 使用. 本文介绍了几种作者在近期测试...</span></a><a class="item" href="/2024/10/5/HT813-FreePBX/" title="Grandstream HT813 双模语音网关 FreePBX 配置指北"><span class="title">Grandstream HT813 双模语音网关 FreePBX 配置指北</span></a><a class="item" href="/2024/3/1/STM32-CMake/" title="在 VSCode 上使用 CMake 开发 STM32CubeMX 项目"><span class="title">在 VSCode 上使用 CMake 开发 STM32CubeMX 项目</span></a><a class="item" href="/2018/11/28/Jekyll-Search/" title="为你的Jekyll博客添加搜索文章功能"><span class="title">为你的Jekyll博客添加搜索文章功能</span><span class="excerpt">众所周知，Github上的Jekyll上实现自定义插件很困难，因此即使有Jekyll的搜索插件，也只能手写js代码。静态网站实现搜索原理是这样的，通过HTTP请求获取posts.json，然后本地解析里面内容实现搜索。</span></a></div></section></div>
+
+
+
+  <div class='related-wrap md-text reveal' id="comments">
+    <section class='header cmt-title cap theme'>
+      快来参与讨论吧
+    </section>
+    <section class='body cmt-body utterances'>
+      
+
+<!-- <svg class="loading" style="vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2709"><path d="M832 512c0-176-144-320-320-320V128c211.2 0 384 172.8 384 384h-64zM192 512c0 176 144 320 320 320v64C300.8 896 128 723.2 128 512h64z" p-id="2710"></path></svg> -->
+
+<div id="utterances" repo="duanyll/duanyll.com-comment" issue-term="pathname" theme="switch" label="Comment" enabled="true" issue_term="pathname"></div>
+
+    </section>
+  </div>
+
+
+
+      
+      
+<footer class="page-footer reveal fs12"><hr><div class="sitemap"><div class="sitemap-group"><span class="fs14">博客</span><a href="/">近期</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></div><div class="sitemap-group"><span class="fs14">项目</span><a target="_blank" rel="noopener" href="https://github.com/duanyll">开源库</a><a href="/wiki/">文档</a><a target="_blank" rel="noopener" href="https://github.com/duanyll/scoop-bucket">Scoop Bucket</a></div><div class="sitemap-group"><span class="fs14">社交</span><a href="/about/#comments">留言板</a><a target="_blank" rel="noopener" href="https://netunion.org">NetUnion</a><a target="_blank" rel="noopener" href="https://www.travellings.cn/go.html">开往</a></div><div class="sitemap-group"><span class="fs14">更多</span><a href="/about">关于本站</a><a target="_blank" rel="noopener" href="https://github.com/duanyll/duanyll.com-hexo">GitHub 源码</a><a target="_blank" rel="noopener" href="https://duanyll.cloudflareaccess.com">Dashboard</a></div></div><div class="text"><p>本站由 <a target="_blank" rel="noopener" href="https://github.com/duanyll">duanyll</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。 本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = stellar.config.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.21.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.21.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+    root : '/',
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js","memos":"/js/plugins/memos.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide:not(.swiper-slide-duplicate) img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.copycode = Object.assign({"enable":true,"js":"/js/plugins/copycode.js","default_text":"Copy","success_text":"Copied"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+  <script>
+  function loadUtterances() {
+    const els = document.querySelectorAll("#comments #utterances");
+    if (els.length === 0) return;
+    els.forEach((el, i) => {
+      try {
+        el.innerHTML = '';
+      } catch (error) {
+        console.error(error);
+      }
+      var script = document.createElement('script');
+      script.src = 'https://utteranc.es/client.js';
+      script.async = true;
+      for (let key of Object.keys(el.attributes)) {
+        let attr = el.attributes[key];
+        if (['class', 'id'].includes(attr.name) === false) {
+          var name = attr.name;
+          var value = attr.value;
+          if (name == 'theme' && value == 'switch') {
+            value = window.currentTheme == 'dark' ? 'github-dark' : 'github-light';
+          }
+          script.setAttribute(name, value);
+        }
+      }
+      el.appendChild(script);
+    });
+  }
+  window.addEventListener('DOMContentLoaded', (event) => {
+      loadUtterances();
+  });
+</script>
+
+
+
+
+
+  
+<script src="https://buttons.github.io/buttons.js" async></script>
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

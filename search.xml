@@ -1,0 +1,3536 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>Mellanox Connect-X 5 网卡 SN2700 交换机 NFS Over RDMA (RoCEv2) 配置指北</title>
+      <link href="/2026/1/19/NFS-Over-RDMA/"/>
+      <url>/2026/1/19/NFS-Over-RDMA/</url>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 指北 </tag>
+            
+            <tag> infra </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>HPE cx555a 100G 网卡刷入以太网固件指北</title>
+      <link href="/2025/11/26/HPE-cx555a/"/>
+      <url>/2025/11/26/HPE-cx555a/</url>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 指北 </tag>
+            
+            <tag> infra </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>在 ComfyUI 中优雅地函数式编程</title>
+      <link href="/2025/9/25/ComfyUI-Functional/"/>
+      <url>/2025/9/25/ComfyUI-Functional/</url>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 图论 </tag>
+            
+            <tag> 指北 </tag>
+            
+            <tag> comfyui </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Docker 和 uv 炼丹实践指北</title>
+      <link href="/2025/9/1/Docker-Uv/"/>
+      <url>/2025/9/1/Docker-Uv/</url>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 炼丹 </tag>
+            
+            <tag> 指北 </tag>
+            
+            <tag> docker </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>更好的 VSCode 粘贴上传图床插件</title>
+      <link href="/2025/8/29/Paste-And-Upload/"/>
+      <url>/2025/8/29/Paste-And-Upload/</url>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> vscode </tag>
+            
+            <tag> 指北 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Flow Matching 与 DDIM 小记</title>
+      <link href="/2025/6/21/Flow/"/>
+      <url>/2025/6/21/Flow/</url>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 炼丹 </tag>
+            
+            <tag> Flow Matching </tag>
+            
+            <tag> DDIM </tag>
+            
+            <tag> 生成模型 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Windows TUN 分流旁路由指北</title>
+      <link href="/2025/5/31/Windows-TUN-Router/"/>
+      <url>/2025/5/31/Windows-TUN-Router/</url>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 指北 </tag>
+            
+            <tag> 网络 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>非常便宜的同德 4090 手办风扇灯光驱动板</title>
+      <link href="/2024/11/6/PY32-Palit-4090/"/>
+      <url>/2024/11/6/PY32-Palit-4090/</url>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 电子设计 </tag>
+            
+            <tag> 嘉立创eda </tag>
+            
+            <tag> py32 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Grandstream HT813 双模语音网关 FreePBX 配置指北</title>
+      <link href="/2024/10/5/HT813-FreePBX/"/>
+      <url>/2024/10/5/HT813-FreePBX/</url>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 指北 </tag>
+            
+            <tag> freepbx </tag>
+            
+            <tag> voip </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>彩色丝印 PN532 + CH582 读卡器</title>
+      <link href="/2024/10/1/PN532-CH582/"/>
+      <url>/2024/10/1/PN532-CH582/</url>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 电子设计 </tag>
+            
+            <tag> 嘉立创eda </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>微分方程数值解速通</title>
+      <link href="/2024/9/4/DE/"/>
+      <url>/2024/9/4/DE/</url>
+      
+      
+      <categories>
+          
+          <category> 课程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 微分方程 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Type-C SWD VCP USB 一线通 ST-LINK/V2-1</title>
+      <link href="/2024/9/1/STLink-SBU/"/>
+      <url>/2024/9/1/STLink-SBU/</url>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 电子设计 </tag>
+            
+            <tag> 嘉立创eda </tag>
+            
+            <tag> stm32 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>毛概</title>
+      <link href="/2024/8/27/Mao/"/>
+      <url>/2024/8/27/Mao/</url>
+      
+      
+      <categories>
+          
+          <category> 课程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 毛概 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>CH334F 双上行切换 USB Hub</title>
+      <link href="/2024/8/16/CH334F-KVM-Hub/"/>
+      <url>/2024/8/16/CH334F-KVM-Hub/</url>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 电子设计 </tag>
+            
+            <tag> 嘉立创eda </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Differential Equations - Gray Scott Equations</title>
+      <link href="/2024/7/1/DE-7/"/>
+      <url>/2024/7/1/DE-7/</url>
+      
+      
+      <categories>
+          
+          <category> 课程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 微分方程 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>基于 WSL2 和 Docker 的深度学习环境指北</title>
+      <link href="/2024/6/30/WSL2-Docker-Deep-Learning/"/>
+      <url>/2024/6/30/WSL2-Docker-Deep-Learning/</url>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 炼丹 </tag>
+            
+            <tag> 指北 </tag>
+            
+            <tag> docker </tag>
+            
+            <tag> 网络 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>矩阵分析速通</title>
+      <link href="/2024/6/10/Matrix/"/>
+      <url>/2024/6/10/Matrix/</url>
+      
+      
+      <categories>
+          
+          <category> 课程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 矩阵 </tag>
+            
+            <tag> 线性代数 </tag>
+            
+            <tag> 数学 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>微分方程数值解作业 6</title>
+      <link href="/2024/5/25/DE-6/"/>
+      <url>/2024/5/25/DE-6/</url>
+      
+      
+      <categories>
+          
+          <category> 课程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 微分方程 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>矩阵函数在线性时不变系统的能控性和能观性上的应用</title>
+      <link href="/2024/5/20/Mat/"/>
+      <url>/2024/5/20/Mat/</url>
+      
+      
+      <categories>
+          
+          <category> 课程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 矩阵分析 </tag>
+            
+            <tag> 线性系统 </tag>
+            
+            <tag> 控制理论 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>微分方程数值解作业 5</title>
+      <link href="/2024/5/12/DE-5/"/>
+      <url>/2024/5/12/DE-5/</url>
+      
+      
+      <categories>
+          
+          <category> 课程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 微分方程 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>强化学习作业 7</title>
+      <link href="/2024/5/4/RL-7/"/>
+      <url>/2024/5/4/RL-7/</url>
+      
+      
+      <categories>
+          
+          <category> 课程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 强化学习 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>基于 PY32 和 INA219 的 USB3.0 电流表</title>
+      <link href="/2024/5/1/PY32-Current-Meter/"/>
+      <url>/2024/5/1/PY32-Current-Meter/</url>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 电子设计 </tag>
+            
+            <tag> 嘉立创eda </tag>
+            
+            <tag> py32 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>微分方程数值解作业 4</title>
+      <link href="/2024/4/29/DE-4/"/>
+      <url>/2024/4/29/DE-4/</url>
+      
+      
+      <categories>
+          
+          <category> 课程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 微分方程 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>微分方程数值解作业 3</title>
+      <link href="/2024/4/18/DE-3/"/>
+      <url>/2024/4/18/DE-3/</url>
+      
+      
+      <categories>
+          
+          <category> 课程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 微分方程 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>强化学习作业 6</title>
+      <link href="/2024/4/15/RL-6/"/>
+      <url>/2024/4/15/RL-6/</url>
+      
+      
+      <categories>
+          
+          <category> 课程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 强化学习 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>强化学习作业 5</title>
+      <link href="/2024/4/14/RL-5/"/>
+      <url>/2024/4/14/RL-5/</url>
+      
+      
+      <categories>
+          
+          <category> 课程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 强化学习 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>矩阵分析作业 2</title>
+      <link href="/2024/4/7/Matrix-1/"/>
+      <url>/2024/4/7/Matrix-1/</url>
+      
+      
+      <categories>
+          
+          <category> 课程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 矩阵分析 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>微分方程数值解作业 2</title>
+      <link href="/2024/3/23/DE-2/"/>
+      <url>/2024/3/23/DE-2/</url>
+      
+      
+      <categories>
+          
+          <category> 课程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 微分方程 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>强化学习作业 4</title>
+      <link href="/2024/3/20/RL-4/"/>
+      <url>/2024/3/20/RL-4/</url>
+      
+      
+      <categories>
+          
+          <category> 课程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 强化学习 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>强化学习作业 3</title>
+      <link href="/2024/3/17/RL-3/"/>
+      <url>/2024/3/17/RL-3/</url>
+      
+      
+      <categories>
+          
+          <category> 课程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 强化学习 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>微分方程数值解作业 1</title>
+      <link href="/2024/3/10/DE-1/"/>
+      <url>/2024/3/10/DE-1/</url>
+      
+      
+      <categories>
+          
+          <category> 课程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 微分方程 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>强化学习作业 1</title>
+      <link href="/2024/3/7/RL-1/"/>
+      <url>/2024/3/7/RL-1/</url>
+      
+      
+      <categories>
+          
+          <category> 课程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 强化学习 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>强化学习作业 2</title>
+      <link href="/2024/3/7/RL-2/"/>
+      <url>/2024/3/7/RL-2/</url>
+      
+      
+      <categories>
+          
+          <category> 课程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 强化学习 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>在 VSCode 上使用 CMake 开发 STM32CubeMX 项目</title>
+      <link href="/2024/3/1/STM32-CMake/"/>
+      <url>/2024/3/1/STM32-CMake/</url>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> vscode </tag>
+            
+            <tag> 电子设计 </tag>
+            
+            <tag> cmake </tag>
+            
+            <tag> 指北 </tag>
+            
+            <tag> stm32 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>马原2</title>
+      <link href="/2024/1/3/Marxism-2/"/>
+      <url>/2024/1/3/Marxism-2/</url>
+      
+      
+      <categories>
+          
+          <category> 课程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 马原 </tag>
+            
+            <tag> 废话 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>马原1</title>
+      <link href="/2024/1/1/Marxism-1/"/>
+      <url>/2024/1/1/Marxism-1/</url>
+      
+      
+      <categories>
+          
+          <category> 课程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 马原 </tag>
+            
+            <tag> 废话 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>时间序列分析作业 2</title>
+      <link href="/2023/12/20/TimeSeries-2/"/>
+      <url>/2023/12/20/TimeSeries-2/</url>
+      
+      
+      <categories>
+          
+          <category> 课程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 时间序列 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>时间序列分析作业 1</title>
+      <link href="/2023/12/3/TimeSeries-1/"/>
+      <url>/2023/12/3/TimeSeries-1/</url>
+      
+      
+      <categories>
+          
+          <category> 课程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 时间序列 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>使用 CMake 构建 PyTorch 和 Numpy C++ 拓展</title>
+      <link href="/2023/7/12/Python-CMake/"/>
+      <url>/2023/7/12/Python-CMake/</url>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> vscode </tag>
+            
+            <tag> 炼丹 </tag>
+            
+            <tag> python </tag>
+            
+            <tag> pytorch </tag>
+            
+            <tag> cmake </tag>
+            
+            <tag> 指北 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>信息论速通</title>
+      <link href="/2023/6/26/Information/"/>
+      <url>/2023/6/26/Information/</url>
+      
+      
+      <categories>
+          
+          <category> 课程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 信息论 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>数值分析作业 - 数值积分</title>
+      <link href="/2023/5/27/Numeric-10/"/>
+      <url>/2023/5/27/Numeric-10/</url>
+      
+      
+      <categories>
+          
+          <category> 课程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数值分析 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>数值分析作业 - 数值微分</title>
+      <link href="/2023/5/17/Numeric-9/"/>
+      <url>/2023/5/17/Numeric-9/</url>
+      
+      
+      <categories>
+          
+          <category> 课程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数值分析 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>数值分析作业 - 数据拟合与最小二乘</title>
+      <link href="/2023/5/15/Numeric-8/"/>
+      <url>/2023/5/15/Numeric-8/</url>
+      
+      
+      <categories>
+          
+          <category> 课程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数值分析 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>数值分析作业 - 插值</title>
+      <link href="/2023/4/28/Numeric-7/"/>
+      <url>/2023/4/28/Numeric-7/</url>
+      
+      
+      <categories>
+          
+          <category> 课程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数值分析 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>数值分析作业 - 矩阵特征值的数值解法</title>
+      <link href="/2023/4/24/Numeric-6/"/>
+      <url>/2023/4/24/Numeric-6/</url>
+      
+      
+      <categories>
+          
+          <category> 课程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数值分析 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>数值分析作业 - 对称正定线性方程组的解法</title>
+      <link href="/2023/4/19/Numeric-5/"/>
+      <url>/2023/4/19/Numeric-5/</url>
+      
+      
+      <categories>
+          
+          <category> 课程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数值分析 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>数值分析作业 - 线性方程组的迭代法</title>
+      <link href="/2023/4/5/Numeric-4/"/>
+      <url>/2023/4/5/Numeric-4/</url>
+      
+      
+      <categories>
+          
+          <category> 课程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数值分析 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>数值分析作业 - 线性方程组的直接求解</title>
+      <link href="/2023/3/24/Numeric-3/"/>
+      <url>/2023/3/24/Numeric-3/</url>
+      
+      
+      <categories>
+          
+          <category> 课程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数值分析 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>数值分析作业 - 非线性求解方程</title>
+      <link href="/2023/3/18/Numeric-2/"/>
+      <url>/2023/3/18/Numeric-2/</url>
+      
+      
+      <categories>
+          
+          <category> 课程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数值分析 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>数值分析作业 - 浮点运算和误差</title>
+      <link href="/2023/3/11/Numeric-1/"/>
+      <url>/2023/3/11/Numeric-1/</url>
+      
+      
+      <categories>
+          
+          <category> 课程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数值分析 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>离散数学速通</title>
+      <link href="/2023/2/21/DiscreteMath/"/>
+      <url>/2023/2/21/DiscreteMath/</url>
+      
+      
+      <categories>
+          
+          <category> 课程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 离散数学 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>关于迁移到 Hexo 的技术说明</title>
+      <link href="/2023/2/10/Migrate-To-Hexo/"/>
+      <url>/2023/2/10/Migrate-To-Hexo/</url>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 公告 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>2022 UESTC ICPC Training for Dynamic Planning</title>
+      <link href="/2022/5/21/UESTC-ICPC-Training-DP/"/>
+      <url>/2022/5/21/UESTC-ICPC-Training-DP/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 题解 </tag>
+            
+            <tag> oi </tag>
+            
+            <tag> 动态规划 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>2022 UESTC ICPC Training for Data Structures</title>
+      <link href="/2022/5/21/UESTC-ICPC-Training-Data-Structure/"/>
+      <url>/2022/5/21/UESTC-ICPC-Training-Data-Structure/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 题解 </tag>
+            
+            <tag> oi </tag>
+            
+            <tag> 数据结构 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>2022 UESTC ICPC Training for Graph</title>
+      <link href="/2022/4/30/UESTC-ICPC-Training-Graph/"/>
+      <url>/2022/4/30/UESTC-ICPC-Training-Graph/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 题解 </tag>
+            
+            <tag> oi </tag>
+            
+            <tag> 图论 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>洛谷 P4208 Lutece 2726 最小生成树计数模版</title>
+      <link href="/2022/4/22/Luogu-P4208/"/>
+      <url>/2022/4/22/Luogu-P4208/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 题解 </tag>
+            
+            <tag> oi </tag>
+            
+            <tag> 图论 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>洛谷 P4716 Lutece 2733 POJ3164 最小树形图模板</title>
+      <link href="/2022/4/19/Luogu-P4716/"/>
+      <url>/2022/4/19/Luogu-P4716/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 题解 </tag>
+            
+            <tag> oi </tag>
+            
+            <tag> 图论 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>POJ2914 Lutece 2710 Minimum Cut</title>
+      <link href="/2022/4/13/POJ-2914/"/>
+      <url>/2022/4/13/POJ-2914/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 题解 </tag>
+            
+            <tag> oi </tag>
+            
+            <tag> 图论 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>电子科技大学第十二届ACM趣味程序设计竞赛第一场（热身赛）</title>
+      <link href="/2021/11/20/UESTC-Contest-1/"/>
+      <url>/2021/11/20/UESTC-Contest-1/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> oi </tag>
+            
+            <tag> 比赛 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>生物选修一摘要</title>
+      <link href="/2021/3/29/Biology-4/"/>
+      <url>/2021/3/29/Biology-4/</url>
+      
+      
+      <categories>
+          
+          <category> 课程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 文化课 </tag>
+            
+            <tag> 生物 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>高中生物必修一教材整理</title>
+      <link href="/2021/3/19/Biology-1/"/>
+      <url>/2021/3/19/Biology-1/</url>
+      
+      
+      <categories>
+          
+          <category> 课程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 文化课 </tag>
+            
+            <tag> 生物 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>高中生物必修三教材整理</title>
+      <link href="/2021/3/19/Biology-3/"/>
+      <url>/2021/3/19/Biology-3/</url>
+      
+      
+      <categories>
+          
+          <category> 课程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 文化课 </tag>
+            
+            <tag> 生物 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>高中生物必修二教材整理</title>
+      <link href="/2021/3/19/Biology-2/"/>
+      <url>/2021/3/19/Biology-2/</url>
+      
+      
+      <categories>
+          
+          <category> 课程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 文化课 </tag>
+            
+            <tag> 生物 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>高中数学导数总结</title>
+      <link href="/2020/5/5/Derivative/"/>
+      <url>/2020/5/5/Derivative/</url>
+      
+      
+      <categories>
+          
+          <category> 课程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 文化课 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>解决 Onenote UWP 版与某不可名状软件搭配使用的同步失败问题</title>
+      <link href="/2020/3/18/Solve-Onenote-Problems-With-SSR/"/>
+      <url>/2020/3/18/Solve-Onenote-Problems-With-SSR/</url>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 废话 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Codeforces Round 606 (Div. 2, based on Technocup 2020 Elimination Round 4)</title>
+      <link href="/2019/12/15/Codeforces-1277/"/>
+      <url>/2019/12/15/Codeforces-1277/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> oi </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>知乎定时屏蔽 userscript</title>
+      <link href="/2019/12/14/Zhihu-Smart-Block/"/>
+      <url>/2019/12/14/Zhihu-Smart-Block/</url>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 项目 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>CSP-S 2019 游记 &amp; 感想</title>
+      <link href="/2019/11/23/CSP2019/"/>
+      <url>/2019/11/23/CSP2019/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> oi </tag>
+            
+            <tag> 总结 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>CSP 考前急救</title>
+      <link href="/2019/11/15/CSP-Rescue/"/>
+      <url>/2019/11/15/CSP-Rescue/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> oi </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>NOI Linux 存活指北</title>
+      <link href="/2019/11/11/NOI-Liunx-Survival-Guide/"/>
+      <url>/2019/11/11/NOI-Liunx-Survival-Guide/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> oi </tag>
+            
+            <tag> linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Codeforces 833B The bakery</title>
+      <link href="/2019/10/31/Codeforces-833B/"/>
+      <url>/2019/10/31/Codeforces-833B/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 题解 </tag>
+            
+            <tag> 线段树 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>AT2300 Snuke Line</title>
+      <link href="/2019/10/30/AtCoder-2300/"/>
+      <url>/2019/10/30/AtCoder-2300/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 题解 </tag>
+            
+            <tag> oi </tag>
+            
+            <tag> 树状数组 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>DFS 序和欧拉序复习</title>
+      <link href="/2019/10/29/DFS-Order/"/>
+      <url>/2019/10/29/DFS-Order/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> oi </tag>
+            
+            <tag> 图论 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>CSP 初赛数据结构与算法复习</title>
+      <link href="/2019/10/17/CSP-Data-Structure-And-Algorithm/"/>
+      <url>/2019/10/17/CSP-Data-Structure-And-Algorithm/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数据结构 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>CSP 初赛数学复习</title>
+      <link href="/2019/10/17/CSP-Review-Math/"/>
+      <url>/2019/10/17/CSP-Review-Math/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数学 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>树状数组的奇妙运用</title>
+      <link href="/2019/10/7/Fenwick/"/>
+      <url>/2019/10/7/Fenwick/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> oi </tag>
+            
+            <tag> 数据结构 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>CF360E Levko and Game</title>
+      <link href="/2019/10/5/Codeforces-360E/"/>
+      <url>/2019/10/5/Codeforces-360E/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 题解 </tag>
+            
+            <tag> oi </tag>
+            
+            <tag> 贪心 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>CF273D Dima and Figure</title>
+      <link href="/2019/10/3/Codeforces-273D/"/>
+      <url>/2019/10/3/Codeforces-273D/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 题解 </tag>
+            
+            <tag> oi </tag>
+            
+            <tag> dp </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>CF1209E Rotate Columns</title>
+      <link href="/2019/10/3/Codeforces-1209E/"/>
+      <url>/2019/10/3/Codeforces-1209E/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 题解 </tag>
+            
+            <tag> oi </tag>
+            
+            <tag> dp </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>CF575G Run for beer</title>
+      <link href="/2019/10/3/Codeforces-575G/"/>
+      <url>/2019/10/3/Codeforces-575G/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 题解 </tag>
+            
+            <tag> oi </tag>
+            
+            <tag> 图论 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Codeforces Round 585 (Div. 2)</title>
+      <link href="/2019/9/16/Codeforces-1215/"/>
+      <url>/2019/9/16/Codeforces-1215/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 题解 </tag>
+            
+            <tag> oi </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>洛谷P2482 [SDOI2010]猪国杀</title>
+      <link href="/2019/8/28/Luogu-P2418/"/>
+      <url>/2019/8/28/Luogu-P2418/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 题解 </tag>
+            
+            <tag> oi </tag>
+            
+            <tag> 模拟 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>洛谷P2540 斗地主增强版</title>
+      <link href="/2019/8/23/Luogu-P2540/"/>
+      <url>/2019/8/23/Luogu-P2540/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 题解 </tag>
+            
+            <tag> oi </tag>
+            
+            <tag> 搜索 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>洛谷P2149 [SDOI2009]Elaxia的路线</title>
+      <link href="/2019/8/19/Luogu-P2149/"/>
+      <url>/2019/8/19/Luogu-P2149/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 题解 </tag>
+            
+            <tag> oi </tag>
+            
+            <tag> 图论 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Codeforces Round 580 (Div. 2)</title>
+      <link href="/2019/8/19/Codeforces-1206/"/>
+      <url>/2019/8/19/Codeforces-1206/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 题解 </tag>
+            
+            <tag> oi </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Codeforces Round 578 (Div. 2)</title>
+      <link href="/2019/8/16/Codeforces-1200/"/>
+      <url>/2019/8/16/Codeforces-1200/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 题解 </tag>
+            
+            <tag> oi </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>CF870F Paths</title>
+      <link href="/2019/7/24/Codeforces-870F/"/>
+      <url>/2019/7/24/Codeforces-870F/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 题解 </tag>
+            
+            <tag> oi </tag>
+            
+            <tag> 数论 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>CF852A Digits</title>
+      <link href="/2019/7/23/Codeforces-852A/"/>
+      <url>/2019/7/23/Codeforces-852A/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 题解 </tag>
+            
+            <tag> oi </tag>
+            
+            <tag> 思维题 </tag>
+            
+            <tag> 分类讨论 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>CF625E Frog Fights</title>
+      <link href="/2019/7/23/Codeforces-625E/"/>
+      <url>/2019/7/23/Codeforces-625E/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 题解 </tag>
+            
+            <tag> oi </tag>
+            
+            <tag> 思维题 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>CF852C Property</title>
+      <link href="/2019/7/23/Codeforces-852C/"/>
+      <url>/2019/7/23/Codeforces-852C/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 题解 </tag>
+            
+            <tag> oi </tag>
+            
+            <tag> 思维题 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>KMP算法求串的循环节长度</title>
+      <link href="/2019/7/15/KMP-Loop/"/>
+      <url>/2019/7/15/KMP-Loop/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> oi </tag>
+            
+            <tag> kmp </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>UVA1541 To Bet or Not To Bet</title>
+      <link href="/2019/6/4/UVA-1541/"/>
+      <url>/2019/6/4/UVA-1541/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 题解 </tag>
+            
+            <tag> oi </tag>
+            
+            <tag> 概率dp </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>LightOJ1395 | UVA12411 A Dangerous Maze (II)</title>
+      <link href="/2019/6/1/LightOJ-1395/"/>
+      <url>/2019/6/1/LightOJ-1395/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 题解 </tag>
+            
+            <tag> oi </tag>
+            
+            <tag> 概率dp </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>C++(Dev-Cpp附赠的Mingw32)的浮点数的坑</title>
+      <link href="/2019/5/22/Cpp-Float/"/>
+      <url>/2019/5/22/Cpp-Float/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> oi </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>UVA11768 Lattice Point or Not</title>
+      <link href="/2019/5/21/UVa-11768/"/>
+      <url>/2019/5/21/UVa-11768/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 题解 </tag>
+            
+            <tag> oi </tag>
+            
+            <tag> 数论 </tag>
+            
+            <tag> exgcd </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>HDU5728 PowMod</title>
+      <link href="/2019/5/11/HDU-5728/"/>
+      <url>/2019/5/11/HDU-5728/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 题解 </tag>
+            
+            <tag> oi </tag>
+            
+            <tag> 数论 </tag>
+            
+            <tag> 欧拉函数 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>HDU5812 Distance</title>
+      <link href="/2019/5/11/HDU-5812/"/>
+      <url>/2019/5/11/HDU-5812/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 题解 </tag>
+            
+            <tag> oi </tag>
+            
+            <tag> 数论 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>HDU3398 String</title>
+      <link href="/2019/5/11/HDU-3398/"/>
+      <url>/2019/5/11/HDU-3398/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 题解 </tag>
+            
+            <tag> oi </tag>
+            
+            <tag> 数论 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>CF615D Multipliers</title>
+      <link href="/2019/5/10/Codeforces-615D/"/>
+      <url>/2019/5/10/Codeforces-615D/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 题解 </tag>
+            
+            <tag> oi </tag>
+            
+            <tag> 数论 </tag>
+            
+            <tag> 组合数学 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>SPOJ4191 POJ3904 Sky Code</title>
+      <link href="/2019/5/10/SPOJ-4191/"/>
+      <url>/2019/5/10/SPOJ-4191/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 题解 </tag>
+            
+            <tag> oi </tag>
+            
+            <tag> 数论 </tag>
+            
+            <tag> 容斥原理 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>洛谷P2607 [ZJOI2008]骑士</title>
+      <link href="/2019/4/13/Luogu-P2607/"/>
+      <url>/2019/4/13/Luogu-P2607/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 题解 </tag>
+            
+            <tag> oi </tag>
+            
+            <tag> dp </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>洛谷P3195 [HNOI2008]玩具装箱TOY</title>
+      <link href="/2019/4/13/Luogu-P3195/"/>
+      <url>/2019/4/13/Luogu-P3195/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 题解 </tag>
+            
+            <tag> oi </tag>
+            
+            <tag> dp </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Codeforces Global Round 2</title>
+      <link href="/2019/4/7/Codeforces-1119/"/>
+      <url>/2019/4/7/Codeforces-1119/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 题解 </tag>
+            
+            <tag> oi </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>CF733E Sleep in Class [思维题]</title>
+      <link href="/2019/3/30/Codeforces-733E/"/>
+      <url>/2019/3/30/Codeforces-733E/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 题解 </tag>
+            
+            <tag> oi </tag>
+            
+            <tag> 思维题 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>CF786A Berzerk</title>
+      <link href="/2019/3/29/Codeforces-786A/"/>
+      <url>/2019/3/29/Codeforces-786A/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 题解 </tag>
+            
+            <tag> oi </tag>
+            
+            <tag> 博弈论 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>CF95B Lucky Numbers [毒瘤分类讨论贪心/DFS]</title>
+      <link href="/2019/3/19/Codeforces-95B/"/>
+      <url>/2019/3/19/Codeforces-95B/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 题解 </tag>
+            
+            <tag> oi </tag>
+            
+            <tag> 贪心 </tag>
+            
+            <tag> 思维题 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>CF696A Lorenzo Von Matterhorn</title>
+      <link href="/2019/3/15/Codeforces-696A/"/>
+      <url>/2019/3/15/Codeforces-696A/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 题解 </tag>
+            
+            <tag> oi </tag>
+            
+            <tag> 思维题 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>CF832D Misha, Grisha and Underground</title>
+      <link href="/2019/3/15/Codeforces-832D/"/>
+      <url>/2019/3/15/Codeforces-832D/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 题解 </tag>
+            
+            <tag> oi </tag>
+            
+            <tag> lca </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>CF932D Tree</title>
+      <link href="/2019/3/15/Codeforces-932D/"/>
+      <url>/2019/3/15/Codeforces-932D/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 题解 </tag>
+            
+            <tag> oi </tag>
+            
+            <tag> lca </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>洛谷P2783 有机化学之神偶尔会做作弊（水黑题系列）</title>
+      <link href="/2019/3/12/Luogu-P2783/"/>
+      <url>/2019/3/12/Luogu-P2783/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 题解 </tag>
+            
+            <tag> oi </tag>
+            
+            <tag> lca </tag>
+            
+            <tag> scc </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>洛谷P4427 [BJOI2018]求和</title>
+      <link href="/2019/3/12/Luogu-P4427/"/>
+      <url>/2019/3/12/Luogu-P4427/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 题解 </tag>
+            
+            <tag> oi </tag>
+            
+            <tag> lca </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>解决Ubuntu使用中遇到的几个问题</title>
+      <link href="/2019/2/7/Solve-Ubuntu-Problems/"/>
+      <url>/2019/2/7/Solve-Ubuntu-Problems/</url>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ubuntu </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Codeforces Round 536 (Div. 2)</title>
+      <link href="/2019/2/1/Codeforces-1106/"/>
+      <url>/2019/2/1/Codeforces-1106/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 题解 </tag>
+            
+            <tag> oi </tag>
+            
+            <tag> codeforces </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>摇号机~~全新~~翻新发布</title>
+      <link href="/2019/2/1/RNumWPFNew/"/>
+      <url>/2019/2/1/RNumWPFNew/</url>
+      
+      
+      <categories>
+          
+          <category> 项目 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 项目 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>如何用C#强行A掉洛谷高精模板(P1601)</title>
+      <link href="/2019/1/30/Luogu-P1601/"/>
+      <url>/2019/1/30/Luogu-P1601/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 题解 </tag>
+            
+            <tag> oi </tag>
+            
+            <tag> dotnet </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>贴几个VSCode的常用代码片段</title>
+      <link href="/2019/1/27/Llf-AK-IOI/"/>
+      <url>/2019/1/27/Llf-AK-IOI/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> oi </tag>
+            
+            <tag> vscode </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>VJudge-Anti-Cheating - VJudge比赛反抄袭程序</title>
+      <link href="/2019/1/17/VJudge-Anti-Cheating/"/>
+      <url>/2019/1/17/VJudge-Anti-Cheating/</url>
+      
+      
+      <categories>
+          
+          <category> 项目 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> oi </tag>
+            
+            <tag> 项目 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>OJStatusCrawler-爬取大佬的做题记录</title>
+      <link href="/2018/12/9/OJStatusCrawler/"/>
+      <url>/2018/12/9/OJStatusCrawler/</url>
+      
+      
+      <categories>
+          
+          <category> 项目 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> dotnet </tag>
+            
+            <tag> 项目 </tag>
+            
+            <tag> 施工现场 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>全新自动AC机</title>
+      <link href="/2018/12/1/Self-AC-Machine/"/>
+      <url>/2018/12/1/Self-AC-Machine/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> oi </tag>
+            
+            <tag> 搞事情 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>为你的Jekyll博客添加搜索文章功能</title>
+      <link href="/2018/11/28/Jekyll-Search/"/>
+      <url>/2018/11/28/Jekyll-Search/</url>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 教程 </tag>
+            
+            <tag> jekyll </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>NOIP2018总结</title>
+      <link href="/2018/11/16/NOIP2018-Summary/"/>
+      <url>/2018/11/16/NOIP2018-Summary/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> oi </tag>
+            
+            <tag> 总结 </tag>
+            
+            <tag> noip2018 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>[手动置顶]讣告</title>
+      <link href="/2018/11/15/Obituary/"/>
+      <url>/2018/11/15/Obituary/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> oi </tag>
+            
+            <tag> noip2018 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>NOIP2018 Day2 游记</title>
+      <link href="/2018/11/11/NOIP2018-Day2/"/>
+      <url>/2018/11/11/NOIP2018-Day2/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> oi </tag>
+            
+            <tag> noip2018 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>NOIP2018 Day1 游记</title>
+      <link href="/2018/11/10/NOIP2018-Day1/"/>
+      <url>/2018/11/10/NOIP2018-Day1/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> oi </tag>
+            
+            <tag> noip2018 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>论给电脑设密码的重要性——机房惨案的新境界</title>
+      <link href="/2018/10/24/Please-Set-Password/"/>
+      <url>/2018/10/24/Please-Set-Password/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 搞事情 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>初步认识分块算法</title>
+      <link href="/2018/10/22/Fenkuai-Algorithm/"/>
+      <url>/2018/10/22/Fenkuai-Algorithm/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> oi </tag>
+            
+            <tag> 算法 </tag>
+            
+            <tag> 分块 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>PlaneGame v1.0.0.5 正式版发布</title>
+      <link href="/2018/10/20/PlaneGame-Release/"/>
+      <url>/2018/10/20/PlaneGame-Release/</url>
+      
+      
+      <categories>
+          
+          <category> 项目 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> dotnet </tag>
+            
+            <tag> 项目 </tag>
+            
+            <tag> planegame </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Linux下对拍sh</title>
+      <link href="/2018/10/19/VSCode-Duipai/"/>
+      <url>/2018/10/19/VSCode-Duipai/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> oi </tag>
+            
+            <tag> linux </tag>
+            
+            <tag> vscode </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>GCC/STL里面不那么常用又很有帮助的函数</title>
+      <link href="/2018/10/18/Some-STL-Functions/"/>
+      <url>/2018/10/18/Some-STL-Functions/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> oi </tag>
+            
+            <tag> 总结 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>玄(pian)学(fen)算法——模拟退火</title>
+      <link href="/2018/10/16/Simulate-Anneal/"/>
+      <url>/2018/10/16/Simulate-Anneal/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> oi </tag>
+            
+            <tag> 算法 </tag>
+            
+            <tag> 模拟退火 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>GDB常用命令</title>
+      <link href="/2018/10/3/GDB-Usage/"/>
+      <url>/2018/10/3/GDB-Usage/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> oi </tag>
+            
+            <tag> 总结 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>单硬盘安装Ubuntu18.04与Win10</title>
+      <link href="/2018/10/3/Install-Ubuntu/"/>
+      <url>/2018/10/3/Install-Ubuntu/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> linux </tag>
+            
+            <tag> 教程 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>实地测试各种读取方法的速度</title>
+      <link href="/2018/9/16/IO-Speed-Test/"/>
+      <url>/2018/9/16/IO-Speed-Test/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 废话 </tag>
+            
+            <tag> oi </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>VSCode OI 使用配置</title>
+      <link href="/2018/9/15/VSCode-Config/"/>
+      <url>/2018/9/15/VSCode-Config/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> oi </tag>
+            
+            <tag> vscode </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>C++快速读写</title>
+      <link href="/2018/9/12/Fast-IO/"/>
+      <url>/2018/9/12/Fast-IO/</url>
+      
+      
+      <categories>
+          
+          <category> OI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> oi </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Standard-TLE-Library</title>
+      <link href="/2018/8/31/Standard-TLE-Library/"/>
+      <url>/2018/8/31/Standard-TLE-Library/</url>
+      
+      
+      <categories>
+          
+          <category> 项目 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> oi </tag>
+            
+            <tag> 项目 </tag>
+            
+            <tag> 施工现场 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>PlaneGame正在施工中</title>
+      <link href="/2018/8/17/PlaneGame/"/>
+      <url>/2018/8/17/PlaneGame/</url>
+      
+      
+      <categories>
+          
+          <category> 项目 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 项目 </tag>
+            
+            <tag> planegame </tag>
+            
+            <tag> 施工现场 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>[已补档]山寨金山打字——KeyboardExercise</title>
+      <link href="/2018/8/6/TypeExercise/"/>
+      <url>/2018/8/6/TypeExercise/</url>
+      
+      
+      <categories>
+          
+          <category> 项目 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 项目 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>DDZGame正式版发布</title>
+      <link href="/2018/8/2/DDZGame-Release/"/>
+      <url>/2018/8/2/DDZGame-Release/</url>
+      
+      
+      <categories>
+          
+          <category> 项目 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 项目 </tag>
+            
+            <tag> ddzgame </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>

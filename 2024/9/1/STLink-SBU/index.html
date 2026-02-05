@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 8.1.1">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.21.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+
+  
+  
+  <title>Type-C SWD VCP USB 一线通 ST-LINK/V2-1 - duanyll</title>
+
+  
+    <meta name="description" content="可能是使用最方便的 ST-LINK&#x2F;V2-1 一线通方案：无需对线，一个 Type-C 接口搞定 SWD 调试，VCP 虚拟串口和下行 USB，支持正反插，同时引出 ST-LINK&#x2F;V3 Minie 的 STDC-14 标准接口，带下游供电短路和倒灌保护。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Type-C SWD VCP USB 一线通 ST-LINK&#x2F;V2-1">
+<meta property="og:url" content="https://duanyll.com/2024/9/1/STLink-SBU/">
+<meta property="og:site_name" content="duanyll">
+<meta property="og:description" content="可能是使用最方便的 ST-LINK&#x2F;V2-1 一线通方案：无需对线，一个 Type-C 接口搞定 SWD 调试，VCP 虚拟串口和下行 USB，支持正反插，同时引出 ST-LINK&#x2F;V3 Minie 的 STDC-14 标准接口，带下游供电短路和倒灌保护。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.duanyll.com/img/20240902140957.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20240902141043.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20240902141448.png">
+<meta property="og:image" content="https://img.duanyll.com/img/1725195123571.jpg">
+<meta property="og:image" content="https://img.duanyll.com/img/20240902114419.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20240902114450.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20240902114810.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20240902115307.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20240301121055.png">
+<meta property="og:image" content="https://img.duanyll.com/img/1725195123578.jpg">
+<meta property="og:image" content="https://img.duanyll.com/img/1725195123586.jpg">
+<meta property="og:image" content="https://img.duanyll.com/img/1725195123565.jpg">
+<meta property="og:image" content="https://img.duanyll.com/img/1725195123582.jpg">
+<meta property="article:published_time" content="2024-09-01T00:00:00.000Z">
+<meta property="article:modified_time" content="2024-09-01T00:00:00.000Z">
+<meta property="article:author" content="duanyll">
+<meta property="article:tag" content="stm32">
+<meta property="article:tag" content="嘉立创eda">
+<meta property="article:tag" content="电子设计">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://img.duanyll.com/img/20240902140957.png">
+  
+  
+  
+  <meta name="keywords" content="电子设计,嘉立创eda,stm32">
+
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="duanyll" type="application/atom+xml">
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+    <link rel="shortcut icon" href="https://cdn.duanyll.com/favicon.ico">
+  
+
+  
+
+  
+
+
+  
+
+  
+    <script>
+      var darkmodeSettings = localStorage.getItem('darkmode') || 'auto';
+      var enableDarkmode = darkmodeSettings == 'true' 
+        || (darkmodeSettings == 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (enableDarkmode) {
+        document.documentElement.classList.add('global-darkmode');
+      }
+      window.currentTheme = enableDarkmode ? 'dark' : 'light';
+    </script>
+  
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://cdn.duanyll.com/android-chrome-192x192.png" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">duanyll</div><div class="sub normal cap">qwq</div><div class="sub hover cap" style="opacity:0"> QWQ</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Wiki</a><a class="nav-item" href="/about/">关于</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Type-C SWD VCP USB 一线通 ST-LINK/V2-1</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-text">摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E5%B7%A5%E4%BD%9C"><span class="toc-text">相关工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95"><span class="toc-text">方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%92%8C%E8%AE%A8%E8%AE%BA"><span class="toc-text">实验和讨论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-text">结论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-text">参考文献</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%99%84%E5%BD%95"><span class="toc-text">附录</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#st-link-%E6%8C%87%E7%A4%BA%E7%81%AF%E5%90%AB%E4%B9%89"><span class="toc-text">ST-LINK 指示灯含义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bom"><span class="toc-text">BOM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B5%84%E6%BA%90"><span class="toc-text">资源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E5%A4%9A%E5%9B%BE%E7%89%87"><span class="toc-text">更多图片</span></a></li></ol></li></ol></div></div></widget>
+
+
+
+
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/duanyll" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/08a41b181ce68.svg"/></a><a class="social" href="/about/#comments" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/942ebbf1a4b91.svg"/></a><a class="social" href="https://www.travellings.cn/go.html" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://www.travellings.cn/assets/favicon-fluent-emoji.svg"/></a><a class="social" href="javascript:darkmode.next()" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/img/half-moon.svg"/></a></div></footer>
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+        
+
+
+
+<div class="bread-nav fs12"><div class="left"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></div><div id="post-meta">
+    <span>发布于&nbsp;<time datetime="2024-09-01T00:00:00.000Z">2024-09-01</time></span>
+    
+    <span>更新于&nbsp;<time datetime="2024-09-01T00:00:00.000Z">2024-09-01</time></span>
+    </div></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Type-C SWD VCP USB 一线通 ST-LINK/V2-1</span></h1>
+
+<div class="article-tags"><a class="tag-plugin colorful hashtag" color="cyan" href="/tags/%E7%94%B5%E5%AD%90%E8%AE%BE%E8%AE%A1/" >  <svg t="1701408144765" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4228" width="200" height="200"><path d="M426.6 64.8c34.8 5.8 58.4 38.8 52.6 73.6l-19.6 117.6h190.2l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6s58.4 38.8 52.6 73.6l-19.4 117.6H896c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-42.6 256H832c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.6-117.4h-190.4l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.4-117.8H128c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l42.6-256H192c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6z m11.6 319.2l-42.6 256h190.2l42.6-256h-190.2z" p-id="4229"></path></svg>  <span>电子设计</span></a><a class="tag-plugin colorful hashtag" color="orange" href="/tags/%E5%98%89%E7%AB%8B%E5%88%9Beda/" >  <svg t="1701408144765" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4228" width="200" height="200"><path d="M426.6 64.8c34.8 5.8 58.4 38.8 52.6 73.6l-19.6 117.6h190.2l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6s58.4 38.8 52.6 73.6l-19.4 117.6H896c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-42.6 256H832c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.6-117.4h-190.4l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.4-117.8H128c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l42.6-256H192c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6z m11.6 319.2l-42.6 256h190.2l42.6-256h-190.2z" p-id="4229"></path></svg>  <span>嘉立创eda</span></a><a class="tag-plugin colorful hashtag" color="yellow" href="/tags/stm32/" >  <svg t="1701408144765" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4228" width="200" height="200"><path d="M426.6 64.8c34.8 5.8 58.4 38.8 52.6 73.6l-19.6 117.6h190.2l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6s58.4 38.8 52.6 73.6l-19.4 117.6H896c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-42.6 256H832c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.6-117.4h-190.4l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.4-117.8H128c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l42.6-256H192c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6z m11.6 319.2l-42.6 256h190.2l42.6-256h-190.2z" p-id="4229"></path></svg>  <span>stm32</span></a></div>
+<div class="tag-plugin link dis-select"><a class="link-card plain" title="" href="https://oshwhub.com/duanyll/stlink-sbu" target="_blank" rel="external nofollow noopener noreferrer" cardlink="" autofill="title,icon"><div class="left"><span class="title">https://oshwhub.com/duanyll/stlink-sbu</span><span class="cap link fs12">https://oshwhub.com/duanyll/stlink-sbu</span></div><div class="right"><div class="lazy img" data-bg="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/link/8f277b4ee0ecd.svg"></div></div></a></div>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20240902140957.png" alt="省流" fancybox="true"></div><div class="image-meta"><span class="image-caption center">省流</span></div></div>
+<h2 id="摘要">摘要</h2>
+<p>本文提出了一种基于 Type-C 接口调试配件（Debug Accessory）模式的 ST-LINK/V2-1 接 线方案，实现了一次连接同时支持 SWD 调试、VCP 虚拟串口和下行 USB 三种调试功能，而 且支持正反插，便利性较传统的连接方式有显著提升。为了验证方案的可行性，还基于 STM32F103CBT6 和 CH334F 方案设计设计了一款 PCB，验证了方案的可行性。设计的 PCB 除了具备提出的一线通 Type-C 公头，还提供了支持供电的 ST-LINK/V3 Minie 的 STDC-14 小体积标准调试接口，并实现了下行供电的过流和倒灌保护，具备实用价值。最后，本文还 提供了详细的原理图、PCB 设计和 BOM 表，方便读者参考。</p>
+<h2 id="引言">引言</h2>
+<p>自行设计单片机最小系统时，调试接口的设计能明显地影响 PCB 的布局和调试的便利性。 常见的基于排针、测试点等的调试接口设计存在以下问题：</p>
+<ul>
+<li>体积大，占用 PCB 空间</li>
+<li>需要专用的排线或者探头才能连接到调试接口</li>
+<li>接口引脚顺序不统一，反复对照引脚定义连接杜邦线费时费力，容易接错</li>
+<li>调试器提供的 5V 或 3V3 供电没有足够的保护措施，可能导致开发板倒灌电脑 USB 接口</li>
+<li>调试接口被封闭在开发板内部，需要在外壳上增加额外的开孔</li>
+</ul>
+<p>而像 STM32 官方 Discovery 系列开发板采用的将 ST-LINK 集成到开发板上的设计，虽然 改善了连接电脑的便利性，但若需要同时使用 MCU 的 USB 功能，还需要额外的 USB 线连 接到开发板上；另外，板载 ST-LINK 的设计也显著增大了开发板的面积和成本。</p>
+<p>本文提出的方案能<strong>复用开发板上的 Type-C 接口，无需任何额外的面积和元器件</strong>，即可 实现一次连接进行 SWD 调试、VCP 虚拟串口，并连接下行 USB。被调试 MCU 侧只需要一个 常见的、廉价的 12/16Pin Type-C 接口，就可以实现同时使用 SWD 调试和 USB 功能，且 支持正反插。如果开发板不需要 USB 功能，则也可以将 USB 数据线复用为 VCP 虚拟串 口，调试器能自动识别 USB 复用为 VCP 的状态。如果开发板使用了 24Pin Type-C 接口， 则可以同时进行 SWD 调试、VCP 虚拟串口和 USB 功能。针对 24Pin 接口，调试器侧的布 线进行了优化，降低了开发板侧的布线扇出难度。</p>
+<p>值得注意的是，基于 Type-C 规范定义的调试配件（Debug Accessory）模式，<strong>开发板侧 的 Type-C 调试口也可用作普通的 USB 数据接口</strong>，且开发板可以检测调试接口上连接的 是调试器还是普通的 USB 线缆，从而允许派生出更多的应用场景。</p>
+<h2 id="相关工作">相关工作</h2>
+<p>标准的 JTAG 接口和正版 ST-LINK V2 上巨大的 20Pin 简牛座接口都是通过规范化调试接 口引脚定义来提升接线体验的例子，但是 20Pin 的接口实在是太大了，不适合用在小型开 发板上。ST-Link V3 系列的 STDC-14 调试接口相比于 20Pin 简牛座极大地减小了体积， 然而在开发板侧仍然存在反接的风险，并且价格最低（仍然很高）的 ST-LINK/V3 Minie 不 能提供下行供 电。<a target="_blank" rel="noopener" href="https://item.taobao.com/item.htm?spm=a21n57.1.item.2.1c8b523cSViWIz&amp;priceTId=2147bf9d17252005574896585e4f3d&amp;utparam=%7B%22aplus_abtest%22:%22475785183ac3899d5fd36cfd8e71be5a%22%7D&amp;id=754895571935&amp;ns=1&amp;abbucket=12&amp;skuId=5206391305056">极客 STM32 电子开发网的 STLINK</a> 价格低廉，能直接通过 7Pin 2.54 排针连接到该店设计的开发板，但是双层排针的设计也 存在反接的可能，且开发板上也要为调试接口付出不小的额外面积。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20240902141043.png" alt="minoseigenheer 的调试脚位设计" fancybox="true"></div><div class="image-meta"><span class="image-caption center">minoseigenheer 的调试脚位设计</span></div></div>
+<p><a target="_blank" rel="noopener" href="https://github.com/minoseigenheer">minoseigenheer</a> 基于 Type-C 接口的调试配件模 式设计了一种 <a target="_blank" rel="noopener" href="https://github.com/minoseigenheer/SWD-over-USB-C">SWD over USB-C</a> 方案，通过 Type-C 接口实现了 SWD 调试和下行 USB，是本文的灵感来源之一。然而，该 方案未提供 VCP 虚拟串口功能，并且要求开发板具备 24Pin 全针脚的 Type-C 接口，增加 了开发板侧的成本和布线难度。</p>
+<p>本方案通过在规范容差范围内调整开发板侧两个 CC 线 Rd 下拉电阻的阻值，实现了从公口 方向检测母口的插入方向（而不是通常的从母口侧检查公口的方向），从而能在调试器一侧 翻转线序，可以利用两个 SBU 针脚进行 SWDIO 和 SWCLK 两线调试。同时，基于对 Rd 下 拉电阻的检测，可以控制模拟开关切换 D+ D- 用作 USB 或 VCP 串口，在 16Pin Type-C 接口上按需提供尽量多的功能。</p>
+<h2 id="方法">方法</h2>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20240902141448.png" alt="Rp，Rd 和 Ra" fancybox="true"></div><div class="image-meta"><span class="image-caption center">Rp，Rd 和 Ra</span></div></div>
+<p>Type-C 规范要求受电端（Sink）在 CC1 和 CC2 上各接入 5.1kR 的下拉电阻，称为 Rd； 供电端在 CC1 和 CC2 接入一定阻值的上拉电阻或电流源 Rp，以将 CC 线上的电压上拉到 一定值，CC 线上的不同电平指示连接建立初期，受电端允许吸入的最大电流。由于正确的 C-C 连接线只允许连接一侧的 CC 引脚，另一侧 CC 引脚要么开路，要么存在 1kR 的下拉 电阻 Ra 用于开启 VCONN 供电。于是根据两条 CC 线上 Rp，Rd，Ra 的连接状态，可以区 分连接设备的类型和插入方向。</p>
+<table>
+<colgroup>
+<col style="width: 23%">
+<col style="width: 23%">
+<col style="width: 52%">
+</colgroup>
+<thead>
+<tr>
+<th>CC1</th>
+<th>CC2</th>
+<th>状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Rp Rd 未连接</td>
+<td>Rp Rd 未连接</td>
+<td>未连接</td>
+</tr>
+<tr>
+<td>Rp Rd 未连接</td>
+<td>Rp-Rd 0.25V-2.04V</td>
+<td>使用普通线缆接入设备</td>
+</tr>
+<tr>
+<td>Rp-Rd 0.25V-2.04V</td>
+<td>Rp Rd 未连接</td>
+<td>使用普通线缆接入设备</td>
+</tr>
+<tr>
+<td>Rp-Ra -0.25V-0.15V</td>
+<td>Rp-Rd 0.25V-2.04V</td>
+<td>使用 E-Marker 线缆接入设备，CC1 是 VCONN</td>
+</tr>
+<tr>
+<td>Rp-Rd 0.25V-2.04V</td>
+<td>Rp-Ra -0.25V-0.15V</td>
+<td>使用 E-Marker 线缆接入设备，CC2 是 VCONN</td>
+</tr>
+<tr>
+<td>Rp-Rd 0.25V-2.04V</td>
+<td>Rp-Rd 0.25V-2.04V</td>
+<td>调试配件模式 (Debug Accessory Mode)</td>
+</tr>
+<tr>
+<td>Rp-Ra -0.25V-0.15V</td>
+<td>Rp-Ra -0.25V-0.15V</td>
+<td>音频配件模式</td>
+</tr>
+</tbody>
+</table>
+<p>Rp-Rd 连接的不同电压还能区分供电能力。于是 Type-C 接口在无需传递 PD 报文的情况下 就能区分多种连接设备的类型和插入方向，为调试配件模式提供了可能。由上表发现由于普 通 Type-C 连接器公口一侧只有一个 CC 引脚，故调试配件模式需要使用特制的公口直接连 接到母口。开发板侧母口通过检测两侧 CC 引脚是否同时具有 vRd-Connect 电压是否存在 调试配件的连接，从而控制 Mux 改变接线。（在只使用 USB 2.0 的情况下，本文的方案不 需要进行检测，可直接连线）。</p>
+<p>规范的 Type-C 调试配件模式在不进行插入方向检测的情况下，允许将 2, 3, 6, 7, 8, 10, 11 共 7 个引脚用于传输自定义的调试信号。然而，这要求连接器同时具有 24Pin 的 Type-C 接口，且开发板侧的布线难度较大。简易的 16Pin Type-C 接口只能使用 6, 7, 8 三个引脚，若保留 USB 功能，且不在开发板侧增加额外的元器件，实际上只有 8 号引脚 （SBU 引脚）可用。于是不得不实现插入方向检测，以便在 A8 和 B8 上分别传输 SWDIO 和 SWCLK 信号。</p>
+<p>Type-C 插入方向检测和线序翻转通常在母口侧进行，但为了不在母口增加元器件，本文将 插入方向检测和线序翻转放在公口侧进行。Type-C 规范给 Rd 电阻提供了很大的容差范 围，通过<strong>在母口两侧使用略有差别的 Rd 电阻，公口侧使用相同的 Rp 电阻，则可用比较 器比较两条 CC 线上的电压，从而判断母口的插入方向，进而使用模拟开关交换 SWDIO 和 SWCLK 信号的线序，不需要对调试器的固件进行修改。</strong> 开发板侧的两个 SBU 引脚可直连 MCU，不需要额外的元器件。</p>
+<p>以上设计可以实现在 16Pin Type-C 口上同时使用 SWD 调试和 USB 功能。对于不支持、不 需要 USB 功能的开发板，是否可以将 USB 数据线复用为 USART 串口呢？可以实现这样的 设计。由于 USB D+ D- 和 USART 的电平比较复杂，所以<strong>通过比较器检测 CC1 的分压电 阻来切换模拟开关，实现 USB 和 VCP 的复用</strong>。对于 24Pin 完整的母口，则在两侧的高 速信号上引出 VCP 和剩余的调试信号。额外信号调试器公头侧做了双面布线，因此开发板 母口侧只需要单面连接，降低了开发板侧的布线难度。</p>
+<p>USB 部分内置了小封装 CH334 Hub 实现上位机一线同时连接调试器和开发板。STDC-14 调 试接口利用未定义引脚增加了 5V 供电并受到 TPS2553 芯片保护，防止过流和倒灌，USB 公头旁的红色 LED 指示供电故障。设计的过流保护电流为 1.5A，基本满足多数需求，可自 行调整。（注：正版 ST-LINK/V2-1 固件具有使用 GPIO 引脚控制负载开关的功能，在 USB 握手初期可限制电流到 100mA 以满足 USB 规范。实际上几乎所有的 USB 接口都没有严格 执行 100mA 的限制，所以这个功能在本文的设计中没有实现。）</p>
+<h2 id="实验和讨论">实验和讨论</h2>
+<p>已验证此调试器可刷入 ST-LINK/V2-1 固件并正常工作，支持正反插。DAPLink 固件可以刷 入并被上位机 PyOCD 识别，暂未测试 SWD 调试功能。已验证短路保护和倒灌保护功能，供 电故障时 LED 亮起。下面是注意事项：</p>
+<ol type="1">
+<li><p><strong>CH334 免晶振功能：</strong> 本设计为了节约 PCB 空间，需要使用 CH334 的内部晶振。尽 管根据沁恒论坛上的答复 <a target="_blank" rel="noopener" href="https://www.wch.cn/bbs/thread-117640-1.html">1</a> <a target="_blank" rel="noopener" href="https://www.wch.cn/bbs/thread-123784-1.html">2</a>，目前最新的 CH334 除了 CH334S 封装均支持免晶振功能，但是截至 2024 年 9 月立创贴片的 CH334F 不能免晶 振，无法正常工作。2024 年 8 月 <a target="_blank" rel="noopener" href="https://item.taobao.com/item.htm?spm=a1z09.2.0.0.28c92e8d998lE5&amp;id=739658232700&amp;_u=231vkgfvbed8&amp;skuId=5106094177623">这家淘宝店的 CH334F</a> 是可以免晶振的。本设计有 CH334F 和 CH334P 两个版本，建议向卖家确认是否支持免 晶振功能。</p></li>
+<li><p><strong>STM32 容量:</strong> 请使用 128kB 容量的 STM32F103CBT6，否则无法刷入 ST-LINK/V2-1 固件。其余国产替代芯片理论上可行，但未测试。</p></li>
+<li><p><strong>固件刷入方式：</strong> 本调试器自身的 SWD 调试接口也使用一线通方案引出到上位机 Type-C 母座上。制作第一个调试器时，可以购买一个 Type-C 公母头测试板，在调试器 母座侧使用测试板连接电脑，再使用一个普通 ST-LINK 刷入固件。</p>
+<ol type="1">
+<li><p>接线需要先接通地线，再使用万用表电压档测量测试板上 A5，A8，B5，B8 四个引脚 的电压，具有 3.3V 电压的引脚是 SWDIO，SWDIO 对角的引脚是 SWCLK。测试板另一 头可直接连接电脑 USB 接口。接线如下图所示:</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/1725195123571.jpg" alt="使用 Type-C 测试板烧录固件" fancybox="true"></div><div class="image-meta"><span class="image-caption center">使用 Type-C 测试板烧录固件</span></div></div></li>
+<li><p>下载安装打开 <a target="_blank" rel="noopener" href="https://www.st.com/zh/development-tools/stm32cubeprog.html">STM32CubeProgrammer</a>。 点击右上角 Connect 连接调试器，成功连接后左下角显示目标芯片信息。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20240902114419.png" alt="点击连接" fancybox="true"></div><div class="image-meta"><span class="image-caption center">点击连接</span></div></div>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20240902114450.png" alt="连接成功" fancybox="true"></div><div class="image-meta"><span class="image-caption center">连接成功</span></div></div></li>
+<li><p>烧录广为流传的 <code>STLinkV2.J28.M18.bin</code> 版本固件。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20240902114810.png" fancybox="true"></div></div></li>
+<li><p>注意这个版本的固件不能正常使用，还需进行一次固件升级。点击 Disconnect 断开 连接，移除测试板和另一个调试器，只连接本调试器。</p></li>
+<li><p>调试器插上电脑后，不点击其他按钮，直接点击 Firmware Upgrade 按钮</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20240902115307.png" fancybox="true"></div></div></li>
+<li><p>点击按钮升级固件后即可正常使用。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20240301121055.png" fancybox="true"></div></div></li>
+<li><p>成功烧录一个调试器后，可以使用这个调试器的公口对插下一个调试器进行烧录，无 需再次使用测试板。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/1725195123578.jpg" fancybox="true"></div></div></li>
+</ol></li>
+<li><p><strong>DAPLink</strong> 这块板有 USB 重枚举电路，需要使用兼容 ST-LINK/V2-1 的 DAPLink 固 件，如 <a target="_blank" rel="noopener" href="https://github.com/devanlai/dap42/releases/tag/v1.31">DAP103</a></p></li>
+<li><p><strong>板厚和叠层</strong> 0.8 板厚 4 层板，JLC04161H-3313 叠层（可使用 1-4 层沉金免费 券）</p></li>
+<li><p><strong>Type-C DRP</strong> 调试器只能做 Source，不能做 Sink。目标开发板侧如果不使用 PD 协 议芯片，或者 PD 协议芯片需要外置下拉电阻，可直接按本文设计放置 Rd 电阻。若 PD 芯片内置 Rd 电阻，可能可以通过在一侧 CC 上并联一个下拉电阻来实现方向检测，未 经验证。</p></li>
+</ol>
+<h2 id="结论">结论</h2>
+<p>灌水灌不下去了。</p>
+<h2 id="参考文献">参考文献</h2>
+<p>推荐阅读：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.ruanx.net/diy-daplink/">Ruan Xingzhi “DIY：自制 DAPLink”</a></li>
+<li><a target="_blank" rel="noopener" href="https://hackaday.com/2023/01/04/all-about-usb-c-resistors-and-emarkers/">Arya Voronova “All About USB-C: Resistors And Emarkers”</a></li>
+</ul>
+<h2 id="附录">附录</h2>
+<h3 id="st-link-指示灯含义">ST-LINK 指示灯含义</h3>
+<p>STM32F103CBT6 旁边的两个 LED 灯的含义如下：</p>
+<ul>
+<li>红色闪烁：已上电，未连接到电脑（大概率是 CH334 不支持免晶振）</li>
+<li>红色常亮：已连接到电脑，未连接到目标芯片</li>
+<li>红绿交替闪烁：正在传输数据</li>
+<li>绿色常亮：上次传输数据成功</li>
+<li>红绿常亮：上次传输数据失败</li>
+</ul>
+<p>Type-C 公口旁边的 LED 灯的含义如下：</p>
+<ul>
+<li>不亮：供电正常</li>
+<li>亮：供电异常，可能是过流或倒灌</li>
+</ul>
+<h3 id="bom">BOM</h3>
+<p>主要元件淘宝参考价格：</p>
+<ul>
+<li>STM32F103CBT6：2.2 元包邮</li>
+<li>CH334F / CH334P：1.5 元邮费 1 元（注意批次）</li>
+<li>XC6206P332MR：2 元 20 个包邮</li>
+<li>S9013: 2 元 100 个包邮</li>
+<li>TPS2553：0.6 元包邮</li>
+<li>RS2227XUTQK10: 0.52 元运费 1 元</li>
+<li>CH443K：0.12 元运费 1 元</li>
+<li>RS8901XF: 0.45 元运费 1 元</li>
+<li>16Pin Type-C 贴片母座：2.8 元 10 个包邮</li>
+<li>24Pin Type-C 0.8 夹板公头：0.48 元运费 1.5 元</li>
+</ul>
+<p>合计单个调试器主要元件成本不到 10 元。按立创 EDA 导出的 BOM, 立创贴片五个板全贴 元件价格约 140 元。</p>
+<h3 id="资源">资源</h3>
+<p>原理图，PCB 和固件均在嘉立创开源广场：</p>
+<div class="tag-plugin link dis-select"><a class="link-card plain" title="" href="https://oshwhub.com/duanyll/stlink-sbu" target="_blank" rel="external nofollow noopener noreferrer" cardlink="" autofill="title,icon"><div class="left"><span class="title">https://oshwhub.com/duanyll/stlink-sbu</span><span class="cap link fs12">https://oshwhub.com/duanyll/stlink-sbu</span></div><div class="right"><div class="lazy img" data-bg="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/link/8f277b4ee0ecd.svg"></div></div></a></div>
+<h3 id="更多图片">更多图片</h3>
+<div class="tag-plugin swiper" width="max" effect="cards/coverflow"><div class="swiper-wrapper"><div class="swiper-slide"><img no-lazy="true" src="https://img.duanyll.com/img/1725195123586.jpg" alt=""></div><div class="swiper-slide"><img no-lazy="true" src="https://img.duanyll.com/img/1725195123565.jpg" alt=""></div><div class="swiper-slide"><img no-lazy="true" src="https://img.duanyll.com/img/1725195123582.jpg" alt=""></div></div><div class="swiper-pagination"></div><div class="swiper-button-prev blur"></div><div class="swiper-button-next blur"></div></div>
+
+
+
+<div class="article-footer reveal fs14">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-sa/4.0/">署名-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section>
+    
+    <section id="share">
+      <div class="header"><span>分享文章</span></div>
+      <div class="body">
+        <div class="link"><input class="copy-area" readonly="true" id="copy-link" value="https://duanyll.com/2024/9/1/STLink-SBU/" /></div>
+        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot)"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/b32ef3da1162a.svg"/></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=https://duanyll.com/2024/9/1/STLink-SBU/&title=Type-C SWD VCP USB 一线通 ST-LINK/V2-1 - duanyll&pics=https://img.duanyll.com/img/20240901205441.png&summary=可能是使用最方便的 ST-LINK/V2-1 一线通方案：无需对线，一个 Type-C 接口搞定 SWD 调试，VCP 虚拟串口和下行 USB，支持正反插，同时引出 ST-LINK/V3 Minie 的 STDC-14 标准接口，带下..."><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/80c07e4dbb303.svg"/></a><a class="social share-item email" href="mailto:?subject=Type-C SWD VCP USB 一线通 ST-LINK/V2-1 - duanyll&amp;body=https://duanyll.com/2024/9/1/STLink-SBU/"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/a1b00e20f425d.svg"/></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/8411ed322ced6.svg"/></a><a class="social share-item print" onclick="window.print()"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/img/print.svg" /></a><a class="social share-item source" target="_blank" rel="noopener" href="https://github.com/duanyll/duanyll.com-hexo/blob/master/source/_posts/tech/2024-9-1-STLink-SBU.md"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/08a41b181ce68.svg"/></a></div>
+        
+        <div class="qrcode" id="qrcode-wechat" style="visibility:hidden;height:0">
+          <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=https://duanyll.com/2024/9/1/STLink-SBU/"/>
+        </div>
+        
+      </div>
+    </section>
+    
+      <section id="star">
+        <div class="body">
+          <span class="github-button-wrap">
+            <a class="github-button" 
+               target="_blank" rel="noopener" href="https://github.com/duanyll/duanyll.com-hexo" 
+               data-color-scheme="no-preference: light; light: light; dark: dark;" 
+               data-size="large" 
+               data-show-count="true" 
+               aria-label="Star this site on GitHub">Star</a>
+            <span>喜欢这个网站？在 GitHub 上给它一个 Star 吧！</span>
+          </span>
+        </div>
+      </section>
+    </div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2024/9/4/DE/">微分方程数值解速通</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2024/8/27/Mao/">毛概</a></div></section></div>
+
+
+<div class="related-wrap reveal" id="related-posts">
+    <section class='header'>
+      <div class='title cap theme'>您可能感兴趣的文章</div>
+    </section>
+    <section class='body'>
+    <div class="related-posts"><a class="item" href="/2024/10/1/PN532-CH582/" title="彩色丝印 PN532 + CH582 读卡器"><span class="title">彩色丝印 PN532 + CH582 读卡器</span><span class="excerpt">带 CH582 BLE 和 USB 主控的 PN532 读卡器，使用嘉立创彩色丝印工艺，可通过 USB CDC  串口、USB HID 模拟键盘或 BLE 等多种方式连接上位机，或基于 CH582 直接开发串口屏应用。</span></a><a class="item" href="/2024/11/6/PY32-Palit-4090/" title="非常便宜的同德 4090 手办风扇灯光驱动板"><span class="title">非常便宜的同德 4090 手办风扇灯光驱动板</span><span class="excerpt">使用 PY32F002A 以超低成本点亮同德 4090 手办卡的风扇和灯光</span></a><a class="item" href="/2024/3/1/STM32-CMake/" title="在 VSCode 上使用 CMake 开发 STM32CubeMX 项目"><span class="title">在 VSCode 上使用 CMake 开发 STM32CubeMX 项目</span></a><a class="item" href="/2024/5/1/PY32-Current-Meter/" title="基于 PY32 和 INA219 的 USB3.0 电流表"><span class="title">基于 PY32 和 INA219 的 USB3.0 电流表</span><span class="excerpt">基于 PY32F002A 和 INA219 的 USB3.0 电流表，成本不到 10 元，提供 Type-A 和 Type-C 版本</span></a><a class="item" href="/2018/11/28/Jekyll-Search/" title="为你的Jekyll博客添加搜索文章功能"><span class="title">为你的Jekyll博客添加搜索文章功能</span><span class="excerpt">众所周知，Github上的Jekyll上实现自定义插件很困难，因此即使有Jekyll的搜索插件，也只能手写js代码。静态网站实现搜索原理是这样的，通过HTTP请求获取posts.json，然后本地解析里面内容实现搜索。</span></a></div></section></div>
+
+
+
+  <div class='related-wrap md-text reveal' id="comments">
+    <section class='header cmt-title cap theme'>
+      快来参与讨论吧
+    </section>
+    <section class='body cmt-body utterances'>
+      
+
+<!-- <svg class="loading" style="vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2709"><path d="M832 512c0-176-144-320-320-320V128c211.2 0 384 172.8 384 384h-64zM192 512c0 176 144 320 320 320v64C300.8 896 128 723.2 128 512h64z" p-id="2710"></path></svg> -->
+
+<div id="utterances" repo="duanyll/duanyll.com-comment" issue-term="pathname" theme="switch" label="Comment" enabled="true" issue_term="pathname"></div>
+
+    </section>
+  </div>
+
+
+
+      
+      
+<footer class="page-footer reveal fs12"><hr><div class="sitemap"><div class="sitemap-group"><span class="fs14">博客</span><a href="/">近期</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></div><div class="sitemap-group"><span class="fs14">项目</span><a target="_blank" rel="noopener" href="https://github.com/duanyll">开源库</a><a href="/wiki/">文档</a><a target="_blank" rel="noopener" href="https://github.com/duanyll/scoop-bucket">Scoop Bucket</a></div><div class="sitemap-group"><span class="fs14">社交</span><a href="/about/#comments">留言板</a><a target="_blank" rel="noopener" href="https://netunion.org">NetUnion</a><a target="_blank" rel="noopener" href="https://www.travellings.cn/go.html">开往</a></div><div class="sitemap-group"><span class="fs14">更多</span><a href="/about">关于本站</a><a target="_blank" rel="noopener" href="https://github.com/duanyll/duanyll.com-hexo">GitHub 源码</a><a target="_blank" rel="noopener" href="https://duanyll.cloudflareaccess.com">Dashboard</a></div></div><div class="text"><p>本站由 <a target="_blank" rel="noopener" href="https://github.com/duanyll">duanyll</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。 本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = stellar.config.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.21.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.21.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+    root : '/',
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js","memos":"/js/plugins/memos.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide:not(.swiper-slide-duplicate) img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.copycode = Object.assign({"enable":true,"js":"/js/plugins/copycode.js","default_text":"Copy","success_text":"Copied"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+  <script>
+  function loadUtterances() {
+    const els = document.querySelectorAll("#comments #utterances");
+    if (els.length === 0) return;
+    els.forEach((el, i) => {
+      try {
+        el.innerHTML = '';
+      } catch (error) {
+        console.error(error);
+      }
+      var script = document.createElement('script');
+      script.src = 'https://utteranc.es/client.js';
+      script.async = true;
+      for (let key of Object.keys(el.attributes)) {
+        let attr = el.attributes[key];
+        if (['class', 'id'].includes(attr.name) === false) {
+          var name = attr.name;
+          var value = attr.value;
+          if (name == 'theme' && value == 'switch') {
+            value = window.currentTheme == 'dark' ? 'github-dark' : 'github-light';
+          }
+          script.setAttribute(name, value);
+        }
+      }
+      el.appendChild(script);
+    });
+  }
+  window.addEventListener('DOMContentLoaded', (event) => {
+      loadUtterances();
+  });
+</script>
+
+
+
+
+
+  
+<script src="https://buttons.github.io/buttons.js" async></script>
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

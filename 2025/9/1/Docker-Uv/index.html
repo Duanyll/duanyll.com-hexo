@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 8.1.1">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.21.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+
+  
+  
+  <title>Docker 和 uv 炼丹实践指北 - duanyll</title>
+
+  
+    <meta name="description" content="Abstract 前作 详细介绍了如何（在 WSL2 中）中安装 CUDA 和 Docker，并且配置了 GPU 支持的 Docker 镜像。本文将更详细地介绍一种在容器中使用 uv 管理 PyTorch 深度学习环境的实践。 Introduction 为什么要抛弃 conda，转而使用 Docker 和 uv？ Why Docker  不留死角的环境隔离：Docker 默认隔离所有的用户态要素，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker 和 uv 炼丹实践指北">
+<meta property="og:url" content="https://duanyll.com/2025/9/1/Docker-Uv/">
+<meta property="og:site_name" content="duanyll">
+<meta property="og:description" content="Abstract 前作 详细介绍了如何（在 WSL2 中）中安装 CUDA 和 Docker，并且配置了 GPU 支持的 Docker 镜像。本文将更详细地介绍一种在容器中使用 uv 管理 PyTorch 深度学习环境的实践。 Introduction 为什么要抛弃 conda，转而使用 Docker 和 uv？ Why Docker  不留死角的环境隔离：Docker 默认隔离所有的用户态要素，">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-09-01T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-09-01T00:00:00.000Z">
+<meta property="article:author" content="duanyll">
+<meta property="article:tag" content="docker">
+<meta property="article:tag" content="指北">
+<meta property="article:tag" content="炼丹">
+<meta name="twitter:card" content="summary">
+  
+  
+  
+  <meta name="keywords" content="炼丹,指北,docker">
+
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="duanyll" type="application/atom+xml">
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+    <link rel="shortcut icon" href="https://cdn.duanyll.com/favicon.ico">
+  
+
+  
+
+  
+
+
+  
+
+  
+    <script>
+      var darkmodeSettings = localStorage.getItem('darkmode') || 'auto';
+      var enableDarkmode = darkmodeSettings == 'true' 
+        || (darkmodeSettings == 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (enableDarkmode) {
+        document.documentElement.classList.add('global-darkmode');
+      }
+      window.currentTheme = enableDarkmode ? 'dark' : 'light';
+    </script>
+  
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://cdn.duanyll.com/android-chrome-192x192.png" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">duanyll</div><div class="sub normal cap">qwq</div><div class="sub hover cap" style="opacity:0"> QWQ</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Wiki</a><a class="nav-item" href="/about/">关于</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Docker 和 uv 炼丹实践指北</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#abstract"><span class="toc-text">Abstract</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#introduction"><span class="toc-text">Introduction</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#why-docker"><span class="toc-text">Why Docker</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#why-uv"><span class="toc-text">Why uv</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#related-works"><span class="toc-text">Related Works</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#method%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%92%8C%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E"><span class="toc-text">Method（配置文件和使用说明）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#dockerfile"><span class="toc-text">Dockerfile</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#docker-compose.yml"><span class="toc-text">docker-compose.yml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#devcontainer.json"><span class="toc-text">devcontainer.json</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pyproject.toml"><span class="toc-text">pyproject.toml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-venv"><span class="toc-text">使用 venv</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#experiment%E6%93%8D%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="toc-text">Experiment（操作流程）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#sop"><span class="toc-text">SOP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84"><span class="toc-text">项目结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#appendix"><span class="toc-text">Appendix</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#cuda-%E7%89%88%E6%9C%AC%E5%85%BC%E5%AE%B9%E6%80%A7"><span class="toc-text">CUDA 版本兼容性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-jupyter"><span class="toc-text">使用 Jupyter</span></a></li></ol></li></ol></div></div></widget>
+
+<widget class="widget-wrapper ghrepo"><div class="widget-body"><div class="items stellar-ghinfo-api" api="https://api.github.com/repos/Duanyll/torch-devcontainer"><a class="repo" href="https://github.com/Duanyll/torch-devcontainer" target="_blank" rel="external nofollow noopener noreferrer"><div class="repo-name flex-row"><svg aria-hidden="true" role="img" class="color-icon-primary" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" style="user-select:none;overflow:visible"><path fill-rule="evenodd" d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z"></path></svg>Duanyll/torch-devcontainer</div><div class="repo-desc"><span type="text" id="description">&nbsp;</span></div><div class="grid"><div class="flex-row"><svg aria-hidden="true" role="img" class="color-icon-primary" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" style="user-select:none;overflow:visible"><path fill-rule="evenodd" d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25zm0 2.445L6.615 5.5a.75.75 0 01-.564.41l-3.097.45 2.24 2.184a.75.75 0 01.216.664l-.528 3.084 2.769-1.456a.75.75 0 01.698 0l2.77 1.456-.53-3.084a.75.75 0 01.216-.664l2.24-2.183-3.096-.45a.75.75 0 01-.564-.41L8 2.694v.001z"></path></svg><span type="text" id="stargazers_count"></span></div><div class="flex-row"><svg aria-hidden="true" role="img" class="color-icon-primary" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" style="user-select:none;overflow:visible"><path fill-rule="evenodd" d="M5 3.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm0 2.122a2.25 2.25 0 10-1.5 0v.878A2.25 2.25 0 005.75 8.5h1.5v2.128a2.251 2.251 0 101.5 0V8.5h1.5a2.25 2.25 0 002.25-2.25v-.878a2.25 2.25 0 10-1.5 0v.878a.75.75 0 01-.75.75h-4.5A.75.75 0 015 6.25v-.878zm3.75 7.378a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm3-8.75a.75.75 0 100-1.5.75.75 0 000 1.5z"></path></svg><span type="text" id="forks_count"></span></div><div class="flex-row stellar-ghinfo-api" index="0" api="https://api.github.com/repos/Duanyll/torch-devcontainer/tags"><svg aria-hidden="true" role="img" class="color-icon-primary" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" style="user-select:none;overflow:visible"><path fill-rule="evenodd" d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z"></path></svg><span type="text" id="latest-tag-name">0</span></div></div></a></div></div></widget>
+
+<widget class="widget-wrapper timeline"><div class="widget-body fs14"><div class="tag-plugin timeline stellar-timeline-api" api="https://api.github.com/repos/Duanyll/torch-devcontainer/issues?per_page=3"></div></div></widget>
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/duanyll" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/08a41b181ce68.svg"/></a><a class="social" href="/about/#comments" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/942ebbf1a4b91.svg"/></a><a class="social" href="https://www.travellings.cn/go.html" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://www.travellings.cn/assets/favicon-fluent-emoji.svg"/></a><a class="social" href="javascript:darkmode.next()" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/img/half-moon.svg"/></a></div></footer>
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+        
+
+
+
+<div class="bread-nav fs12"><div class="left"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></div><div id="post-meta">
+    <span>发布于&nbsp;<time datetime="2025-09-01T00:00:00.000Z">2025-09-01</time></span>
+    
+    <span>更新于&nbsp;<time datetime="2025-09-01T00:00:00.000Z">2025-09-01</time></span>
+    </div></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Docker 和 uv 炼丹实践指北</span></h1>
+
+<div class="article-tags"><a class="tag-plugin colorful hashtag" color="yellow" href="/tags/%E7%82%BC%E4%B8%B9/" >  <svg t="1701408144765" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4228" width="200" height="200"><path d="M426.6 64.8c34.8 5.8 58.4 38.8 52.6 73.6l-19.6 117.6h190.2l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6s58.4 38.8 52.6 73.6l-19.4 117.6H896c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-42.6 256H832c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.6-117.4h-190.4l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.4-117.8H128c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l42.6-256H192c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6z m11.6 319.2l-42.6 256h190.2l42.6-256h-190.2z" p-id="4229"></path></svg>  <span>炼丹</span></a><a class="tag-plugin colorful hashtag" color="green" href="/tags/%E6%8C%87%E5%8C%97/" >  <svg t="1701408144765" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4228" width="200" height="200"><path d="M426.6 64.8c34.8 5.8 58.4 38.8 52.6 73.6l-19.6 117.6h190.2l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6s58.4 38.8 52.6 73.6l-19.4 117.6H896c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-42.6 256H832c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.6-117.4h-190.4l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.4-117.8H128c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l42.6-256H192c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6z m11.6 319.2l-42.6 256h190.2l42.6-256h-190.2z" p-id="4229"></path></svg>  <span>指北</span></a><a class="tag-plugin colorful hashtag" color="blue" href="/tags/docker/" >  <svg t="1701408144765" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4228" width="200" height="200"><path d="M426.6 64.8c34.8 5.8 58.4 38.8 52.6 73.6l-19.6 117.6h190.2l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6s58.4 38.8 52.6 73.6l-19.4 117.6H896c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-42.6 256H832c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.6-117.4h-190.4l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.4-117.8H128c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l42.6-256H192c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6z m11.6 319.2l-42.6 256h190.2l42.6-256h-190.2z" p-id="4229"></path></svg>  <span>docker</span></a></div>
+<h2 id="abstract">Abstract</h2>
+<p><a href="/2024/6/30/WSL2-Docker-Deep-Learning/">前作</a> 详细介绍了如何（在 WSL2 中）中安装 CUDA 和 Docker，并且配置了 GPU 支持的 Docker 镜像。本文将更详细地介绍一种在容器中使用 uv 管理 PyTorch 深度学习环境的实践。</p>
+<h2 id="introduction">Introduction</h2>
+<p>为什么要抛弃 conda，转而使用 Docker 和 uv？</p>
+<h3 id="why-docker">Why Docker</h3>
+<ul>
+<li>不留死角的环境隔离：Docker 默认隔离所有的用户态要素，声明可以共享的要素；而 conda 打包则是声明需要隔离的依赖——总是会有遗漏的</li>
+<li>隔离任何包：Docker 可以将整个文件系统打包，包括所有依赖和配置，而 conda 只能隔离 Python 包和一些系统库</li>
+<li>应急：实在别的更好的迁移环境办法，还可以 <code>docker commit / save / load</code> 一条龙（仅供应急使用，并非最佳实践）</li>
+</ul>
+<h3 id="why-uv">Why uv</h3>
+<ul>
+<li>快：比 pip 快 10 倍，比 conda 快 100 倍（虚指，但真的很快）</li>
+<li>至少可以当 pip 用：不想学习？使用 <code>uv pip install</code>, 至少是一个更快的 pip</li>
+<li>使用 pip 源：更少 Licensing 限制，更多镜像站。如果一个包只有 conda 源，它大概率有好些年没更新过了</li>
+<li>是一个真正的包管理器：支持项目文件 <code>pyproject.toml</code>，支持自动维护的 Lockfile（有效保障 Python 环境的可复现性）</li>
+</ul>
+<h2 id="related-works">Related Works</h2>
+<p>请优先参考官方文档</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://docs.astral.sh/uv/getting-started/">uv 官方文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.docker.com/reference/compose-file/">Docker compose 参考手册</a></li>
+<li><a target="_blank" rel="noopener" href="https://containers.dev/implementors/json_reference/">devcontainers.json 参考手册</a></li>
+</ul>
+<h2 id="method配置文件和使用说明">Method（配置文件和使用说明）</h2>
+<p>我们整体的思路是用 Docker 隔离 CUDA Toolkit 和系统 apt 包，以及其他系统级的包，用 uv 维护 Python 的 venv。</p>
+<h3 id="dockerfile">Dockerfile</h3>
+<p>在开发和调试中，经常需要临时的安装和卸载 Python 包，为了方便起见，减少重构和重启容器，本文的方法选择不把 uv 的 venv 打包进 Docker 镜像中，而是通过挂载的形式将其保留在主机文件系统上。由于 uv 本身具有快速创建和复现环境的能力（真的很快！），不用 Docker 处理 Python 环境其实是更方便且节约硬盘空间的。</p>
+<p>因此在 Dockerfile 中我们不需要预先安装 PyTorch 等 Python 包，只需要从 <code>nvidia/cuda</code> 镜像继承，并安装一些系统级的包（如 git, vim, wget 等）即可。</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># This file is used to build the development container for the project.</span></span><br><span class="line"><span class="comment"># Use CUDA devel image without CUDNN since PyTorch brings its own CUDNN</span></span><br><span class="line"><span class="keyword">ARG</span> CUDA_VERSION=<span class="number">12.9</span>.<span class="number">0</span></span><br><span class="line"><span class="keyword">FROM</span> nvidia/cuda:${CUDA_VERSION}-devel-ubuntu22.<span class="number">04</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Install common apt dependencies as root user</span></span><br><span class="line"><span class="keyword">ENV</span> DEBIAN_FRONTEND=noninteractive</span><br><span class="line"><span class="keyword">ENV</span> TZ=Asia/Hong_Kong</span><br><span class="line"><span class="keyword">ARG</span> UBUNTU_MIRROR=https://mirrors.bfsu.edu.cn/ubuntu/</span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> sed -i <span class="string">"s|http://archive.ubuntu.com/ubuntu/|<span class="variable">$UBUNTU_MIRROR</span>|g"</span> /etc/apt/sources.list &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    sed -i <span class="string">"s|http://security.ubuntu.com/ubuntu/|<span class="variable">$UBUNTU_MIRROR</span>|g"</span> /etc/apt/sources.list</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apt-get update -y &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    apt-get -y install --no-install-recommends curl tree wget ca-certificates unzip bzip2 xz-utils zip nano vim-tiny less jq lsb-release apt-transport-https <span class="built_in">sudo</span> tmux ffmpeg libsm6 libxext6 libxrender-dev libssl3 git git-lfs gdb rsync aria2 &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    apt-get -y clean &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    <span class="built_in">rm</span> -rf /var/lib/apt/lists/*</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Create non-root user</span></span><br><span class="line"><span class="keyword">ARG</span> USER_NAME=dev</span><br><span class="line"><span class="keyword">ARG</span> USER_UID=<span class="number">1000</span></span><br><span class="line"><span class="keyword">ARG</span> USER_GID=<span class="number">1000</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> addgroup --gid <span class="variable">${USER_GID}</span> <span class="variable">${USER_NAME}</span> &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    adduser --disabled-password --gecos <span class="string">""</span> --uid <span class="variable">${USER_UID}</span> --gid <span class="variable">${USER_GID}</span> <span class="variable">${USER_NAME}</span> &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    <span class="built_in">echo</span> <span class="string">"<span class="variable">${USER_NAME}</span> ALL=(ALL) NOPASSWD:ALL"</span> &gt; /etc/sudoers.d/<span class="variable">${USER_NAME}</span></span></span><br><span class="line"><span class="keyword">USER</span> ${USER_NAME}</span><br><span class="line"></span><br><span class="line"><span class="comment"># Install the uv package manager for the user</span></span><br><span class="line"><span class="keyword">ARG</span> PYPI_MIRROR=https://mirrors.aliyun.com/pypi/simple/</span><br><span class="line"><span class="keyword">ENV</span> PATH=<span class="string">"/home/${USER_NAME}/.local/bin:${PATH}"</span></span><br><span class="line"><span class="keyword">ENV</span> UV_DEFAULT_INDEX=${PYPI_MIRROR}</span><br><span class="line"><span class="keyword">ENV</span> UV_LINK_MODE=<span class="keyword">copy</span><span class="language-bash"></span></span><br><span class="line"><span class="language-bash">RUN curl -LsSf https://astral.sh/uv/install.sh | sh</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Install starship prompt</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> curl -sS https://starship.rs/install.sh | sh -s -- --<span class="built_in">yes</span> &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    <span class="built_in">echo</span> <span class="string">'eval "$(starship init bash)"'</span> &gt;&gt; /home/<span class="variable">${USER_NAME}</span>/.bashrc</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Install cmake and ninja globally with uv</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> uv tool install cmake --no-cache &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    uv tool install ninja --no-cache</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Configure runtime environments</span></span><br><span class="line"><span class="keyword">ARG</span> HUGGINGFACE_MIRROR=https://hf-mirror.com</span><br><span class="line"><span class="keyword">ENV</span> HF_ENDPOINT=${HUGGINGFACE_MIRROR}</span><br><span class="line"><span class="keyword">ENV</span> HF_HUB_DISABLE_XET=<span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Optional environment variables</span></span><br><span class="line"><span class="comment"># Allow nvenc capabilities for ffmpeg</span></span><br><span class="line"><span class="keyword">ENV</span> NVIDIA_DRIVER_CAPABILITIES=compute,video,utility</span><br><span class="line"><span class="comment"># Disable NCCL P2P and IB to avoid issues with consumer-grade GPUs</span></span><br><span class="line"><span class="comment"># ENV NCCL_P2P_DISABLE=1 NCCL_IB_DISABLE=1</span></span><br><span class="line"><span class="comment"># Fine-tune the number of threads for OMP</span></span><br><span class="line"><span class="comment"># ENV OMP_NUM_THREADS=8</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Configure volumes for the user</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> <span class="built_in">mkdir</span> -p /home/<span class="variable">${USER_NAME}</span>/.cache/huggingface &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    <span class="built_in">mkdir</span> -p /home/<span class="variable">${USER_NAME}</span>/.cache/uv &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    <span class="built_in">mkdir</span> -p /home/<span class="variable">${USER_NAME}</span>/.cache/torch/hub &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    <span class="built_in">mkdir</span> -p /home/<span class="variable">${USER_NAME}</span>/local/share/uv</span></span><br><span class="line"><span class="keyword">VOLUME</span><span class="language-bash"> [<span class="string">"/home/<span class="variable">${USER_NAME}</span>/.cache/huggingface"</span>, <span class="string">"/home/<span class="variable">${USER_NAME}</span>/.cache/uv"</span>, <span class="string">"/home/<span class="variable">${USER_NAME}</span>/.cache/torch/hub"</span>, <span class="string">"/home/<span class="variable">${USER_NAME}</span>/.local/share/uv"</span>]</span></span><br></pre></td></tr></table></figure>
+<p>这个 Dockerfile 相当适合在开发中使用。一些说明：</p>
+<ul>
+<li>选用 <code>devel</code> 系列包含编译器的镜像，因为开发过程中容易遇到一些需要本机编译的包。</li>
+<li>使用非 root 用户：挂载主机目录时，在容器中使用 root 用户会在主机文件系统中留下 root 权限的文件，导致在主机中使用普通用户权限无法管理。这里将容器内的用户名和 UID/GID 设置为和主机用户相同，避免权限问题。</li>
+<li>镜像站：推荐在国内使用
+<ul>
+<li>北外 Ubuntu 镜像：https://mirrors.bfsu.edu.cn/ubuntu/</li>
+<li>阿里云 PyPI 镜像：https://mirrors.aliyun.com/pypi/simple/</li>
+<li>Huggingface 镜像：https://hf-mirror.com</li>
+<li>Daocloud Docker 镜像（仅支持官网部分热门包，包括我们使用的 <code>nvidia/cuda</code>）：docker.m.daocloud.io</li>
+<li>阿里云 PyTorch Wheels 镜像：https://mirrors.aliyun.com/pytorch-wheels/</li>
+</ul></li>
+<li>这里 uv 和 starship（shell prompt 工具）都使用官方 GitHub 源安装，因此构建镜像时仍然需要 <a href="/2024/6/30/WSL2-Docker-Deep-Learning/">访问外部网络</a>. 可将客户端代理通过 <code>ssh -R</code> 转发到服务器上，设置 <code>~/.docker/config.json</code> 的代理选项，无需 root.</li>
+<li>一些 nvidia 驱动相关的环境变量如果遇到问题可以按需使用</li>
+</ul>
+<h3 id="docker-compose.yml">docker-compose.yml</h3>
+<p>使用 Docker Compose 来创建 devcontainer，这样无论是否使用 VSCode 的 Remote - Containers 插件，都可以方便地通过 Docker Compose 启动开发容器。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">devcontainer:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">uv-devcontainer:cu${CUDA_VERSION:-12.9.0}-${USER_NAME:?}</span></span><br><span class="line">    <span class="attr">build:</span></span><br><span class="line">      <span class="attr">context:</span> <span class="string">.devcontainer</span></span><br><span class="line">      <span class="attr">args:</span></span><br><span class="line">        <span class="attr">CUDA_VERSION:</span> <span class="string">"${CUDA_VERSION:?}"</span></span><br><span class="line">        <span class="attr">USER_NAME:</span> <span class="string">"${USER_NAME:?}"</span></span><br><span class="line">        <span class="attr">USER_UID:</span> <span class="string">"${USER_UID:-1000}"</span></span><br><span class="line">        <span class="attr">USER_GID:</span> <span class="string">"${USER_GID:-1000}"</span></span><br><span class="line"></span><br><span class="line">        <span class="attr">UBUNTU_MIRROR:</span> <span class="string">"${UBUNTU_MIRROR:-https://mirrors.bfsu.edu.cn/ubuntu/}"</span></span><br><span class="line">        <span class="attr">PYPI_MIRROR:</span> <span class="string">"${PYPI_MIRROR:-https://mirrors.aliyun.com/pypi/simple/}"</span></span><br><span class="line">        <span class="attr">HUGGINGFACE_MIRROR:</span> <span class="string">"${HUGGINGFACE_MIRROR:-https://hf-mirror.com}"</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">user:</span> <span class="string">${USER_NAME}</span></span><br><span class="line">    <span class="attr">cap_add:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">SYS_PTRACE</span></span><br><span class="line">    <span class="attr">shm_size:</span> <span class="string">${SHM_SIZE:-32g}</span></span><br><span class="line">    <span class="attr">command:</span> [<span class="string">"tail"</span>, <span class="string">"-f"</span>, <span class="string">"/dev/null"</span>]</span><br><span class="line">    <span class="attr">working_dir:</span> <span class="string">/workspace/${REPO_NAME:?}</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"/home/${USER_NAME}/.cache/huggingface/:/home/${USER_NAME}/.cache/huggingface/"</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"/home/${USER_NAME}/.cache/uv/:/home/${USER_NAME}/.cache/uv/"</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"/home/${USER_NAME}/.cache/torch/hub/:/home/${USER_NAME}/.cache/torch/hub/"</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"/home/${USER_NAME}/.local/share/uv/:/home/${USER_NAME}/.local/share/uv/"</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">".:/workspace/${REPO_NAME:?}"</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">NVIDIA_VISIBLE_DEVICES=${NVIDIA_VISIBLE_DEVICES:-all}</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">deploy:</span></span><br><span class="line">      <span class="attr">resources:</span></span><br><span class="line">        <span class="attr">reservations:</span></span><br><span class="line">          <span class="attr">devices:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="attr">driver:</span> <span class="string">nvidia</span></span><br><span class="line">              <span class="attr">count:</span> <span class="string">"all"</span></span><br><span class="line">              <span class="attr">capabilities:</span> [<span class="string">gpu</span>]</span><br></pre></td></tr></table></figure>
+<p>一些说明：</p>
+<ul>
+<li><code>Dockerfile</code> 放置在 <code>.devcontainer</code> 目录内部，而 <code>docker-compose.yml</code> 放在工作区目录下。由于我们不需要把工作区中的代码和数据打包进镜像，使用 <code>.devcontainer</code> 作为构建上下文可显著提升构建速度，省去负载的 <code>.dockerignore</code> 文件。</li>
+<li>这里除了挂载代码工作区目录，还挂载了用户的缓存目录，以便在不同的容器实例之间共享缓存数据（Huggingface 数据集与权重，uv 包缓存，PyTorch Hub 缓存，uv Python 可执行文件）。在启动容器前需要确保这些目录存在，否则就会被 Docker 在主机目录上以 root 权限创建，影响在主机上使用。</li>
+<li>许多参数通过 <code>.env</code> 文件进行配置，方便在不同机器上使用：</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Devcontainer 镜像使用的 CUDA 版本。推荐与要安装的 PyTorch 的 CUDA 版本一致。</span></span><br><span class="line">CUDA_VERSION=12.9.0</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用户配置</span></span><br><span class="line">USER_NAME=duanyll</span><br><span class="line">USER_UID=1001</span><br><span class="line">USER_GID=1001</span><br><span class="line"></span><br><span class="line"><span class="comment"># 项目文件夹名称</span></span><br><span class="line">REPO_NAME=your-repo-name</span><br><span class="line"></span><br><span class="line"><span class="comment"># Docker 运行时设置</span></span><br><span class="line">SHM_SIZE=48g</span><br><span class="line">NVIDIA_VISIBLE_DEVICES=all</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用于加速下载的镜像源设置</span></span><br><span class="line">UBUNTU_MIRROR=https://mirrors.bfsu.edu.cn/ubuntu/</span><br><span class="line">PYPI_MIRROR=https://mirrors.aliyun.com/pypi/simple/</span><br><span class="line">HUGGINGFACE_MIRROR=https://hf-mirror.com</span><br></pre></td></tr></table></figure>
+<p>我写了一个 <code>setup_env.sh</code> 脚本，放入工作区目录后运行可自动生成 <code>.env</code> 文件。</p>
+<div class="tag-plugin link dis-select"><a class="link-card plain" title="" href="https://github.com/Duanyll/torch-devcontainer/blob/main/setup_env.sh" target="_blank" rel="external nofollow noopener noreferrer" cardlink="" autofill="title,icon"><div class="left"><span class="title">https://github.com/Duanyll/torch-devcontainer/blob/main/setup_env.sh</span><span class="cap link fs12">https://github.com/Duanyll/torch-devcontainer/blob/main/setup_env.sh</span></div><div class="right"><div class="lazy img" data-bg="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/link/8f277b4ee0ecd.svg"></div></div></a></div>
+<p>有了 <code>docker-compose.yml</code> 和 <code>.env</code> 文件记录启动容器的参数，启动容器的命令就很简洁：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker compose up -d</span><br></pre></td></tr></table></figure>
+<p>如果修改了 <code>Dockerfile</code>, 比如增加了 apt 包，则加上 <code>--build</code> 参数（重新）启动容器：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker compose up -d --build</span><br></pre></td></tr></table></figure>
+<p>随后可进入容器并执行命令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker compose <span class="built_in">exec</span> devcontainer bash</span><br></pre></td></tr></table></figure>
+<h3 id="devcontainer.json">devcontainer.json</h3>
+<p>VSCode 的 Remote - Containers 插件可以帮我们创建容器并将 VSCode 连接到容器内部。我们让 <code>.devcontainer/devcontainer.json</code> 引用 Docker Compose 文件即可，不需要把容器的参数重复一遍：</p>
+<figure class="highlight jsonc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">{</span></span><br><span class="line">  <span class="attr">"dockerComposeFile"</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">"../docker-compose.yml"</span><span class="punctuation">,</span> <span class="string">"./docker-compose.extend.yml"</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">"service"</span><span class="punctuation">:</span> <span class="string">"devcontainer"</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">"customizations"</span><span class="punctuation">:</span> <span class="punctuation">{</span></span><br><span class="line">    <span class="attr">"vscode"</span><span class="punctuation">:</span> <span class="punctuation">{</span></span><br><span class="line">      <span class="attr">"extensions"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="string">"ms-python.python"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">"ms-vscode.cmake-tools"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">"ms-vscode.cpptools"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">"GitHub.copilot"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">"ms-vscode.hexeditor"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">"ms-toolsai.jupyter"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">"tamasfe.even-better-toml"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">"charliermarsh.ruff"</span><span class="punctuation">,</span></span><br><span class="line">      <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">"settings"</span><span class="punctuation">:</span> <span class="punctuation">{</span></span><br><span class="line">        <span class="attr">"C_Cpp.intelliSenseEngine"</span><span class="punctuation">:</span> <span class="string">"default"</span><span class="punctuation">,</span></span><br><span class="line">      <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">  <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">"workspaceFolder"</span><span class="punctuation">:</span> <span class="string">"/workspace/${localWorkspaceFolderBasename}"</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">"shutdownAction"</span><span class="punctuation">:</span> <span class="string">"none"</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">"hostRequirements"</span><span class="punctuation">:</span> <span class="punctuation">{</span></span><br><span class="line">    <span class="attr">"gpu"</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">  <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">"updateContentCommand"</span><span class="punctuation">:</span> <span class="string">"uv sync --dev --no-install-project"</span><span class="punctuation">,</span></span><br><span class="line"><span class="punctuation">}</span></span><br></pre></td></tr></table></figure>
+<p>这里还使用了 <code>./docker-compose.extend.yml</code>, 它可以是一个空的文件，你可以在里面放一些额外的（本机相关）的配置来覆盖外层 <code>docker-compose.yml</code> 的设置，比如挂载额外的目录，或者设置环境变量等。</p>
+<p>要启动并进入容器，只需按下 <code>F1</code>, 输入并选择 <code>Remote-Containers: Reopen in Container</code> 即可。</p>
+<h3 id="pyproject.toml">pyproject.toml</h3>
+<p>忘掉 <code>requirements.txt</code> 和 <code>environment.yml</code> 吧！我们使用 <code>pyproject.toml</code> 来声明项目的依赖和配置，结合 uv 它还可以很好地处理需要特殊安装来源的包。我们使用下面的模板来创建一个 <code>pyproject.toml</code> 文件</p>
+<figure class="highlight toml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[project]</span></span><br><span class="line"><span class="attr">name</span> = <span class="string">"torch-devcontainer"</span> <span class="comment"># 可以改成项目的名称</span></span><br><span class="line"><span class="attr">version</span> = <span class="string">"0.1.0"</span></span><br><span class="line"><span class="attr">description</span> = <span class="string">"Add your description here"</span></span><br><span class="line"><span class="attr">readme</span> = <span class="string">"README.md"</span></span><br><span class="line"><span class="attr">requires-python</span> = <span class="string">"&gt;=3.12"</span>  <span class="comment"># Python 版本要求</span></span><br><span class="line"><span class="attr">dependencies</span> = []</span><br><span class="line"></span><br><span class="line"><span class="section">[tool.uv.sources]</span></span><br><span class="line"><span class="attr">torch</span> = [</span><br><span class="line">  { index = <span class="string">"pytorch"</span>, marker = <span class="string">"sys_platform == 'linux' or sys_platform == 'win32'"</span> },</span><br><span class="line">]</span><br><span class="line"><span class="attr">torchvision</span> = [</span><br><span class="line">  { index = <span class="string">"pytorch"</span>, marker = <span class="string">"sys_platform == 'linux' or sys_platform == 'win32'"</span> },</span><br><span class="line">]</span><br><span class="line"><span class="attr">torchaudio</span> = [</span><br><span class="line">  { index = <span class="string">"pytorch"</span>, marker = <span class="string">"sys_platform == 'linux' or sys_platform == 'win32'"</span> },</span><br><span class="line">]</span><br><span class="line"><span class="attr">xformers</span> = [</span><br><span class="line">  { index = <span class="string">"pytorch"</span>, marker = <span class="string">"sys_platform == 'linux' or sys_platform == 'win32'"</span> },</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="section">[[tool.uv.index]]</span></span><br><span class="line"><span class="attr">url</span> = <span class="string">"https://mirrors.aliyun.com/pypi/simple/"</span></span><br><span class="line"><span class="attr">default</span> = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="section">[[tool.uv.index]]</span></span><br><span class="line"><span class="attr">name</span> = <span class="string">"pytorch"</span></span><br><span class="line"><span class="attr">url</span> = <span class="string">"https://download.pytorch.org/whl/cu128"</span></span><br><span class="line"><span class="attr">explicit</span> = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>关于 python 版本的设置，上面这个 <code>pyproject.toml</code> 文件中指定了 <code>requires-python = "&gt;=3.12"</code>，这里我们通常指定成项目能够运行的最宽泛要求。自 Python 3.13 起，CPython 引入了 Free-threaded 等重大的改进，因此目前（2025 年 9 月）还有相当一部分包尚未适配，使用 Python 3.12 的兼容性比较好。如果在 <code>requires-python</code> 中指定了 <code>&gt;=3.8</code>，但系统中存在 Python 3.10（如 ubuntu 22.04 自带的），那么 uv 很可能会直接使用这个 Python 3.10 创建虚拟环境。为了让 uv 使用一致的 Python 版本，可以在 <code>pyproject.toml</code> 旁边创建一个 <code>.python-version</code> 文件，内容为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3.12</span><br></pre></td></tr></table></figure>
+<p>则会要求 uv 自动安装使用 Python 3.12 创建虚拟环境。</p>
+<p>上面的 <code>pyproject.toml</code> 文件中还没有指定项目的依赖项，但已经预先声明了 PyTorch 相关的包的下载来源，因此稍后可直接安装这些包，<strong>未来反复安装卸载这些包时，也能确保使用了相同的安装源</strong>。此处仍然建议尽量使用 PyTorch 官网 Wheel 源，在 url 中设置 cuda 版本（如 <code>cu128</code>）。如果实在访问不畅，可以使用阿里云国内镜像源，例如</p>
+<figure class="highlight toml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[[tool.uv.index]]</span></span><br><span class="line"><span class="attr">name</span> = <span class="string">"pytorch"</span></span><br><span class="line"><span class="attr">url</span> = <span class="string">"https://mirrors.aliyun.com/pytorch-wheels/cu128"</span></span><br><span class="line"><span class="attr">explicit</span> = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>但需要注意阿里云镜像更新较慢，可能没有最新的 PyTorch 版本。这里列出的 <code>torch</code>, <code>torchvision</code>, <code>torchaudio</code>, <code>xformers</code> 是常见的必须使用分 CUDA 版本的包。</p>
+<p>创建好 <code>pyproject.toml</code> 后，就可以使用 uv 来安装包了：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uv add torch torchvision</span><br></pre></td></tr></table></figure>
+<p>我们最好使用 <code>uv add</code> 命令而不是 <code>pip install</code> 或者 <code>uv pip install</code> 直接安装包。<code>uv add</code> 会把我们安装的包记录在 <code>pyproject.toml</code> 和 <code>uv.lock</code> 文件中，从而确保环境的一致性和可重现性。</p>
+<p>如果已经有了 <code>requirements.txt</code> 文件，可以直接安装并写入项目文件：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uv add -r requirements.txt</span><br></pre></td></tr></table></figure>
+<div class="tag-plugin colorful note"><div class="title"><strong>特殊包的安装方式</strong></div><div class="body"><p>uv 支持在 <code>pyproject.toml</code> 中声明特殊包的安装方式，以便在其他地方以相同的方式安装。</p><p>从 Git 仓库直接安装的包，如 <a target="_blank" rel="noopener" href="https://github.com/openai/CLIP">OpenAI CLIP</a>, 在 <code>tool.uv.sources</code> 中添加</p><figure class="highlight toml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[tool.uv.sources]</span></span><br><span class="line"><span class="attr">clip</span> = [</span><br><span class="line">  { git = <span class="string">"https://github.com/openai/CLIP"</span>, branch = <span class="string">"main"</span> }</span><br><span class="line">]</span><br></pre></td></tr></table></figure><p>再运行安装命令</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uv add clip</span><br></pre></td></tr></table></figure><p>一些带有预编译 torch 和 cuda 二进制的包（如 <code>flash-attn</code>, <code>nunchaku</code>, <code>ktransformers</code>, <code>vllm</code> 等等），直接从 PyPI 安装时需要从源码编译，编译往往需要数小时。可前往这些仓库的 GitHub Releases 页面查找是否预编译的 Wheel 包。一般这些包需要匹配的参数包括</p><ul><li>CUDA 版本（大版本如 11，12）</li><li>Python 版本（如 3.8，3.9，3.10，可使用 <code>.python-version</code> 文件固定）</li><li>PyTorch 版本（如 2.6，2.7）</li><li>PyTorch C++11 ABI （一般从 PyTorch 官网 Wheel 源下载的 PyTorch 都不使用 C++11 ABI）</li></ul><p>找到对应 Wheel 包下载链接后，加入到 <code>pyproject.toml</code> 的 <code>tool.uv.sources</code> 中，例如</p><figure class="highlight toml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[tool.uv.sources]</span></span><br><span class="line"><span class="attr">flash-attn</span> = [</span><br><span class="line">  { url = <span class="string">"https://github.com/Dao-AILab/flash-attention/releases/download/v2.8.3/flash_attn-2.8.3+cu12torch2.8cxx11abiFALSE-cp312-cp312-linux_x86_64.whl"</span></span><br><span class="line">  }</span><br><span class="line">]</span><br></pre></td></tr></table></figure><p>再运行安装命令</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uv add flash-attn</span><br></pre></td></tr></table></figure></div></div>
+<h3 id="使用-venv">使用 venv</h3>
+<p>怎么使用 uv 建立的 Python 虚拟环境？uv 并不建议像传统的 conda 那样在终端中设置环境变量去激活环境，而是通过 <code>uv</code> 命令自动管理虚拟环境。uv 会在每次运行时自动激活对应的虚拟环境, 这样可以防止忘了激活环境或者是进入了错误的环境。</p>
+<p>原来使用 conda 需要运行</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda activate your-env-name</span><br><span class="line">python main.py --arg1 --arg2</span><br></pre></td></tr></table></figure>
+<p>使用 uv 只需要</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uv run main.py --arg1 --arg2</span><br></pre></td></tr></table></figure>
+<p>uv 会查找项目对应的 <code>pyproject.toml</code> 文件，<strong>验证当前虚拟环境中的包是否满足声明</strong>，自动安装缺失的包 <strong>（卸载多余的包）</strong>，在虚拟环境中调用正确的 Python 解释器执行脚本。</p>
+<p><code>uv run</code> 也可以用来执行虚拟环境中的命令行工具，比如</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uv run hf cache scan</span><br></pre></td></tr></table></figure>
+<h2 id="experiment操作流程">Experiment（操作流程）</h2>
+<h3 id="sop">SOP</h3>
+<blockquote>
+<p>用上面这一套给新项目 / 现有项目配环境的流程是什么？</p>
+</blockquote>
+<ol type="1">
+<li>配置 Docker 镜像。一般来说本文给出的 <code>Dockerfile</code> 和 <code>docker-compose.yml</code> 已经足够多数情况下使用。
+<ol type="1">
+<li>在项目根目录下创建 <code>.devcontainer</code> 文件夹并将 <a href="#dockerfile">这里</a> 的 <code>Dockerfile</code> 复制到里面</li>
+<li>在项目根目录下创建 <code>docker-compose.yml</code> 文件并将 <a href="#docker-composeyml">这里</a> 的内容复制到里面，一般来说只需要添加额外的挂载点，如数据集等</li>
+<li>根据实际情况创建 <code>.env</code> 文件，设置 docker 镜像参数 (匹配容器内外 UID/GID, CUDA 版本等)</li>
+<li>运行 <code>docker compose build</code> 构建容器。一台机器上只需要构建一次，不同项目可以复用这个镜像。</li>
+</ol></li>
+<li>把 <a href="#devcontainerjson">这里</a> 的 <code>devcontainers.json</code> 文件复制到 <code>.devcontainer</code> 文件夹里面, 一般不用改动</li>
+<li>(可选) 在 VSCode 中按 F1 搜索并选择 “Remote-Containers: Reopen in Container” 进入开发容器。得益于 uv 良好的 venv 管理，许多简单的，不需要使用 nvcc 编译的项目不需要进入容器也可直接在主机中管理。</li>
+<li>创建 <code>pyproject.toml</code> 文件，首先把 <a href="#pyprojecttoml">这里</a> 的起手式复制到 <code>pyproject.toml</code> 文件中。</li>
+<li>创建 <code>.python-version</code> 文件, 写入实际需要的 Python 版本号</li>
+<li>检查 <code>requirements.txt</code> 和 <code>README.md</code> 等文件, 查看项目是否使用了需要特殊方式安装的包, 如果有, 把它们的安装链接加入到 <code>pyproject.toml</code> 文件中</li>
+<li>运行 <code>uv venv</code> 创建一个空的虚拟环境 (这个虚拟环境中默认不包含 pip)</li>
+<li>使用 <code>uv add</code> 命令添加包, 直接 <code>uv add -r requirements.txt</code></li>
+<li>使用 <code>uv run</code> 命令运行 Python 代码和工具</li>
+<li>(可选) 对于别人的项目, 在 GitHub 上创建 Fork, 把以上新增的配置文件 (包括 <code>uv.lock</code>) 推送到 Fork 的仓库中以便后续使用</li>
+</ol>
+<h3 id="项目结构">项目结构</h3>
+<p>典型的项目结构:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">project</span><br><span class="line">├── .devcontainer</span><br><span class="line">│   ├── Dockerfile</span><br><span class="line">│   ├── devcontainer.json</span><br><span class="line">│   └── docker-compose.extend.yml</span><br><span class="line">├── .env</span><br><span class="line">├── .gitignore</span><br><span class="line">├── .python-version</span><br><span class="line">├── .vscode</span><br><span class="line">│   ├── extensions.json</span><br><span class="line">│   ├── launch.json</span><br><span class="line">│   └── settings.json</span><br><span class="line">├── LICENSE</span><br><span class="line">├── README.md</span><br><span class="line">├── docker-compose.yml</span><br><span class="line">├── pyproject.toml</span><br><span class="line">├── setup_env.sh</span><br><span class="line">└── uv.lock</span><br></pre></td></tr></table></figure>
+<h2 id="appendix">Appendix</h2>
+<h3 id="cuda-版本兼容性">CUDA 版本兼容性</h3>
+<p>下面介绍不同场景下 CUDA 版本兼容性条件</p>
+<ul>
+<li><strong>启动 Docker 容器</strong>: 主机 CUDA 小版本取决于 nvidia 驱动, 主机不需要安装 CUDA Toolkit
+<ul>
+<li>消费级显卡 (RTX 3090, 4090, 4090): 容器内 CUDA 小版本不能高于主机 CUDA 小版本 (主机上 <code>nvidia-smi</code> 输出的 CUDA 版本).</li>
+<li>数据中心显卡 (A100, H100): 容器内 CUDA 小版本可以高于主机 CUDA 小版本</li>
+<li>因此不建议消费级显卡死守 535, 470 等 “LTS” 版本驱动, 应该尽可能更新驱动版本.</li>
+</ul></li>
+<li><strong>运行 PyTorch 和 PyTorch 生态下的预编译 Kernel</strong>: PyTorch 的 Python Wheel 自带了需要的 CUDA Runtime 依赖
+<ul>
+<li>只需要主机驱动版本不要差太远, 与主机和容器内安装的 CUDA Toolkit 版本无关</li>
+<li>535 驱动 + cuda11.8 docker 镜像 + torch2.7cu128 的组合可以运行</li>
+</ul></li>
+<li><strong>编译 PyTorch 生态下的 Kernel</strong>:
+<ul>
+<li>容器必须用 <code>devel</code> 包含编译器的镜像, 容器 CUDA 版本与 PyTorch CUDA 版本<strong>一致</strong></li>
+<li>自从 PyTorch 2.5 后, 在 CUDA 11.8 上给第三方包编译 Kernel 会非常困难. PyTorch 2.5 以后要求使用 c++17, 但 nvcc 11.8 不支持 c++17. PyTorch 自身使用了复杂的编译规则来实现交叉编译, 但需要自己编译的第三方库几乎都没有做这些考虑.</li>
+<li>在 CUDA 11.8 上多卡训练时, PyTorch 依赖的 <code>nvidia-nccl-cu11</code> 预编译包是基于 cu110 的, 在 cu118 上并不能正常工作. 需要使用 cu118 下重新编译的 NCCL. 在此提供一个可用的 <a target="_blank" rel="noopener" href="https://cdn.duanyll.com/whl/nvidia_nccl_cu11-2.27.6-py3-none-manylinux2014_x86_64.whl">预编译 Wheel</a>, 可以像下面这样在 <code>pyproject.toml</code> 中引用:</li>
+</ul></li>
+</ul>
+<figure class="highlight toml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[project]</span></span><br><span class="line"><span class="attr">dependencies</span> = [</span><br><span class="line">  <span class="string">"nvidia-nccl-cu11&gt;=2.27.6"</span>,</span><br><span class="line">  <span class="string">"torch&gt;=2.7.0"</span></span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="section">[tool.uv]</span></span><br><span class="line"><span class="attr">override-dependencies</span> = [ <span class="string">"nvidia-nccl-cu11==v2.27.6"</span> ]</span><br><span class="line"></span><br><span class="line"><span class="section">[tool.uv.sources]</span></span><br><span class="line"><span class="attr">torch</span> = [</span><br><span class="line">  { index = <span class="string">"pytorch"</span>, marker = <span class="string">"sys_platform == 'linux' or sys_platform == 'win32'"</span> },</span><br><span class="line">]</span><br><span class="line"><span class="attr">nvidia-nccl-cu11</span> = { url = <span class="string">"https://cdn.duanyll.com/whl/nvidia_nccl_cu11-2.27.6-py3-none-manylinux2014_x86_64.whl"</span> }</span><br><span class="line"></span><br><span class="line"><span class="section">[[tool.uv.index]]</span></span><br><span class="line"><span class="attr">name</span> = <span class="string">"pytorch"</span></span><br><span class="line"><span class="attr">url</span> = <span class="string">"https://download.pytorch.org/whl/cu118"</span></span><br><span class="line"><span class="attr">explicit</span> = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<h3 id="使用-jupyter">使用 Jupyter</h3>
+<p>在 VSCode 中使用打开 <code>ipynb</code> 文件时, 可以直接选择 uv 的虚拟环境中的 Python 解释器作为内核. 建议将 <code>ipykernel</code> 包加入到项目依赖中:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uv add ipykernel</span><br></pre></td></tr></table></figure>
+
+
+
+<div class="article-footer reveal fs14">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-sa/4.0/">署名-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section>
+    
+    <section id="share">
+      <div class="header"><span>分享文章</span></div>
+      <div class="body">
+        <div class="link"><input class="copy-area" readonly="true" id="copy-link" value="https://duanyll.com/2025/9/1/Docker-Uv/" /></div>
+        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot)"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/b32ef3da1162a.svg"/></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=https://duanyll.com/2025/9/1/Docker-Uv/&title=Docker 和 uv 炼丹实践指北 - duanyll&summary=Abstract
+前作 详细介绍了如何（在 WSL2 中）中安装 CUDA 和 Docker，并且配置了 GPU 支持的 Docker 镜像。本文将更详细地介绍一种在容器中使用 uv 管理 PyTorch 深度学习环境的实践。
+Int..."><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/80c07e4dbb303.svg"/></a><a class="social share-item email" href="mailto:?subject=Docker 和 uv 炼丹实践指北 - duanyll&amp;body=https://duanyll.com/2025/9/1/Docker-Uv/"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/a1b00e20f425d.svg"/></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/8411ed322ced6.svg"/></a><a class="social share-item print" onclick="window.print()"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/img/print.svg" /></a><a class="social share-item source" target="_blank" rel="noopener" href="https://github.com/duanyll/duanyll.com-hexo/blob/master/source/_posts/tech/2025-9-1-Docker-Uv.md"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/08a41b181ce68.svg"/></a></div>
+        
+        <div class="qrcode" id="qrcode-wechat" style="visibility:hidden;height:0">
+          <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=https://duanyll.com/2025/9/1/Docker-Uv/"/>
+        </div>
+        
+      </div>
+    </section>
+    
+      <section id="star">
+        <div class="body">
+          <span class="github-button-wrap">
+            <a class="github-button" 
+               target="_blank" rel="noopener" href="https://github.com/duanyll/duanyll.com-hexo" 
+               data-color-scheme="no-preference: light; light: light; dark: dark;" 
+               data-size="large" 
+               data-show-count="true" 
+               aria-label="Star this site on GitHub">Star</a>
+            <span>喜欢这个网站？在 GitHub 上给它一个 Star 吧！</span>
+          </span>
+        </div>
+      </section>
+    </div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2025/9/25/ComfyUI-Functional/">在 ComfyUI 中优雅地函数式编程</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2025/8/29/Paste-And-Upload/">更好的 VSCode 粘贴上传图床插件</a></div></section></div>
+
+
+<div class="related-wrap reveal" id="related-posts">
+    <section class='header'>
+      <div class='title cap theme'>您可能感兴趣的文章</div>
+    </section>
+    <section class='body'>
+    <div class="related-posts"><a class="item" href="/2024/6/30/WSL2-Docker-Deep-Learning/" title="基于 WSL2 和 Docker 的深度学习环境指北"><span class="title">基于 WSL2 和 Docker 的深度学习环境指北</span></a><a class="item" href="/2023/7/12/Python-CMake/" title="使用 CMake 构建 PyTorch 和 Numpy C++ 拓展"><span class="title">使用 CMake 构建 PyTorch 和 Numpy C++ 拓展</span><span class="excerpt">使用 CMake 构建 PyTorch 和 Numpy C++ 拓展能适应更复杂的项目并使用灵活的编译选项. 然而, 许多互联网上的教程中的方法已经不能在较新版本的 PyTorch 和 CMake 使用. 本文介绍了几种作者在近期测试...</span></a><a class="item" href="/2025/6/21/Flow/" title="Flow Matching 与 DDIM 小记"><span class="title">Flow Matching 与 DDIM 小记</span></a><a class="item" href="/2024/10/5/HT813-FreePBX/" title="Grandstream HT813 双模语音网关 FreePBX 配置指北"><span class="title">Grandstream HT813 双模语音网关 FreePBX 配置指北</span></a><a class="item" href="/2018/11/28/Jekyll-Search/" title="为你的Jekyll博客添加搜索文章功能"><span class="title">为你的Jekyll博客添加搜索文章功能</span><span class="excerpt">众所周知，Github上的Jekyll上实现自定义插件很困难，因此即使有Jekyll的搜索插件，也只能手写js代码。静态网站实现搜索原理是这样的，通过HTTP请求获取posts.json，然后本地解析里面内容实现搜索。</span></a></div></section></div>
+
+
+
+  <div class='related-wrap md-text reveal' id="comments">
+    <section class='header cmt-title cap theme'>
+      快来参与讨论吧
+    </section>
+    <section class='body cmt-body utterances'>
+      
+
+<!-- <svg class="loading" style="vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2709"><path d="M832 512c0-176-144-320-320-320V128c211.2 0 384 172.8 384 384h-64zM192 512c0 176 144 320 320 320v64C300.8 896 128 723.2 128 512h64z" p-id="2710"></path></svg> -->
+
+<div id="utterances" repo="duanyll/duanyll.com-comment" issue-term="pathname" theme="switch" label="Comment" enabled="true" issue_term="pathname"></div>
+
+    </section>
+  </div>
+
+
+
+      
+      
+<footer class="page-footer reveal fs12"><hr><div class="sitemap"><div class="sitemap-group"><span class="fs14">博客</span><a href="/">近期</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></div><div class="sitemap-group"><span class="fs14">项目</span><a target="_blank" rel="noopener" href="https://github.com/duanyll">开源库</a><a href="/wiki/">文档</a><a target="_blank" rel="noopener" href="https://github.com/duanyll/scoop-bucket">Scoop Bucket</a></div><div class="sitemap-group"><span class="fs14">社交</span><a href="/about/#comments">留言板</a><a target="_blank" rel="noopener" href="https://netunion.org">NetUnion</a><a target="_blank" rel="noopener" href="https://www.travellings.cn/go.html">开往</a></div><div class="sitemap-group"><span class="fs14">更多</span><a href="/about">关于本站</a><a target="_blank" rel="noopener" href="https://github.com/duanyll/duanyll.com-hexo">GitHub 源码</a><a target="_blank" rel="noopener" href="https://duanyll.cloudflareaccess.com">Dashboard</a></div></div><div class="text"><p>本站由 <a target="_blank" rel="noopener" href="https://github.com/duanyll">duanyll</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。 本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = stellar.config.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.21.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.21.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+    root : '/',
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js","memos":"/js/plugins/memos.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide:not(.swiper-slide-duplicate) img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.copycode = Object.assign({"enable":true,"js":"/js/plugins/copycode.js","default_text":"Copy","success_text":"Copied"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+  <script>
+  function loadUtterances() {
+    const els = document.querySelectorAll("#comments #utterances");
+    if (els.length === 0) return;
+    els.forEach((el, i) => {
+      try {
+        el.innerHTML = '';
+      } catch (error) {
+        console.error(error);
+      }
+      var script = document.createElement('script');
+      script.src = 'https://utteranc.es/client.js';
+      script.async = true;
+      for (let key of Object.keys(el.attributes)) {
+        let attr = el.attributes[key];
+        if (['class', 'id'].includes(attr.name) === false) {
+          var name = attr.name;
+          var value = attr.value;
+          if (name == 'theme' && value == 'switch') {
+            value = window.currentTheme == 'dark' ? 'github-dark' : 'github-light';
+          }
+          script.setAttribute(name, value);
+        }
+      }
+      el.appendChild(script);
+    });
+  }
+  window.addEventListener('DOMContentLoaded', (event) => {
+      loadUtterances();
+  });
+</script>
+
+
+
+
+
+  
+<script src="https://buttons.github.io/buttons.js" async></script>
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

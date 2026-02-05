@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 8.1.1">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.21.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+
+  
+  
+  <title>CSP 考前急救 - duanyll</title>
+
+  
+    <meta name="description" content="背板 Exgcd 求逆元 123456789101112131415161718int64 exgcd(int64 a, int64 b, int64&amp; x, int64&amp; y) {    if (b &#x3D;&#x3D; 0) {        x &#x3D; 1;        y &#x3D; 0;        return a;    }    int64 d &#x3D; exgcd(b, a % b, x, y">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSP 考前急救">
+<meta property="og:url" content="https://duanyll.com/2019/11/15/CSP-Rescue/">
+<meta property="og:site_name" content="duanyll">
+<meta property="og:description" content="背板 Exgcd 求逆元 123456789101112131415161718int64 exgcd(int64 a, int64 b, int64&amp; x, int64&amp; y) {    if (b &#x3D;&#x3D; 0) {        x &#x3D; 1;        y &#x3D; 0;        return a;    }    int64 d &#x3D; exgcd(b, a % b, x, y">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-11-15T00:00:00.000Z">
+<meta property="article:modified_time" content="2019-11-15T00:00:00.000Z">
+<meta property="article:author" content="duanyll">
+<meta property="article:tag" content="oi">
+<meta name="twitter:card" content="summary">
+  
+  
+  
+  <meta name="keywords" content="oi">
+
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="duanyll" type="application/atom+xml">
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+    <link rel="shortcut icon" href="https://cdn.duanyll.com/favicon.ico">
+  
+
+  
+
+  
+
+
+  
+
+  
+    <script>
+      var darkmodeSettings = localStorage.getItem('darkmode') || 'auto';
+      var enableDarkmode = darkmodeSettings == 'true' 
+        || (darkmodeSettings == 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (enableDarkmode) {
+        document.documentElement.classList.add('global-darkmode');
+      }
+      window.currentTheme = enableDarkmode ? 'dark' : 'light';
+    </script>
+  
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://cdn.duanyll.com/android-chrome-192x192.png" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">duanyll</div><div class="sub normal cap">qwq</div><div class="sub hover cap" style="opacity:0"> QWQ</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Wiki</a><a class="nav-item" href="/about/">关于</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">CSP 考前急救</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%9D%BF"><span class="toc-text">背板</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#exgcd-%E6%B1%82%E9%80%86%E5%85%83"><span class="toc-text">Exgcd 求逆元</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E9%80%92%E6%8E%A8%E9%80%86%E5%85%83"><span class="toc-text">线性递推逆元</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95"><span class="toc-text">矩阵乘法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%89%E5%85%B3%E7%BB%84%E5%90%88%E6%95%B0"><span class="toc-text">有关组合数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tarjan-scc"><span class="toc-text">tarjan scc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tarjan-%E5%89%B2%E9%A1%B6"><span class="toc-text">tarjan 割顶</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tarjan-bcc"><span class="toc-text">tarjan bcc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ek-%E7%BD%91%E7%BB%9C%E6%B5%81"><span class="toc-text">EK 网络流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%91%E5%89%96"><span class="toc-text">树剖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E7%AD%9B%E8%B4%A8%E6%95%B0"><span class="toc-text">线性筛质数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#stl"><span class="toc-text">STL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%AB%E7%9A%84%E4%B8%9C%E8%A5%BF"><span class="toc-text">别的东西</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E6%8B%8D"><span class="toc-text">对拍</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#windows-bat"><span class="toc-text">Windows bat</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#linux-sh"><span class="toc-text">Linux sh</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84-dfs-%E4%BC%98%E5%8C%96"><span class="toc-text">常见的 DFS 优化:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84-dp-%E4%BC%98%E5%8C%96"><span class="toc-text">常见的 DP 优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%89%E5%88%A9%E6%A8%A1%E6%95%B0"><span class="toc-text">吉利模数</span></a></li></ol></li></ol></div></div></widget>
+
+
+
+
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/duanyll" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/08a41b181ce68.svg"/></a><a class="social" href="/about/#comments" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/942ebbf1a4b91.svg"/></a><a class="social" href="https://www.travellings.cn/go.html" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://www.travellings.cn/assets/favicon-fluent-emoji.svg"/></a><a class="social" href="javascript:darkmode.next()" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/img/half-moon.svg"/></a></div></footer>
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+        
+
+
+
+<div class="bread-nav fs12"><div class="left"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/OI/">OI</a></div><div id="post-meta">
+    <span>发布于&nbsp;<time datetime="2019-11-15T00:00:00.000Z">2019-11-15</time></span>
+    
+    <span>更新于&nbsp;<time datetime="2019-11-15T00:00:00.000Z">2019-11-15</time></span>
+    </div></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>CSP 考前急救</span></h1>
+
+<div class="article-tags"><a class="tag-plugin colorful hashtag" color="cyan" href="/tags/oi/" >  <svg t="1701408144765" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4228" width="200" height="200"><path d="M426.6 64.8c34.8 5.8 58.4 38.8 52.6 73.6l-19.6 117.6h190.2l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6s58.4 38.8 52.6 73.6l-19.4 117.6H896c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-42.6 256H832c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.6-117.4h-190.4l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.4-117.8H128c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l42.6-256H192c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6z m11.6 319.2l-42.6 256h190.2l42.6-256h-190.2z" p-id="4229"></path></svg>  <span>oi</span></a></div>
+<h2 id="背板">背板</h2>
+<h3 id="exgcd-求逆元">Exgcd 求逆元</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">int64 <span class="title">exgcd</span><span class="params">(int64 a, int64 b, int64&amp; x, int64&amp; y)</span> </span>{</span><br><span class="line">    <span class="keyword">if</span> (b == <span class="number">0</span>) {</span><br><span class="line">        x = <span class="number">1</span>;</span><br><span class="line">        y = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    }</span><br><span class="line">    int64 d = <span class="built_in">exgcd</span>(b, a % b, x, y);</span><br><span class="line">    int64 tmp = x;</span><br><span class="line">    x = y;</span><br><span class="line">    y = tmp - a / b * y;</span><br><span class="line">    <span class="keyword">return</span> d;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function">int64 <span class="title">inv1</span><span class="params">(int64 a, int64 mod)</span> </span>{</span><br><span class="line">    int64 x, y;</span><br><span class="line">    <span class="built_in">exgcd</span>(a, mod, x, y);</span><br><span class="line">    <span class="keyword">return</span> (x % mod + mod) % mod;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<h3 id="线性递推逆元">线性递推逆元</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">inv[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt;= n; i++) {</span><br><span class="line">    inv[i] = p - (p / i) * inv[p % i] % p;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<h3 id="矩阵乘法">矩阵乘法</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="type">size_t</span> h, <span class="type">size_t</span> w, <span class="type">size_t</span> w1&gt;</span><br><span class="line">matrix&lt;T, h, w&gt; <span class="keyword">operator</span>*(<span class="type">const</span> matrix&lt;T, h, w1&gt;&amp; a, <span class="type">const</span> matrix&lt;T, w1, w&gt;&amp; b) {</span><br><span class="line">	matrix&lt;T, h, w&gt; ans;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">size_t</span> k = <span class="number">0</span>; k &lt; w1; k++) {</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; h; i++) {</span><br><span class="line">			<span class="keyword">if</span> (a[i][k] == <span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">			<span class="keyword">for</span> (<span class="type">size_t</span> j = <span class="number">0</span>; j &lt; w; j++) {</span><br><span class="line">				ans[i][j] += a[i][k] * b[k][j];</span><br><span class="line">				ans[i][j] %= MOD;</span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>关键一句话:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ans[i][j] += a[i][k] * b[k][j];</span><br></pre></td></tr></table></figure>
+<h3 id="有关组合数">有关组合数</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">int64 a = <span class="number">1</span>, b = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; m; i++) {</span><br><span class="line">	a = a * (n - i) % mod;</span><br><span class="line">	b = b * (i + <span class="number">1</span>) % mod;</span><br><span class="line">}</span><br><span class="line"><span class="keyword">return</span> a * <span class="built_in">pow</span>(b, mod - <span class="number">2</span>, mod) % mod;</span><br></pre></td></tr></table></figure>
+<p>卢卡斯定理</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">lucas</span>(n, m, mod) {</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">lucas</span>(n / mod, m / mod, mod) * <span class="built_in">c</span>(n % mod, m % mod, mod) % mod;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<h3 id="tarjan-scc">tarjan scc</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">tarjan</span><span class="params">(<span class="type">int</span> u)</span> </span>{</span><br><span class="line">    dfn[u] = low[u] = tim++;</span><br><span class="line">    s.<span class="built_in">push</span>(u);</span><br><span class="line">    ins[u] = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = head[u]; i != <span class="number">-1</span>; i = e[i].next) {</span><br><span class="line">        <span class="type">int</span> v = e[i].to;</span><br><span class="line">        <span class="keyword">if</span> (dfn[v] == <span class="number">-1</span>) {</span><br><span class="line">            <span class="built_in">tarjan</span>(v);</span><br><span class="line">            low[u] = <span class="built_in">min</span>(low[u], low[v]);</span><br><span class="line">        } <span class="keyword">else</span> {</span><br><span class="line">            <span class="keyword">if</span> (ins[v]) {</span><br><span class="line">                low[u] = <span class="built_in">min</span>(low[u], dfn[v]);</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">if</span> (dfn[u] == low[u]) {</span><br><span class="line">        scccnt++;</span><br><span class="line">        <span class="type">int</span> v = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (v != u) {</span><br><span class="line">            v = s.<span class="built_in">top</span>();</span><br><span class="line">            s.<span class="built_in">pop</span>();</span><br><span class="line">            ins[v] = <span class="literal">false</span>;</span><br><span class="line">            belong[v] = scccnt;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<h3 id="tarjan-割顶">tarjan 割顶</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> u, <span class="type">int</span> fa)</span> </span>{</span><br><span class="line">    <span class="type">int</span> cc = <span class="number">0</span>;</span><br><span class="line">    dfn[u] = low[u] = tim++;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = head[u]; i != <span class="number">-1</span>; i = e[i].next) {</span><br><span class="line">        <span class="type">int</span> v = e[i].to;</span><br><span class="line">        <span class="keyword">if</span> (dfn[v] == <span class="number">-1</span>) {</span><br><span class="line">            <span class="built_in">dfs</span>(v, u);</span><br><span class="line">            cc++;</span><br><span class="line">            low[u] = <span class="built_in">min</span>(low[u], low[v]);</span><br><span class="line">            <span class="keyword">if</span> (fa != <span class="number">-1</span> &amp;&amp; low[v] &gt; dfn[u]) {</span><br><span class="line">                ans.<span class="built_in">push_back</span>(u);</span><br><span class="line">            }</span><br><span class="line">        } <span class="keyword">else</span> <span class="keyword">if</span> (v != fa) {</span><br><span class="line">            low[u] = <span class="built_in">min</span>(low[u], dfn[v]);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">if</span> (fa == <span class="number">-1</span> &amp;&amp; cc &gt;= <span class="number">2</span>) {</span><br><span class="line">        ans.<span class="built_in">push_back</span>(u);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>DFS 后要对 ans 进行 <code>unique</code> 操作, 或直接用 <code>set</code>.</p>
+<h3 id="tarjan-bcc">tarjan bcc</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> u, <span class="type">int</span> fa)</span> </span>{</span><br><span class="line">    dfn[u] = low[u] = ++tim;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = head[u]; i != <span class="number">-1</span>; i = e[i].next) {</span><br><span class="line">        <span class="type">int</span> v = e[i].to;</span><br><span class="line">        <span class="keyword">if</span> (v == fa) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">if</span> (dfn[v] == <span class="number">0</span>) {</span><br><span class="line">            s.<span class="built_in">push</span>(<span class="built_in">make_pair</span>(u, v));</span><br><span class="line">            <span class="built_in">dfs</span>(v, u);</span><br><span class="line">            low[u] = <span class="built_in">min</span>(low[u], low[v]);</span><br><span class="line">            <span class="keyword">if</span> (low[v] &gt;= dfn[u]) {</span><br><span class="line">                vector&lt;<span class="type">int</span>&gt; cur;</span><br><span class="line">                bcccnt++;</span><br><span class="line">                pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; now;</span><br><span class="line">                <span class="keyword">do</span> {</span><br><span class="line">                    now = s.<span class="built_in">top</span>();</span><br><span class="line">                    s.<span class="built_in">pop</span>();</span><br><span class="line">                    <span class="keyword">if</span> (color[now.first] != bcccnt) {</span><br><span class="line">                        cur.<span class="built_in">push_back</span>(now.first);</span><br><span class="line">                        color[now.first] = bcccnt;</span><br><span class="line">                        belong[now.first].<span class="built_in">push_back</span>(bcccnt);</span><br><span class="line">                    }</span><br><span class="line">                    <span class="keyword">if</span> (color[now.second] != bcccnt) {</span><br><span class="line">                        cur.<span class="built_in">push_back</span>(now.second);</span><br><span class="line">                        color[now.second] = bcccnt;</span><br><span class="line">                        belong[now.second].<span class="built_in">push_back</span>(bcccnt);</span><br><span class="line">                    }</span><br><span class="line">                } <span class="keyword">while</span> (!(now.first == u &amp;&amp; now.second == v));</span><br><span class="line">                bccs.<span class="built_in">push_back</span>(cur);</span><br><span class="line">            }</span><br><span class="line">        } <span class="keyword">else</span> <span class="keyword">if</span> (dfn[v] &lt; dfn[u]) {</span><br><span class="line">            s.<span class="built_in">push</span>(<span class="built_in">make_pair</span>(u, v));</span><br><span class="line">            low[u] = <span class="built_in">min</span>(low[u], dfn[v]);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<h3 id="ek-网络流">EK 网络流</h3>
+<p>思想: 暴力 BFS 找增广路.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> flow = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span> (<span class="literal">true</span>) {</span><br><span class="line">    <span class="built_in">memset</span>(a, <span class="number">0</span>, <span class="keyword">sizeof</span> a);</span><br><span class="line">    queue&lt;<span class="type">int</span>&gt; q;</span><br><span class="line">    q.<span class="built_in">push</span>(s);</span><br><span class="line">    a[s] = INF;</span><br><span class="line">    <span class="keyword">while</span> (!q.<span class="built_in">empty</span>()) {</span><br><span class="line">        <span class="type">int</span> u = q.<span class="built_in">front</span>();</span><br><span class="line">        q.<span class="built_in">pop</span>();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i : g[u]) {</span><br><span class="line">            edge&amp; now = e[i];</span><br><span class="line">            <span class="keyword">if</span> (a[now.to] == <span class="number">0</span> &amp;&amp; now.cap &gt; now.flow) {</span><br><span class="line">                fa[now.to] = i;</span><br><span class="line">                a[now.to] = <span class="built_in">min</span>(a[u], now.cap - now.flow);</span><br><span class="line">                q.<span class="built_in">push</span>(now.to);</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span> (a[t] &gt; <span class="number">0</span>) {  <span class="comment">//剪枝：已经找到了一条</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">if</span> (a[t] == <span class="number">0</span>) {  <span class="comment">//没有增广路了</span></span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> u = t; u != s; u = e[fa[u]].from) {</span><br><span class="line">        e[fa[u]].flow += a[t];</span><br><span class="line">        e[fa[u] ^ <span class="number">1</span>].flow -= a[t];</span><br><span class="line">    }</span><br><span class="line">    flow += a[t];</span><br><span class="line">}</span><br><span class="line"><span class="keyword">return</span> flow;</span><br></pre></td></tr></table></figure>
+<p>最小费用流: 每次用 Dijkstra / SPFA 找增广路.</p>
+<h3 id="树剖">树剖</h3>
+<p>第一遍 DFS 找重儿子, 第二遍 DFS 给点编号. (至少预留 30min 打树剖).</p>
+<h3 id="线性筛质数">线性筛质数</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">make_prime</span><span class="params">()</span> </span>{</span><br><span class="line">    prime_cnt = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">memset</span>(isntp, <span class="literal">false</span>, <span class="built_in">sizeof</span>(isntp));</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt;= AMXA; ++i) {</span><br><span class="line">        <span class="keyword">if</span> (!isntp[i]) {</span><br><span class="line">            prime[prime_cnt++] = i;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; prime_cnt; ++j) {</span><br><span class="line">            <span class="keyword">if</span> (i * prime[j] &gt; AMXA) {</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            }</span><br><span class="line">            isntp[i * prime[j]] = <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">if</span> (i % prime[j] == <span class="number">0</span>) {</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<h2 id="stl">STL</h2>
+<blockquote>
+<p>我个人认为在绝大多数情况下为了卡常而放弃 STL 放弃代码可读性是一种得不偿失的行为.</p>
+</blockquote>
+<ul>
+<li><code>lower_bound</code> 找第一个大于等于目标的元素</li>
+<li><code>upper_bound</code> 找第一个大于目标的元素</li>
+</ul>
+<p>以上两者返回指向目标元素的指针, 减去数组开头地址得到 0 开始的下标.</p>
+<p>强行用 <code>unordered_map</code> 救急:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;tr1/unordered_map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> std::tr1::unordered_map;</span><br></pre></td></tr></table></figure>
+<h2 id="别的东西">别的东西</h2>
+<ul>
+<li>背包分清楚要不要重复枚举同一个节点, 从大到小还是从小到大枚举.</li>
+<li>不要把 DP 状态表示的复杂度当成 DP 转移的复杂度! 实际上很多暴力算法往往转移会比状态表示大一两个数量级!</li>
+<li>链式前向星记得 <code>memset(head, -1, sizeof head)</code>.</li>
+<li>能不写平衡树就不写平衡树! 真的要写先画图! 坚决不写维护父指针的 splay!</li>
+<li>Dijkstra 能过坚决不写 SPFA!</li>
+<li>快读快写码完要测试!</li>
+<li>把 Dev-C++ 的自动保存拉到最快, 重构代码不要删掉原来的!</li>
+</ul>
+<h3 id="对拍">对拍</h3>
+<p>最好带文件一起对拍.</p>
+<h4 id="windows-bat">Windows bat</h4>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line">problem_gen</span><br><span class="line">problem</span><br><span class="line">problem_std</span><br><span class="line">fc problem.out problem1.out</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> <span class="keyword">ERRORLEVEL</span> <span class="number">1</span> <span class="keyword">goto</span> loop</span><br><span class="line"><span class="built_in">pause</span></span><br></pre></td></tr></table></figure>
+<h4 id="linux-sh">Linux sh</h4>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">    ./problem_gen</span><br><span class="line">    ./problem</span><br><span class="line">    ./problem_std</span><br><span class="line">    <span class="keyword">if</span> diff problem.out problem1.out; <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">printf</span> <span class="string">"AC\n"</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">printf</span> <span class="string">"WA\n"</span></span><br><span class="line">        <span class="built_in">exit</span> 0;</span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<h3 id="常见的-dfs-优化">常见的 DFS 优化:</h3>
+<ol type="1">
+<li>优化搜索顺序</li>
+<li>结合二分</li>
+<li>可行性剪枝</li>
+<li>最优化剪枝</li>
+<li>记忆化</li>
+<li>预处理</li>
+</ol>
+<h3 id="常见的-dp-优化">常见的 DP 优化</h3>
+<ol type="1">
+<li>单调队列 / 单调栈</li>
+<li>尝试分治</li>
+<li>斜率优化</li>
+<li>结合线段树</li>
+<li>前缀和优化</li>
+<li>矩阵快速幂 (初始参数不多, 转移跨度不大)</li>
+<li>不证明结论, 直接瞎贪心</li>
+</ol>
+<h3 id="吉利模数">吉利模数</h3>
+<ul>
+<li><code>1e9 + 7</code></li>
+<li><code>1e7 + 9</code></li>
+<li><code>998244353</code></li>
+<li><code>19260817</code></li>
+</ul>
+
+
+
+<div class="article-footer reveal fs14">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-sa/4.0/">署名-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section>
+    
+    <section id="share">
+      <div class="header"><span>分享文章</span></div>
+      <div class="body">
+        <div class="link"><input class="copy-area" readonly="true" id="copy-link" value="https://duanyll.com/2019/11/15/CSP-Rescue/" /></div>
+        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot)"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/b32ef3da1162a.svg"/></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=https://duanyll.com/2019/11/15/CSP-Rescue/&title=CSP 考前急救 - duanyll&summary=背板
+Exgcd 求逆元
+123456789101112131415161718int64 exgcd(int64 a, int64 b, int64&amp; x, int64&amp; y) {    if (b == 0) { ..."><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/80c07e4dbb303.svg"/></a><a class="social share-item email" href="mailto:?subject=CSP 考前急救 - duanyll&amp;body=https://duanyll.com/2019/11/15/CSP-Rescue/"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/a1b00e20f425d.svg"/></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/8411ed322ced6.svg"/></a><a class="social share-item print" onclick="window.print()"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/img/print.svg" /></a><a class="social share-item source" target="_blank" rel="noopener" href="https://github.com/duanyll/duanyll.com-hexo/blob/master/source/_posts/oi/2019-11-15-CSP-Rescue.md"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/08a41b181ce68.svg"/></a></div>
+        
+        <div class="qrcode" id="qrcode-wechat" style="visibility:hidden;height:0">
+          <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=https://duanyll.com/2019/11/15/CSP-Rescue/"/>
+        </div>
+        
+      </div>
+    </section>
+    
+      <section id="star">
+        <div class="body">
+          <span class="github-button-wrap">
+            <a class="github-button" 
+               target="_blank" rel="noopener" href="https://github.com/duanyll/duanyll.com-hexo" 
+               data-color-scheme="no-preference: light; light: light; dark: dark;" 
+               data-size="large" 
+               data-show-count="true" 
+               aria-label="Star this site on GitHub">Star</a>
+            <span>喜欢这个网站？在 GitHub 上给它一个 Star 吧！</span>
+          </span>
+        </div>
+      </section>
+    </div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2019/11/23/CSP2019/">CSP-S 2019 游记 & 感想</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2019/11/11/NOI-Liunx-Survival-Guide/">NOI Linux 存活指北</a></div></section></div>
+
+
+<div class="related-wrap reveal" id="related-posts">
+    <section class='header'>
+      <div class='title cap theme'>您可能感兴趣的文章</div>
+    </section>
+    <section class='body'>
+    <div class="related-posts"><a class="item" href="/2018/10/16/Simulate-Anneal/" title="玄(pian)学(fen)算法——模拟退火"><span class="title">玄(pian)学(fen)算法——模拟退火</span><span class="excerpt">NOIP在即，还是复习一下经典玄(pian)学(fen)算法，多骗个二三十分，以免爆零。</span></a><a class="item" href="/2018/10/18/Some-STL-Functions/" title="GCC/STL里面不那么常用又很有帮助的函数"><span class="title">GCC/STL里面不那么常用又很有帮助的函数</span><span class="excerpt">今天改以前的错题，发现了几个当初知道干嘛现在搞忘了的函数，能偷懒少写几行代码，再次做一个收集整理。</span></a><a class="item" href="/2018/10/19/VSCode-Duipai/" title="Linux下对拍sh"><span class="title">Linux下对拍sh</span><span class="excerpt">不多说,上代码</span></a><a class="item" href="/2018/10/22/Fenkuai-Algorithm/" title="初步认识分块算法"><span class="title">初步认识分块算法</span><span class="excerpt">
+我实在太弱了，连分块算法都不知道，现在才学。
+</span></a><a class="item" href="/2018/10/24/Please-Set-Password/" title="论给电脑设密码的重要性——机房惨案的新境界"><span class="title">论给电脑设密码的重要性——机房惨案的新境界</span><span class="excerpt">昨天颓了半个晚自习研究机房惨案黑科技，感受到了机房电脑不设密码又不开防火墙还不开UAC的巨大风险……
+
+在机房实际运用以下内容可能导致您被教练锤，被同学揍或者是更加严重的后果！
+</span></a></div></section></div>
+
+
+
+  <div class='related-wrap md-text reveal' id="comments">
+    <section class='header cmt-title cap theme'>
+      快来参与讨论吧
+    </section>
+    <section class='body cmt-body utterances'>
+      
+
+<!-- <svg class="loading" style="vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2709"><path d="M832 512c0-176-144-320-320-320V128c211.2 0 384 172.8 384 384h-64zM192 512c0 176 144 320 320 320v64C300.8 896 128 723.2 128 512h64z" p-id="2710"></path></svg> -->
+
+<div id="utterances" repo="duanyll/duanyll.com-comment" issue-term="pathname" theme="switch" label="Comment" enabled="true" issue_term="pathname"></div>
+
+    </section>
+  </div>
+
+
+
+      
+      
+<footer class="page-footer reveal fs12"><hr><div class="sitemap"><div class="sitemap-group"><span class="fs14">博客</span><a href="/">近期</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></div><div class="sitemap-group"><span class="fs14">项目</span><a target="_blank" rel="noopener" href="https://github.com/duanyll">开源库</a><a href="/wiki/">文档</a><a target="_blank" rel="noopener" href="https://github.com/duanyll/scoop-bucket">Scoop Bucket</a></div><div class="sitemap-group"><span class="fs14">社交</span><a href="/about/#comments">留言板</a><a target="_blank" rel="noopener" href="https://netunion.org">NetUnion</a><a target="_blank" rel="noopener" href="https://www.travellings.cn/go.html">开往</a></div><div class="sitemap-group"><span class="fs14">更多</span><a href="/about">关于本站</a><a target="_blank" rel="noopener" href="https://github.com/duanyll/duanyll.com-hexo">GitHub 源码</a><a target="_blank" rel="noopener" href="https://duanyll.cloudflareaccess.com">Dashboard</a></div></div><div class="text"><p>本站由 <a target="_blank" rel="noopener" href="https://github.com/duanyll">duanyll</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。 本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = stellar.config.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.21.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.21.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+    root : '/',
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js","memos":"/js/plugins/memos.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide:not(.swiper-slide-duplicate) img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.copycode = Object.assign({"enable":true,"js":"/js/plugins/copycode.js","default_text":"Copy","success_text":"Copied"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+  <script>
+  function loadUtterances() {
+    const els = document.querySelectorAll("#comments #utterances");
+    if (els.length === 0) return;
+    els.forEach((el, i) => {
+      try {
+        el.innerHTML = '';
+      } catch (error) {
+        console.error(error);
+      }
+      var script = document.createElement('script');
+      script.src = 'https://utteranc.es/client.js';
+      script.async = true;
+      for (let key of Object.keys(el.attributes)) {
+        let attr = el.attributes[key];
+        if (['class', 'id'].includes(attr.name) === false) {
+          var name = attr.name;
+          var value = attr.value;
+          if (name == 'theme' && value == 'switch') {
+            value = window.currentTheme == 'dark' ? 'github-dark' : 'github-light';
+          }
+          script.setAttribute(name, value);
+        }
+      }
+      el.appendChild(script);
+    });
+  }
+  window.addEventListener('DOMContentLoaded', (event) => {
+      loadUtterances();
+  });
+</script>
+
+
+
+
+
+  
+<script src="https://buttons.github.io/buttons.js" async></script>
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

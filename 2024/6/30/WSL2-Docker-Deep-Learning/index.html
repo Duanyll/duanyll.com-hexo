@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 8.1.1">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.21.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+
+  
+  
+  <title>基于 WSL2 和 Docker 的深度学习环境指北 - duanyll</title>
+
+  
+    <meta name="description" content="为什么要使用 WSL2 和 Docker 来管理深度学习环境？本教程的配置方法旨在日常使用的 Windows 机器上建立 CUDA 加速的深度学习环境，以便进行快速的调试与开发代码，而无需忍受连接到远程服务器的延迟。许多的深度学习库不能在 Windows 上开箱即用（尽管许多库只需少量的代码修改即可兼容 Windows 和 MSVC），或者在 Windows 上难以复现行为，所以需要使用 WSL2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于 WSL2 和 Docker 的深度学习环境指北">
+<meta property="og:url" content="https://duanyll.com/2024/6/30/WSL2-Docker-Deep-Learning/">
+<meta property="og:site_name" content="duanyll">
+<meta property="og:description" content="为什么要使用 WSL2 和 Docker 来管理深度学习环境？本教程的配置方法旨在日常使用的 Windows 机器上建立 CUDA 加速的深度学习环境，以便进行快速的调试与开发代码，而无需忍受连接到远程服务器的延迟。许多的深度学习库不能在 Windows 上开箱即用（尽管许多库只需少量的代码修改即可兼容 Windows 和 MSVC），或者在 Windows 上难以复现行为，所以需要使用 WSL2">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.duanyll.com/img/20240630232131.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20240630224805.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20240630225813.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20240630230038.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20240630234302.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20240630230645.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20240630231108.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20240630231738.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20240630232545.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20240630233136.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20240630233542.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20240630233710.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20240630234523.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20240630235033.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20240701001112.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20240701001148.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20240701093208.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20240701095622.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20240701094634.png">
+<meta property="og:image" content="https://img.duanyll.com/img/20240701094957.png">
+<meta property="article:published_time" content="2024-06-30T00:00:00.000Z">
+<meta property="article:modified_time" content="2024-06-30T00:00:00.000Z">
+<meta property="article:author" content="duanyll">
+<meta property="article:tag" content="docker">
+<meta property="article:tag" content="指北">
+<meta property="article:tag" content="炼丹">
+<meta property="article:tag" content="网络">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.duanyll.com/img/20240630232131.png">
+  
+  
+  
+  <meta name="keywords" content="炼丹,指北,docker,网络">
+
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="duanyll" type="application/atom+xml">
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+    <link rel="shortcut icon" href="https://cdn.duanyll.com/favicon.ico">
+  
+
+  
+
+  
+
+
+  
+
+  
+    <script>
+      var darkmodeSettings = localStorage.getItem('darkmode') || 'auto';
+      var enableDarkmode = darkmodeSettings == 'true' 
+        || (darkmodeSettings == 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (enableDarkmode) {
+        document.documentElement.classList.add('global-darkmode');
+      }
+      window.currentTheme = enableDarkmode ? 'dark' : 'light';
+    </script>
+  
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://cdn.duanyll.com/android-chrome-192x192.png" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">duanyll</div><div class="sub normal cap">qwq</div><div class="sub hover cap" style="opacity:0"> QWQ</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Wiki</a><a class="nav-item" href="/about/">关于</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">基于 WSL2 和 Docker 的深度学习环境指北</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#step-1---%E8%AE%BF%E9%97%AE%E4%BA%92%E8%81%94%E7%BD%91"><span class="toc-text">Step 1 - 访问互联网</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#step-2---%E5%AE%89%E8%A3%85-visual-studio-%E5%92%8C-cuda"><span class="toc-text">Step 2 - 安装 Visual Studio 和 CUDA</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#step-3---%E5%AE%89%E8%A3%85-wsl2"><span class="toc-text">Step 3 - 安装 WSL2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#step-4---%E5%9C%A8-wsl-%E4%B8%AD%E8%AE%BF%E9%97%AE%E4%BA%92%E8%81%94%E7%BD%91"><span class="toc-text">Step 4 - 在 WSL 中访问互联网</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#step-5---%E5%9C%A8-wsl-%E4%B8%AD%E5%AE%89%E8%A3%85-cuda"><span class="toc-text">Step 5 - 在 WSL 中安装 CUDA</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#step-6---%E5%9C%A8-wsl-%E4%B8%AD%E5%AE%89%E8%A3%85-docker"><span class="toc-text">Step 6 - 在 WSL 中安装 Docker</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#step-7---%E5%AE%89%E8%A3%85-nvidia-container-toolkit"><span class="toc-text">Step 7 - 安装 NVIDIA Container Toolkit</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#docker-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8"><span class="toc-text">Docker 快速入门</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#devcontainer-%E6%8C%87%E5%8C%97"><span class="toc-text">DevContainer 指北</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/duanyll" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/08a41b181ce68.svg"/></a><a class="social" href="/about/#comments" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/942ebbf1a4b91.svg"/></a><a class="social" href="https://www.travellings.cn/go.html" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://www.travellings.cn/assets/favicon-fluent-emoji.svg"/></a><a class="social" href="javascript:darkmode.next()" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/img/half-moon.svg"/></a></div></footer>
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+        
+
+
+
+<div class="bread-nav fs12"><div class="left"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></div><div id="post-meta">
+    <span>发布于&nbsp;<time datetime="2024-06-30T00:00:00.000Z">2024-06-30</time></span>
+    
+    <span>更新于&nbsp;<time datetime="2024-06-30T00:00:00.000Z">2024-06-30</time></span>
+    </div></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>基于 WSL2 和 Docker 的深度学习环境指北</span></h1>
+
+<div class="article-tags"><a class="tag-plugin colorful hashtag" color="yellow" href="/tags/%E7%82%BC%E4%B8%B9/" >  <svg t="1701408144765" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4228" width="200" height="200"><path d="M426.6 64.8c34.8 5.8 58.4 38.8 52.6 73.6l-19.6 117.6h190.2l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6s58.4 38.8 52.6 73.6l-19.4 117.6H896c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-42.6 256H832c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.6-117.4h-190.4l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.4-117.8H128c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l42.6-256H192c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6z m11.6 319.2l-42.6 256h190.2l42.6-256h-190.2z" p-id="4229"></path></svg>  <span>炼丹</span></a><a class="tag-plugin colorful hashtag" color="green" href="/tags/%E6%8C%87%E5%8C%97/" >  <svg t="1701408144765" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4228" width="200" height="200"><path d="M426.6 64.8c34.8 5.8 58.4 38.8 52.6 73.6l-19.6 117.6h190.2l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6s58.4 38.8 52.6 73.6l-19.4 117.6H896c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-42.6 256H832c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.6-117.4h-190.4l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.4-117.8H128c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l42.6-256H192c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6z m11.6 319.2l-42.6 256h190.2l42.6-256h-190.2z" p-id="4229"></path></svg>  <span>指北</span></a><a class="tag-plugin colorful hashtag" color="blue" href="/tags/docker/" >  <svg t="1701408144765" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4228" width="200" height="200"><path d="M426.6 64.8c34.8 5.8 58.4 38.8 52.6 73.6l-19.6 117.6h190.2l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6s58.4 38.8 52.6 73.6l-19.4 117.6H896c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-42.6 256H832c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.6-117.4h-190.4l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.4-117.8H128c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l42.6-256H192c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6z m11.6 319.2l-42.6 256h190.2l42.6-256h-190.2z" p-id="4229"></path></svg>  <span>docker</span></a><a class="tag-plugin colorful hashtag" color="purple" href="/tags/%E7%BD%91%E7%BB%9C/" >  <svg t="1701408144765" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4228" width="200" height="200"><path d="M426.6 64.8c34.8 5.8 58.4 38.8 52.6 73.6l-19.6 117.6h190.2l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6s58.4 38.8 52.6 73.6l-19.4 117.6H896c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-42.6 256H832c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.6-117.4h-190.4l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.4-117.8H128c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l42.6-256H192c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6z m11.6 319.2l-42.6 256h190.2l42.6-256h-190.2z" p-id="4229"></path></svg>  <span>网络</span></a></div>
+<p>为什么要使用 WSL2 和 Docker 来管理深度学习环境？本教程的配置方法旨在日常使用的 Windows 机器上建立 CUDA 加速的深度学习环境，以便进行快速的调试与开发代码，而无需忍受连接到远程服务器的延迟。许多的深度学习库不能在 Windows 上开箱即用（尽管许多库只需少量的代码修改即可兼容 Windows 和 MSVC），或者在 Windows 上难以复现行为，所以需要使用 WSL2。作为虚拟机，WSL2 支持绝大多数的 Linux 内核的特性，相较于其他的虚拟化平台，WSL2 能优雅地与 Windows 宿主机共享同一张 CUDA 显卡。我不喜欢使用 Conda，第一是因为 Resolving Environment 太慢了，第二是 conda 的环境隔离程度实际上并不能满足深度学习的需求。Conda 不能隔离 CUDA 运行库，和其他 apt 管理的 C 库，而 Docker 可以，DevContainers 已包含了一套易用的将 Docker 容器用于开发的方案。</p>
+<blockquote>
+<p>根本碰都不要碰 Docker Desktop, Bug 太多了。本教程直接在 WSL2 中安装 Docker，不需要 Docker Desktop。</p>
+</blockquote>
+<p>实际上，得益于 WSL2 的设计，本文所述的 WSL2 部分的方法也适用于典型的 Ubuntu 主机。Windows 部分的教程需要 Windows 11 或 Windows 10 22H2 (19045) 以上的版本。推荐安装 <a target="_blank" rel="noopener" href="https://aka.ms/terminal">Windows Terminal</a> 来让命令行体验更美好。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20240630232131.png" alt="安装 Windows Terminal 并取代 conhost" fancybox="true"></div><div class="image-meta"><span class="image-caption center">安装 Windows Terminal 并取代 conhost</span></div></div>
+<h2 id="step-1---访问互联网">Step 1 - 访问互联网</h2>
+<p>本教程假定必须使用 HTTP 代理才能访问任何互联网上的网站（实际上相当契合中国大陆的情况了），并且这个代理服务器位于 Windows 宿主机的 7890 端口上。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20240630224805.png" alt="一个典型的 HTTP 代理软件" fancybox="true"></div><div class="image-meta"><span class="image-caption center">一个典型的 HTTP 代理软件</span></div></div>
+<p>我们首先让 Windows 上的程序能使用这个代理服务器。通常来说只需要<strong>打开 System Proxy 选项</strong>，这会修改 Windows 的 IE 代理设置，适用于多数的图形化程序。<strong>不建议打开 TUN 模式</strong>，这会让情况变得复杂棘手，建议把 TUN 代理留给 “访问内部资产” 的需求，如 EasyConnect 和 WireGuard，而不是 “访问互联网” 的需求。<a href="/2025/5/31/Windows-TUN-Router/">这里</a> 有关于 TUN 代理的更多讨论和高级用法。</p>
+<p>仅仅这样设置是不够的。许多从 Linux 世界移植的命令行程序从环境变量读取代理设置，而不是从 Windows 的 IE 代理设置读取。可添加 Windows 环境变量 <code>http_proxy</code> 和 <code>https_proxy</code>，值均为 <code>http://127.0.0.1:7890</code>.</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20240630225813.png" alt="添加 Windows 环境变量" fancybox="true"></div><div class="image-meta"><span class="image-caption center">添加 Windows 环境变量</span></div></div>
+<p>添加完记得重启打开的 Shell，或者直接重启电脑。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20240630230038.png" alt="如果以上步骤是正确的，你应该能直接在 PowerShell 中直接 curl google.com" fancybox="true"></div><div class="image-meta"><span class="image-caption center">如果以上步骤是正确的，你应该能直接在 PowerShell 中直接 curl google.com</span></div></div>
+<p>之后还要用到 Windows 的主机名，最好顺手改成好看的名字，不要用默认的乱码。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20240630234302.png" alt="最好把主机名从默认的乱码改成好打的名字" fancybox="true"></div><div class="image-meta"><span class="image-caption center">最好把主机名从默认的乱码改成好打的名字</span></div></div>
+<h2 id="step-2---安装-visual-studio-和-cuda">Step 2 - 安装 Visual Studio 和 CUDA</h2>
+<p>由于 CUDA 的编译器和调试器都依赖于 MSVC，所以我们直接安装一个完整的 Visual Studio 来减少麻烦。</p>
+<div class="tag-plugin link dis-select"><a class="link-card plain" title="" href="https://visualstudio.microsoft.com/zh-hans/downloads/" target="_blank" rel="external nofollow noopener noreferrer" cardlink="" autofill="title,icon"><div class="left"><span class="title">https://visualstudio.microsoft.com/zh-hans/downloads/</span><span class="cap link fs12">https://visualstudio.microsoft.com/zh-hans/downloads/</span></div><div class="right"><div class="lazy img" data-bg="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/link/8f277b4ee0ecd.svg"></div></div></a></div>
+<p>下载 Visual Studio Community 2022，安装时选择 C++ 工作负载。安装过程略，只需要一直点下一步。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20240630230645.png" alt="至少选择 C++ 工作负载，别的看喜好选择。" fancybox="true"></div><div class="image-meta"><span class="image-caption center">至少选择 C++ 工作负载，别的看喜好选择。</span></div></div>
+<blockquote>
+<p>如果想要减少麻烦，就不要修改任何东西的默认安装路径。</p>
+<p>如果 C 盘不够大，就换一个足够大的 C 盘。</p>
+</blockquote>
+<p>安装完 Visual Studio 之后，按提示重启电脑。随后下载并安装 CUDA Toolkit。</p>
+<div class="tag-plugin link dis-select"><a class="link-card plain" title="" href="https://developer.nvidia.com/cuda-downloads?target_os=Windows&target_arch=x86_64&target_version=10&target_type=exe_local" target="_blank" rel="external nofollow noopener noreferrer" cardlink="" autofill="title,icon"><div class="left"><span class="title">https://developer.nvidia.com/cuda-downloads?target_os=Windows&amp;target_arch=x86_64&amp;target_version=10&amp;target_type=exe_local</span><span class="cap link fs12">https://developer.nvidia.com/cuda-downloads?target_os=Windows&amp;target_arch=x86_64&amp;target_version=10&amp;target_type=exe_local</span></div><div class="right"><div class="lazy img" data-bg="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/link/8f277b4ee0ecd.svg"></div></div></a></div>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20240630231108.png" alt="直接安装你看到的最新版本，无论你想用的深度学习库要求使用哪个版本的 CUDA" fancybox="true"></div><div class="image-meta"><span class="image-caption center">直接安装你看到的最新版本，无论你想用的深度学习库要求使用哪个版本的 CUDA</span></div></div>
+<p>只需要一直点下一步。会覆盖显卡驱动，所以屏幕会闪几下。</p>
+<p>正确完成本节后，应该能在 Windows 上运行 <code>nvidia-smi</code> 命令，显示显卡的状态。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20240630231738.png" alt="能在 Windows 上运行 nvidia-smi" fancybox="true"></div><div class="image-meta"><span class="image-caption center">能在 Windows 上运行 nvidia-smi</span></div></div>
+<h2 id="step-3---安装-wsl2">Step 3 - 安装 WSL2</h2>
+<p>确保是 Windows 11 或 Windows 10 22H2 (19045) 以上的版本。最新版本的 Windows 应当无需额外设置即可使用 <code>wsl</code> 命令，无论是否安装了 WSL。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20240630232545.png" alt="可以直接运行 WSL 命令" fancybox="true"></div><div class="image-meta"><span class="image-caption center">可以直接运行 WSL 命令</span></div></div>
+<p>如果找不到 <code>wsl</code> 命令说明需要手动安装 WSL2。参考官方教程：</p>
+<div class="tag-plugin link dis-select"><a class="link-card plain" title="" href="https://learn.microsoft.com/en-us/windows/wsl/install-manual" target="_blank" rel="external nofollow noopener noreferrer" cardlink="" autofill="title,icon"><div class="left"><span class="title">https://learn.microsoft.com/en-us/windows/wsl/install-manual</span><span class="cap link fs12">https://learn.microsoft.com/en-us/windows/wsl/install-manual</span></div><div class="right"><div class="lazy img" data-bg="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/link/8f277b4ee0ecd.svg"></div></div></a></div>
+<p>对于有 <code>wsl</code> 命令的用户，直接运行 <code>wsl --install</code> 即可。安装中会多次请求 UAC 权限，确保有 <a href="#step-1---访问互联网">好的网络连接</a>。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20240630233136.png" alt="按照提示重启电脑" fancybox="true"></div><div class="image-meta"><span class="image-caption center">按照提示重启电脑</span></div></div>
+<p>重启电脑后自动继续安装，或者手动运行 <code>wsl</code> 命令。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20240630233542.png" alt="设置用户名和密码，按照惯例，输入密码时不会回显" fancybox="true"></div><div class="image-meta"><span class="image-caption center">设置用户名和密码，按照惯例，输入密码时不会回显</span></div></div>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20240630233710.png" alt="默认为安装了 Ubuntu 22.04，这是我们需要的" fancybox="true"></div><div class="image-meta"><span class="image-caption center">默认为安装了 Ubuntu 22.04，这是我们需要的</span></div></div>
+<h2 id="step-4---在-wsl-中访问互联网">Step 4 - 在 WSL 中访问互联网</h2>
+<p>一种方法是让 WSL 使用 Windows 上的代理服务器联网。由于 Hyper-V 的默认网络设置，WSL2 中 Windows 宿主机的 IP 地址会在每次重启时改变（几乎必然改变）。不过在 WSL2 中能解析 Windows 宿主机的主机名，通过主机名访问 Windows 宿主机，在主机名后加 <code>.local</code>：</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20240630234523.png" alt="确保能从 WSL 内 ping 通主机" fancybox="true"></div><div class="image-meta"><span class="image-caption center">确保能从 WSL 内 ping 通主机</span></div></div>
+<p>就可以直接在 <code>.bashrc</code> 中设置代理（通常 WSL 的主机名和 Windows 是相同的），直接运行命令追加 <code>.bashrc</code> 文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">'export http_proxy=http://$(hostname).local:7890'</span> &gt;&gt; ~/.bashrc</span><br><span class="line"><span class="built_in">echo</span> <span class="string">'export https_proxy=http://$(hostname).local:7890'</span> &gt;&gt; ~/.bashrc</span><br></pre></td></tr></table></figure>
+<p>重启 shell 或者直接运行 <code>source ~/.bashrc</code>，应该能直接访问互联网。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20240630235033.png" alt="确保能直接访问互联网" fancybox="true"></div><div class="image-meta"><span class="image-caption center">确保能直接访问互联网</span></div></div>
+<p>apt 不会使用这个代理。我的经验是使用国内镜像站会比使用代理更快，所以修改 <code>/etc/apt/sources.list</code> 文件，将默认的源替换为国内源。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> sed -i <span class="string">'s/archive.ubuntu.com/mirrors.ustc.edu.cn/g'</span> /etc/apt/sources.list</span><br><span class="line"><span class="built_in">sudo</span> sed -i <span class="string">'s/security.ubuntu.com/mirrors.ustc.edu.cn/g'</span> /etc/apt/sources.list</span><br><span class="line"><span class="built_in">sudo</span> apt update</span><br></pre></td></tr></table></figure>
+<div class="tag-plugin colorful note"><div class="title"><strong>注意</strong></div><div class="body"><p>为了使用 Docker 的 apt 源，还需要设置 apt 代理, 或者也可以按下文的方式使用 apt 国内镜像：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"Acquire::http::Proxy \"http://<span class="subst">$(hostname)</span>.local:7890\";"</span> | <span class="built_in">sudo</span> <span class="built_in">tee</span> /etc/apt/apt.conf.d/99proxy</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Acquire::https::Proxy \"http://<span class="subst">$(hostname)</span>.local:7890\";"</span> | <span class="built_in">sudo</span> <span class="built_in">tee</span> -a /etc/apt/apt.conf.d/99proxy</span><br><span class="line"><span class="built_in">sudo</span> apt update</span><br></pre></td></tr></table></figure></div></div>
+<h2 id="step-5---在-wsl-中安装-cuda">Step 5 - 在 WSL 中安装 CUDA</h2>
+<p>无论最后需要用什么版本的 CUDA，都在 WSL 中安装最新版的 CUDA Toolkit。</p>
+<div class="tag-plugin link dis-select"><a class="link-card plain" title="" href="https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=WSL-Ubuntu&target_version=2.0&target_type=deb_network" target="_blank" rel="external nofollow noopener noreferrer" cardlink="" autofill="title,icon"><div class="left"><span class="title">https://developer.nvidia.com/cuda-downloads?target_os=Linux&amp;target_arch=x86_64&amp;Distribution=WSL-Ubuntu&amp;target_version=2.0&amp;target_type=deb_network</span><span class="cap link fs12">https://developer.nvidia.com/cuda-downloads?target_os=Linux&amp;target_arch=x86_64&amp;Distribution=WSL-Ubuntu&amp;target_version=2.0&amp;target_type=deb_network</span></div><div class="right"><div class="lazy img" data-bg="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/link/8f277b4ee0ecd.svg"></div></div></a></div>
+<div class="tag-plugin colorful note" color="yellow"><div class="title"><strong>注意</strong></div><div class="body"><p>在官网给出的三种安装方式中, 最推荐使用 <code>deb (network)</code> 的方式安装 CUDA Toolkit, 这样符合一般使用 APT 的操作习惯, 在需要升级 CUDA 版本时最为方便, 其他两种方式都非常容易把 APT 搞爆炸. 目前英伟达的国内 CDN 已经正常使用, 使用官网的下载源会自动重定向到 <code>nvidia.cn</code> 域名, 速度很快.</p></div></div>
+<div class="tag-plugin colorful note" color="red"><div class="title"><strong>警告：为什么你的显卡驱动在 apt upgrade 之后就挂了？</strong></div><div class="body"><p>因为你使用了 <strong>runfile (local)</strong> 的方式安装了 nvidia 驱动，这是 <strong>完全不推荐</strong> 的做法。runfile <strong>不会</strong> 向 APT 注册它添加的内核模块和库文件，当 apt 尝试升级内核或其他依赖库时，就不会自动重新编译和安装这些模块和库文件，导致重启后系统无法正常工作。请务必使用 APT 安装 NVIDIA 驱动。至少也要使用 <code>deb (local)</code> 的方式安装 CUDA Toolkit，这样才能确保 APT 能正确管理 NVIDIA 驱动和 CUDA 相关的库文件。<strong>当然，最好的方法是使用 <code>deb (network)</code>。</strong></p><p><code>apt upgrade</code> 和高版本的 CUDA Toolkit 和 nvidia 驱动没那么多毛病，升级后出现错误多半因为之前安装的驱动的方法不对。</p></div></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/cuda-keyring_1.1-1_all.deb</span><br><span class="line"><span class="built_in">sudo</span> dpkg -i cuda-keyring_1.1-1_all.deb</span><br><span class="line"><span class="built_in">sudo</span> apt-get update</span><br><span class="line"><span class="built_in">sudo</span> apt-get -y install cuda-toolkit</span><br></pre></td></tr></table></figure>
+<p>使用 APT 在线安装 <code>cuda-toolkit</code> 包会自动安装最新版本的 CUDA Toolkit, 并且在未来可以使用 <code>apt upgrade</code> 命令升级到最新版本. 也可以使用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get -y install cuda-toolkit-12-9</span><br></pre></td></tr></table></figure>
+<p>来安装指定版本的 CUDA Toolkit, 例如 <code>cuda-toolkit-12-9</code>。这样安装不会通过 <code>apt upgrade</code> 自动升级. 在手动升级 CUDA 版本, 或者清除以其他方式安装的 CUDA 版本时, 建议先移除所有 CUDA 相关的包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get remove --purge <span class="string">'^cuda.*'</span> <span class="string">'nvidia-.*'</span> <span class="string">'libnvidia-.*'</span></span><br></pre></td></tr></table></figure>
+<div class="tag-plugin colorful note"><div class="title"><strong>注意</strong></div><div class="body"><p>在 WSL 中只需安装 CUDA Toolkit, 不需要安装 NVIDIA 驱动. 在一般 Debian 裸机上还需安装 NVIDIA 驱动.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get install -y nvidia-open</span><br></pre></td></tr></table></figure><p>安装最新稳定版本的 NVIDIA 驱动. 目前看来高版本的驱动没那么可怕, 建议不要守着 535 版本不放. 毕竟 LLM 横行的时代, 高版本的 CUDA Toolkit 和 PyTorch 都有很多重要的新特性.</p><p>另外，如果使用数据中心级的 GPU (A100, H100, …)，还要安装</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get install -y datacenter-gpu-manager nvidia-fabricmanager</span><br></pre></td></tr></table></figure><p>否则可能出现 nvidia-smi 正常但 PyTorch 报错 <code>system not yet initialized</code> 的问题。</p></div></div>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20240701001112.png" fancybox="true"></div></div>
+<p>安装完成后应当能在 WSL 中运行 <code>nvidia-smi</code> 命令，显示显卡的状态。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20240701001148.png" fancybox="true"></div></div>
+<h2 id="step-6---在-wsl-中安装-docker">Step 6 - 在 WSL 中安装 Docker</h2>
+<p>不要使用 Docker Desktop，它有太多的 Bug。我们直接在 WSL 中安装 Docker。</p>
+<div class="tag-plugin link dis-select"><a class="link-card plain" title="" href="https://docs.docker.com/engine/install/ubuntu/" target="_blank" rel="external nofollow noopener noreferrer" cardlink="" autofill="title,icon"><div class="left"><span class="title">https://docs.docker.com/engine/install/ubuntu/</span><span class="cap link fs12">https://docs.docker.com/engine/install/ubuntu/</span></div><div class="right"><div class="lazy img" data-bg="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/link/8f277b4ee0ecd.svg"></div></div></a></div>
+<p>粘到 WSL 里运行（已加入代理设置）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Add Docker's official GPG key:</span></span><br><span class="line"><span class="built_in">sudo</span> apt-get update</span><br><span class="line"><span class="built_in">sudo</span> apt-get install ca-certificates curl</span><br><span class="line"><span class="built_in">sudo</span> install -m 0755 -d /etc/apt/keyrings</span><br><span class="line"><span class="built_in">sudo</span> curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc --proxy http://$(hostname).<span class="built_in">local</span>:7890</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chmod</span> a+r /etc/apt/keyrings/docker.asc</span><br><span class="line"></span><br><span class="line"><span class="comment"># Add the repository to Apt sources:</span></span><br><span class="line"><span class="built_in">echo</span> \</span><br><span class="line">  <span class="string">"deb [arch=<span class="subst">$(dpkg --print-architecture)</span> signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \</span></span><br><span class="line"><span class="string">  <span class="subst">$(. /etc/os-release &amp;&amp; echo <span class="string">"<span class="variable">$VERSION_CODENAME</span>"</span>)</span> stable"</span> | \</span><br><span class="line">  <span class="built_in">sudo</span> <span class="built_in">tee</span> /etc/apt/sources.list.d/docker.list &gt; /dev/null</span><br><span class="line"><span class="built_in">sudo</span> apt-get update</span><br><span class="line"></span><br><span class="line"><span class="built_in">sudo</span> apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin</span><br></pre></td></tr></table></figure>
+<div class="tag-plugin colorful note"><div class="title"><strong>说明</strong></div><div class="body"><p>也可以考虑使用国内 Docker APT 镜像源, 例如北外镜像. 仍然需要按照上面五行命令从 Docker 官网获得 GPG 密钥。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> \</span><br><span class="line">  <span class="string">"deb [arch=<span class="subst">$(dpkg --print-architecture)</span> signed-by=/etc/apt/keyrings/docker.gpg] https://mirrors.bfsu.edu.cn/docker-ce/linux/debian \</span></span><br><span class="line"><span class="string">  "</span>$(. /etc/os-release &amp;&amp; <span class="built_in">echo</span> <span class="string">"<span class="variable">$VERSION_CODENAME</span>"</span>)<span class="string">" stable"</span> | \</span><br><span class="line">  <span class="built_in">tee</span> /etc/apt/sources.list.d/docker.list &gt; /dev/null</span><br></pre></td></tr></table></figure></div></div>
+<p>随后在 Docker Daemon 的 Systemd 单元文件中配置代理环境变量</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">mkdir</span> -p /etc/systemd/system/docker.service.d</span><br><span class="line"><span class="built_in">echo</span> <span class="string">'[Service]'</span> | <span class="built_in">sudo</span> <span class="built_in">tee</span> /etc/systemd/system/docker.service.d/http-proxy.conf</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Environment=\"HTTP_PROXY=http://<span class="subst">$(hostname)</span>.local:7890\""</span> | <span class="built_in">sudo</span> <span class="built_in">tee</span> -a /etc/systemd/system/docker.service.d/http-proxy.conf</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Environment=\"HTTPS_PROXY=http://<span class="subst">$(hostname)</span>.local:7890\""</span> | <span class="built_in">sudo</span> <span class="built_in">tee</span> -a /etc/systemd/system/docker.service.d/http-proxy.conf</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Environment=\"NO_PROXY=localhost,127.0.0.1\""</span> | <span class="built_in">sudo</span> <span class="built_in">tee</span> -a /etc/systemd/system/docker.service.d/http-proxy.conf</span><br><span class="line"><span class="built_in">sudo</span> systemctl daemon-reload</span><br><span class="line"><span class="built_in">sudo</span> systemctl restart docker</span><br></pre></td></tr></table></figure>
+<p>把当前用户加入 <code>docker</code> 组，以免每次用 docker 都要 <code>sudo</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> usermod -aG docker <span class="variable">$USER</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>别用 Rootless Docker, 纯属自找麻烦。</p>
+</blockquote>
+<p>需要重启 shell。创建 Docker Client 的配置文件并设置代理，这样容器中会自动添加代理的环境变量：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p ~/.docker</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"{\"proxies\":{\"default\":{\"httpProxy\":\"http://<span class="subst">$(hostname)</span>:7890\",\"httpsProxy\":\"http://<span class="subst">$(hostname)</span>:7890\",\"noproxy\":\"localhost,127.0.0.1,::1\"}}}"</span> &gt; ~/.docker/config.json</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这里不加 <code>.local</code>, 不正确的 noproxy 可能导致 gradio 无法启动。</p>
+</blockquote>
+<p>正确完成本节后，应当能在 WSL 中运行 <code>docker run hello-world</code> 命令，显示 Docker 正常工作。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20240701093208.png" fancybox="true"></div></div>
+<p>配置好 Docker Client 的代理设置后，可以直接在容器中运行 <code>curl</code> 命令，访问互联网。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20240701095622.png" fancybox="true"></div></div>
+<h2 id="step-7---安装-nvidia-container-toolkit">Step 7 - 安装 NVIDIA Container Toolkit</h2>
+<p>在 WSL 中可以直接安装 Ubuntu 版本的 NVIDIA Container Toolkit。</p>
+<div class="tag-plugin link dis-select"><a class="link-card plain" title="" href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#installing-on-ubuntu-and-debian" target="_blank" rel="external nofollow noopener noreferrer" cardlink="" autofill="title,icon"><div class="left"><span class="title">https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#installing-on-ubuntu-and-debian</span><span class="cap link fs12">https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#installing-on-ubuntu-and-debian</span></div><div class="right"><div class="lazy img" data-bg="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/link/8f277b4ee0ecd.svg"></div></div></a></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | <span class="built_in">sudo</span> gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \</span><br><span class="line">  &amp;&amp; curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \</span><br><span class="line">    sed <span class="string">'s#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g'</span> | \</span><br><span class="line">    <span class="built_in">sudo</span> <span class="built_in">tee</span> /etc/apt/sources.list.d/nvidia-container-toolkit.list</span><br><span class="line"><span class="built_in">sudo</span> apt-get update</span><br><span class="line"><span class="built_in">sudo</span> apt-get install -y nvidia-container-toolkit</span><br><span class="line"><span class="built_in">sudo</span> nvidia-ctk runtime configure --runtime=docker</span><br><span class="line"><span class="built_in">sudo</span> systemctl restart docker</span><br></pre></td></tr></table></figure>
+<p>下载一个带 CUDA 的 PyTorch 镜像试试：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull pytorch/pytorch:2.3.1-cuda12.1-cudnn8-devel</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注: 使用 Docker 时，可以使用任意的比系统 CUDA 版本低的 CUDA 镜像。开发时请使用 devel 版本的 PyTorch 镜像，只有 devel 版本才包含编译器，可以编译 C++ 扩展。</p>
+</blockquote>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20240701094634.png" alt="PyTorch devel 镜像现在已有 8 个多 G" fancybox="true"></div><div class="image-meta"><span class="image-caption center">PyTorch devel 镜像现在已有 8 个多 G</span></div></div>
+<blockquote>
+<p><code>docker pull</code> 并不能断点续传，最好用一个好的代理。</p>
+</blockquote>
+<p>成功安装 NVIDIA Container Toolkit 后，能在容器内运行 <code>nvidia-smi</code> 命令，显示显卡的状态。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --<span class="built_in">rm</span> -it --gpus all pytorch/pytorch:2.3.1-cuda12.1-cudnn8-devel nvidia-smi</span><br></pre></td></tr></table></figure>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.duanyll.com/img/20240701094957.png" fancybox="true"></div></div>
+<h2 id="docker-快速入门">Docker 快速入门</h2>
+<p>一个 Docker 镜像包含了运行程序所需的完整文件系统和环境变量。Docker 容器是一个特殊的进程，使用 Docker 镜像提供的文件系统和环境变量，并且网络栈和主机一般是隔离的（实际上，几乎所有的用户态要素都被隔离了）。相比于虚拟机，Docker 能快速地启动和停止，而且 Docker 镜像的大小通常比虚拟机的小很多。</p>
+<p>需要注意的是，Docker 容器被设计成无状态的，容器内的文件系统和环境变量都是临时的，<strong>任何修改都会在容器停止后丢失</strong>。如果需要向容器内安装新的程序或者修改配置文件，应该重新构建一个新的 Docker 镜像。如果需要保存容器内的数据，应该把数据文件挂载（Mount）到宿主机的文件夹或者 Docker Volume。<code>Docker Commit</code> 命令可以把运行中的容器保存为新的 Docker 镜像，但是<em>不推荐用来制作镜像</em>，只适合用于调试或者紧急保存数据的需求。</p>
+<p>可以方便地从 Docker Hub 上下载包含各类 Linux 发行版和软件的镜像，由于 Docker 提供了充分的隔离，几乎所有镜像都能下载后开箱即用，省去了手动安装各类环境的麻烦。如果需要自定义镜像，可以使用 Dockerfile 来描述镜像的构建过程，然后使用 <code>docker build</code> 命令构建镜像。Dockerfile 中的每一条指令都会生成一个新的镜像层，Docker 会尽量复用已有的镜像层，以减少镜像的大小。Dockerfile 通常包括 <code>FROM</code>, <code>RUN</code>, <code>COPY</code>, <code>CMD</code> 等指令。</p>
+<ul>
+<li><code>FROM</code> 指定基础镜像</li>
+<li><code>RUN</code> 在镜像中运行 Shell 命令，可以用来安装软件</li>
+<li><code>COPY</code> 复制文件到镜像中。由于 Docker 的设计，要复制的文件必须在构建上下文中，所以通常需要把文件放在 Dockerfile 同一目录下</li>
+<li><code>CMD</code> 指定容器启动时默认运行的命令</li>
+<li><code>ENV</code> 设置环境变量</li>
+</ul>
+<p>Docker 镜像的构建过程会被缓存，如果 Dockerfile 的某一步发生了变化，Docker 会重新构建这一步之后的所有步骤。下面是一个常见的 Dockerfile 示例：</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 有了 Docker，可以使用任意老版本的 PyTorch 和 CUDA，而不会影响其他的项目</span></span><br><span class="line"><span class="keyword">FROM</span> pytorch/pytorch:<span class="number">1.7</span>.<span class="number">1</span>-cuda11.<span class="number">0</span>-cudnn8-devel</span><br><span class="line"></span><br><span class="line"><span class="comment"># Dockerfile 中 APT 包的安装比较复杂，建议复制下面的格式</span></span><br><span class="line"><span class="comment"># rm /etc/apt/sources.list.d/cuda.list 如果镜像中没有 CUDA，则删掉这一行</span></span><br><span class="line"><span class="comment"># 如果不指定 DEBIAN_FRONTEND=noninteractive TZ=Asia/Shanghai 和 -y 参数，构建镜像会因为 apt 等待用户输入而卡死</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> <span class="built_in">rm</span> /etc/apt/sources.list.d/cuda.list \</span></span><br><span class="line"><span class="language-bash">    &amp;&amp; sed -i <span class="string">'s/archive.ubuntu.com/mirrors.ustc.edu.cn/g'</span> /etc/apt/sources.list \</span></span><br><span class="line"><span class="language-bash">    &amp;&amp; sed -i <span class="string">'s/security.ubuntu.com/mirrors.ustc.edu.cn/g'</span> /etc/apt/sources.list \</span></span><br><span class="line"><span class="language-bash">    &amp;&amp; apt-get update \</span></span><br><span class="line"><span class="language-bash">    &amp;&amp; DEBIAN_FRONTEND=noninteractive TZ=Asia/Shanghai apt-get install -y git gdb vim curl wget tmux zip cmake ffmpeg libsm6 libxext6 \</span></span><br><span class="line"><span class="language-bash">    &amp;&amp; <span class="built_in">rm</span> -rf /var/lib/apt/lists/*</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># environment.yml 需要放在 Dockerfile 同一目录下</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> environment.yml /tmp/environment.yml</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> conda <span class="built_in">env</span> create -f /tmp/environment.yml</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> conda init bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 除了 Conda，也可以直接用 pip 安装 Python 包，Docker 已经提供了环境隔离</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> pip install -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com h5py einops tqdm matplotlib tensorboard torch-tb-profiler ninja scipy</span></span><br></pre></td></tr></table></figure>
+<p>可以用 <code>docker build</code> 命令构建 Docker 镜像：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t my-image-name .</span><br></pre></td></tr></table></figure>
+<p><code>-t</code> 参数指定镜像的名字，只能包含小写字母和数字，可以用 <code>/</code> 分隔，<code>.</code> 指定 Dockerfile 所在的目录。构建完成后可以用 <code>docker images</code> 命令查看所有的镜像。</p>
+<p>要启动 Docker 镜像，可以使用 <code>docker run</code> 命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --<span class="built_in">rm</span> -it --gpus all -v $(<span class="built_in">pwd</span>):/workspace -p 8080:80 my-image-name bash</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>--rm</code> 容器停止后自动删除，一般不用留着因为数据都清除了</li>
+<li><code>-it</code> 交互式启动，可以使用 Shell。如果需要作为后台进程运行，换成 <code>-d</code> 参数</li>
+<li><code>--gpus all</code> 允许容器使用所有的 GPU，不加用不了 CUDA</li>
+<li><code>-v $(pwd):/workspace</code> 把当前目录挂载到容器的 <code>/workspace</code> 目录，可以在容器内的 <code>/workspace</code> 目录中读写文件，数据会随时同步到宿主机，不会丢失</li>
+<li><code>-p 8080:80</code> 把容器的 80 端口映射到宿主机的 8080 端口，可以通过 <code>localhost:8080</code> 访问容器内 <code>80</code> 端口的 Web 服务。如果不需要映射端口，可以不加这个参数。
+<ul>
+<li>在 WSL2 上，这个命令只负责从容器映射到 WSL2 的网络栈</li>
+<li>但通常 WSL2 上的端口能被自动映射到 Windows 上，可以直接在 Windows 上访问 <code>localhost:8080</code></li>
+</ul></li>
+<li><code>my-image-name</code> 指定要启动的镜像名称</li>
+<li><code>bash</code> 指定容器启动时运行的命令，可不加，默认是 <code>CMD</code> 指定的命令</li>
+</ul>
+<p>使用 <code>docker ps</code> 命令可以查看所有正在运行的容器，使用 <code>docker stop</code> 命令可以停止容器（容器会在主进程退出后自动停止）。使用 <code>docker exec</code> 命令可以在运行中的容器中运行命令。使用 <code>docker cp</code> 命令可以从容器中复制文件到宿主机。具体用法略。</p>
+<p>Docker Compose 可以用来管理多个容器，也能方便的把容器的启动参数写到文件里。具体用法略。</p>
+<h2 id="devcontainer-指北">DevContainer 指北</h2>
+<p>Visual Studio Code 的 DevContainer 功能可以让你在容器中开发代码，能自动启动容器并使用 VS Code 在容器内进行开发调试。DevContainer 会自动挂载当前目录到容器内的 <code>/workspace</code> 目录，所以容器内的文件会和宿主机同步，不会丢失。VS Code 还能自动配置端口映射和 X11 显示并兼容 WSLg，<code>plt.show()</code> 能在 Windows 上显示图像。</p>
+<p>要使用 DevContainer，需要安装 <a target="_blank" rel="noopener" href="https://code.visualstudio.com/">Visual Studio Code</a>、<a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl">Remote - WSL</a> 和 <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers">Remote - Containers</a> 插件。由于我们没有使用 Docker Desktop，所以需要先让 VSCode 连接到 WSL，才能使用 DevContainer 功能。</p>
+<p>首次配置大致需要以下几个步骤：</p>
+<ol type="1">
+<li>打开 VS Code，按左下角的 <code>&gt;&lt;</code> 图标，选择 <code>Remote-WSL: New Window</code></li>
+<li>在 Terminal 窗口中 <code>git clone</code> 你的项目，或者打开一个已有的项目, 项目目录最好放在 WSL 的文件系统中 (如 <code>/home/username/project</code>), 然后 <code>cd</code> 到项目目录, 用 <code>code .</code> 命令打开项目</li>
+<li>添加 DevContainer 配置文件 <code>.devcontainer/devcontainer.json</code> 和 <code>.devcontainer/Dockerfile</code>. Dockerfile 可以参考上一节的例子，DevContainer 配置文件可以参考下面的例子</li>
+<li>按左下角的 <code>&gt;&lt;</code> 图标，选择 <code>Remote-Containers: Reopen in Container</code>，VS Code 会自动构建镜像并启动容器，首次启动可能需要下载镜像和安装软件包，耗时较长。如果构建失败，可以在 VS Code 的 Terminal 窗口中查看构建日志。很多构建失败的原因是网络问题，请确保你已经按照上面的步骤在所有地方都设置好了代理。</li>
+<li>在容器中可以使用 VS Code 的所有功能，包括调试、代码补全、代码格式化等。容器内的文件会和宿主机同步，不会丢失。容器内的代码修改会立即反映到宿主机，不需要手动同步文件。</li>
+</ol>
+<p>下面是 <code>.devcontainer/devcontainer.json</code> 模板，需要按需修改挂载数据集的配置（如果需要）</p>
+<figure class="highlight jsonc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">{</span></span><br><span class="line">  <span class="attr">"build"</span><span class="punctuation">:</span> <span class="punctuation">{</span></span><br><span class="line">    <span class="attr">"dockerfile"</span><span class="punctuation">:</span> <span class="string">"Dockerfile"</span><span class="punctuation">,</span></span><br><span class="line">  <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">"customizations"</span><span class="punctuation">:</span> <span class="punctuation">{</span></span><br><span class="line">    <span class="attr">"vscode"</span><span class="punctuation">:</span> <span class="punctuation">{</span></span><br><span class="line">      <span class="attr">"extensions"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="string">"ms-python.python"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">"ms-python.autopep8"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">"ms-vscode.cmake-tools"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">"ms-vscode.cpptools"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">"GitHub.copilot"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">"ms-vscode.hexeditor"</span><span class="punctuation">,</span></span><br><span class="line">        <span class="comment">// Add more extensions here to use in the container</span></span><br><span class="line">      <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">  <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">"capAdd"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="string">"SYS_PTRACE"</span><span class="punctuation">,</span> <span class="comment">// Required to use gdb</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">"runArgs"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="comment">// Enable host.docker.internal DNS name</span></span><br><span class="line">    <span class="string">"--add-host=host.docker.internal:host-gateway"</span><span class="punctuation">,</span></span><br><span class="line">    <span class="comment">// Enable CUDA support</span></span><br><span class="line">    <span class="string">"--gpus"</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">"all"</span><span class="punctuation">,</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">"mounts"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="comment">// UNCOMMENT AND TYPE YOUR ABSOLUTE PATH TO THE DATASETS FOLDER</span></span><br><span class="line">    <span class="comment">// "type=bind,source=/absolute/path/to/datasets,target=/datasets"</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">"shutdownAction"</span><span class="punctuation">:</span> <span class="string">"none"</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">"hostRequirements"</span><span class="punctuation">:</span> <span class="punctuation">{</span></span><br><span class="line">    <span class="attr">"gpu"</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">  <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line"><span class="punctuation">}</span></span><br></pre></td></tr></table></figure>
+
+
+
+<div class="article-footer reveal fs14">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-sa/4.0/">署名-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section>
+    
+    <section id="share">
+      <div class="header"><span>分享文章</span></div>
+      <div class="body">
+        <div class="link"><input class="copy-area" readonly="true" id="copy-link" value="https://duanyll.com/2024/6/30/WSL2-Docker-Deep-Learning/" /></div>
+        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot)"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/b32ef3da1162a.svg"/></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=https://duanyll.com/2024/6/30/WSL2-Docker-Deep-Learning/&title=基于 WSL2 和 Docker 的深度学习环境指北 - duanyll&summary=为什么要使用 WSL2 和 Docker 来管理深度学习环境？本教程的配置方法旨在日常使用的 Windows 机器上建立 CUDA 加速的深度学习环境，以便进行快速的调试与开发代码，而无需忍受连接到远程服务器的延迟。许多的深度学习库不..."><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/80c07e4dbb303.svg"/></a><a class="social share-item email" href="mailto:?subject=基于 WSL2 和 Docker 的深度学习环境指北 - duanyll&amp;body=https://duanyll.com/2024/6/30/WSL2-Docker-Deep-Learning/"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/a1b00e20f425d.svg"/></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/8411ed322ced6.svg"/></a><a class="social share-item print" onclick="window.print()"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/img/print.svg" /></a><a class="social share-item source" target="_blank" rel="noopener" href="https://github.com/duanyll/duanyll.com-hexo/blob/master/source/_posts/tech/2024-6-30-WSL2-Docker-Deep-Learning.md"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/08a41b181ce68.svg"/></a></div>
+        
+        <div class="qrcode" id="qrcode-wechat" style="visibility:hidden;height:0">
+          <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=https://duanyll.com/2024/6/30/WSL2-Docker-Deep-Learning/"/>
+        </div>
+        
+      </div>
+    </section>
+    
+      <section id="star">
+        <div class="body">
+          <span class="github-button-wrap">
+            <a class="github-button" 
+               target="_blank" rel="noopener" href="https://github.com/duanyll/duanyll.com-hexo" 
+               data-color-scheme="no-preference: light; light: light; dark: dark;" 
+               data-size="large" 
+               data-show-count="true" 
+               aria-label="Star this site on GitHub">Star</a>
+            <span>喜欢这个网站？在 GitHub 上给它一个 Star 吧！</span>
+          </span>
+        </div>
+      </section>
+    </div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2024/7/1/DE-7/">Differential Equations - Gray Scott Equations</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2024/6/10/Matrix/">矩阵分析速通</a></div></section></div>
+
+
+<div class="related-wrap reveal" id="related-posts">
+    <section class='header'>
+      <div class='title cap theme'>您可能感兴趣的文章</div>
+    </section>
+    <section class='body'>
+    <div class="related-posts"><a class="item" href="/2025/9/1/Docker-Uv/" title="Docker 和 uv 炼丹实践指北"><span class="title">Docker 和 uv 炼丹实践指北</span></a><a class="item" href="/2023/7/12/Python-CMake/" title="使用 CMake 构建 PyTorch 和 Numpy C++ 拓展"><span class="title">使用 CMake 构建 PyTorch 和 Numpy C++ 拓展</span><span class="excerpt">使用 CMake 构建 PyTorch 和 Numpy C++ 拓展能适应更复杂的项目并使用灵活的编译选项. 然而, 许多互联网上的教程中的方法已经不能在较新版本的 PyTorch 和 CMake 使用. 本文介绍了几种作者在近期测试...</span></a><a class="item" href="/2025/5/31/Windows-TUN-Router/" title="Windows TUN 分流旁路由指北"><span class="title">Windows TUN 分流旁路由指北</span></a><a class="item" href="/2025/6/21/Flow/" title="Flow Matching 与 DDIM 小记"><span class="title">Flow Matching 与 DDIM 小记</span></a><a class="item" href="/2018/11/28/Jekyll-Search/" title="为你的Jekyll博客添加搜索文章功能"><span class="title">为你的Jekyll博客添加搜索文章功能</span><span class="excerpt">众所周知，Github上的Jekyll上实现自定义插件很困难，因此即使有Jekyll的搜索插件，也只能手写js代码。静态网站实现搜索原理是这样的，通过HTTP请求获取posts.json，然后本地解析里面内容实现搜索。</span></a></div></section></div>
+
+
+
+  <div class='related-wrap md-text reveal' id="comments">
+    <section class='header cmt-title cap theme'>
+      快来参与讨论吧
+    </section>
+    <section class='body cmt-body utterances'>
+      
+
+<!-- <svg class="loading" style="vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2709"><path d="M832 512c0-176-144-320-320-320V128c211.2 0 384 172.8 384 384h-64zM192 512c0 176 144 320 320 320v64C300.8 896 128 723.2 128 512h64z" p-id="2710"></path></svg> -->
+
+<div id="utterances" repo="duanyll/duanyll.com-comment" issue-term="pathname" theme="switch" label="Comment" enabled="true" issue_term="pathname"></div>
+
+    </section>
+  </div>
+
+
+
+      
+      
+<footer class="page-footer reveal fs12"><hr><div class="sitemap"><div class="sitemap-group"><span class="fs14">博客</span><a href="/">近期</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></div><div class="sitemap-group"><span class="fs14">项目</span><a target="_blank" rel="noopener" href="https://github.com/duanyll">开源库</a><a href="/wiki/">文档</a><a target="_blank" rel="noopener" href="https://github.com/duanyll/scoop-bucket">Scoop Bucket</a></div><div class="sitemap-group"><span class="fs14">社交</span><a href="/about/#comments">留言板</a><a target="_blank" rel="noopener" href="https://netunion.org">NetUnion</a><a target="_blank" rel="noopener" href="https://www.travellings.cn/go.html">开往</a></div><div class="sitemap-group"><span class="fs14">更多</span><a href="/about">关于本站</a><a target="_blank" rel="noopener" href="https://github.com/duanyll/duanyll.com-hexo">GitHub 源码</a><a target="_blank" rel="noopener" href="https://duanyll.cloudflareaccess.com">Dashboard</a></div></div><div class="text"><p>本站由 <a target="_blank" rel="noopener" href="https://github.com/duanyll">duanyll</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。 本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = stellar.config.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.21.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.21.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+    root : '/',
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js","memos":"/js/plugins/memos.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide:not(.swiper-slide-duplicate) img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.copycode = Object.assign({"enable":true,"js":"/js/plugins/copycode.js","default_text":"Copy","success_text":"Copied"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+  <script>
+  function loadUtterances() {
+    const els = document.querySelectorAll("#comments #utterances");
+    if (els.length === 0) return;
+    els.forEach((el, i) => {
+      try {
+        el.innerHTML = '';
+      } catch (error) {
+        console.error(error);
+      }
+      var script = document.createElement('script');
+      script.src = 'https://utteranc.es/client.js';
+      script.async = true;
+      for (let key of Object.keys(el.attributes)) {
+        let attr = el.attributes[key];
+        if (['class', 'id'].includes(attr.name) === false) {
+          var name = attr.name;
+          var value = attr.value;
+          if (name == 'theme' && value == 'switch') {
+            value = window.currentTheme == 'dark' ? 'github-dark' : 'github-light';
+          }
+          script.setAttribute(name, value);
+        }
+      }
+      el.appendChild(script);
+    });
+  }
+  window.addEventListener('DOMContentLoaded', (event) => {
+      loadUtterances();
+  });
+</script>
+
+
+
+
+
+  
+<script src="https://buttons.github.io/buttons.js" async></script>
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 8.1.1">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.21.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+
+  
+  
+  <title>洛谷P2540 斗地主增强版 - duanyll</title>
+
+  
+    <meta name="description" content="https:&#x2F;&#x2F;www.luogu.org&#x2F;problem&#x2F;P2540https:&#x2F;&#x2F;www.luogu.org&#x2F;problem&#x2F;P2540  一道经典的搜索?题, 早就想做了.  听说考试原题的数据很水, 瞎贪心都能过, 就不说了, 这里分析一下几个直接贪心不能解决的地方.  两个鬼是否拆开(3333鬼鬼) 顺子要截取多少(日常斗地主经验太常见这种情况了) 炸弹和三联拆不拆开(33334444,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="洛谷P2540 斗地主增强版">
+<meta property="og:url" content="https://duanyll.com/2019/8/23/Luogu-P2540/">
+<meta property="og:site_name" content="duanyll">
+<meta property="og:description" content="https:&#x2F;&#x2F;www.luogu.org&#x2F;problem&#x2F;P2540https:&#x2F;&#x2F;www.luogu.org&#x2F;problem&#x2F;P2540  一道经典的搜索?题, 早就想做了.  听说考试原题的数据很水, 瞎贪心都能过, 就不说了, 这里分析一下几个直接贪心不能解决的地方.  两个鬼是否拆开(3333鬼鬼) 顺子要截取多少(日常斗地主经验太常见这种情况了) 炸弹和三联拆不拆开(33334444,">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-08-23T00:00:00.000Z">
+<meta property="article:modified_time" content="2019-08-23T00:00:00.000Z">
+<meta property="article:author" content="duanyll">
+<meta property="article:tag" content="oi">
+<meta property="article:tag" content="搜索">
+<meta property="article:tag" content="题解">
+<meta name="twitter:card" content="summary">
+  
+  
+  
+  <meta name="keywords" content="题解,oi,搜索">
+
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="duanyll" type="application/atom+xml">
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+    <link rel="shortcut icon" href="https://cdn.duanyll.com/favicon.ico">
+  
+
+  
+
+  
+
+
+  
+
+  
+    <script>
+      var darkmodeSettings = localStorage.getItem('darkmode') || 'auto';
+      var enableDarkmode = darkmodeSettings == 'true' 
+        || (darkmodeSettings == 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (enableDarkmode) {
+        document.documentElement.classList.add('global-darkmode');
+      }
+      window.currentTheme = enableDarkmode ? 'dark' : 'light';
+    </script>
+  
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://cdn.duanyll.com/android-chrome-192x192.png" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">duanyll</div><div class="sub normal cap">qwq</div><div class="sub hover cap" style="opacity:0"> QWQ</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Wiki</a><a class="nav-item" href="/about/">关于</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+
+<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2026/1/19/NFS-Over-RDMA/"><span class="title">Mellanox Connect-X 5 网卡 SN2700 交换机 NFS Over RDMA (RoCEv2) 配置指北</span></a><a class="item title" href="/2025/11/26/HPE-cx555a/"><span class="title">HPE cx555a 100G 网卡刷入以太网固件指北</span></a><a class="item title" href="/2025/9/25/ComfyUI-Functional/"><span class="title">在 ComfyUI 中优雅地函数式编程</span></a><a class="item title" href="/2025/9/1/Docker-Uv/"><span class="title">Docker 和 uv 炼丹实践指北</span></a><a class="item title" href="/2025/8/29/Paste-And-Upload/"><span class="title">更好的 VSCode 粘贴上传图床插件</span></a></div></widget>
+
+
+
+
+
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/duanyll" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/08a41b181ce68.svg"/></a><a class="social" href="/about/#comments" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/942ebbf1a4b91.svg"/></a><a class="social" href="https://www.travellings.cn/go.html" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://www.travellings.cn/assets/favicon-fluent-emoji.svg"/></a><a class="social" href="javascript:darkmode.next()" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/img/half-moon.svg"/></a></div></footer>
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+        
+
+
+
+<div class="bread-nav fs12"><div class="left"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/OI/">OI</a></div><div id="post-meta">
+    <span>发布于&nbsp;<time datetime="2019-08-23T00:00:00.000Z">2019-08-23</time></span>
+    
+    <span>更新于&nbsp;<time datetime="2019-08-23T00:00:00.000Z">2019-08-23</time></span>
+    </div></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>洛谷P2540 斗地主增强版</span></h1>
+
+<div class="article-tags"><a class="tag-plugin colorful hashtag" color="green" href="/tags/%E9%A2%98%E8%A7%A3/" >  <svg t="1701408144765" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4228" width="200" height="200"><path d="M426.6 64.8c34.8 5.8 58.4 38.8 52.6 73.6l-19.6 117.6h190.2l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6s58.4 38.8 52.6 73.6l-19.4 117.6H896c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-42.6 256H832c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.6-117.4h-190.4l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.4-117.8H128c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l42.6-256H192c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6z m11.6 319.2l-42.6 256h190.2l42.6-256h-190.2z" p-id="4229"></path></svg>  <span>题解</span></a><a class="tag-plugin colorful hashtag" color="cyan" href="/tags/oi/" >  <svg t="1701408144765" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4228" width="200" height="200"><path d="M426.6 64.8c34.8 5.8 58.4 38.8 52.6 73.6l-19.6 117.6h190.2l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6s58.4 38.8 52.6 73.6l-19.4 117.6H896c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-42.6 256H832c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.6-117.4h-190.4l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.4-117.8H128c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l42.6-256H192c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6z m11.6 319.2l-42.6 256h190.2l42.6-256h-190.2z" p-id="4229"></path></svg>  <span>oi</span></a><a class="tag-plugin colorful hashtag" color="blue" href="/tags/%E6%90%9C%E7%B4%A2/" >  <svg t="1701408144765" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4228" width="200" height="200"><path d="M426.6 64.8c34.8 5.8 58.4 38.8 52.6 73.6l-19.6 117.6h190.2l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6s58.4 38.8 52.6 73.6l-19.4 117.6H896c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-42.6 256H832c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.6-117.4h-190.4l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.4-117.8H128c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l42.6-256H192c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6z m11.6 319.2l-42.6 256h190.2l42.6-256h-190.2z" p-id="4229"></path></svg>  <span>搜索</span></a></div>
+<div class="tag-plugin link dis-select"><a class="link-card rich" title="" href="https://www.luogu.org/problem/P2540" target="_blank" rel="external nofollow noopener noreferrer" cardlink="" autofill="title,icon,desc"><div class="top"><div class="lazy img" data-bg="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/link/8f277b4ee0ecd.svg"></div><span class="cap link fs12">https://www.luogu.org/problem/P2540</span></div><div class="bottom"><span class="title">https://www.luogu.org/problem/P2540</span><span class="cap desc fs12"></span></div></a></div>
+<blockquote>
+<p>一道经典的搜索?题, 早就想做了.</p>
+</blockquote>
+<p>听说考试原题的数据很水, 瞎贪心都能过, 就不说了, 这里分析一下几个直接贪心不能解决的地方.</p>
+<ul>
+<li>两个鬼是否拆开(3333鬼鬼)</li>
+<li>顺子要截取多少(日常斗地主经验太常见这种情况了)</li>
+<li>炸弹和三联拆不拆开(33334444, 理解成四带两对可以一次走掉)</li>
+<li>多次顺子/拆炸弹</li>
+</ul>
+<p>按照以上几个痛点依次dfs搜索就是了, 具体见代码</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cassert&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> int64;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> INF = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MAXN = <span class="number">25</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">int</span> card;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> card three = <span class="number">1</span>;</span><br><span class="line"><span class="type">const</span> card four = <span class="number">2</span>;</span><br><span class="line"><span class="type">const</span> card five = <span class="number">3</span>;</span><br><span class="line"><span class="type">const</span> card six = <span class="number">4</span>;</span><br><span class="line"><span class="type">const</span> card seven = <span class="number">5</span>;</span><br><span class="line"><span class="type">const</span> card eight = <span class="number">6</span>;</span><br><span class="line"><span class="type">const</span> card nine = <span class="number">7</span>;</span><br><span class="line"><span class="type">const</span> card ten = <span class="number">8</span>;</span><br><span class="line"><span class="type">const</span> card J = <span class="number">9</span>;</span><br><span class="line"><span class="type">const</span> card Q = <span class="number">10</span>;</span><br><span class="line"><span class="type">const</span> card K = <span class="number">11</span>;</span><br><span class="line"><span class="type">const</span> card A = <span class="number">12</span>;</span><br><span class="line"><span class="type">const</span> card two = <span class="number">13</span>;</span><br><span class="line"><span class="type">const</span> card grey_joker = <span class="number">14</span>;</span><br><span class="line"><span class="type">const</span> card red_joker = <span class="number">15</span>;</span><br><span class="line"></span><br><span class="line"><span class="function">card <span class="title">parse</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> </span>{</span><br><span class="line">    <span class="keyword">switch</span> (a) {</span><br><span class="line">        <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">if</span> (b == <span class="number">1</span>)</span><br><span class="line">                <span class="keyword">return</span> grey_joker;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="keyword">return</span> red_joker;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> A;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">            <span class="keyword">return</span> two;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">            <span class="keyword">return</span> three;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">            <span class="keyword">return</span> four;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">            <span class="keyword">return</span> five;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">6</span>:</span><br><span class="line">            <span class="keyword">return</span> six;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">7</span>:</span><br><span class="line">            <span class="keyword">return</span> seven;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">8</span>:</span><br><span class="line">            <span class="keyword">return</span> eight;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">9</span>:</span><br><span class="line">            <span class="keyword">return</span> nine;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">10</span>:</span><br><span class="line">            <span class="keyword">return</span> ten;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">11</span>:</span><br><span class="line">            <span class="keyword">return</span> J;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">12</span>:</span><br><span class="line">            <span class="keyword">return</span> Q;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">13</span>:</span><br><span class="line">            <span class="keyword">return</span> K;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            clog &lt;&lt; <span class="string">"fuck unknown card"</span> &lt;&lt; endl;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">int</span> card_count[<span class="number">20</span>];</span><br><span class="line"><span class="type">int</span> style_count[<span class="number">5</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 考虑最后的情况(贪心匹配)</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">get_other</span><span class="params">()</span> </span>{</span><br><span class="line">    <span class="type">int</span> tmp[<span class="number">5</span>];</span><br><span class="line">    <span class="built_in">memcpy</span>(tmp, style_count, <span class="keyword">sizeof</span> tmp);</span><br><span class="line">    <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (tmp[<span class="number">4</span>] &gt; <span class="number">0</span>) {</span><br><span class="line">        tmp[<span class="number">4</span>]--;</span><br><span class="line">        ans++;</span><br><span class="line">        <span class="keyword">if</span> (tmp[<span class="number">1</span>] &gt;= <span class="number">2</span>) {  <span class="comment">// 带两张单牌</span></span><br><span class="line">            tmp[<span class="number">1</span>] -= <span class="number">2</span>;</span><br><span class="line">        } <span class="keyword">else</span> <span class="keyword">if</span> (tmp[<span class="number">2</span>] &gt;= <span class="number">2</span>) {  <span class="comment">// 带两对</span></span><br><span class="line">            tmp[<span class="number">2</span>] -= <span class="number">2</span>;</span><br><span class="line">        } <span class="keyword">else</span> <span class="keyword">if</span> (tmp[<span class="number">2</span>] &gt;= <span class="number">1</span>) {  <span class="comment">// 带一对</span></span><br><span class="line">            tmp[<span class="number">2</span>]--;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">while</span> (tmp[<span class="number">3</span>] &gt; <span class="number">0</span>) {</span><br><span class="line">        tmp[<span class="number">3</span>]--;</span><br><span class="line">        ans++;</span><br><span class="line">        <span class="keyword">if</span> (tmp[<span class="number">1</span>] &gt;= <span class="number">1</span>) {  <span class="comment">// 带一张单牌</span></span><br><span class="line">            tmp[<span class="number">1</span>]--;</span><br><span class="line">        } <span class="keyword">else</span> <span class="keyword">if</span> (tmp[<span class="number">2</span>] &gt;= <span class="number">1</span>) { <span class="comment">// 带一对</span></span><br><span class="line">            tmp[<span class="number">2</span>]--;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    ans += tmp[<span class="number">2</span>] + tmp[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 考虑拆开对子和三连, 炸弹</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">dfs_break</span><span class="params">()</span> </span>{</span><br><span class="line">    <span class="type">int</span> ans = INF;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 不拆</span></span><br><span class="line">    ans = <span class="built_in">min</span>(ans, <span class="built_in">get_other</span>());</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 拆对子 (没意义)</span></span><br><span class="line">    <span class="comment">// if (style_count[2] &gt; 0) {</span></span><br><span class="line">    <span class="comment">//     style_count[2]--;</span></span><br><span class="line">    <span class="comment">//     style_count[1] += 2;</span></span><br><span class="line">    <span class="comment">//     ans = min(ans, get_other());</span></span><br><span class="line">    <span class="comment">//     style_count[1] -= 2;</span></span><br><span class="line">    <span class="comment">//     style_count[2]++;</span></span><br><span class="line">    <span class="comment">// }</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 拆三联</span></span><br><span class="line">    <span class="keyword">if</span> (style_count[<span class="number">3</span>] &gt; <span class="number">0</span>) {</span><br><span class="line">        style_count[<span class="number">3</span>]--;</span><br><span class="line">        style_count[<span class="number">2</span>]++;</span><br><span class="line">        style_count[<span class="number">1</span>]++;</span><br><span class="line">        ans = <span class="built_in">min</span>(ans, <span class="built_in">dfs_break</span>());</span><br><span class="line">        style_count[<span class="number">1</span>]--;</span><br><span class="line">        style_count[<span class="number">2</span>]--;</span><br><span class="line">        style_count[<span class="number">3</span>]++;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 拆炸弹</span></span><br><span class="line">    <span class="keyword">if</span> (style_count[<span class="number">4</span>] &gt; <span class="number">0</span>) {</span><br><span class="line">        style_count[<span class="number">4</span>]--;</span><br><span class="line"></span><br><span class="line">        style_count[<span class="number">2</span>] += <span class="number">2</span>;</span><br><span class="line">        ans = <span class="built_in">min</span>(ans, <span class="built_in">dfs_break</span>());</span><br><span class="line">        style_count[<span class="number">2</span>] -= <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">        style_count[<span class="number">1</span>]++;</span><br><span class="line">        style_count[<span class="number">3</span>]++;</span><br><span class="line">        ans = <span class="built_in">min</span>(ans, <span class="built_in">dfs_break</span>());</span><br><span class="line">        style_count[<span class="number">3</span>]--;</span><br><span class="line">        style_count[<span class="number">1</span>]--;</span><br><span class="line"></span><br><span class="line">        style_count[<span class="number">4</span>]++;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 考虑三种顺子</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">dfs_sequence</span><span class="params">()</span> </span>{</span><br><span class="line">    <span class="type">int</span> ans = INF;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 不出顺子</span></span><br><span class="line">    <span class="built_in">memset</span>(style_count, <span class="number">0</span>, <span class="keyword">sizeof</span> style_count);</span><br><span class="line">    <span class="keyword">for</span> (card i = three; i &lt;= red_joker; i++) {</span><br><span class="line">        style_count[card_count[i]]++;</span><br><span class="line">    }</span><br><span class="line">    ans = <span class="built_in">min</span>(ans, <span class="built_in">dfs_break</span>());</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 考虑单顺子</span></span><br><span class="line">    <span class="keyword">for</span> (card i = three; i + <span class="number">4</span> &lt; two; i++) {</span><br><span class="line">        <span class="keyword">for</span> (card j = i; j &lt; two; j++) {</span><br><span class="line">            <span class="keyword">if</span> (card_count[j] &lt; <span class="number">1</span>) <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">if</span> (j - i &lt; <span class="number">4</span>) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">for</span> (card k = i; k &lt;= j; k++) {</span><br><span class="line">                card_count[k] -= <span class="number">1</span>;</span><br><span class="line">            }</span><br><span class="line">            ans = <span class="built_in">min</span>(ans, <span class="built_in">dfs_sequence</span>() + <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">for</span> (card k = i; k &lt;= j; k++) {</span><br><span class="line">                card_count[k] += <span class="number">1</span>;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 考虑双顺子</span></span><br><span class="line">    <span class="keyword">for</span> (card i = three; i + <span class="number">2</span> &lt; two; i++) {</span><br><span class="line">        <span class="keyword">for</span> (card j = i; j &lt; two; j++) {</span><br><span class="line">            <span class="keyword">if</span> (card_count[j] &lt; <span class="number">2</span>) <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">if</span> (j - i &lt; <span class="number">2</span>) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">for</span> (card k = i; k &lt;= j; k++) {</span><br><span class="line">                card_count[k] -= <span class="number">2</span>;</span><br><span class="line">            }</span><br><span class="line">            ans = <span class="built_in">min</span>(ans, <span class="built_in">dfs_sequence</span>() + <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">for</span> (card k = i; k &lt;= j; k++) {</span><br><span class="line">                card_count[k] += <span class="number">2</span>;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 考虑三顺子</span></span><br><span class="line">    <span class="keyword">for</span> (card i = three; i + <span class="number">1</span> &lt; two; i++) {</span><br><span class="line">        <span class="keyword">for</span> (card j = i; j &lt; two; j++) {</span><br><span class="line">            <span class="keyword">if</span> (card_count[j] &lt; <span class="number">3</span>) <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">if</span> (j - i &lt; <span class="number">1</span>) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">for</span> (card k = i; k &lt;= j; k++) {</span><br><span class="line">                card_count[k] -= <span class="number">3</span>;</span><br><span class="line">            }</span><br><span class="line">            ans = <span class="built_in">min</span>(ans, <span class="built_in">dfs_sequence</span>() + <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">for</span> (card k = i; k &lt;= j; k++) {</span><br><span class="line">                card_count[k] += <span class="number">3</span>;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 是否出对鬼</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">dfs_joker</span><span class="params">()</span> </span>{</span><br><span class="line">    <span class="type">int</span> ans = INF;</span><br><span class="line">    <span class="keyword">if</span> (card_count[grey_joker] &gt; <span class="number">0</span> &amp;&amp; card_count[red_joker] &gt; <span class="number">0</span>) {</span><br><span class="line">        card_count[grey_joker]--;</span><br><span class="line">        card_count[red_joker]--;</span><br><span class="line">        ans = <span class="built_in">min</span>(ans, <span class="built_in">dfs_sequence</span>() + <span class="number">1</span>);</span><br><span class="line">        card_count[grey_joker]++;</span><br><span class="line">        card_count[red_joker]++;</span><br><span class="line">    }</span><br><span class="line">    ans = <span class="built_in">min</span>(ans, <span class="built_in">dfs_sequence</span>());</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>{</span><br><span class="line">    <span class="type">int</span> tcnt;</span><br><span class="line">    cin &gt;&gt; tcnt &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> T = <span class="number">1</span>; T &lt;= tcnt; T++) {</span><br><span class="line">        <span class="built_in">memset</span>(card_count, <span class="number">0</span>, <span class="keyword">sizeof</span> card_count);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) {</span><br><span class="line">            <span class="type">int</span> a, b;</span><br><span class="line">            cin &gt;&gt; a &gt;&gt; b;</span><br><span class="line">            card_count[<span class="built_in">parse</span>(a, b)]++;</span><br><span class="line">        }</span><br><span class="line">        cout &lt;&lt; <span class="built_in">dfs_joker</span>() &lt;&lt; endl;</span><br><span class="line">    }</span><br><span class="line">    <span class="comment">// ans = INF;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>这题要是放cf educational round上会不会全场fst…</p>
+
+
+
+<div class="article-footer reveal fs14">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-sa/4.0/">署名-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section>
+    
+    <section id="share">
+      <div class="header"><span>分享文章</span></div>
+      <div class="body">
+        <div class="link"><input class="copy-area" readonly="true" id="copy-link" value="https://duanyll.com/2019/8/23/Luogu-P2540/" /></div>
+        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot)"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/b32ef3da1162a.svg"/></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=https://duanyll.com/2019/8/23/Luogu-P2540/&title=洛谷P2540 斗地主增强版 - duanyll&summary=https://www.luogu.org/problem/P2540https://www.luogu.org/problem/P2540
+
+一道经典的搜索?题, 早就想做了.
+
+听说考试原题的数据很水, 瞎贪心都能过, 就不说了,..."><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/80c07e4dbb303.svg"/></a><a class="social share-item email" href="mailto:?subject=洛谷P2540 斗地主增强版 - duanyll&amp;body=https://duanyll.com/2019/8/23/Luogu-P2540/"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/a1b00e20f425d.svg"/></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/8411ed322ced6.svg"/></a><a class="social share-item print" onclick="window.print()"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/img/print.svg" /></a><a class="social share-item source" target="_blank" rel="noopener" href="https://github.com/duanyll/duanyll.com-hexo/blob/master/source/_posts/oi/2019-8-23-Luogu-P2540.md"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/08a41b181ce68.svg"/></a></div>
+        
+        <div class="qrcode" id="qrcode-wechat" style="visibility:hidden;height:0">
+          <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=https://duanyll.com/2019/8/23/Luogu-P2540/"/>
+        </div>
+        
+      </div>
+    </section>
+    
+      <section id="star">
+        <div class="body">
+          <span class="github-button-wrap">
+            <a class="github-button" 
+               target="_blank" rel="noopener" href="https://github.com/duanyll/duanyll.com-hexo" 
+               data-color-scheme="no-preference: light; light: light; dark: dark;" 
+               data-size="large" 
+               data-show-count="true" 
+               aria-label="Star this site on GitHub">Star</a>
+            <span>喜欢这个网站？在 GitHub 上给它一个 Star 吧！</span>
+          </span>
+        </div>
+      </section>
+    </div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2019/8/28/Luogu-P2418/">洛谷P2482 [SDOI2010]猪国杀</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2019/8/19/Luogu-P2149/">洛谷P2149 [SDOI2009]Elaxia的路线</a></div></section></div>
+
+
+<div class="related-wrap reveal" id="related-posts">
+    <section class='header'>
+      <div class='title cap theme'>您可能感兴趣的文章</div>
+    </section>
+    <section class='body'>
+    <div class="related-posts"><a class="item" href="/2019/1/30/Luogu-P1601/" title="如何用C#强行A掉洛谷高精模板(P1601)"><span class="title">如何用C#强行A掉洛谷高精模板(P1601)</span><span class="excerpt">https://www.luogu.org/problemnew/show/P1601https://www.luogu.org/problemnew/show/P1601
+众所周知,洛谷的C# Mono默认是没有引用System.N...</span></a><a class="item" href="/2019/10/3/Codeforces-273D/" title="CF273D Dima and Figure"><span class="title">CF273D Dima and Figure</span></a><a class="item" href="/2019/10/3/Codeforces-1209E/" title="CF1209E Rotate Columns"><span class="title">CF1209E Rotate Columns</span></a><a class="item" href="/2019/10/3/Codeforces-575G/" title="CF575G Run for beer"><span class="title">CF575G Run for beer</span></a><a class="item" href="/2018/10/16/Simulate-Anneal/" title="玄(pian)学(fen)算法——模拟退火"><span class="title">玄(pian)学(fen)算法——模拟退火</span><span class="excerpt">NOIP在即，还是复习一下经典玄(pian)学(fen)算法，多骗个二三十分，以免爆零。</span></a></div></section></div>
+
+
+
+  <div class='related-wrap md-text reveal' id="comments">
+    <section class='header cmt-title cap theme'>
+      快来参与讨论吧
+    </section>
+    <section class='body cmt-body utterances'>
+      
+
+<!-- <svg class="loading" style="vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2709"><path d="M832 512c0-176-144-320-320-320V128c211.2 0 384 172.8 384 384h-64zM192 512c0 176 144 320 320 320v64C300.8 896 128 723.2 128 512h64z" p-id="2710"></path></svg> -->
+
+<div id="utterances" repo="duanyll/duanyll.com-comment" issue-term="pathname" theme="switch" label="Comment" enabled="true" issue_term="pathname"></div>
+
+    </section>
+  </div>
+
+
+
+      
+      
+<footer class="page-footer reveal fs12"><hr><div class="sitemap"><div class="sitemap-group"><span class="fs14">博客</span><a href="/">近期</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></div><div class="sitemap-group"><span class="fs14">项目</span><a target="_blank" rel="noopener" href="https://github.com/duanyll">开源库</a><a href="/wiki/">文档</a><a target="_blank" rel="noopener" href="https://github.com/duanyll/scoop-bucket">Scoop Bucket</a></div><div class="sitemap-group"><span class="fs14">社交</span><a href="/about/#comments">留言板</a><a target="_blank" rel="noopener" href="https://netunion.org">NetUnion</a><a target="_blank" rel="noopener" href="https://www.travellings.cn/go.html">开往</a></div><div class="sitemap-group"><span class="fs14">更多</span><a href="/about">关于本站</a><a target="_blank" rel="noopener" href="https://github.com/duanyll/duanyll.com-hexo">GitHub 源码</a><a target="_blank" rel="noopener" href="https://duanyll.cloudflareaccess.com">Dashboard</a></div></div><div class="text"><p>本站由 <a target="_blank" rel="noopener" href="https://github.com/duanyll">duanyll</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。 本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = stellar.config.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.21.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.21.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+    root : '/',
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js","memos":"/js/plugins/memos.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide:not(.swiper-slide-duplicate) img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.copycode = Object.assign({"enable":true,"js":"/js/plugins/copycode.js","default_text":"Copy","success_text":"Copied"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+  <script>
+  function loadUtterances() {
+    const els = document.querySelectorAll("#comments #utterances");
+    if (els.length === 0) return;
+    els.forEach((el, i) => {
+      try {
+        el.innerHTML = '';
+      } catch (error) {
+        console.error(error);
+      }
+      var script = document.createElement('script');
+      script.src = 'https://utteranc.es/client.js';
+      script.async = true;
+      for (let key of Object.keys(el.attributes)) {
+        let attr = el.attributes[key];
+        if (['class', 'id'].includes(attr.name) === false) {
+          var name = attr.name;
+          var value = attr.value;
+          if (name == 'theme' && value == 'switch') {
+            value = window.currentTheme == 'dark' ? 'github-dark' : 'github-light';
+          }
+          script.setAttribute(name, value);
+        }
+      }
+      el.appendChild(script);
+    });
+  }
+  window.addEventListener('DOMContentLoaded', (event) => {
+      loadUtterances();
+  });
+</script>
+
+
+
+
+
+  
+<script src="https://buttons.github.io/buttons.js" async></script>
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>
