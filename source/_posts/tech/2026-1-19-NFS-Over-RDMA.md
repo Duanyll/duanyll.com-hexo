@@ -400,7 +400,38 @@ ip link set dev mce0 down
 ip link set dev mce0 up
 ```
 
-再次运行 `show_gids`，应该就能看到 IPv4 地址的行了。可以考虑把上面的命令写入一个脚本，开机后自动执行。
+再次运行 `show_gids`，应该就能看到 IPv4 地址的行了。
+
+{% box Systemd 服务依赖顺序问题的解决思路 %}
+
+systemd 的服务依赖顺序有时会比较难以控制，尤其是当服务的启动时机依赖于硬件状态（如网卡 link up）时。解决这个问题的一种思路是创建一个自定义的 systemd 服务单元，专门在启动阶段的最后重新把网卡 `link down` 然后 `link up`. 创建 `/etc/systemd/system/fix-roce-networkmanager.service` 文件，写入以下内容：
+
+```ini
+[Unit]
+Description=Fix RDMA mce0 link flapping after boot
+After=network-online.target rdma-ndd.service NetworkManager.service multi-user.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/sleep 2
+ExecStart=/usr/sbin/ip link set mce0 down
+ExecStart=/usr/bin/sleep 1
+ExecStart=/usr/sbin/ip link set mce0 up
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
+```
+
+并启用该服务：
+
+```bash
+systemctl daemon-reload
+systemctl enable fix-roce-networkmanager.service
+```
+
+{% endbox %}
 
 接下来可以运行 `ib_write_bw` 来测个速。在一边运行
 
