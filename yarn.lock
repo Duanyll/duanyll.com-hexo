@@ -4175,13 +4175,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hexo-filter-tikzjax@npm:^1.0.2":
-  version: 1.0.2
-  resolution: "hexo-filter-tikzjax@npm:1.0.2"
+"hexo-filter-tikzjax@npm:^1.0.3":
+  version: 1.0.3
+  resolution: "hexo-filter-tikzjax@npm:1.0.3"
   dependencies:
     node-localstorage: "npm:^3.0.5"
-    node-tikzjax: "npm:^1.0.3"
-  checksum: 10c0/805ebf9aeec8c57301ea6cd9686b846ed6ba7e92167d5ab65badc75a1a61d090c9a5e4063d0a61555e1e168a9c53428cb802b5a2f9bededa095e5b85f310af22
+    node-tikzjax: "npm:^1.0.5"
+  checksum: 10c0/ebed93e593b48319fff7f033a64f8a09651f40bb12a2e000e72dd8c7dc02dc9d368c9df349d2a7e977f849696a5915db45990b859828749ac3102e5c4e25bd02
   languageName: node
   linkType: hard
 
@@ -4401,7 +4401,7 @@ __metadata:
     hexo: "npm:^8.1.1"
     hexo-filter-mathjax: "npm:^0.9.1"
     hexo-filter-mermaid-diagrams: "npm:^1.0.5"
-    hexo-filter-tikzjax: "npm:^1.0.2"
+    hexo-filter-tikzjax: "npm:^1.0.3"
     hexo-fs: "npm:^5.0.1"
     hexo-generator-archive: "npm:^2.0.0"
     hexo-generator-category: "npm:^2.0.0"
@@ -5982,16 +5982,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-tikzjax@npm:^1.0.3":
-  version: 1.0.3
-  resolution: "node-tikzjax@npm:1.0.3"
+"node-tikzjax@npm:^1.0.5":
+  version: 1.0.5
+  resolution: "node-tikzjax@npm:1.0.5"
   dependencies:
     "@prinsss/dvi2html": "npm:^0.0.1"
     jsdom: "npm:^23.2.0"
     memfs: "npm:^4.6.0"
     svgo: "npm:^3.2.0"
     tar-fs: "npm:^3.0.4"
-  checksum: 10c0/d496ac7d30ffca20c5d5131a276c9db780d22875cfc030ee6b4add28c0171a4c466b9fe8b9ddab1c8cc19d27703be3da0edc8711034fe0eb1fca691729c56a90
+  checksum: 10c0/61c5daf6598c081eff440c3e7e6b8093db82f18813364c677b31bee1afb746a714b2d64282a3ebb8dd4b111c7775a816c671b13ab6dd9030ec9916e63ea0c920
   languageName: node
   linkType: hard
 
