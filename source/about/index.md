@@ -7,6 +7,14 @@ sidebar:
 ---
 
 <h1 align="center">Hi 👋, I'm duanyll</h1>
-<h3 align="center">A deep learning learner in China, also interested in electronic design.</h3>
+<h3 align="center">AIGC PhD student from China</h3>
 
-<p>&nbsp;<img align="center" src="https://github-readme-stats.vercel.app/api?username=duanyll&show_icons=true&locale=en" alt="duanyll" /></p>
+- 🔭 I’m currently working on [Controlling Diffusion Transformers](https://github.com/Duanyll/flow-control)
+
+- 🌱 I’m currently learning **Flow-matching/Diffusion, PyTorch & HPC**
+
+- 👨‍💻 All of my projects are available at [https://github.com/Duanyll](https://github.com/Duanyll)
+
+- 📝 I regularly write articles on [https://duanyll.com](https://duanyll.com)
+
+- 📫 How to reach me **duanyll@outlook.com**
