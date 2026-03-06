@@ -4175,13 +4175,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hexo-filter-tikzjax@npm:^1.0.3":
+"hexo-filter-tikzjax@npm:1.0.3":
   version: 1.0.3
   resolution: "hexo-filter-tikzjax@npm:1.0.3"
   dependencies:
     node-localstorage: "npm:^3.0.5"
     node-tikzjax: "npm:^1.0.5"
   checksum: 10c0/ebed93e593b48319fff7f033a64f8a09651f40bb12a2e000e72dd8c7dc02dc9d368c9df349d2a7e977f849696a5915db45990b859828749ac3102e5c4e25bd02
+  languageName: node
+  linkType: hard
+
+"hexo-filter-tikzjax@patch:hexo-filter-tikzjax@npm%3A1.0.3#~/.yarn/patches/hexo-filter-tikzjax-npm-1.0.3-3ddd6b6c3b.patch":
+  version: 1.0.3
+  resolution: "hexo-filter-tikzjax@patch:hexo-filter-tikzjax@npm%3A1.0.3#~/.yarn/patches/hexo-filter-tikzjax-npm-1.0.3-3ddd6b6c3b.patch::version=1.0.3&hash=5658e7"
+  dependencies:
+    node-localstorage: "npm:^3.0.5"
+    node-tikzjax: "npm:^1.0.5"
+  checksum: 10c0/262c4d71a862e50874a04bff41ae7c99e412f3b0870b31e451e20d0538ed903862e53c70426ab89064b87af1949070361c8fd44cb93ba343628cebaf53bd8604
   languageName: node
   linkType: hard
 
@@ -4401,7 +4411,7 @@ __metadata:
     hexo: "npm:^8.1.1"
     hexo-filter-mathjax: "npm:^0.9.1"
     hexo-filter-mermaid-diagrams: "npm:^1.0.5"
-    hexo-filter-tikzjax: "npm:^1.0.3"
+    hexo-filter-tikzjax: "patch:hexo-filter-tikzjax@npm%3A1.0.3#~/.yarn/patches/hexo-filter-tikzjax-npm-1.0.3-3ddd6b6c3b.patch"
     hexo-fs: "npm:^5.0.1"
     hexo-generator-archive: "npm:^2.0.0"
     hexo-generator-category: "npm:^2.0.0"

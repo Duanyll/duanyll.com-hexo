@@ -30,7 +30,7 @@
     "hexo": "^8.1.1",
     "hexo-filter-mathjax": "^0.9.1",
     "hexo-filter-mermaid-diagrams": "^1.0.5",
-    "hexo-filter-tikzjax": "^1.0.3",
+    "hexo-filter-tikzjax": "patch:hexo-filter-tikzjax@npm%3A1.0.3#~/.yarn/patches/hexo-filter-tikzjax-npm-1.0.3-3ddd6b6c3b.patch",
     "hexo-fs": "^5.0.1",
     "hexo-generator-archive": "^2.0.0",
     "hexo-generator-category": "^2.0.0",

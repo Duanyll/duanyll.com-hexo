@@ -12,7 +12,7 @@ index 7c3c4b7abd752caab80d5eb9fa05874b98c180a5..8208e2a922d8a45cf4f797d8220b4c6a
   * Calculate the MD5 hash of a string. Used for cache key.
   */
 diff --git a/dist/render-tikzjax.js b/dist/render-tikzjax.js
-index a466a7185a1a9f4e096112fa887226e1cbced59f..acb3d737fc1b2140f9e5beb71c48fe769e1d52e2 100644
+index 17fb0e4b1bd89f13c96b75ef0acb31db020fdda4..b791ab0d6bc32db594d7f486ae6b925a1e12881e 100644
 --- a/dist/render-tikzjax.js
 +++ b/dist/render-tikzjax.js
 @@ -20,19 +20,24 @@ async function renderTikzjax(data) {
