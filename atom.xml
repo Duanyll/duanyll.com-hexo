@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <author>
+    <name>duanyll</name>
+  </author>
+  <generator uri="https://hexo.io/">Hexo</generator>
+  <icon>https://duanyll.com/icon.png</icon>
+  <id>https://duanyll.com/</id>
+  <link href="https://duanyll.com/" rel="alternate"/>
+  <link href="https://duanyll.com/atom.xml" rel="self"/>
+  <rights>All rights reserved 2026, duanyll</rights>
+  <subtitle>qwq | QWQ</subtitle>
+  <title>duanyll</title>
+  <updated>2026-01-19T00:00:00.000Z</updated>
+  <entry>
+    <author>
+      <name>duanyll</name>
+    </author>
+    <category term="技术" scheme="https://duanyll.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    <category term="指北" scheme="https://duanyll.com/tags/%E6%8C%87%E5%8C%97/"/>
+    <category term="infra" scheme="https://duanyll.com/tags/infra/"/>
+    <id>https://duanyll.com/2026/1/19/NFS-Over-RDMA/</id>
+    <link href="https://duanyll.com/2026/1/19/NFS-Over-RDMA/"/>
+    <published>2026-01-19T00:00:00.000Z</published>
+    <summary>
+      <![CDATA[<p>目前 CX555 网卡和 SN2700 交换机的价格已经能让 100G 以太网走进寻常百姓家。配置 RoCEv2 和 NFS Over RDMA 其实并不复杂，但网上的资料比较零散，而且有些已经过时。本文记录一下我个人的配置经验，供大家参考。</p>
+<h2 id="环境"]]>
+    </summary>
+    <title>Mellanox Connect-X 5 网卡 SN2700 交换机 NFS Over RDMA (RoCEv2) 配置指北</title>
+    <updated>2026-01-19T00:00:00.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>duanyll</name>
+    </author>
+    <category term="技术" scheme="https://duanyll.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    <category term="指北" scheme="https://duanyll.com/tags/%E6%8C%87%E5%8C%97/"/>
+    <category term="infra" scheme="https://duanyll.com/tags/infra/"/>
+    <id>https://duanyll.com/2025/11/26/HPE-cx555a/</id>
+    <link href="https://duanyll.com/2025/11/26/HPE-cx555a/"/>
+    <published>2025-11-26T00:00:00.000Z</published>
+    <summary>
+      <![CDATA[<h2 id="参考文献">参考文献</h2>
+<div class="tag-plugin link dis-select"><a class="link-card plain" title="" href="https://forums.servethehome.com/in]]>
+    </summary>
+    <title>HPE cx555a 100G 网卡刷入以太网固件指北</title>
+    <updated>2025-11-26T00:00:00.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>duanyll</name>
+    </author>
+    <category term="技术" scheme="https://duanyll.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    <category term="图论" scheme="https://duanyll.com/tags/%E5%9B%BE%E8%AE%BA/"/>
+    <category term="指北" scheme="https://duanyll.com/tags/%E6%8C%87%E5%8C%97/"/>
+    <category term="comfyui" scheme="https://duanyll.com/tags/comfyui/"/>
+    <id>https://duanyll.com/2025/9/25/ComfyUI-Functional/</id>
+    <link href="https://duanyll.com/2025/9/25/ComfyUI-Functional/"/>
+    <published>2025-09-25T00:00:00.000Z</published>
+    <summary>
+      <![CDATA[<p>我给 ComfyUI 写了一个插件 <a href="https://github.com/Duanyll/comfyui_functional">ComfyUI-Functional</a>，能让你在 ComfyUI 的节点图中直观地定义函数，实现在工作流中复用流程，还能]]>
+    </summary>
+    <title>在 ComfyUI 中优雅地函数式编程</title>
+    <updated>2025-09-25T00:00:00.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>duanyll</name>
+    </author>
+    <category term="技术" scheme="https://duanyll.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    <category term="炼丹" scheme="https://duanyll.com/tags/%E7%82%BC%E4%B8%B9/"/>
+    <category term="指北" scheme="https://duanyll.com/tags/%E6%8C%87%E5%8C%97/"/>
+    <category term="docker" scheme="https://duanyll.com/tags/docker/"/>
+    <id>https://duanyll.com/2025/9/1/Docker-Uv/</id>
+    <link href="https://duanyll.com/2025/9/1/Docker-Uv/"/>
+    <published>2025-09-01T00:00:00.000Z</published>
+    <summary>
+      <![CDATA[<h2 id="abstract">Abstract</h2>
+<p><a href="/2024/6/30/WSL2-Docker-Deep-Learning/">前作</a> 详细介绍了如何（在 WSL2 中）中安装 CUDA 和 Docker，并且配置了 GPU 支持的 D]]>
+    </summary>
+    <title>Docker 和 uv 炼丹实践指北</title>
+    <updated>2025-09-01T00:00:00.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>duanyll</name>
+    </author>
+    <category term="技术" scheme="https://duanyll.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    <category term="vscode" scheme="https://duanyll.com/tags/vscode/"/>
+    <category term="指北" scheme="https://duanyll.com/tags/%E6%8C%87%E5%8C%97/"/>
+    <id>https://duanyll.com/2025/8/29/Paste-And-Upload/</id>
+    <link href="https://duanyll.com/2025/8/29/Paste-And-Upload/"/>
+    <published>2025-08-29T00:00:00.000Z</published>
+    <summary>
+      <![CDATA[<div class="tag-plugin image"><div class="image-bg"><img src="https://img.duanyll.com/img/c9d59d9e.png" fancybox="true"></div></div>
+<div cl]]>
+    </summary>
+    <title>更好的 VSCode 粘贴上传图床插件</title>
+    <updated>2025-08-29T00:00:00.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>duanyll</name>
+    </author>
+    <category term="技术" scheme="https://duanyll.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    <category term="炼丹" scheme="https://duanyll.com/tags/%E7%82%BC%E4%B8%B9/"/>
+    <category term="Flow Matching" scheme="https://duanyll.com/tags/Flow-Matching/"/>
+    <category term="DDIM" scheme="https://duanyll.com/tags/DDIM/"/>
+    <category term="生成模型" scheme="https://duanyll.com/tags/%E7%94%9F%E6%88%90%E6%A8%A1%E5%9E%8B/"/>
+    <id>https://duanyll.com/2025/6/21/Flow/</id>
+    <link href="https://duanyll.com/2025/6/21/Flow/"/>
+    <published>2025-06-21T00:00:00.000Z</published>
+    <summary>
+      <![CDATA[<h2 id="背景故事">背景故事</h2>
+<p>2022 年 10 月左右，同期有三篇关于 Flow 模型用于图像生成的论文发表，并都被 ICLR 2023 录用：</p>
+<ul>
+<li><a href="https://arxiv.org/abs/2210.02747]]>
+    </summary>
+    <title>Flow Matching 与 DDIM 小记</title>
+    <updated>2025-06-21T00:00:00.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>duanyll</name>
+    </author>
+    <category term="技术" scheme="https://duanyll.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    <category term="指北" scheme="https://duanyll.com/tags/%E6%8C%87%E5%8C%97/"/>
+    <category term="网络" scheme="https://duanyll.com/tags/%E7%BD%91%E7%BB%9C/"/>
+    <id>https://duanyll.com/2025/5/31/Windows-TUN-Router/</id>
+    <link href="https://duanyll.com/2025/5/31/Windows-TUN-Router/"/>
+    <published>2025-05-31T00:00:00.000Z</published>
+    <summary>
+      <![CDATA[<h2 id="为什么要使用不使用tun">为什么要使用（不使用）TUN</h2>
+<div class="tag-plugin image"><div class="image-bg"><img src="https://img.duanyll.com/img/981d476d]]>
+    </summary>
+    <title>Windows TUN 分流旁路由指北</title>
+    <updated>2025-05-31T00:00:00.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>duanyll</name>
+    </author>
+    <category term="技术" scheme="https://duanyll.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    <category term="电子设计" scheme="https://duanyll.com/tags/%E7%94%B5%E5%AD%90%E8%AE%BE%E8%AE%A1/"/>
+    <category term="嘉立创eda" scheme="https://duanyll.com/tags/%E5%98%89%E7%AB%8B%E5%88%9Beda/"/>
+    <category term="py32" scheme="https://duanyll.com/tags/py32/"/>
+    <id>https://duanyll.com/2024/11/6/PY32-Palit-4090/</id>
+    <link href="https://duanyll.com/2024/11/6/PY32-Palit-4090/"/>
+    <published>2024-11-06T00:00:00.000Z</published>
+    <summary>使用 PY32F002A 以超低成本点亮同德 4090 手办卡的风扇和灯光</summary>
+    <title>非常便宜的同德 4090 手办风扇灯光驱动板</title>
+    <updated>2024-11-06T00:00:00.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>duanyll</name>
+    </author>
+    <category term="技术" scheme="https://duanyll.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    <category term="指北" scheme="https://duanyll.com/tags/%E6%8C%87%E5%8C%97/"/>
+    <category term="freepbx" scheme="https://duanyll.com/tags/freepbx/"/>
+    <category term="voip" scheme="https://duanyll.com/tags/voip/"/>
+    <id>https://duanyll.com/2024/10/5/HT813-FreePBX/</id>
+    <link href="https://duanyll.com/2024/10/5/HT813-FreePBX/"/>
+    <published>2024-10-05T00:00:00.000Z</published>
+    <summary>
+      <![CDATA[<h2 id="概述">概述</h2>
+<p>Grandstream HT813 是一款双模语音网关，支持 FXS 和 FXO 两种接口，可以连接传统的电话机和 PSTN 线路，也可以连接 VoIP 服务器。HT813 最重要的特点是便宜，咸鱼二手价格在 130 元左右，同价位其]]>
+    </summary>
+    <title>Grandstream HT813 双模语音网关 FreePBX 配置指北</title>
+    <updated>2024-10-05T00:00:00.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>duanyll</name>
+    </author>
+    <category term="技术" scheme="https://duanyll.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    <category term="电子设计" scheme="https://duanyll.com/tags/%E7%94%B5%E5%AD%90%E8%AE%BE%E8%AE%A1/"/>
+    <category term="嘉立创eda" scheme="https://duanyll.com/tags/%E5%98%89%E7%AB%8B%E5%88%9Beda/"/>
+    <id>https://duanyll.com/2024/10/1/PN532-CH582/</id>
+    <link href="https://duanyll.com/2024/10/1/PN532-CH582/"/>
+    <published>2024-10-01T00:00:00.000Z</published>
+    <summary>带 CH582 BLE 和 USB 主控的 PN532 读卡器，使用嘉立创彩色丝印工艺，可通过 USB CDC  串口、USB HID 模拟键盘或 BLE 等多种方式连接上位机，或基于 CH582 直接开发串口屏应用。</summary>
+    <title>彩色丝印 PN532 + CH582 读卡器</title>
+    <updated>2024-10-01T00:00:00.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>duanyll</name>
+    </author>
+    <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
+    <category term="微分方程" scheme="https://duanyll.com/tags/%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/"/>
+    <id>https://duanyll.com/2024/9/4/DE/</id>
+    <link href="https://duanyll.com/2024/9/4/DE/"/>
+    <published>2024-09-04T00:00:00.000Z</published>
+    <summary>
+      <![CDATA[<h2 id="initial-value-problems">Initial Value Problems</h2>
+<p>Problem formulation:</p>
+<p><span class="math display"><mjx-container class="]]>
+    </summary>
+    <title>微分方程数值解速通</title>
+    <updated>2024-09-04T00:00:00.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>duanyll</name>
+    </author>
+    <category term="技术" scheme="https://duanyll.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    <category term="电子设计" scheme="https://duanyll.com/tags/%E7%94%B5%E5%AD%90%E8%AE%BE%E8%AE%A1/"/>
+    <category term="嘉立创eda" scheme="https://duanyll.com/tags/%E5%98%89%E7%AB%8B%E5%88%9Beda/"/>
+    <category term="stm32" scheme="https://duanyll.com/tags/stm32/"/>
+    <id>https://duanyll.com/2024/9/1/STLink-SBU/</id>
+    <link href="https://duanyll.com/2024/9/1/STLink-SBU/"/>
+    <published>2024-09-01T00:00:00.000Z</published>
+    <summary>可能是使用最方便的 ST-LINK/V2-1 一线通方案：无需对线，一个 Type-C 接口搞定 SWD 调试，VCP 虚拟串口和下行 USB，支持正反插，同时引出 ST-LINK/V3 Minie 的 STDC-14 标准接口，带下游供电短路和倒灌保护。</summary>
+    <title>Type-C SWD VCP USB 一线通 ST-LINK/V2-1</title>
+    <updated>2024-09-01T00:00:00.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>duanyll</name>
+    </author>
+    <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
+    <category term="毛概" scheme="https://duanyll.com/tags/%E6%AF%9B%E6%A6%82/"/>
+    <id>https://duanyll.com/2024/8/27/Mao/</id>
+    <link href="https://duanyll.com/2024/8/27/Mao/"/>
+    <published>2024-08-27T00:00:00.000Z</published>
+    <summary>
+      <![CDATA[<h2 id="导论">导论</h2>
+<ol type="1">
+<li>马克思主义中国化的提出
+<ol type="1">
+<li>1921 中国共产党成立, 将马克思列宁主义列为指导思想</li>
+<li>1931 左倾错误将马克思主义教条化</li>
+<li>1938 毛]]>
+    </summary>
+    <title>毛概</title>
+    <updated>2024-08-27T00:00:00.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>duanyll</name>
+    </author>
+    <category term="技术" scheme="https://duanyll.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    <category term="电子设计" scheme="https://duanyll.com/tags/%E7%94%B5%E5%AD%90%E8%AE%BE%E8%AE%A1/"/>
+    <category term="嘉立创eda" scheme="https://duanyll.com/tags/%E5%98%89%E7%AB%8B%E5%88%9Beda/"/>
+    <id>https://duanyll.com/2024/8/16/CH334F-KVM-Hub/</id>
+    <link href="https://duanyll.com/2024/8/16/CH334F-KVM-Hub/"/>
+    <published>2024-08-16T00:00:00.000Z</published>
+    <summary>采用 CH334F 和 RS2227 方案的 USB Hub，可连接两台电脑并使用开关切换上行，实现一套键鼠控制两台电脑</summary>
+    <title>CH334F 双上行切换 USB Hub</title>
+    <updated>2024-08-16T00:00:00.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>duanyll</name>
+    </author>
+    <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
+    <category term="微分方程" scheme="https://duanyll.com/tags/%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/"/>
+    <id>https://duanyll.com/2024/7/1/DE-7/</id>
+    <link href="https://duanyll.com/2024/7/1/DE-7/"/>
+    <published>2024-07-01T00:00:00.000Z</published>
+    <summary>
+      <![CDATA[<h2 id="introduction-to-gray-scott-equations">Introduction to Gray Scott Equations</h2>
+<p>The Gray-Scott equations are a set of partial dif]]>
+    </summary>
+    <title>Differential Equations - Gray Scott Equations</title>
+    <updated>2024-07-01T00:00:00.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>duanyll</name>
+    </author>
+    <category term="技术" scheme="https://duanyll.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    <category term="炼丹" scheme="https://duanyll.com/tags/%E7%82%BC%E4%B8%B9/"/>
+    <category term="指北" scheme="https://duanyll.com/tags/%E6%8C%87%E5%8C%97/"/>
+    <category term="docker" scheme="https://duanyll.com/tags/docker/"/>
+    <category term="网络" scheme="https://duanyll.com/tags/%E7%BD%91%E7%BB%9C/"/>
+    <id>https://duanyll.com/2024/6/30/WSL2-Docker-Deep-Learning/</id>
+    <link href="https://duanyll.com/2024/6/30/WSL2-Docker-Deep-Learning/"/>
+    <published>2024-06-30T00:00:00.000Z</published>
+    <summary>
+      <![CDATA[<p>为什么要使用 WSL2 和 Docker 来管理深度学习环境？本教程的配置方法旨在日常使用的 Windows 机器上建立 CUDA 加速的深度学习环境，以便进行快速的调试与开发代码，而无需忍受连接到远程服务器的延迟。许多的深度学习库不能在 Windows 上开箱即用（尽管许]]>
+    </summary>
+    <title>基于 WSL2 和 Docker 的深度学习环境指北</title>
+    <updated>2024-06-30T00:00:00.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>duanyll</name>
+    </author>
+    <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
+    <category term="矩阵" scheme="https://duanyll.com/tags/%E7%9F%A9%E9%98%B5/"/>
+    <category term="线性代数" scheme="https://duanyll.com/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/"/>
+    <category term="数学" scheme="https://duanyll.com/tags/%E6%95%B0%E5%AD%A6/"/>
+    <id>https://duanyll.com/2024/6/10/Matrix/</id>
+    <link href="https://duanyll.com/2024/6/10/Matrix/"/>
+    <published>2024-06-10T00:00:00.000Z</published>
+    <summary>
+      <![CDATA[<h2 id="第一章---线性空间">第一章 - 线性空间</h2>
+<ol type="1">
+<li>线性空间八条性质</li>
+<li>线性空间的子空间</li>
+<li>线性空间的基、坐标</li>
+<li>维数公式 <span class="math display"]]>
+    </summary>
+    <title>矩阵分析速通</title>
+    <updated>2024-06-10T00:00:00.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>duanyll</name>
+    </author>
+    <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
+    <category term="微分方程" scheme="https://duanyll.com/tags/%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/"/>
+    <id>https://duanyll.com/2024/5/25/DE-6/</id>
+    <link href="https://duanyll.com/2024/5/25/DE-6/"/>
+    <published>2024-05-25T00:00:00.000Z</published>
+    <summary>
+      <![CDATA[<h2 id="problem-1">Problem 1</h2>
+<div class="tag-plugin image"><div class="image-bg"><img src="https://img.duanyll.com/img/20240525164212.p]]>
+    </summary>
+    <title>微分方程数值解作业 6</title>
+    <updated>2024-05-25T00:00:00.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>duanyll</name>
+    </author>
+    <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
+    <category term="矩阵分析" scheme="https://duanyll.com/tags/%E7%9F%A9%E9%98%B5%E5%88%86%E6%9E%90/"/>
+    <category term="线性系统" scheme="https://duanyll.com/tags/%E7%BA%BF%E6%80%A7%E7%B3%BB%E7%BB%9F/"/>
+    <category term="控制理论" scheme="https://duanyll.com/tags/%E6%8E%A7%E5%88%B6%E7%90%86%E8%AE%BA/"/>
+    <id>https://duanyll.com/2024/5/20/Mat/</id>
+    <link href="https://duanyll.com/2024/5/20/Mat/"/>
+    <published>2024-05-20T00:00:00.000Z</published>
+    <summary>
+      <![CDATA[<h2 id="引言">引言</h2>
+<p>控制理论诞生于上个世纪，基于信息的交互来控制目标的运动，经典的控制理论已经广泛用于工业自动化、认知科学、人工智能和经济学等多个领域。现代控制理论基于状态空间描述的状态方程模型，基于矩阵作用于状态向量来表示系统，通过矩阵函数简化了对系统]]>
+    </summary>
+    <title>矩阵函数在线性时不变系统的能控性和能观性上的应用</title>
+    <updated>2024-05-20T00:00:00.000Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>duanyll</name>
+    </author>
+    <category term="课程" scheme="https://duanyll.com/categories/%E8%AF%BE%E7%A8%8B/"/>
+    <category term="微分方程" scheme="https://duanyll.com/tags/%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/"/>
+    <id>https://duanyll.com/2024/5/12/DE-5/</id>
+    <link href="https://duanyll.com/2024/5/12/DE-5/"/>
+    <published>2024-05-12T00:00:00.000Z</published>
+    <summary>
+      <![CDATA[<h2 id="problem-1">Problem 1</h2>
+<div class="tag-plugin image"><div class="image-bg"><img src="https://img.duanyll.com/img/20240513093730.p]]>
+    </summary>
+    <title>微分方程数值解作业 5</title>
+    <updated>2024-05-12T00:00:00.000Z</updated>
+  </entry>
+</feed>
