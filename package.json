@@ -52,7 +52,7 @@
     "lodash": "^4.18.1",
     "moment": "^2.30.1",
     "node-fetch": "^3.3.2",
-    "prettier": "^3.8.1",
+    "prettier": "^3.8.2",
     "prompt-sync": "^4.2.0"
   },
   "lint-staged": {
