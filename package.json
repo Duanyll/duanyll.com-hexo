@@ -47,7 +47,7 @@
     "hexo-server": "^3.0.0",
     "hexo-util": "^4.0.0",
     "husky": "^9.1.7",
-    "js-yaml": "^5.0.0",
+    "js-yaml": "^5.2.1",
     "lint-staged": "^17.0.8",
     "lodash": "^4.18.1",
     "moment": "^2.30.1",
