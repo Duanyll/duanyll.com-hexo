@@ -17,7 +17,7 @@
     "normalize-slash": "node utils/normalize-slash.js"
   },
   "hexo": {
-    "version": "8.1.1"
+    "version": "8.1.2"
   },
   "engines": {
     "node": ">=22.0.0"
