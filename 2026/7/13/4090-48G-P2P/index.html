@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 8.1.2">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.21.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+
+  
+  
+  <title>给 48G 魔改 4090 解锁 PCIe P2P：动态 BAR1 映射的实现 - duanyll</title>
+
+  
+    <meta name="description" content="手头攒了一批 48G 显存的魔改 4090。单卡推理一切正常，换成多卡训练，NCCL 却停在初始化阶段：社区里给消费卡解锁 PCIe P2P 的经典 mod，在这种卡上并不能工作。排查两天后，我改用动态 BAR1 逐分配映射，在不修改用户态的前提下保住了全部 48G 显存，P2P 带宽也能跑满 PCIe Gen4 x16。本文记录问题的成因、驱动修改和上机结果。 文末另有一节「AI 使用披露」。这">
+<meta property="og:type" content="article">
+<meta property="og:title" content="给 48G 魔改 4090 解锁 PCIe P2P：动态 BAR1 映射的实现">
+<meta property="og:url" content="https://duanyll.com/2026/7/13/4090-48G-P2P/">
+<meta property="og:site_name" content="duanyll">
+<meta property="og:description" content="手头攒了一批 48G 显存的魔改 4090。单卡推理一切正常，换成多卡训练，NCCL 却停在初始化阶段：社区里给消费卡解锁 PCIe P2P 的经典 mod，在这种卡上并不能工作。排查两天后，我改用动态 BAR1 逐分配映射，在不修改用户态的前提下保住了全部 48G 显存，P2P 带宽也能跑满 PCIe Gen4 x16。本文记录问题的成因、驱动修改和上机结果。 文末另有一节「AI 使用披露」。这">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-07-13T00:00:00.000Z">
+<meta property="article:modified_time" content="2026-07-13T00:00:00.000Z">
+<meta property="article:author" content="duanyll">
+<meta property="article:tag" content="Agent">
+<meta property="article:tag" content="GPU">
+<meta property="article:tag" content="NVIDIA">
+<meta property="article:tag" content="infra">
+<meta name="twitter:card" content="summary">
+  
+  
+  
+  <meta name="keywords" content="infra,GPU,NVIDIA,Agent">
+
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="duanyll" type="application/atom+xml">
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+    <link rel="shortcut icon" href="https://cdn.duanyll.com/favicon.ico">
+  
+
+  
+
+  
+
+
+  
+
+  
+    <script>
+      var darkmodeSettings = localStorage.getItem('darkmode') || 'auto';
+      var enableDarkmode = darkmodeSettings == 'true' 
+        || (darkmodeSettings == 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (enableDarkmode) {
+        document.documentElement.classList.add('global-darkmode');
+      }
+      window.currentTheme = enableDarkmode ? 'dark' : 'light';
+    </script>
+  
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/node-tikzjax@latest/css/fonts.css" /><style>.tikzjax { display: block; text-align: center; user-select: none; }</style></head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://cdn.duanyll.com/android-chrome-192x192.png" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">duanyll</div><div class="sub normal cap">qwq</div><div class="sub hover cap" style="opacity:0"> QWQ</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Wiki</a><a class="nav-item" href="/about/">关于</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">给 48G 魔改 4090 解锁 PCIe P2P：动态 BAR1 映射的实现</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#tldr"><span class="toc-text">TL;DR</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF%E6%B6%88%E8%B4%B9%E5%8D%A1%E6%98%AF%E6%80%8E%E4%B9%88%E8%A7%A3%E9%94%81-p2p-%E7%9A%84"><span class="toc-text">背景：消费卡是怎么解锁 P2P 的</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E4%BA%BA%E7%9A%84%E5%B7%A5%E4%BD%9C"><span class="toc-text">前人的工作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#static-bar1-identity-%E6%98%A0%E5%B0%84%E7%9A%84%E5%8E%9F%E7%90%86"><span class="toc-text">static BAR1 identity 映射的原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#g-4090-%E6%98%AF%E4%B8%AA%E4%BB%80%E4%B9%88%E4%B8%9C%E8%A5%BF"><span class="toc-text">48G 4090 是个什么东西</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%B0%E8%BF%87%E7%9A%84%E4%B8%A4%E6%9D%A1%E5%BC%AF%E8%B7%AF"><span class="toc-text">走过的两条弯路</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%E6%8A%8A%E6%98%BE%E5%AD%98%E8%A3%81%E5%88%B0-bar1-%E4%BB%A5%E5%86%85"><span class="toc-text">方法一：把显存裁到 BAR1 以内</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C%E5%8F%AA%E6%8A%8A%E4%BC%9A%E8%A2%AB-p2p-%E5%85%B1%E4%BA%AB%E7%9A%84%E5%86%85%E5%AD%98%E9%92%89%E5%9C%A8%E4%BD%8E%E5%9C%B0%E5%9D%80"><span class="toc-text">方法二：只把「会被 P2P 共享」的内存钉在低地址</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%B8%89%E5%8A%A8%E6%80%81-bar1-p2p"><span class="toc-text">方法三：动态 BAR1 P2P</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%B9%E6%88%90%E9%80%90%E5%88%86%E9%85%8D%E9%A2%84%E6%98%A0%E5%B0%84"><span class="toc-text">改成逐分配预映射</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%AE%83%E8%83%BD%E5%90%83%E4%B8%8B-32g-%E7%9A%84%E9%AB%98%E5%9C%B0%E5%9D%80%E5%88%86%E9%85%8D"><span class="toc-text">为什么它能吃下 &gt;32G 的高地址分配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E7%94%A8-gpudirect-rdma-%E7%9A%84%E7%8E%B0%E6%9C%89%E8%B7%AF%E5%BE%84"><span class="toc-text">复用 GPUDirect RDMA 的现有路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E5%9C%A8-static-%E4%B8%8E-dynamic-%E4%B9%8B%E9%97%B4%E8%87%AA%E9%80%82%E5%BA%94"><span class="toc-text">实现：在 static 与 dynamic 之间自适应</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8A%E6%9C%BA%E6%89%8D%E6%9A%B4%E9%9C%B2%E7%9A%84%E4%B8%A4%E4%B8%AA%E5%9D%91"><span class="toc-text">上机才暴露的两个坑</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E6%B5%8B%E7%BB%93%E6%9E%9C"><span class="toc-text">实测结果</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#platform-a%E5%8F%8C%E8%B7%AF-xeon8-rtx-4090-48g"><span class="toc-text">Platform A：双路 Xeon，8× RTX 4090 48G</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#baseline%E5%8E%9F%E7%89%88%E9%A9%B1%E5%8A%A8%E6%97%A0-patch"><span class="toc-text">Baseline：原版驱动（无 patch）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#patch-%E5%90%8E%E6%96%B9%E6%B3%95%E4%B8%89%E5%8A%A8%E6%80%81-bar1-p2p"><span class="toc-text">Patch 后：方法三动态 BAR1 P2P</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pytorch-ddp-%E8%AE%AD%E7%BB%83"><span class="toc-text">PyTorch DDP 训练</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#platform-bepyc-73024-rtx-4090-48g"><span class="toc-text">Platform B：EPYC 7302，4× RTX 4090 48G</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8"><span class="toc-text">如何使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E6%9D%A1%E4%BB%B6%E4%B8%8E%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-text">前置条件与注意事项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8-dkms-%E5%8C%85%E5%AE%89%E8%A3%85"><span class="toc-text">用 DKMS 包安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6"><span class="toc-text">运行时</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ai-%E4%BD%BF%E7%94%A8%E6%8A%AB%E9%9C%B2"><span class="toc-text">AI 使用披露</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%BA%E8%B4%9F%E8%B4%A3%E5%88%A4%E6%96%AD%E6%96%B9%E5%90%91agent-%E8%B4%9F%E8%B4%A3%E5%95%83%E7%BB%86%E8%8A%82"><span class="toc-text">人负责判断方向，agent 负责啃细节</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%BA%E4%B8%8A%E6%9C%BAagent-%E8%BF%9C%E7%A8%8B%E9%A9%BE%E9%A9%B6"><span class="toc-text">人上机、agent 远程驾驶</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E8%BA%AB%E4%BB%BD%E6%8A%AB%E9%9C%B2"><span class="toc-text">模型身份披露</span></a></li></ol></li></ol></div></div></widget>
+
+<widget class="widget-wrapper ghrepo"><div class="widget-body"><div class="items stellar-ghinfo-api" api="https://api.github.com/repos/Duanyll/open-gpu-kernel-modules"><a class="repo" href="https://github.com/Duanyll/open-gpu-kernel-modules" target="_blank" rel="external nofollow noopener noreferrer"><div class="repo-name flex-row"><svg aria-hidden="true" role="img" class="color-icon-primary" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" style="user-select:none;overflow:visible"><path fill-rule="evenodd" d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z"></path></svg>Duanyll/open-gpu-kernel-modules</div><div class="repo-desc"><span type="text" id="description">&nbsp;</span></div><div class="grid"><div class="flex-row"><svg aria-hidden="true" role="img" class="color-icon-primary" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" style="user-select:none;overflow:visible"><path fill-rule="evenodd" d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25zm0 2.445L6.615 5.5a.75.75 0 01-.564.41l-3.097.45 2.24 2.184a.75.75 0 01.216.664l-.528 3.084 2.769-1.456a.75.75 0 01.698 0l2.77 1.456-.53-3.084a.75.75 0 01.216-.664l2.24-2.183-3.096-.45a.75.75 0 01-.564-.41L8 2.694v.001z"></path></svg><span type="text" id="stargazers_count"></span></div><div class="flex-row"><svg aria-hidden="true" role="img" class="color-icon-primary" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" style="user-select:none;overflow:visible"><path fill-rule="evenodd" d="M5 3.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm0 2.122a2.25 2.25 0 10-1.5 0v.878A2.25 2.25 0 005.75 8.5h1.5v2.128a2.251 2.251 0 101.5 0V8.5h1.5a2.25 2.25 0 002.25-2.25v-.878a2.25 2.25 0 10-1.5 0v.878a.75.75 0 01-.75.75h-4.5A.75.75 0 015 6.25v-.878zm3.75 7.378a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm3-8.75a.75.75 0 100-1.5.75.75 0 000 1.5z"></path></svg><span type="text" id="forks_count"></span></div><div class="flex-row stellar-ghinfo-api" index="0" api="https://api.github.com/repos/Duanyll/open-gpu-kernel-modules/tags"><svg aria-hidden="true" role="img" class="color-icon-primary" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" style="user-select:none;overflow:visible"><path fill-rule="evenodd" d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z"></path></svg><span type="text" id="latest-tag-name">0</span></div></div></a></div></div></widget>
+
+<widget class="widget-wrapper timeline"><div class="widget-body fs14"><div class="tag-plugin timeline stellar-timeline-api" api="https://api.github.com/repos/Duanyll/open-gpu-kernel-modules/issues?per_page=3"></div></div></widget>
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/duanyll" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/08a41b181ce68.svg"/></a><a class="social" href="/about/#comments" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/942ebbf1a4b91.svg"/></a><a class="social" href="https://www.travellings.cn/go.html" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://www.travellings.cn/assets/favicon-fluent-emoji.svg"/></a><a class="social" href="javascript:darkmode.next()" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/img/half-moon.svg"/></a></div></footer>
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+        
+
+
+  
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mermaid@10.9.0/dist/mermaid.min.js"></script>
+
+  <script>
+    var mermaid_config = {
+      startOnLoad: true,
+      theme:
+        "switch" == "auto" &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "default",
+      logLevel: 3,
+      themeVariables: {
+        darkMode: true
+      },
+      flowchart: {
+        useMaxWidth: false,
+        htmlLabels: true,
+        curve: "linear"
+      },
+      gantt: {
+        axisFormat: "%Y/%m/%d"
+      },
+      sequence: {
+        actorMargin: 50
+      }
+    }
+    if (window.mermaid) {
+      mermaid.initialize(mermaid_config);
+    }
+  </script>
+
+
+
+
+<div class="bread-nav fs12"><div class="left"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></div><div id="post-meta">
+    <span>发布于&nbsp;<time datetime="2026-07-13T00:00:00.000Z">2026-07-13</time></span>
+    
+    <span>更新于&nbsp;<time datetime="2026-07-13T00:00:00.000Z">2026-07-13</time></span>
+    </div></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>给 48G 魔改 4090 解锁 PCIe P2P：动态 BAR1 映射的实现</span></h1>
+
+
+<div class="article-tags"><a class="tag-plugin colorful hashtag" color="orange" href="/tags/infra/" >  <svg t="1701408144765" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4228" width="200" height="200"><path d="M426.6 64.8c34.8 5.8 58.4 38.8 52.6 73.6l-19.6 117.6h190.2l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6s58.4 38.8 52.6 73.6l-19.4 117.6H896c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-42.6 256H832c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.6-117.4h-190.4l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.4-117.8H128c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l42.6-256H192c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6z m11.6 319.2l-42.6 256h190.2l42.6-256h-190.2z" p-id="4229"></path></svg>  <span>infra</span></a><a class="tag-plugin colorful hashtag" color="blue" href="/tags/GPU/" >  <svg t="1701408144765" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4228" width="200" height="200"><path d="M426.6 64.8c34.8 5.8 58.4 38.8 52.6 73.6l-19.6 117.6h190.2l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6s58.4 38.8 52.6 73.6l-19.4 117.6H896c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-42.6 256H832c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.6-117.4h-190.4l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.4-117.8H128c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l42.6-256H192c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6z m11.6 319.2l-42.6 256h190.2l42.6-256h-190.2z" p-id="4229"></path></svg>  <span>GPU</span></a><a class="tag-plugin colorful hashtag" color="orange" href="/tags/NVIDIA/" >  <svg t="1701408144765" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4228" width="200" height="200"><path d="M426.6 64.8c34.8 5.8 58.4 38.8 52.6 73.6l-19.6 117.6h190.2l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6s58.4 38.8 52.6 73.6l-19.4 117.6H896c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-42.6 256H832c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.6-117.4h-190.4l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.4-117.8H128c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l42.6-256H192c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6z m11.6 319.2l-42.6 256h190.2l42.6-256h-190.2z" p-id="4229"></path></svg>  <span>NVIDIA</span></a><a class="tag-plugin colorful hashtag" color="red" href="/tags/Agent/" >  <svg t="1701408144765" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4228" width="200" height="200"><path d="M426.6 64.8c34.8 5.8 58.4 38.8 52.6 73.6l-19.6 117.6h190.2l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6s58.4 38.8 52.6 73.6l-19.4 117.6H896c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-42.6 256H832c35.4 0 64 28.6 64 64s-28.6 64-64 64h-137.8l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.6-117.4h-190.4l-23 138.6c-5.8 34.8-38.8 58.4-73.6 52.6s-58.4-38.8-52.6-73.6l19.4-117.8H128c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l42.6-256H192c-35.4 0-64-28.6-64-64s28.6-64 64-64h137.8l23-138.6c5.8-34.8 38.8-58.4 73.6-52.6z m11.6 319.2l-42.6 256h190.2l42.6-256h-190.2z" p-id="4229"></path></svg>  <span>Agent</span></a></div>
+<p>手头攒了一批 48G 显存的魔改 4090。单卡推理一切正常，换成多卡训练，NCCL 却停在初始化阶段：社区里给消费卡解锁 PCIe P2P 的经典 mod，在这种卡上并不能工作。排查两天后，我改用动态 BAR1 逐分配映射，在不修改用户态的前提下保住了全部 48G 显存，P2P 带宽也能跑满 PCIe Gen4 x16。本文记录问题的成因、驱动修改和上机结果。</p>
+<p>文末另有一节「AI 使用披露」。这套方案从源码调研、实现到上机排错，大部分具体工作由我指挥 Claude 完成；之后又由 Codex 做过代码审查和本文的文字编辑。与其把这些过程折叠成一句「在 AI 辅助下完成」，不如把人和 agent 各自做了什么写清楚，至少比假装几十万行驱动都是某个周末随手读完的可信一些。</p>
+<div class="tag-plugin colorful note" color="orange"><div class="body"><p><strong>免责声明</strong>：这是一个非官方的社区魔改，与 NVIDIA 无关，不提供任何担保。修改内核模块不会让你失去魔改 48G 4090 卡本不存在的官方保修。涉及直接覆盖内核模块的操作，请自行做好备份并承担风险。</p></div></div>
+<h2 id="tldr">TL;DR</h2>
+<div class="tag-plugin colorful note" color="green"><div class="body"><ul><li><strong>背景</strong>：社区给 4090/5090 解锁 P2P 的做法，是把 GH100 的 <strong>static BAR1 identity 映射</strong> 移植过来。它硬依赖 <code>BAR1 窗口 ≥ 显存</code>。</li><li><strong>困难</strong>：使用泄露 VBIOS 的 48G 4090 只有 <strong>32G BAR1 / 48G 显存</strong>。由于 <code>BAR1 &lt; FB</code>，static BAR1 无法启用，P2P 能力位始终为 false，NCCL 会卡在建链阶段。</li><li><strong>方案</strong>：不再 identity-map 整块显存。每当 peer 映射一块分配时，调用现有的动态 BAR1 机制（<code>kbusMapFbAperture</code>），将这块分配单独映射进对端 BAR1；GMMU 提供的一层地址翻译，使位于 32G 以上的显存也能通过 32G BAR1 窗口访问。NCCL 默认只共享几十至数百 MB，容量不是问题。</li><li><strong>结果</strong>：方案在 Intel Xeon 和 AMD EPYC 7002 两套平台上均通过数据校验，并保留全部 48G 显存。8 卡 Xeon 平台的 DDP 提速约 <strong>1.7×</strong>；4 卡 EPYC 7302 平台受 sysmem staging 拖累更严重，NCCL all-reduce busbw 从 <strong>4.1 提升到 25.15 GB/s（6.1×）</strong>，DDP 从 <strong>1203.7 降到 109.5 ms/step（约 11×）</strong>。</li></ul></div></div>
+<h2 id="背景消费卡是怎么解锁-p2p-的">背景：消费卡是怎么解锁 P2P 的</h2>
+<h3 id="前人的工作">前人的工作</h3>
+<p>数据中心卡（例如 A100、H100）之间可以通过 PCIe 或 NVLink 进行 GPU 到 GPU 的点对点（peer-to-peer, P2P）读写。NCCL 的 all-reduce 因而可以绕开 CPU 和系统内存，带宽和延迟都更理想。GeForce 的驱动则禁用了这项能力；硬件并没有明显意见，产品线划分有。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/tinygrad/open-gpu-kernel-modules">geohot（tinygrad）</a> 最早发现，只要 patch 开源的 <code>nvidia-open</code> 内核模块，把 GH100（Hopper）的 PCIe P2P 处理逻辑移植到 AD102（4090）和 GB202（5090）上，就能为消费卡解锁 P2P，而且不用修改用户态：CUDA 和 NCCL 保持原样，<code>cudaDeviceCanAccessPeer</code> 会直接返回 true，NCCL 也就能选择 P2P 路径。这套做法后来经过社区反复验证。本项目沿用了 geohot 原版、后续精简版以及 <a target="_blank" rel="noopener" href="https://github.com/aikitoria/open-gpu-kernel-modules">nimlgen 增加 5090 支持的一系列 fork</a>。harrychen 的 <a target="_blank" rel="noopener" href="https://harrychen.xyz/2026/03/22/enable-pcie-p2p-on-rtx-5090/">RTX 5090 P2P 实践</a> 还详细记录了带宽、ACS 和 <code>NCCL_P2P_LEVEL</code> 等实际问题。</p>
+<p>我此前也处理过这套 mod 的打包问题，目标是做成可以直接 <code>apt install</code> 的 DKMS 包。真正麻烦的是如何可靠地替换 <code>ubuntu-drivers</code> 安装的预编译内核模块。改用 Debian 和 NVIDIA 官方 DKMS 驱动包后，只需给源码打 patch，事情便正常了许多。打包方法放在后文说明。</p>
+<h3 id="static-bar1-identity-映射的原理">static BAR1 identity 映射的原理</h3>
+<p>要理解为什么这套方案在 48G 卡上会崩，得先看它到底是怎么工作的。</p>
+<p>GH100 这套 P2P 机制（不是早期的 mailbox 方案）本质上是把对端 GPU 的整块显存视为一段挂在 BAR1 物理基址上的「系统内存」。BAR1 是 GPU 在 PCIe 地址空间中开放的窗口（aperture）；CPU 或其他 PCIe 设备访问这个窗口，最终读写的是 GPU 显存。</p>
+<p>patch 过的代码里，source GPU 给每个 peer 页填的 PTE 物理地址就是一条极简的线性公式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">peer_bus_addr = bar1BusAddr + fbPhysOffset</span><br></pre></td></tr></table></figure>
+<p>其中 <code>bar1BusAddr = gpumgrGetGpuPhysFbAddr(peerGpu)</code> 是对端 BAR1 的 PCIe 基址，<code>fbPhysOffset</code> 是这块显存在对端显存里的物理偏移。再把 GMMU 的 <code>PEER</code> aperture 改写成 <code>SYS_NONCOH</code>，让地址域指向系统内存。于是 source GPU 一发 DMA，PCIe 就把它路由到对端 BAR1 窗口，命中对端显存的对应位置。</p>
+<p>整个方案依赖 static BAR1：驱动需要一次性将 <code>[0, 整块显存)</code> identity-map 到 BAR1 窗口，使 BAR1 中的偏移 <code>x</code> 始终对应显存中的偏移 <code>x</code>。因此，只有在 <strong>BAR1 窗口 ≥ 显存容量</strong> 时，这个映射才有可能成立：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// kern_bus_gh100.c: kbusIsPcieBar1P2PMappingSupported_GH100</span></span><br><span class="line"><span class="keyword">if</span> (!kbusIsStaticBar1Enabled(pGpu0, ...) || !kbusIsStaticBar1Enabled(pGpu1, ...))</span><br><span class="line">    <span class="keyword">return</span> NV_FALSE;   <span class="comment">// 只要有一端没开 static BAR1，P2P 能力位直接 false</span></span><br></pre></td></tr></table></figure>
+<p>而 <code>kbusIsStaticBar1Supported_TU102</code> 里写死了尺寸检查：<code>FORCE_ENABLE</code> 模式要求 <code>BAR1 ≥ client 可见显存</code>，<code>AUTO</code> 模式要求得更多（还要加上 doorbell、console、512MB padding）。这个检查没有 regkey 能绕过。</p>
+<p>普通 4090 是 24G 显存 / 24G BAR1，5090 是 32G / 32G，RTX Pro 和 GH100 的 BAR1 还更宽裕，都满足 <code>BAR1 ≥ FB</code>，所以原方案可以正常工作。</p>
+<h3 id="g-4090-是个什么东西">48G 4090 是个什么东西</h3>
+<p>问题出在一种特殊的卡上。NVIDIA 曾泄露过一版能让 AD102 使用 48G 显存的 VBIOS；第三方再配合复用 RTX 3090 Ti 的 PCB 设计（正反面共 24 颗显存），便能做出被 NVIDIA 原版驱动完整识别的 <strong>48G 4090</strong>。对于单卡大模型推理，多出来的 24G 显存很有实际价值。</p>
+<p>但这版 VBIOS 只开放了 <strong>32G BAR1 窗口</strong>，目前也看不到将其改成 64G 的可行方法；修改 BAR1 大小需要绕过 VBIOS 签名，基本可以到此为止。第一次尝试多卡训练时，问题随即出现：</p>
+<pre class="mermaid">graph TD
+  A["48G 4090<br>32G BAR1 &lt; 48G 显存"] --&gt; B["static BAR1 尺寸检查<br>要求 BAR1 ≥ 显存"]
+  B --&gt;|检查失败| C["static BAR1 无法启用"]
+  C --&gt; D["kbusIsPcieBar1P2PMappingSupported<br>返回 NV_FALSE"]
+  D --&gt; E["p2pCaps.bar1Supported = false"]
+  E --&gt; F["mod 把 forceP2PType 钉死成 BAR1P2P<br>没有回退路径"]
+  F --&gt; G["NCCL 建链阶段停滞"]</pre>
+<p><code>BAR1 &lt; FB</code> 导致 static BAR1 在任何模式下都无法启用，P2P 能力位始终为 false；与此同时，mod 又把 <code>forceP2PType</code> 固定为 BAR1P2P，没有回退路径，NCCL 因此一直停在建链阶段。这就是「卡在初始化」的具体原因。</p>
+<p>核心矛盾很简单：显存有 48G，能够暴露给 peer 的 BAR1 窗口却只有 32G。</p>
+<p><span class="tikzjax"><svg xmlns="http://www.w3.org/2000/svg" width="417.45" height="295.55" viewBox="-72 -72 313.087 221.662"><g stroke="#000" stroke-miterlimit="10" stroke-width=".4"><path fill="none" stroke-width=".8" d="M-52.319 127.3V-71.87h73.977V127.3ZM21.658-71.87"/><g stroke="none" font-family="cmr7" font-size="7"><text x="-52.319" y="127.299" transform="rotate(-90 -101.128 90.325)">48G</text><text x="-35.465" y="127.299" transform="rotate(-90 -101.128 90.325)">FB</text></g><path fill="none" stroke="red" stroke-dasharray="3.0,3.0" stroke-width=".8" d="M-52.319-5.49h73.977"/><g fill="red" stroke="red"><g fill="red" stroke="none" font-family="cmr7" font-size="7"><text x="-52.319" y="127.299" transform="translate(22.311 -138.41)">32G</text><text x="-35.465" y="127.299" transform="translate(22.311 -138.41)">line</text></g></g><path fill="#d1d1ff" stroke="none" d="M-52.319 110.227V90.311h73.977v19.916Zm73.977-19.916"/><g stroke="none" font-family="cmr7" font-size="7"><text x="-52.319" y="127.299" transform="translate(14.21 -25.28)">allo</text><text x="-39.604" y="127.299" transform="translate(14.21 -25.28)">c</text><text x="-33.354" y="127.299" transform="translate(14.21 -25.28)">A</text><text x="-24.756" y="127.299" transform="translate(14.21 -25.28)">(lo</text><text x="-15.597" y="127.299" transform="translate(14.21 -25.28)">w)</text></g><path fill="#ffd3a6" stroke="none" d="M-52.319-32.036v-19.917h73.977v19.917Zm73.977-19.917"/><g stroke="none" font-size="7"><text x="-52.319" y="127.299" font-family="cmr7" transform="translate(10.034 -167.544)">allo</text><text x="-39.604" y="127.299" font-family="cmr7" transform="translate(10.034 -167.544)">c</text><text x="-33.354" y="127.299" font-family="cmr7" transform="translate(10.034 -167.544)">B</text><text x="-25.069" y="127.299" font-family="cmr7" transform="translate(10.034 -167.544)">(</text><text x="-21.944" y="127.299" font-family="cmmi7" transform="translate(10.034 -167.544)">&gt;</text><text x="-15.694" y="127.299" font-family="cmr7" transform="translate(10.034 -167.544)">32G)</text></g><path fill="none" stroke-width=".8" d="M146.85 127.3V-5.49h73.977V127.3ZM220.827-5.49"/><g stroke="none" font-family="cmr7" font-size="7"><text x="-52.319" y="127.299" transform="rotate(-90 76.642 -33.544)">32G</text><text x="-35.465" y="127.299" transform="rotate(-90 76.642 -33.544)">BAR1</text><text x="-11.485" y="127.299" transform="rotate(-90 76.642 -33.544)">windo</text><text x="9.091" y="127.299" transform="rotate(-90 76.642 -33.544)">w</text></g><g stroke="none" font-family="cmr7" font-size="7"><text x="-52.319" y="127.299" transform="translate(197 17.4)">p</text><text x="-47.687" y="127.299" transform="translate(197 17.4)">eer</text><text x="-34.756" y="127.299" transform="translate(197 17.4)">PCIe</text><text x="-14.534" y="127.299" transform="translate(197 17.4)">bus</text><text x=".162" y="127.299" transform="translate(197 17.4)">address</text></g><g fill="#00f" stroke="#00f" stroke-width=".8"><path fill="none" d="M21.658 100.27H140.65"/><path d="M145.201 100.27c-.559-.14-3.015-.925-4.55-1.78v3.558c1.535-.855 3.991-1.64 4.55-1.779Z"/></g><g fill="#00f" stroke="#00f"><g fill="#00f" stroke="none"><text x="-52.319" y="127.299" font-family="cmr7" font-size="7" transform="translate(104.277 -36.484)">bus</text><text x="-37.623" y="127.299" font-family="cmr7" font-size="7" transform="translate(104.277 -36.484)">=</text><text x="-28.79" y="127.299" font-family="cmr7" font-size="7" transform="translate(104.277 -36.484)">base</text><text x="-10.969" y="127.299" font-family="cmr7" font-size="7" transform="translate(104.277 -36.484)">+</text><text x="-2.135" y="127.299" font-family="cmr7" font-size="7" transform="translate(104.277 -36.484)">o®</text><text x="6.594" y="128.305" font-family="cmmi5" font-size="5" transform="translate(104.277 -36.484)">A</text></g></g><g fill="red" stroke="red" stroke-width=".8"><path fill="none" d="M21.658-41.995c81.316 0 126.39 9.959 201.505 9.959"/><path d="M227.714-32.036c-.56-.139-3.016-.924-4.551-1.779v3.557c1.535-.854 3.992-1.64 4.55-1.778Z"/></g><g fill="red" stroke="red"><g fill="red" stroke="none"><text x="-52.319" y="127.299" font-family="cmr7" font-size="7" transform="translate(109.848 -178.747)">bus</text><text x="-37.623" y="127.299" font-family="cmr7" font-size="7" transform="translate(109.848 -178.747)">=</text><text x="-28.79" y="127.299" font-family="cmr7" font-size="7" transform="translate(109.848 -178.747)">base</text><text x="-10.969" y="127.299" font-family="cmr7" font-size="7" transform="translate(109.848 -178.747)">+</text><text x="-2.135" y="127.299" font-family="cmr7" font-size="7" transform="translate(109.848 -178.747)">o®</text><text x="6.594" y="128.305" font-family="cmmi5" font-size="5" transform="translate(109.848 -178.747)">B</text></g></g><g fill="red" stroke="red"><g fill="red" stroke="none" font-family="cmr7" font-size="7"><text x="-50.532" y="119.299" transform="translate(233.19 -141.524)">o</text><text x="-46.761" y="119.299" transform="translate(233.19 -141.524)">v</text><text x="-42.775" y="119.299" transform="translate(233.19 -141.524)">ersho</text><text x="-24.308" y="119.299" transform="translate(233.19 -141.524)">ots</text><text x="-52.319" y="127.299" transform="translate(233.19 -141.524)">the</text><text x="-38.527" y="127.299" transform="translate(233.19 -141.524)">windo</text><text x="-17.951" y="127.299" transform="translate(233.19 -141.524)">w</text></g></g></g></svg></span></p>
+<p>分配 A 位于低 32G，<code>base + offsetA</code> 仍在窗口内；如果分配 B 的物理偏移超过 32G，<code>base + offsetB</code> 就会越过 BAR1 窗口，编码出的总线地址不再指向有效映射。接下来的选择只有数据损坏或设备挂死，两者都不适合作为回退机制。</p>
+<p>我最初打算沿用传统做法。显存大于 BAR1 并不是新问题，早期显卡就需要由驱动维护按需 pin 和 map 的分页映射。32G 相对 48G 也不算太小，即使需要换页，频率和性能或许仍能接受。于是首先要确认：NVIDIA 驱动中是否已有可以复用的分页映射路径？</p>
+<h2 id="走过的两条弯路">走过的两条弯路</h2>
+<p>在确定最终方案之前，我和 Claude 评估了三个方向，并分别留下了设计文档。前两个方向要么代价过高，要么在现有约束下无法实现；不过，它们也把问题边界收窄到了足以找到第三条路，因此这里一并记录。</p>
+<pre class="mermaid">graph LR
+  P["48G 4090 P2P<br>纯驱动 · 不改用户态"] --&gt; M1["方法一<br>裁显存到 32G"]
+  P --&gt; M2["方法二<br>只把 P2P buffer 钉低地址"]
+  P --&gt; M3["方法三<br>动态 BAR1 逐分配映射"]
+  M1 --&gt; R1["✓ 技术上能跑<br>✗ 丢 18G，拒绝"]
+  M2 --&gt; R2["✗ 分配时无法识别<br>哪块会被 P2P"]
+  M3 --&gt; R3["✓ 保住 48G<br>✓ 满带宽<br>✓ 已上机验证"]</pre>
+<h3 id="方法一把显存裁到-bar1-以内">方法一：把显存裁到 BAR1 以内</h3>
+<p>既然 5090（32G BAR1 + 32G 显存）能够正常工作，最直接的办法就是把 48G 4090 对外提供的可分配显存裁到 32G 以内。这样可以满足 static BAR1 的尺寸要求，现有 mod 无需修改。</p>
+<p>这甚至不需要改源码，两个 NVIDIA 官方 regkey 就够了：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># /etc/modprobe.d/nvidia-48g-p2p.conf</span><br><span class="line">options nvidia NVreg_RegistryDwords="OverrideFbSize=30720;RMForceStaticBar1=1"</span><br></pre></td></tr></table></figure>
+<p><code>OverrideFbSize</code>（单位 MB）会在可用显存区顶部插一段 reserved region，把它从 PMA 可分配池里移除，于是 <code>client 可见显存</code> 降到 32G 以下；<code>RMForceStaticBar1=1</code> 则强制走 <code>FORCE_ENABLE</code> 分支（<code>AUTO</code> 因为看的是没被裁的顶部 limit 仍然不过）。</p>
+<p>这个方案在技术上可行，但我肯定不会接受。购买 48G 卡的目的就是使用这 48G 显存；为了启用 P2P，再用 regkey 把其中约 18G 隐藏起来，账面上的不等式是满足了，机器并不会因此便宜。<code>OverrideFbSize</code> 在这里最多是一个诊断工具，可以用来验证 static BAR1 的尺寸假设，不是保底方案，更不会进入实际部署。我让 Claude 把这一方向整理成文档后，继续寻找不需要裁显存的方案。</p>
+<h3 id="方法二只把会被-p2p-共享的内存钉在低地址">方法二：只把「会被 P2P 共享」的内存钉在低地址</h3>
+<p>方法一的问题在于裁掉了整个 PMA 的一部分，而本机访问自己的显存并不经过 BAR1，只有 P2P 访问需要它。由此可以考虑另一种方案：仍让 PMA 管理全部 48G 显存，仅将以后会被 peer 访问的分配限制在低 32G，static BAR1 也只覆盖这一区域。</p>
+<p>驱动侧几乎具备所需的全部机制：peer 映射本来就按分配（per-allocation）经过 UVM 的 <code>UVM_MAP_EXTERNAL_ALLOCATION</code>；static BAR1 区可以缩小；分配位于 static 区外时已有 dynamic 回退；将分配限制到低地址的原语（<code>PMA_ALLOCATE_SPECIFY_ADDRESS_RANGE</code> / <code>rangeLo/rangeHi</code>）也已经存在。</p>
+<p>问题在于，物理分配发生时，驱动不知道这块内存以后是否会被 P2P 共享。可共享的 <code>cuMemCreate</code> 和普通 <code>cudaMalloc</code> 经过相同的分配路径，参数结构中没有 export、shareable 或 ipc 字段。「可导出」是在分配完成后通过 <code>DupObject</code> 附加到物理内存上的独立对象，相关检查也到导出时才发生。内核没有收到意图，自然也没有必要猜测用户几分钟后的决定。</p>
+<p>要补充这一信号，只能修改闭源的 CUDA 用户态，或者让内核在分配阶段得到目前并不存在的 export 意图。两者都违背「不改用户态，只 patch 驱动」的约束，因此方法二不能成立。不过，对方法二的调查确认了两项重要事实，也直接引出了最终方案。</p>
+<h2 id="方法三动态-bar1-p2p">方法三：动态 BAR1 P2P</h2>
+<h3 id="改成逐分配预映射">改成逐分配预映射</h3>
+<p>方法二确认了两件事：被 peer 共享的集合很小，NCCL 默认只暴露自己的传输 FIFO，通常只有几十至数百 MB；这些分配还会被显式地逐个映射，CUDA/NCCL 通过 <code>UvmMapExternalAllocation</code> 明确告诉驱动要映射哪一块，并不依赖缺页触发。</p>
+<p>因此，没有必要将整块显存 identity-map 到 BAR1。可以把映射粒度改为单个分配：</p>
+<blockquote>
+<p>每次 peer 要映射某个分配时，用现成的<strong>动态 BAR1 机制</strong>（<code>kbusMapFbAperture</code>）把<strong>这一个分配</strong>映射进对端 GPU 的 BAR1，拿到它的 BAR1 总线地址，再让 source 的 peer PTE 指向这个动态窗口的地址。</p>
+</blockquote>
+<p>这避开了透明分页在 inbound BAR1 上无法可靠实现的问题。对端发来的写是 posted transaction，丢失后不能重放；读请求又受 PCIe completion timeout 限制，来不及完成 fault、换页和重试。动态方案不依赖缺页，而是在收到显式请求时 eager 地预先建立映射。硬件不会因为驱动稍后补好了页表，就体谅之前那次传输。</p>
+<h3 id="为什么它能吃下-32g-的高地址分配">为什么它能吃下 &gt;32G 的高地址分配</h3>
+<p>动态方案与 static 方案的区别在于地址中间多了一层翻译：</p>
+<ul>
+<li><strong>static BAR1</strong>：<code>bus = BAR1base + fbPhysOffset</code>。分配物理偏移一旦 &gt;32G，总线地址就越窗 → 损坏。所以硬要求 <code>BAR1 ≥ FB</code>。</li>
+<li><strong>dynamic BAR1</strong>：将分配映射到一个偏移始终位于 <code>0..32G</code> 的 BAR1 VA 槽，再由 GMMU PTE 把这个 BAR1 VA 翻译到 48G 显存中的任意物理页。总线地址 <code>= BAR1base + bar1VAoffset</code>，始终位于 32G 窗口内；peer 的 DMA 到达 BAR1 后，再由 GMMU 定向到高地址显存页。</li>
+</ul>
+<p>借助 GMMU 这层间接，分配可以位于 48G 显存中的任意位置；需要小于 32G 的只是同时映射的 BAR1 VA 总量。NCCL 默认约为 180MB。</p>
+<p><span class="tikzjax"><svg xmlns="http://www.w3.org/2000/svg" width="458.764" height="295.55" viewBox="-72 -72 344.073 221.662"><g stroke="#000" stroke-miterlimit="10" stroke-width=".4"><path fill="none" stroke-width=".8" d="M-52.319 127.3V-71.87h68.286V127.3ZM15.967-71.87"/><g stroke="none" font-family="cmr7" font-size="7"><text x="-52.319" y="127.299" transform="rotate(-90 -101.128 90.325)">48G</text><text x="-35.465" y="127.299" transform="rotate(-90 -101.128 90.325)">FB</text></g><path fill="none" stroke="red" stroke-dasharray="3.0,3.0" d="M-52.319-5.49h68.286"/><path fill="#ffd3a6" stroke="none" d="M-52.319-32.036v-19.917h68.286v19.917Zm68.286-19.917"/><g stroke="none" font-size="7"><text x="-52.319" y="127.299" font-family="cmr7" transform="translate(7.188 -167.544)">allo</text><text x="-39.604" y="127.299" font-family="cmr7" transform="translate(7.188 -167.544)">c</text><text x="-33.354" y="127.299" font-family="cmr7" transform="translate(7.188 -167.544)">B</text><text x="-25.069" y="127.299" font-family="cmr7" transform="translate(7.188 -167.544)">(</text><text x="-21.944" y="127.299" font-family="cmmi7" transform="translate(7.188 -167.544)">&gt;</text><text x="-15.694" y="127.299" font-family="cmr7" transform="translate(7.188 -167.544)">32G)</text></g><path fill="none" stroke-width=".8" d="M89.945 127.3V-5.49h68.286V127.3ZM158.23-5.49"/><g stroke="none" font-family="cmr7" font-size="7"><text x="-52.319" y="127.299" transform="rotate(-90 40.778 -5.35)">32G</text><text x="-35.465" y="127.299" transform="rotate(-90 40.778 -5.35)">BAR1</text><text x="-11.485" y="127.299" transform="rotate(-90 40.778 -5.35)">V</text><text x="-6.444" y="127.299" transform="rotate(-90 40.778 -5.35)">A</text></g><path fill="#b3ffb3" stroke="none" d="M89.945 104.537V87.466h68.286v17.07Zm68.286-17.071"/><g stroke="none" font-family="cmr7" font-size="7"><text x="-52.319" y="127.299" transform="translate(157.89 -28.868)">windo</text><text x="-31.743" y="127.299" transform="translate(157.89 -28.868)">w</text><text x="-23.34" y="127.299" transform="translate(157.89 -28.868)">W</text></g><g stroke="none" font-size="7"><text x="-52.319" y="127.299" font-family="cmr7" transform="translate(137.402 17.4)">W</text><text x="-41.569" y="127.299" font-family="cmr7" transform="translate(137.402 17.4)">o®set</text><text x="-20.297" y="127.299" font-family="cmr7" transform="translate(137.402 17.4)">alw</text><text x="-8.553" y="127.299" font-family="cmr7" transform="translate(137.402 17.4)">a</text><text x="-4.783" y="127.299" font-family="cmr7" transform="translate(137.402 17.4)">ys</text><text x="5.281" y="127.299" font-family="cmmi7" transform="translate(137.402 17.4)">&lt;</text><text x="11.531" y="127.299" font-family="cmr7" transform="translate(137.402 17.4)">32G</text></g><g fill="#007300" stroke="#007300" stroke-width=".8"><path fill="none" d="M158.231 96.001C231.048 69.498 88.784-15.491 21.793-39.874"/><path stroke-width=".799984" d="M17.517-41.43c.478.32 2.518 1.899 3.668 3.227l1.217-3.342c-1.735.278-4.312.175-4.885.115Z"/></g><g fill="#007300" stroke="#007300"><g fill="#007300" stroke="none" font-family="cmr7" font-size="7"><text x="-47.409" y="111.299" transform="translate(265.338 -92.719)">GMMU</text><text x="-18.235" y="111.299" transform="translate(265.338 -92.719)">PTE</text><text x="-47.281" y="119.299" transform="translate(265.338 -92.719)">remaps</text><text x="-19.766" y="119.299" transform="translate(265.338 -92.719)">W</text><text x="-9.016" y="119.299" transform="translate(265.338 -92.719)">to</text><text x="-52.319" y="127.299" transform="translate(265.338 -92.719)">high</text><text x="-34.541" y="127.299" transform="translate(265.338 -92.719)">FB</text><text x="-21.097" y="127.299" transform="translate(265.338 -92.719)">page</text><text x="-2.458" y="127.299" transform="translate(265.338 -92.719)">B</text></g></g><g stroke-width=".8"><path fill="none" d="M95.635-46.229h56.906v-11.449H95.635Z"/><g stroke="none" font-family="cmr7" font-size="7"><text x="-52.319" y="127.299" transform="translate(155.423 -176.86)">source</text><text x="-27.817" y="127.299" transform="translate(155.423 -176.86)">GPU</text></g></g><g fill="#00f" stroke="#00f" stroke-width=".8"><path fill="none" d="M124.088-45.829V81.266"/><path d="M124.088 85.816c.139-.559.924-3.015 1.778-4.55h-3.557c.855 1.535 1.64 3.991 1.779 4.55Z"/></g><g fill="#00f" stroke="#00f"><g fill="#00f" stroke="none"><text x="-46.065" y="111.299" font-family="cmr7" font-size="7" transform="translate(69.058 -101.449)">p</text><text x="-41.433" y="111.299" font-family="cmr7" font-size="7" transform="translate(69.058 -101.449)">eer</text><text x="-28.502" y="111.299" font-family="cmr7" font-size="7" transform="translate(69.058 -101.449)">PTE</text><text x="-9.349" y="111.299" font-family="cmr7" font-size="7" transform="translate(69.058 -101.449)">=</text><text x="-46.211" y="119.299" font-family="cmr7" font-size="7" transform="translate(69.058 -101.449)">base</text><text x="-28.39" y="119.299" font-family="cmr7" font-size="7" transform="translate(69.058 -101.449)">+</text><text x="-19.557" y="119.299" font-family="cmr7" font-size="7" transform="translate(69.058 -101.449)">o®</text><text x="-10.828" y="120.305" font-family="cmmi5" font-size="5" transform="translate(69.058 -101.449)">W</text><text x="-52.319" y="127.299" font-family="cmr7" font-size="7" transform="translate(69.058 -101.449)">(alw</text><text x="-37.451" y="127.299" font-family="cmr7" font-size="7" transform="translate(69.058 -101.449)">a</text><text x="-33.68" y="127.299" font-family="cmr7" font-size="7" transform="translate(69.058 -101.449)">ys</text><text x="-23.616" y="127.299" font-family="cmr7" font-size="7" transform="translate(69.058 -101.449)">in</text><text x="-14.241" y="127.299" font-family="cmr7" font-size="7" transform="translate(69.058 -101.449)">32G)</text></g></g></g></svg></span></p>
+<h3 id="复用-gpudirect-rdma-的现有路径">复用 GPUDirect RDMA 的现有路径</h3>
+<p>驱动中已有一条经过长期使用的相似路径：GPUDirect RDMA / 第三方 P2P 会把单个显存分配映射进 BAR1，再将其 PCIe 总线地址交给调用方：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">nvidia_p2p_get_pages          ← nvidia-peermem 调用</span><br><span class="line">  → RmP2PGetPages</span><br><span class="line">    → RmThirdPartyP2PBAR1GetPages</span><br><span class="line">      → kbusMapFbAperture_HAL   ← 逐分配 BAR1 映射（就是我们要的原语）</span><br><span class="line">      → 总线地址 = BAR1 base + BAR1 VA</span><br></pre></td></tr></table></figure>
+<p>这条路径按字节预算准入，即比较累计映射大小与 <code>BAR1 - 保留空间</code>，并不限制固定条数。BAR1 映射没有固定数组或 <code>MAX_*</code> 上限，页表也在显存中按需分配。GDR 的消费者是网卡，而这里的消费者是 peer GPU；需要复用的是同一套 <code>kbusMapFbAperture</code> 机制。</p>
+<p>容量方面，AD102 的 BAR1 映射只受 32G VA 约束，足以容纳数千到上万条数 MB 的映射。我又根据 NCCL 2.30.7 源码核对了关闭 user-buffer 注册时的默认用量：</p>
+<table>
+<colgroup>
+<col style="width: 57%">
+<col style="width: 24%">
+<col style="width: 18%">
+</colgroup>
+<thead>
+<tr>
+<th>拓扑（PCIe，无 NVLink，registration 关）</th>
+<th>每 GPU 独立映射数</th>
+<th>每 GPU 总字节</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2-GPU all-reduce (ring)</td>
+<td>~4</td>
+<td>~24 MB</td>
+</tr>
+<tr>
+<td>8-GPU all-reduce (ring)</td>
+<td>~16</td>
+<td>~96 MB</td>
+</tr>
+<tr>
+<td>8-GPU 同时跑 coll + a2a（典型默认）</td>
+<td>~30</td>
+<td>~180 MB</td>
+</tr>
+</tbody>
+</table>
+<p>默认用量约为 30 条、180MB，与 32GB 的可用量相比仍有两到三个数量级的余量。</p>
+<h3 id="实现在-static-与-dynamic-之间自适应">实现：在 static 与 dynamic 之间自适应</h3>
+<p>代码修改的核心，是在 <code>nv_gpu_ops.c</code> 中增加逐分配动态 BAR1 窗口，并用它编码 peer PTE。相关改动都带有 <code>METHOD3</code> 注释，便于检索。调用路径如下：</p>
+<pre class="mermaid">graph TD
+  A["UVM: UvmMapExternalAllocation<br>（逐分配，显式）"] --&gt; B["nvGpuOpsBuildExternalAllocPtes"]
+  B --&gt; C{"对端 static BAR1<br>是否启用？"}
+  C --&gt;|正常卡| D["走原 static identity<br>bus = dmaBase + fbOffset<br>行为完全不变"]
+  C --&gt;|48G 卡| E["_nvGpuOpsDynBar1GetOrCreate<br>懒创建动态窗口"]
+  E --&gt; F["kbusMapFbAperture_HAL<br>把分配映进对端 BAR1"]
+  F --&gt; G["memdescMapIommu<br>窗口 IOMMU-map 进 source IOVA"]
+  G --&gt; H["编码 peer PTE =<br>windowDmaBase + offset"]</pre>
+<p>动态路径不能无条件启用。普通显卡的 static 区已经占用了 BAR1 VA，继续创建动态窗口会耗尽地址空间。因此，代码根据对端是否启用 static BAR1 选择路径：普通显卡保持原有行为，只有 <code>BAR1 &lt; FB</code> 的 48G 卡使用动态窗口。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// nv_gpu_ops.c —— orchestrator 里的自适应门禁</span></span><br><span class="line"><span class="keyword">if</span> (isBar1P2PSupported &amp;&amp;</span><br><span class="line">    !kbusIsStaticBar1Enabled(pAdjustedMemDesc-&gt;pGpu,</span><br><span class="line">                             GPU_GET_KERNEL_BUS(pAdjustedMemDesc-&gt;pGpu)))</span><br><span class="line">{</span><br><span class="line">    <span class="comment">// 对端 BAR1 &lt; FB（如 48G 4090）：把这一个分配单独映进对端 BAR1，</span></span><br><span class="line">    <span class="comment">// 拿到 source 可见的窗口 DMA base，用来编码 peer PTE。</span></span><br><span class="line">    status = _nvGpuOpsDynBar1GetOrCreate(vaSpace-&gt;device-&gt;rmSubDevice,</span><br><span class="line">                                         pMappingGpu, pAdjustedMemDesc-&gt;pGpu,</span><br><span class="line">                                         pAdjustedMemDesc, hMemory, &amp;dynBar1DmaBase);</span><br><span class="line">    <span class="keyword">if</span> (status != NV_OK) <span class="keyword">goto</span> freeGpaMemdesc;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 显式的模式标志——不要用 dynBar1DmaBase != 0 反推（IOVA 0 也可能是合法地址）</span></span><br><span class="line">    dynBar1Mapped = NV_TRUE;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>PTE 编码也分为两条路径。动态窗口是连续的，第 <code>i</code> 页地址为 <code>窗口基址 + 分配内偏移</code>；static 模式保持原有实现：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (bDynBar1Mapped)</span><br><span class="line">{</span><br><span class="line">    <span class="comment">// METHOD3（动态）：这个分配被单独映进了对端 BAR1，dynBar1DmaBase 是</span></span><br><span class="line">    <span class="comment">// 该窗口在 source 侧可见的基址。窗口连续，故第 i 页 = 基址 + 分配内偏移。</span></span><br><span class="line">    <span class="keyword">if</span> ((offset + size) &gt; memdescGetSize(pMemDesc)) { <span class="comment">/* 防御性越界拒绝 */</span> }</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; pteCount; i++)</span><br><span class="line">        physicalAddresses[i] = dynBar1DmaBase + offset + i * (NvU64)mappingPageSize;</span><br><span class="line">}</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">{</span><br><span class="line">    <span class="comment">// static identity 区（正常卡，BAR1 &gt;= FB）：peer 地址 = 区基址 + FB 偏移</span></span><br><span class="line">    kbusGetBar1P2PDmaInfo_HAL(pMappingGpu, pRemoteGpu, ..., &amp;dmaBaseAddress, &amp;dmaSize);</span><br><span class="line">    <span class="comment">// physicalAddresses[] 里已经是 FB 偏移，叠加区基址即可</span></span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>动态窗口由 <code>_nvGpuOpsDynBar1Create</code> 创建，整体沿用 <code>third_party_p2p.c</code> 的做法，分为三步：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 把分配映进对端 GPU 的 BAR1（动态孔径）。</span></span><br><span class="line"><span class="comment">//    不带 ALLOW_DISCONTIG：线性编码要求单段连续的 BAR1 VA。</span></span><br><span class="line">status = kbusMapFbAperture_HAL(pRemoteGpu, pRemoteKernelBus,</span><br><span class="line">                               pAllocMemDesc, mrangeMake(<span class="number">0</span>, mapSize),</span><br><span class="line">                               &amp;memArea, BUS_MAP_FB_FLAGS_MAP_UNICAST, <span class="literal">NULL</span>);</span><br><span class="line"><span class="comment">// ...拿不到单段就报错回滚，绝不用多段线性编码（那是数据损坏级的 bug）</span></span><br><span class="line"><span class="keyword">if</span> (memArea.numRanges != <span class="number">1</span>) { status = NV_ERR_INVALID_STATE; <span class="keyword">goto</span> fail; }</span><br><span class="line"></span><br><span class="line">windowPhys = gpumgrGetGpuPhysFbAddr(pRemoteGpu) + memArea.pRanges[<span class="number">0</span>].start;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 把对端 BAR1 窗口描述成 sysmem，IOMMU-map 进 source GPU 的 IOVA 空间。</span></span><br><span class="line"><span class="comment">//    窗口 memdesc 必须以 pRemoteGpu（FB/BAR1 的 owner）为 owner，</span></span><br><span class="line"><span class="comment">//    否则 osIovaMap 里的 IS_FB_OFFSET 判在本地 GPU 上、走不到跨设备 DMA 路径。</span></span><br><span class="line">memdescCreate(&amp;pWin, pRemoteGpu, mapSize, <span class="number">0</span>, NV_MEMORY_CONTIGUOUS,</span><br><span class="line">              ADDR_SYSMEM, NV_MEMORY_UNCACHED, MEMDESC_FLAGS_NONE);</span><br><span class="line">memdescDescribe(pWin, ADDR_SYSMEM, windowPhys, mapSize);</span><br><span class="line">memdescMapIommu(pWin, pMappingGpu-&gt;busInfo.iovaspaceId);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 取窗口在 source 侧可见的 DMA base，登记进按 dup 句柄索引的链表，引用计数管生命周期。</span></span><br><span class="line">memdescGetPtePhysAddrsForGpu(pWin, pMappingGpu, AT_GPU, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, &amp;dmaBase);</span><br></pre></td></tr></table></figure>
+<p>还需要几项配套修改：放开 <code>kern_bus_gh100.c</code> 的能力门禁，因为动态模式不依赖 static BAR1；只有两端都启用 static BAR1 时才建立 per-pair static IOMMU 映射；并修正 <code>nvGpuOpsGetP2PCaps</code>。static 关闭时，代码向 UVM 上报 <code>bar1DmaAddress/Size = 0</code>，但仍报告 <code>p2pLink = PCIE_BAR1</code>。我另外核对了 UVM 的使用路径，确认默认 <code>peer_copy_mode=PHYSICAL</code> 不会因为 base 为 0 出错。</p>
+<p>动态窗口的生命周期跟随 duped peer-memory 句柄：第一次 build PTE 时创建，在 <code>nvGpuOpsFreeDupedHandle</code> 中销毁，并在 subdevice 拆除时由 <code>_DestroyAll</code> 兜底清理。代码还增加了最小 BAR1 字节预算检查，超出预算时明确报错，避免 <code>kbusMapFbAperture</code> 悄悄耗尽 VA 后再留下一道更有研究价值的故障。</p>
+<h3 id="上机才暴露的两个坑">上机才暴露的两个坑</h3>
+<p>macOS 上没有目标内核头文件，代码无法本地编译，只能先做静态检查，再到目标机上迭代。上机后遇到了两个静态审查不容易发现的问题，分别影响初始化和数据正确性。</p>
+<details class="tag-plugin colorful folding"><summary><span>Bug 1：多卡 CUDA init 直接 abort</span></summary><div class="body"><p>驱动能够加载，<code>nvidia-smi topo -p2p</code> 也显示 OK，但多卡 CUDA 初始化立即返回 <code>cudaErrorInitializationError</code>。CUDA 会在初始化时，为所有具备 P2P 能力的可见 GPU 提前创建 NV503B P2P 对象；legacy 路径 <code>p2p_api.c</code> 无条件调用 static 版本的 <code>kbusGetBar1P2PDmaInfo_HAL</code>。static BAR1 未启用时，这里会触发 <code>pPeerDmaMemDesc != NULL</code> 断言，返回 <code>NV_ERR_NOT_SUPPORTED</code>，随后初始化失败。</p><p>修复方法是在这次 fetch 前检查 <code>kbusIsStaticBar1Enabled(local) &amp;&amp; kbusIsStaticBar1Enabled(remote)</code>。动态模式保留默认哨兵 <code>dma_address=NV_U64_MAX, dma_size=0</code>，表示用户态没有可用的 BAR1 DMA 信息。</p></div></details>
+<details class="tag-plugin colorful folding"><summary><span>Bug 2：动态 IOMMU 映射失败</span></summary><div class="body"><p><code>_nvGpuOpsDynBar1Create</code> 创建 BAR1 窗口 memdesc 时，最初将 owner 设为了 <code>pMappingGpu</code>（本地/source GPU）。<code>osIovaMap</code> 会从 memdesc owner 解析 peer 设备，再通过 <code>IS_FB_OFFSET(owner, windowPhys)</code> 判断物理地址是否位于该设备的 FB。窗口物理地址实际位于 <code>pRemoteGpu</code> 的 BAR1 孔径，owner 却指向本地 GPU，于是判断失败，进入 <code>pPriv == NULL</code> 分支并返回 <code>NV_ERR_INVALID_STATE</code>，无法调用跨设备的 <code>nv_dma_map_peer()</code>。</p><p>修复只改了一个 token：将窗口 memdesc 的 owner 从 <code>pMappingGpu</code> 改为 <code>pRemoteGpu</code>，与 static 路径 <code>kbusEnableStaticBar1Mapping_TU102</code> 保持一致。IOMMU 映射目标和 readback 仍使用 <code>pMappingGpu</code> 的 iovaspace。</p><p>这类错误很难只靠静态阅读定位；最终提供有效线索的是目标机 <code>dmesg</code> 中的 <code>status 0x40 NV_ERR_INVALID_STATE</code>。</p></div></details>
+<h2 id="实测结果">实测结果</h2>
+<p>方案先后在两套差异较大的平台上测试：Platform A 是双路 Intel Xeon、8 卡、跨 NUMA 的服务器；Platform B 使用单路 AMD EPYC 7302（Rome，7002 系列）和 4 张卡。后者的 sysmem staging 性能尤其差，因此启用 P2P 后的差距也远比 Platform A 明显。</p>
+<h3 id="platform-a双路-xeon8-rtx-4090-48g">Platform A：双路 Xeon，8× RTX 4090 48G</h3>
+<p>Platform A 是一台双路 Intel Xeon Silver 4416+ 无头服务器，装有 8 张 RTX 4090 <strong>48G</strong>（泄露 VBIOS、32G BAR1，每卡 49140 MiB）。系统为 Ubuntu 22.04.5、内核 6.8.0-124-generic，驱动为 <code>nvidia-595-open</code> 595.71.05，对应分支 <code>595.71.05-p2p-48g</code>。GPU0–3 位于 NUMA0，GPU4–7 位于 NUMA1。</p>
+<h4 id="baseline原版驱动无-patch">Baseline：原版驱动（无 patch）</h4>
+<p>使用原版 595.71.05 open 驱动时，<code>nvidia-smi topo -p2p r/w</code> 的所有卡对均为 <strong>CNS</strong>（Chipset not supported），P2P 不可用，符合 GeForce 的产品设定。all-reduce 全程经过 sysmem/SHM：</p>
+<table>
+<thead>
+<tr>
+<th>配置</th>
+<th>algbw (GB/s)</th>
+<th>busbw (GB/s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4 卡 NUMA0 (GPU0–3)</td>
+<td>11.2</td>
+<td><strong>16.8</strong></td>
+</tr>
+<tr>
+<td>8 卡 (全部)</td>
+<td>8.1</td>
+<td><strong>14.2</strong></td>
+</tr>
+</tbody>
+</table>
+<h4 id="patch-后方法三动态-bar1-p2p">Patch 后：方法三动态 BAR1 P2P</h4>
+<p>应用动态 BAR1 patch 后，<code>nvidia-smi topo -p2p r/w</code> 的所有卡对均显示 <strong>OK</strong>。修复上述两个问题后，使用自定义 <code>p2pcheck.cu</code> 测试 <code>cudaMemcpyPeer</code>（256 MB，包含数据校验），结果如下：</p>
+<table>
+<thead>
+<tr>
+<th>配置</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GPU0–3（单 NUMA）</td>
+<td>全部 12 对 <strong>22.7 GB/s</strong>，正确性 PASS</td>
+</tr>
+<tr>
+<td>全部 8 卡（含跨 NUMA）</td>
+<td>全部 56 对 <strong>22.7 GB/s</strong>，正确性 PASS</td>
+</tr>
+</tbody>
+</table>
+<p>跨 NUMA 卡对（topo 显示 <code>SYS</code>）同样达到完整 P2P 带宽。IOMMU / root complex 能够通过 CPU 互联转发 BAR1 P2P 流量，<code>dmesg</code> 中没有报错。</p>
+<p>NCCL <code>all_reduce_perf</code>（峰值 busbw @ 1 GiB）：</p>
+<table>
+<colgroup>
+<col style="width: 19%">
+<col style="width: 17%">
+<col style="width: 15%">
+<col style="width: 38%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr>
+<th>配置</th>
+<th>原版（无 P2P）</th>
+<th>patched 默认</th>
+<th>patched + <code>NCCL_P2P_LEVEL=SYS</code></th>
+<th>正确性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4 卡 NUMA0</td>
+<td>16.8</td>
+<td>15.2 (SHM)</td>
+<td><strong>20.4</strong> (P2P)</td>
+<td>0 wrong</td>
+</tr>
+<tr>
+<td>8 卡（跨 NUMA）</td>
+<td>14.2</td>
+<td>—</td>
+<td><strong>20.46</strong> (P2P)</td>
+<td>0 wrong</td>
+</tr>
+</tbody>
+</table>
+<div class="tag-plugin colorful note" color="blue"><div class="body"><p><strong>需要特别注意</strong>：在这台具有多个 host bridge 的服务器上，NCCL 会将 GPU 间距离判断为跨 PCIe host bridge 的 <code>NODE</code>，超出默认 <code>NCCL_P2P_LEVEL</code>，于是静默回退到 SHM（经过 sysmem），测试结果也随之回到原版水平。必须设置 <strong><code>NCCL_P2P_LEVEL=SYS</code></strong>，日志才会显示 <code>via P2P/direct pointer</code>。这只是运行环境变量，不需要重新编译 NCCL；这里的「零用户态改动」并不包括「零用户态配置」，词义仍需服从现实。</p></div></div>
+<h4 id="pytorch-ddp-训练">PyTorch DDP 训练</h4>
+<p>最后进行了一组 DDP 训练测试：模型为合成的 403M 参数 MLP，每步需要对 1611 MB 梯度执行 all-reduce；启动命令为 <code>torchrun --nproc_per_node=N</code>，torch 2.8 自带 NCCL 2.27.3。</p>
+<table>
+<colgroup>
+<col style="width: 43%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 22%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr>
+<th>配置</th>
+<th>ms/step</th>
+<th>steps/s</th>
+<th>all-reduce busbw</th>
+<th>final loss</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4 卡 P2P (<code>NCCL_P2P_LEVEL=SYS</code>)</td>
+<td>134.7</td>
+<td>7.4</td>
+<td>~17.9 GB/s</td>
+<td>1.0042</td>
+</tr>
+<tr>
+<td>8 卡 P2P (<code>NCCL_P2P_LEVEL=SYS</code>)</td>
+<td>153.4</td>
+<td>6.5</td>
+<td>~18.4 GB/s</td>
+<td>1.0005</td>
+</tr>
+<tr>
+<td>8 卡默认 (SHM，无 P2P)</td>
+<td>259.5</td>
+<td>3.9</td>
+<td>~10.9 GB/s</td>
+<td>1.0007</td>
+</tr>
+</tbody>
+</table>
+<p>8 卡 DDP 的 step time 改善约 <strong>1.7×</strong>，收敛结果正常，没有 hang 或报错。测试结束后 GPU 显存能够完全释放，未发现动态映射生命周期泄漏。</p>
+<h3 id="platform-bepyc-73024-rtx-4090-48g">Platform B：EPYC 7302，4× RTX 4090 48G</h3>
+<p>第二套平台使用单路 AMD EPYC 7302（Rome，7002 系列）和 4 张 RTX 4090 48G，所有 GPU 位于同一个 NUMA 节点，卡对距离为 <code>NODE/PHB</code>。系统同样运行 6.8.0-124 内核和 595.71.05 open 驱动，IOMMU（AMD-Vi）开启，ACS redirect 为关闭状态（<code>ReqRedir-</code> / <code>CmpltRedir-</code>）。测试使用的驱动还包含显式 <code>bDynBar1Mapped</code> 标志、BAR1 耗尽日志和混合 static/dynamic 卡对拒绝等 correctness hardening。</p>
+<p>EPYC Rome 的无 P2P 基线很差：经由 sysmem staging 的数据会受到 I/O die 明显限制。也正因为这个瓶颈，动态 BAR1 P2P 在这台机器上的收益不是常见的百分之几十，而是六倍到十一倍。</p>
+<table>
+<colgroup>
+<col style="width: 27%">
+<col style="width: 26%">
+<col style="width: 26%">
+<col style="width: 6%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr>
+<th>测试</th>
+<th>原版 / SHM（无 P2P）</th>
+<th>patched + <code>NCCL_P2P_LEVEL=SYS</code></th>
+<th>提升</th>
+<th>正确性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>p2pcheck</code> peer copy（全部 12 对）</td>
+<td>CNS</td>
+<td><strong>26.3 GB/s</strong></td>
+<td>—</td>
+<td>全部校验通过</td>
+</tr>
+<tr>
+<td>NCCL 4 卡 all-reduce busbw</td>
+<td><strong>4.1 GB/s</strong></td>
+<td><strong>25.15 GB/s</strong></td>
+<td><strong>6.1×</strong></td>
+<td>0 wrong</td>
+</tr>
+<tr>
+<td>4 卡 DDP（403M 参数）</td>
+<td><strong>1203.7 ms/step</strong>（2.0 GB/s AR）</td>
+<td><strong>109.5 ms/step</strong>（22.1 GB/s AR）</td>
+<td><strong>11×</strong></td>
+<td>final loss 0.9996</td>
+</tr>
+</tbody>
+</table>
+<div class="tag-plugin colorful note" color="blue"><div class="body"><p>如果只看 Platform A，1.7× 的 DDP 提升已经足以证明方案有效，但还容易把 P2P 理解成普通的带宽优化。EPYC 7302 上，NCCL busbw 从 4.1 增长到 25.15 GB/s，DDP 单步耗时从 1203.7 ms 降到 109.5 ms，说明在 sysmem staging 被 I/O die 卡住的平台上，P2P 会直接决定多卡训练是否具有实用价值。</p></div></div>
+<p>Platform B 的全部测试同样通过数据校验，<code>dmesg</code> 没有报错，动态映射也没有泄漏。它还说明方法三并非只在最初那台双路 Intel 机器上偶然可用：换到 AMD Rome、不同 PCIe 拓扑和 ACS 配置后，动态 BAR1 路径仍然成立，而且收益更显著。</p>
+<p>两套平台的结果共同表明，在 48G 显存 / 32G BAR1 的 RTX 4090 上，逐分配动态 BAR1 P2P 可以在只修改驱动的条件下保证数据正确，并达到 PCIe Gen4 的 P2P 带宽。8 卡跨 NUMA 和 4 卡单路 EPYC 配置均可使用，全部 48G 显存也得以保留，不需要通过 <code>OverrideFbSize</code> 裁切。</p>
+<h2 id="如何使用">如何使用</h2>
+<p>代码位于<a target="_blank" rel="noopener" href="https://github.com/duanyll/open-gpu-kernel-modules">我的 fork</a> 中，并按驱动版本维护 <code>*-p2p-48g</code> 分支，例如 <code>595.71.05-p2p-48g</code> 和 <code>590.48.01-p2p-48g</code>。此外还提供了适用于 Debian 的离线 DKMS 包，可以直接在目标机上通过 <code>apt install</code> 安装，并在内核升级后自动重新编译，无需反复执行 <code>make install</code>。</p>
+<h3 id="前置条件与注意事项">前置条件与注意事项</h3>
+<div class="tag-plugin colorful note" color="orange"><div class="body"><ul><li>目标是 <strong>Debian + NVIDIA CUDA apt 仓库</strong> 的包命名体系（<code>nvidia-kernel-open-dkms</code>、<code>firmware-nvidia-gsp = &lt;ver&gt;</code>）。Ubuntu 的 <code>ubuntu-drivers</code> 预编译模块是另一套逻辑，不在这个包的目标范围内（那条路我之前趟过，覆盖预编译 <code>.ko</code> 很麻烦）。</li><li><code>&lt;ver&gt;</code> 要和分支版本对上。</li><li>v1 建议只用于：<strong>同构节点</strong>（同一节点只安装同型号显卡，不要混插 48G 动态卡与普通 static 卡）、<strong>NCCL 默认 P2P transport</strong>、<strong>一进程一 GPU rank</strong>，并关闭大 buffer 注册（<code>NCCL_LOCAL_REGISTER=0 NCCL_GRAPH_REGISTER=0</code>）。目前<strong>不支持</strong> <code>cudaMallocManaged</code> 跨卡迁移和 <code>uvm_peer_copy=virt</code>。</li></ul></div></div>
+<h3 id="用-dkms-包安装">用 DKMS 包安装</h3>
+<p>这个包通过 <code>Conflicts</code>/<code>Replaces</code> 替换官方 <code>nvidia-kernel-open-dkms</code>，并声明 <code>Provides: nvidia-kernel-&lt;ver&gt;</code>。apt 会替换 stock 内核包，用户态组件（<code>nvidia-driver-cuda</code>、<code>libcuda1</code> 等）保持不变。打过 patch 的源码直接包含在 <code>.deb</code> 中，DKMS 可以在目标机上全程离线编译。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 自己从分支构建 .deb（需要 dpkg-deb；版本从 version.mk 读，打包脚本与版本无关）</span></span><br><span class="line">packaging/dkms/build-deb.sh</span><br><span class="line"><span class="comment">#  -&gt; packaging/dkms/nvidia-open-p2p-dkms_&lt;ver&gt;-1_all.deb</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 在目标机上安装</span></span><br><span class="line"><span class="built_in">sudo</span> apt install ./nvidia-open-p2p-dkms_&lt;ver&gt;-1_all.deb</span><br></pre></td></tr></table></figure>
+<p>postinst 会为每个已安装头文件的内核执行 <code>dkms build/install</code>，但不会热重载正在运行的驱动；新模块在下次重启后生效。</p>
+<blockquote>
+<p>打包中只有 <code>dkms.conf</code> 是手写的。源码树自带的 <code>kernel-open/dkms.conf</code> 是供 <code>nvidia-installer</code> 使用的模板，包含 <code>__VERSION_STRING</code>、<code>__DKMS_MODULES</code> 等尚未展开的占位符，DKMS 不能直接使用。因此，包内会生成一份显式列出 5 个模块的 <code>dkms.conf</code>。其余构建文件（<code>Makefile</code>、<code>Kbuild</code>、<code>conftest.sh</code> 等）与 stock <code>nvidia-kernel-open-dkms</code> 保持一致。</p>
+</blockquote>
+<h3 id="运行时">运行时</h3>
+<p>装好重启后，验证与实用环境变量：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 验证 P2P 能力（应看到卡对之间 OK 而不是 CNS）</span></span><br><span class="line">nvidia-smi topo -p2p r</span><br><span class="line">nvidia-smi topo -p2p w</span><br><span class="line"></span><br><span class="line"><span class="comment"># NCCL 实用环境变量</span></span><br><span class="line"><span class="built_in">export</span> NCCL_P2P_LEVEL=SYS            <span class="comment"># 多 host-bridge 机器上必须，否则默默回退 SHM</span></span><br><span class="line"><span class="built_in">export</span> NCCL_LOCAL_REGISTER=0         <span class="comment"># v1 建议：别把大 user buffer 映进 BAR1</span></span><br><span class="line"><span class="built_in">export</span> NCCL_GRAPH_REGISTER=0</span><br><span class="line"><span class="built_in">export</span> NCCL_DEBUG=INFO               <span class="comment"># 确认日志里是 via P2P/direct pointer</span></span><br></pre></td></tr></table></figure>
+<p>通常还应关闭 PCIe <strong>ACS redirect</strong>，否则 P2P 流量可能被强制送往 root complex。Platform B 的 ACS redirect 已关闭；Platform A 虽然保持开启，但在 IOMMU 介入后仍能完成跨 root complex 的 P2P 转发，因此最终应以实际拓扑、带宽和 <code>dmesg</code> 为准。至于 <code>OverrideFbSize</code>，我不会在实际机器上使用；方法一只保留为验证 static BAR1 尺寸问题的诊断手段。</p>
+<h2 id="ai-使用披露">AI 使用披露</h2>
+<p>这套方案从源码调研、代码实现到上机验证，大部分具体工作由我指挥 Claude（Opus 4.8，1M 上下文）完成。后续的静态代码审查以及本文的文字编辑还使用了 Codex。下面根据仓库中保留的早期会话记录，说明人和 agent 在这个项目中分别承担了什么工作。把模型名称写出来不会自动提高代码质量，但至少便于追责。</p>
+<h3 id="人负责判断方向agent-负责啃细节">人负责判断方向，agent 负责啃细节</h3>
+<p>项目开始时，我在第一条 prompt 中向 Claude 说明了问题背景、约束和初步判断：</p>
+<blockquote>
+<p>这个仓库是对 nvidia.ko 的 fork……现在我们的挑战是，有一种 48G 的 4090 显卡……这版泄漏的 vbios 只提供了 32G 的 BAR1 窗口……解决此问题的正道应该是，想办法搞出一套正确地在 bar1 窗口上 pin+map，维护分页映射的逻辑来……现在请你帮我深入分析一下这个方案，nvidia 驱动里会不会有现成的、能正确处理此分页映射逻辑的代码分支？</p>
+</blockquote>
+<p>我提供的主要是方向判断和领域信息，包括问题的本质、「只改驱动、不改用户态」的约束，以及优先寻找现有分页映射路径的思路。Claude 负责在几十万行驱动代码中验证这些判断，并提出了三个候选方案。我据此继续收窄方向：</p>
+<ul>
+<li>对方法一，我认为损失显存的代价不能接受，让它存档后继续调查；</li>
+<li>我要求它使用子 agent 并行检查 RM 与 NCCL 源码，并根据 NCCL 的实际行为核算映射需求；</li>
+<li>方案三出现后，我判断这一方向值得实现，随后追问 AD102 可以容纳多少条映射，以及是否足够支持 NCCL。</li>
+</ul>
+<p>映射容量直接决定方案三是否可用。Claude 通过子 agent 分别检查 RM 的 BAR1 簿记结构和 NCCL 建立的连接数量，得出「没有固定条数上限，只受 32G VA 约束；NCCL 默认约需 30 条」的结论。我还提供了 harrychen 的 GDR 文章和 aikitoria 的 issue，用于交叉验证消费卡上的 BAR1 映射路径确实可用。</p>
+<pre class="mermaid">sequenceDiagram
+    participant U as 我 (duanyll)
+    participant C as Claude (Opus 4.8)
+    participant S as 子 Agents
+    participant H as 硬件测试机（Xeon / EPYC）
+    participant X as Codex
+
+    U-&gt;&gt;C: 交代背景+约束+直觉<br>「有没有现成的分页映射分支？」
+    C-&gt;&gt;S: 并行调研 RM/NCCL 源码
+    S--&gt;&gt;C: static BAR1 尺寸限制 · GDR 先例 · 容量论证
+    C--&gt;&gt;U: 提出方法一/二/三 + 设计文档
+    U-&gt;&gt;C: 「方案三有道理·能放多少条映射？」
+    C-&gt;&gt;S: 核 BAR1 簿记 + 数 NCCL 连接
+    S--&gt;&gt;C: 无条数上限，默认仅 ~30 条
+    U-&gt;&gt;C: 「你着手改代码，我去找机器」
+    C-&gt;&gt;H: DKMS 覆盖 .ko · SOL 保平安
+    H--&gt;&gt;C: dmesg: NV_ERR_INVALID_STATE
+    C-&gt;&gt;S: 定位 root cause
+    S--&gt;&gt;C: 窗口 memdesc owner 填错了
+    C-&gt;&gt;H: 一个 token 的修复 → 重测
+    H--&gt;&gt;U: 22.7 GB/s · 正确性 PASS
+    U-&gt;&gt;X: 静态 review，检查 silent corruption
+    X--&gt;&gt;C: 建议补 dynamic 标志/越界校验/预算 guard
+    C--&gt;&gt;U: 硬化 + 文档 + DKMS 打包
+    U-&gt;&gt;X: 对照既有博客编辑本文语言
+    X--&gt;&gt;U: 重写成稿 + AI 使用披露补充</pre>
+<h3 id="人上机agent-远程驾驶">人上机、agent 远程驾驶</h3>
+<p>代码初稿完成后，我负责协调测试机并授权硬件访问。Claude 使用 <a target="_blank" rel="noopener" href="https://github.com/duanyll/tmux-pilot"><code>tmux-pilot</code></a> skill 建立 SSH 和 SOL 会话，配置串口 console，随后反复执行模块卸载、加载、编译和测试，并运行 <code>p2pBandwidthLatencyTest</code> 与 NCCL。前文第二个 memdesc owner 问题，就是由它派出的子 agent 根据 <code>dmesg</code> 定位，再返回一行修改；重新编译后测试通过。允许 agent 重启一台远程服务器之前，确认 SOL 可用仍然是人类相当朴素而有效的贡献。</p>
+<p>之后我又让 Codex 做了一轮静态审查，重点寻找可能造成 silent corruption 的问题，包括以 <code>dynBar1DmaBase != 0</code> 充当模式标志的歧义、<code>size == 0</code> 的语义、单段 BAR1 VA 假设，以及 managed memory 路径的 gate。我把审查意见交给 Claude 复核，确认后逐项修复，不能支持的部分则写入已知限制。不同模型给出的结论仍需由人判断，不过让代码作者以外的模型专门挑错，通常比要求同一个模型再次确信自己更有效。</p>
+<h3 id="模型身份披露">模型身份披露</h3>
+<ul>
+<li><strong>源码调研、实现、上机调试和博客初稿</strong>：Claude Opus 4.8（1M 上下文）。相关 commit 的 <code>Co-Authored-By</code> trailer 中已标注。</li>
+<li><strong>静态代码审查</strong>：Codex（GPT-5.5 xhigh），主要检查 correctness 和 silent corruption 风险。</li>
+<li><strong>本文文字编辑（本轮）</strong>：Codex（GPT-5.6 Sol xhigh），使用 <code>natural-chinese</code> 流程，参考本站近期的硬件与基础设施文章重写 Claude 初稿，主要调整语气、句式、段落衔接和 AI 使用披露。</li>
+</ul>
+<p>Agent 显著降低了在陌生内核代码中验证假设、再到真实硬件上迭代的成本。如果完全由我独立完成，仅理解 RM 的 BAR1 与 IOMMU 调用链就需要数日。不过，问题该如何定义、约束是否可以改变、哪个方向值得投入，以及上机风险由谁承担，仍然需要人来决定。验证想法的成本降低以后，能够提出多少值得验证的想法，反而成了更明显的限制。</p>
+<hr>
+<p>如果手上正好有这种 48G 4090，可以在同构节点上试用对应分支；PR is welcome。遇到问题请开 issue（或者不妨问问你的 Agent），并附上驱动版本、拓扑、复现命令和 <code>dmesg</code>。</p>
+
+
+
+<div class="article-footer reveal fs14">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-sa/4.0/">署名-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section>
+    
+    <section id="share">
+      <div class="header"><span>分享文章</span></div>
+      <div class="body">
+        <div class="link"><input class="copy-area" readonly="true" id="copy-link" value="https://duanyll.com/2026/7/13/4090-48G-P2P/" /></div>
+        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot)"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/b32ef3da1162a.svg"/></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=https://duanyll.com/2026/7/13/4090-48G-P2P/&title=给 48G 魔改 4090 解锁 PCIe P2P：动态 BAR1 映射的实现 - duanyll&summary=手头攒了一批 48G 显存的魔改 4090。单卡推理一切正常，换成多卡训练，NCCL 却停在初始化阶段：社区里给消费卡解锁 PCIe P2P 的经典 mod，在这种卡上并不能工作。排查两天后，我改用动态 BAR1 逐分配映射，在不修改..."><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/80c07e4dbb303.svg"/></a><a class="social share-item email" href="mailto:?subject=给 48G 魔改 4090 解锁 PCIe P2P：动态 BAR1 映射的实现 - duanyll&amp;body=https://duanyll.com/2026/7/13/4090-48G-P2P/"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/a1b00e20f425d.svg"/></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/8411ed322ced6.svg"/></a><a class="social share-item print" onclick="window.print()"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/img/print.svg" /></a><a class="social share-item source" target="_blank" rel="noopener" href="https://github.com/duanyll/duanyll.com-hexo/blob/master/source/_posts/tech/2026-7-13-4090-48G-P2P.md"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/social/08a41b181ce68.svg"/></a></div>
+        
+        <div class="qrcode" id="qrcode-wechat" style="visibility:hidden;height:0">
+          <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=https://duanyll.com/2026/7/13/4090-48G-P2P/"/>
+        </div>
+        
+      </div>
+    </section>
+    
+      <section id="star">
+        <div class="body">
+          <span class="github-button-wrap">
+            <a class="github-button" 
+               target="_blank" rel="noopener" href="https://github.com/duanyll/duanyll.com-hexo" 
+               data-color-scheme="no-preference: light; light: light; dark: dark;" 
+               data-size="large" 
+               data-show-count="true" 
+               aria-label="Star this site on GitHub">Star</a>
+            <span>喜欢这个网站？在 GitHub 上给它一个 Star 吧！</span>
+          </span>
+        </div>
+      </section>
+    </div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2026/1/19/NFS-Over-RDMA/">Mellanox Connect-X 5 网卡 SN2700 交换机 NFS Over RDMA (RoCEv2) 配置指北</a></div></section></div>
+
+
+<div class="related-wrap reveal" id="related-posts">
+    <section class='header'>
+      <div class='title cap theme'>您可能感兴趣的文章</div>
+    </section>
+    <section class='body'>
+    <div class="related-posts"><a class="item" href="/2025/11/26/HPE-cx555a/" title="HPE cx555a 100G 网卡刷入以太网固件指北"><span class="title">HPE cx555a 100G 网卡刷入以太网固件指北</span></a><a class="item" href="/2026/1/19/NFS-Over-RDMA/" title="Mellanox Connect-X 5 网卡 SN2700 交换机 NFS Over RDMA (RoCEv2) 配置指北"><span class="title">Mellanox Connect-X 5 网卡 SN2700 交换机 NFS Over RDMA (RoCEv2) 配置指北</span></a><a class="item" href="/2018/11/28/Jekyll-Search/" title="为你的Jekyll博客添加搜索文章功能"><span class="title">为你的Jekyll博客添加搜索文章功能</span><span class="excerpt">众所周知，Github上的Jekyll上实现自定义插件很困难，因此即使有Jekyll的搜索插件，也只能手写js代码。静态网站实现搜索原理是这样的，通过HTTP请求获取posts.json，然后本地解析里面内容实现搜索。</span></a></div></section></div>
+
+
+
+  <div class='related-wrap md-text reveal' id="comments">
+    <section class='header cmt-title cap theme'>
+      快来参与讨论吧
+    </section>
+    <section class='body cmt-body utterances'>
+      
+
+<!-- <svg class="loading" style="vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2709"><path d="M832 512c0-176-144-320-320-320V128c211.2 0 384 172.8 384 384h-64zM192 512c0 176 144 320 320 320v64C300.8 896 128 723.2 128 512h64z" p-id="2710"></path></svg> -->
+
+<div id="utterances" repo="duanyll/duanyll.com-comment" issue-term="pathname" theme="switch" label="Comment" enabled="true" issue_term="pathname"></div>
+
+    </section>
+  </div>
+
+
+
+      
+      
+<footer class="page-footer reveal fs12"><hr><div class="sitemap"><div class="sitemap-group"><span class="fs14">博客</span><a href="/">近期</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></div><div class="sitemap-group"><span class="fs14">项目</span><a target="_blank" rel="noopener" href="https://github.com/duanyll">开源库</a><a href="/wiki/">文档</a><a target="_blank" rel="noopener" href="https://github.com/duanyll/scoop-bucket">Scoop Bucket</a></div><div class="sitemap-group"><span class="fs14">社交</span><a href="/about/#comments">留言板</a><a target="_blank" rel="noopener" href="https://netunion.org">NetUnion</a><a target="_blank" rel="noopener" href="https://www.travellings.cn/go.html">开往</a></div><div class="sitemap-group"><span class="fs14">更多</span><a href="/about">关于本站</a><a target="_blank" rel="noopener" href="https://github.com/duanyll/duanyll.com-hexo">GitHub 源码</a><a target="_blank" rel="noopener" href="https://duanyll.cloudflareaccess.com">Dashboard</a></div></div><div class="text"><p>本站由 <a target="_blank" rel="noopener" href="https://github.com/duanyll">duanyll</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。 本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = stellar.config.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.21.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.21.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+    root : '/',
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js","memos":"/js/plugins/memos.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide:not(.swiper-slide-duplicate) img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.copycode = Object.assign({"enable":true,"js":"/js/plugins/copycode.js","default_text":"Copy","success_text":"Copied"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+  <script>
+  function loadUtterances() {
+    const els = document.querySelectorAll("#comments #utterances");
+    if (els.length === 0) return;
+    els.forEach((el, i) => {
+      try {
+        el.innerHTML = '';
+      } catch (error) {
+        console.error(error);
+      }
+      var script = document.createElement('script');
+      script.src = 'https://utteranc.es/client.js';
+      script.async = true;
+      for (let key of Object.keys(el.attributes)) {
+        let attr = el.attributes[key];
+        if (['class', 'id'].includes(attr.name) === false) {
+          var name = attr.name;
+          var value = attr.value;
+          if (name == 'theme' && value == 'switch') {
+            value = window.currentTheme == 'dark' ? 'github-dark' : 'github-light';
+          }
+          script.setAttribute(name, value);
+        }
+      }
+      el.appendChild(script);
+    });
+  }
+  window.addEventListener('DOMContentLoaded', (event) => {
+      loadUtterances();
+  });
+</script>
+
+
+
+
+
+  
+<script src="https://buttons.github.io/buttons.js" async></script>
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>
